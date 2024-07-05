@@ -139,7 +139,7 @@ require_once '../helper/connection.php';
                             }
 
                             // Add ORDER BY clause
-                            $sql .= " ORDER BY id DESC";
+                            $sql .= " ORDER BY datecreate DESC";
 
                             // Perform the query
                             $result = mysqli_query($connection, $sql);
