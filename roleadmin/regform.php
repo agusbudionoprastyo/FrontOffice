@@ -66,6 +66,12 @@ require_once '../helper/connection.php';
 <form id="filter" method="GET">
     <div class="datepicker-container">
     <div class="form-row align-items-center mb-3">
+    <div class="col-auto">
+            <input type="text" class="rounded-pill custom-datepicker-input" id="today" name="today" autocomplete="off" 
+                   value="<?php echo isset($_GET['today']) ? $_GET['today'] : ''; ?>" 
+                   placeholder="Date">
+            <label for="today" class="btn btn-light rounded-pill custom-datepicker-button"><i class="fa-solid fa-calendar-days"></i></label>
+        </div>
         <div class="col-auto">
             <input type="text" class="rounded-pill custom-datepicker-input" id="start-date" name="start_date" autocomplete="off" 
                    value="<?php echo isset($_GET['start_date']) ? $_GET['start_date'] : ''; ?>" 
@@ -359,7 +365,7 @@ $(document).ready(function(){
         var yyyy = today.getFullYear();
         var formattedDate = yyyy + '-' + mm + '-' + dd;
 
-        $('#start-date').val(formattedDate); // Set the value of start_date input field
+        $('#today').val(formattedDate); // Set the value of start_date input field
     });
 </script>
 
