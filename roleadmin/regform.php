@@ -158,19 +158,19 @@ require_once '../helper/connection.php';
                                         <?php 
                                             switch ($row['foliostatus']) {
                                                 case 'I':
-                                                    echo '<a class="btn rounded-pill btn-success">inHouse</a>';
+                                                    echo 'inHouse';
                                                     break;
                                                 case 'O':
-                                                    echo '<a class="btn rounded-pill btn-danger">CheckOut</a>';
+                                                    echo 'CheckOut';
                                                     break;
                                                 case 'C':
-                                                    echo '<a class="btn rounded-pill btn-light">Confirm</a>';
+                                                    echo 'Confirm';
                                                     break;
                                                 case 'G':
-                                                    echo '<a class="btn rounded-pill btn-primary">Guarantee</a>';
+                                                    echo 'Guarantee';
                                                     break;
                                                 case 'T':
-                                                    echo '<a class="btn rounded-pill btn-warning">Tentative</a>';
+                                                    echo 'Tentative';
                                                     break;
                                                 default:
                                                     echo $row['foliostatus'];
