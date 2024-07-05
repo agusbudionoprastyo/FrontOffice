@@ -266,37 +266,6 @@ require_once '../helper/connection.php';
 require_once '../layout/_bottom.php';
 ?>
 
-<!-- Modal
-<div class="modal fade" id="deviceModal" tabindex="-1" role="dialog" aria-labelledby="deviceModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deviceModalLabel"><i class="fa-solid fa-tablet"></i> Select Device</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="guestfolio_sign_update.php" method="get">
-          <div class="form-group">
-            <label for="device_id"><i>pilih tablet untuk sign dokumen</i></label>
-            <select name="id" id="device_id" class="form-control">
-              <?php
-              require_once '../helper/connection.php';
-              $query = "SELECT device_name FROM token_device";
-              $result = mysqli_query($connection, $query);
-              while ($row = mysqli_fetch_assoc($result)): ?>
-                <option value="<?= $row['token_id'] ?>"><?= $row['device_name'] ?></option>
-              <?php endwhile; ?>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary">PILIH</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <script>
 $(document).ready(function(){
     $('#deviceModal').on('show.bs.modal', function (event) {
@@ -375,18 +344,6 @@ $(document).ready(function(){
     });
 </script>
 
-<!-- <script>
-$(document).ready(function(){
-    // Event yang dipicu saat modal akan ditampilkan
-    $('#deviceModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Tombol yang memicu modal
-        var recipientId = button.data('id'); // Ekstrak info dari atribut data-id
-        var modal = $(this);
-        modal.find('.modal-body form').attr('action', 'guestfolio_sign_update.php?id=' + recipientId);
-    });
-});
-</script> -->
-
 
 <!-- Page Specific JS File -->
 <?php
@@ -417,7 +374,6 @@ if (isset($_SESSION['info'])):
   unset($_SESSION['info']);
 endif;
 ?>
-<script src="../assets/js/page/modules-datatables.js"></script>
 
 <!-- Tambahkan script berikut di bagian bawah file -->
 <script>
@@ -438,3 +394,5 @@ endif;
         });
     }
 </script>
+
+<script src="../assets/js/page/modules-datatables.js"></script>
