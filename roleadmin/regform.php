@@ -387,7 +387,7 @@ endif;
         // Panggil API di sini
         // Contoh:
         $.ajax({
-            url: 'htts://103.236.201.34:3000/replicate',
+            url: 'https://103.236.201.34:3000/replicate',
             method: 'GET',
             success: function(response) {
                 // Handle response
