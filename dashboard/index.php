@@ -3,11 +3,11 @@ require_once '../layout/_top.php';
 require_once '../helper/connection.php';
 
 
-$regcard = mysqli_query($connection, "SELECT COUNT(*) FROM regform where at_regform <> ''");
+$regcard = mysqli_query($connection, "SELECT COUNT(*) FROM FOGUEST where at_regform <> ''");
 
 $total_regcard = mysqli_fetch_array($regcard)[0];
 
-$guestfolio = mysqli_query($connection, "SELECT COUNT(*) FROM regform where at_guestfolio <> ''");
+$guestfolio = mysqli_query($connection, "SELECT COUNT(*) FROM FOGUEST where at_guestfolio <> ''");
 
 $total_guestfolio = mysqli_fetch_array($guestfolio)[0];
 
