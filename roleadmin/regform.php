@@ -153,24 +153,22 @@ require_once '../helper/connection.php';
                             // Loop through the results and display them in the table
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
-                                <tr></tr>
-                                    <td>
-                                        <?php if ($row['foliostatus'] == 'I'): ?>
-                                            <a class="btn btn-sm btn-success mb-md-0 mb-1">inHouse</a>
-                                        <?php endif; ?>
-                                        <?php if ($row['foliostatus'] == 'O'): ?>
-                                            <a class="btn btn-sm btn-danger mb-md-0 mb-1">CheckOut</a>
-                                        <?php endif; ?>
-                                        <?php if ($row['foliostatus'] == 'C'): ?>
-                                            <a class="btn btn-sm btn-light mb-md-0 mb-1">Confirm</a>
-                                        <?php endif; ?>
-                                        <?php if ($row['foliostatus'] == 'G'): ?>
-                                            <a class="btn btn-sm btn-primary mb-md-0 mb-1">Guarantee</a>
-                                        <?php endif; ?>
-                                        <?php if ($row['foliostatus'] == 'T'): ?>
-                                            <a class="btn btn-sm btn-warning mb-md-0 mb-1">Tentative</a>
-                                        <?php endif; ?>
-                                    </td>
+                                <tr>
+                                <td>
+                                    <?php if ($row['foliostatus'] == 'I'): ?>
+                                        <a class="btn btn-sm btn-success rounded-pill mb-md-0 mb-1">inHouse</a>
+                                    <?php elseif ($row['foliostatus'] == 'O'): ?>
+                                        <a class="btn btn-sm btn-danger rounded-pill mb-md-0 mb-1">CheckOut</a>
+                                    <?php elseif ($row['foliostatus'] == 'C'): ?>
+                                        <a class="btn btn-sm btn-light rounded-pill mb-md-0 mb-1">Confirm</a>
+                                    <?php elseif ($row['foliostatus'] == 'G'): ?>
+                                        <a class="btn btn-sm btn-primary rounded-pill mb-md-0 mb-1">Guarantee</a>
+                                    <?php elseif ($row['foliostatus'] == 'T'): ?>
+                                        <a class="btn btn-sm btn-warning rounded-pill mb-md-0 mb-1">Tentative</a>
+                                    <?php else: ?>
+                                        <span class="text-muted">Unknown Status</span>
+                                    <?php endif; ?>
+                                </td>
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><?php echo $row['birthday']; ?></td>
                                     <td><?php echo $row['resv_phone']; ?></td>
