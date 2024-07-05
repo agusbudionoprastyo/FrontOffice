@@ -113,6 +113,7 @@ require_once '../helper/connection.php';
                                 <th>REGCARD</th>
                                 <th>GUESTBILL</th>
                                 <th>CL / VOUCHER</th>
+                                <th>STATUS</th>
                             </tr>
                         </thead>
                         <tbody>
