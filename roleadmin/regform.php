@@ -99,6 +99,7 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
+                            <th>ROOM STATUS</th>
                                 <th>NAME</th>
                                 <th>DATEOFBIRTH</th>
                                 <th>PHONE</th>
@@ -112,7 +113,6 @@ require_once '../helper/connection.php';
                                 <th>REGCARD</th>
                                 <th>GUESTBILL</th>
                                 <th>CL / VOUCHER</th>
-                                <th>STATUS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -154,6 +154,30 @@ require_once '../helper/connection.php';
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
                                 <tr>
+                                    <td>
+                                        <?php 
+                                            switch ($row['foliostatus']) {
+                                                case 'i':
+                                                    echo '<button class="btn rounded-pill btn-success">inHouse</button>';
+                                                    break;
+                                                case 'o':
+                                                    echo '<button class="btn rounded-pill btn-danger">CheckOut</button>';
+                                                    break;
+                                                case 'c':
+                                                    echo '<button class="btn rounded-pill btn-ligth">Confirm</button>';
+                                                    break;
+                                                case 'g':
+                                                    echo '<button class="btn rounded-pill btn-primary">Guarantee</button>';
+                                                    break;
+                                                case 't':
+                                                    echo '<button class="btn rounded-pill btn-warning">Tentative</button>';
+                                                    break;
+                                                default:
+                                                    echo $row['foliostatus'];
+                                                    break;
+                                            }
+                                        ?>
+                                    </td>
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><?php echo $row['birthday']; ?></td>
                                     <td><?php echo $row['resv_phone']; ?></td>
