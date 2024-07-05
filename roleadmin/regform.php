@@ -155,25 +155,21 @@ require_once '../helper/connection.php';
                                 ?>
                                 <tr>
                                     <td>
-                                        <?php 
-                                            switch ($row['foliostatus']) {
-                                                case 'I':
-                                                    echo 'inHouse';
-                                                    break;
-                                                case 'C':
-                                                    echo 'Confirm';
-                                                    break;
-                                                case 'G':
-                                                    echo 'Guarantee';
-                                                    break;
-                                                case 'T':
-                                                    echo 'Tentative';
-                                                    break;
-                                                default:
-                                                    echo $row['foliostatus'];
-                                                    break;
-                                            }
-                                        ?>
+                                        <?php if ($row['foliostatus'] == 'I'): ?>
+                                            <a class="btn btn-sm btn-success mb-md-0 mb-1">inHouse</a>
+                                        <?php endif; ?>
+                                        <?php if ($row['foliostatus'] == 'O'): ?>
+                                            <a class="btn btn-sm btn-danger mb-md-0 mb-1">CheckOut</a>
+                                        <?php endif; ?>
+                                        <?php if ($row['foliostatus'] == 'C'): ?>
+                                            <a class="btn btn-sm btn-light mb-md-0 mb-1">Confirm</a>
+                                        <?php endif; ?>
+                                        <?php if ($row['foliostatus'] == 'G'): ?>
+                                            <a class="btn btn-sm btn-primary mb-md-0 mb-1">Guarantee</a>
+                                        <?php endif; ?>
+                                        <?php if ($row['foliostatus'] == 'T'): ?>
+                                            <a class="btn btn-sm btn-warning mb-md-0 mb-1">Tentative</a>
+                                        <?php endif; ?>
                                     </td>
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><?php echo $row['birthday']; ?></td>
