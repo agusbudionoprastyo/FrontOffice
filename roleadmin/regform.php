@@ -158,15 +158,15 @@ require_once '../helper/connection.php';
                                     <td>
                                         <?php $foliostatus = trim($row['foliostatus']); ?>
                                         <?php if ($foliostatus == 'I'): ?>
-                                            <span style="color: green;">inHouse</span>
+                                            <span style="color: #15F5BA;">inHouse</span>
                                         <?php elseif ($foliostatus == 'O'): ?>
-                                            <span style="color: red;">CheckOut</span>
+                                            <span style="color: #FF3EA5;">CheckOut</span>
                                         <?php elseif ($foliostatus == 'C'): ?>
-                                            <span style="color: grey;">Confirm</span>
+                                            <span style="color: #15F5BA;">Confirm</span>
                                         <?php elseif ($foliostatus == 'G'): ?>
-                                            <span style="color: blue;">Guarantee</span>
+                                            <span style="color: #FF204E;">Guarantee</span>
                                         <?php elseif ($foliostatus == 'T'): ?>
-                                            <span style="color: orange;">Tentative</span>
+                                            <span style="color: #43919B;">Tentative</span>
                                         <?php else: ?>
                                             <span class="text-muted">Unknown Status</span>
                                         <?php endif; ?>
