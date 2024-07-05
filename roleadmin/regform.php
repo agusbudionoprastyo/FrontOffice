@@ -351,6 +351,15 @@ $(document).ready(function(){
             $('.custom-datepicker-input').datepicker('setDate', null); // Mengatur tanggal datepicker ke null
             $('#filter').submit(); 
         });
+
+        // Set start_date to today's date
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        var formattedDate = yyyy + '-' + mm + '-' + dd;
+
+        $('#start-date').val(formattedDate); // Set the value of start_date input field
     });
 </script>
 
