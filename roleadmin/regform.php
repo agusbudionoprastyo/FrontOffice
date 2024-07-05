@@ -155,15 +155,15 @@ require_once '../helper/connection.php';
                                 ?>
                                 <tr>
                                 <td>
-                                    <?php if ($row['foliostatus'] == 'I'): ?>
+                                    <?php if ($row['foliostatus'] = 'I'): ?>
                                         <a class="btn btn-sm btn-success rounded-pill mb-md-0 mb-1">inHouse</a>
-                                    <?php elseif ($row['foliostatus'] == 'O'): ?>
+                                    <?php elseif ($row['foliostatus'] = 'O'): ?>
                                         <a class="btn btn-sm btn-danger rounded-pill mb-md-0 mb-1">CheckOut</a>
-                                    <?php elseif ($row['foliostatus'] == 'C'): ?>
+                                    <?php elseif ($row['foliostatus'] = 'C'): ?>
                                         <a class="btn btn-sm btn-light rounded-pill mb-md-0 mb-1">Confirm</a>
-                                    <?php elseif ($row['foliostatus'] == 'G'): ?>
+                                    <?php elseif ($row['foliostatus'] = 'G'): ?>
                                         <a class="btn btn-sm btn-primary rounded-pill mb-md-0 mb-1">Guarantee</a>
-                                    <?php elseif ($row['foliostatus'] == 'T'): ?>
+                                    <?php elseif ($row['foliostatus'] = 'T'): ?>
                                         <a class="btn btn-sm btn-warning rounded-pill mb-md-0 mb-1">Tentative</a>
                                     <?php else: ?>
                                         <span class="text-muted">Unknown Status</span>
