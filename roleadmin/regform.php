@@ -111,15 +111,15 @@ require_once '../helper/connection.php';
                                 <th>CHECKIN</th>
                                 <th>CHECKOUT</th>
                                 <th>NAME</th>
-                                <th>DATEOFBIRTH</th>
+                                <!-- <th>DATEOFBIRTH</th>
                                 <th>PHONE</th>
-                                <th>EMAIL</th>
+                                <th>EMAIL</th> -->
                                 <th>FOLIO</th>
                                 <th>REGCARD</th>
                                 <th>GUESTBILL</th>
                                 <th>CL / VOUCHER</th>
                                 <th>STATUS</th>
-                                <th>DATECREATE</th>
+                                <!-- <th>DATECREATE</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -188,9 +188,9 @@ require_once '../helper/connection.php';
                                     <td><?php echo $row['dateci']; ?></td>
                                     <td><?php echo $row['dateco']; ?></td>
                                     <td><?php echo $row['fname']; ?></td>
-                                    <td><?php echo $row['birthday']; ?></td>
+                                    <!-- <td><?php echo $row['birthday']; ?></td>
                                     <td><?php echo $row['resv_phone']; ?></td>
-                                    <td><?php echo $row['resv_email']; ?></td>
+                                    <td><?php echo $row['resv_email']; ?></td> -->
                                     <td><?php echo $row['folio']; ?></td>
                                     <td>
                                         <?php if (empty($row['rc_signature_path'])): ?>
@@ -248,7 +248,7 @@ require_once '../helper/connection.php';
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1">checked <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
                                         <?php endif; ?>
                                     </td>
-                                    <td><?php echo $row['datecreate']; ?></td>
+                                    <!-- <td><?php echo $row['datecreate']; ?></td> -->
                                 </tr>
                                 <?php
                             }
