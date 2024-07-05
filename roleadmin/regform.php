@@ -160,9 +160,6 @@ require_once '../helper/connection.php';
                                                 case 'I':
                                                     echo 'inHouse';
                                                     break;
-                                                case 'O':
-                                                    echo 'CheckOut';
-                                                    break;
                                                 case 'C':
                                                     echo 'Confirm';
                                                     break;
