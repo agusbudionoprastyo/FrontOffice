@@ -128,6 +128,12 @@ require_once '../helper/connection.php';
                             $sql = "SELECT * FROM FOGUEST";
 
                             // Check if start date is provided
+                            if (isset($_GET['today']) && !empty($_GET['today'])) {
+                                $today = $_GET['today'];
+                                $sql .= " WHERE dateci = '$today'";
+                            }
+
+                            // Check if start date is provided
                             if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
                                 $start_date = $_GET['start_date'];
                                 $sql .= " WHERE dateci = '$start_date'";
