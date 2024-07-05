@@ -157,20 +157,20 @@ require_once '../helper/connection.php';
                                     <td>
                                         <?php 
                                             switch ($row['foliostatus']) {
-                                                case 'i':
-                                                    echo '<button class="btn rounded-pill btn-success">inHouse</button>';
+                                                case 'I':
+                                                    echo '<a class="btn rounded-pill btn-success">inHouse</a>';
                                                     break;
-                                                case 'o':
-                                                    echo '<button class="btn rounded-pill btn-danger">CheckOut</button>';
+                                                case 'O':
+                                                    echo '<a class="btn rounded-pill btn-danger">CheckOut</a>';
                                                     break;
-                                                case 'c':
-                                                    echo '<button class="btn rounded-pill btn-ligth">Confirm</button>';
+                                                case 'C':
+                                                    echo '<a class="btn rounded-pill btn-light">Confirm</a>';
                                                     break;
-                                                case 'g':
-                                                    echo '<button class="btn rounded-pill btn-primary">Guarantee</button>';
+                                                case 'G':
+                                                    echo '<a class="btn rounded-pill btn-primary">Guarantee</a>';
                                                     break;
-                                                case 't':
-                                                    echo '<button class="btn rounded-pill btn-warning">Tentative</button>';
+                                                case 'T':
+                                                    echo '<a class="btn rounded-pill btn-warning">Tentative</a>';
                                                     break;
                                                 default:
                                                     echo $row['foliostatus'];
