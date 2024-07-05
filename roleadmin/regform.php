@@ -105,21 +105,21 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                            <th>ROOM STATUS</th>
+                                <th>ROOM STATUS</th>
+                                <th>ROOM</th>
+                                <th>ROOMTYPE</th>
+                                <th>CHECKIN</th>
+                                <th>CHECKOUT</th>
                                 <th>NAME</th>
                                 <th>DATEOFBIRTH</th>
                                 <th>PHONE</th>
                                 <th>EMAIL</th>
                                 <th>FOLIO</th>
-                                <th>ROOM</th>
-                                <th>ROOMTYPE</th>
-                                <th>CHECKIN</th>
-                                <th>CHECKOUT</th>
-                                <th>DATECREATE</th>
                                 <th>REGCARD</th>
                                 <th>GUESTBILL</th>
                                 <th>CL / VOUCHER</th>
                                 <th>STATUS</th>
+                                <th>DATECREATE</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -183,16 +183,15 @@ require_once '../helper/connection.php';
                                             <span class="text-muted">Unknown Status</span>
                                         <?php endif; ?>
                                     </td>
+                                    <td><?php echo $row['room']; ?></td>
+                                    <td><?php echo $row['roomtype']; ?></td>
+                                    <td><?php echo $row['dateci']; ?></td>
+                                    <td><?php echo $row['dateco']; ?></td>
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><?php echo $row['birthday']; ?></td>
                                     <td><?php echo $row['resv_phone']; ?></td>
                                     <td><?php echo $row['resv_email']; ?></td>
                                     <td><?php echo $row['folio']; ?></td>
-                                    <td><?php echo $row['room']; ?></td>
-                                    <td><?php echo $row['roomtype']; ?></td>
-                                    <td><?php echo $row['dateci']; ?></td>
-                                    <td><?php echo $row['dateco']; ?></td>
-                                    <td><?php echo $row['datecreate']; ?></td>
                                     <td>
                                         <?php if (empty($row['rc_signature_path'])): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_sign_update.php?id=<?php echo $row['id']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></a>
@@ -249,6 +248,7 @@ require_once '../helper/connection.php';
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1">checked <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
                                         <?php endif; ?>
                                     </td>
+                                    <td><?php echo $row['datecreate']; ?></td>
                                 </tr>
                                 <?php
                             }
