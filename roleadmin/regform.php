@@ -59,7 +59,7 @@ require_once '../helper/connection.php';
 <section class="section">
   <div class="section-header d-flex justify-content-between">
     <b><i class="fa-solid fa-fire"></i> FrontOffice <i class="fa-solid fa-folder-open"></i> Regcard Guestfolio</b>
-    <a href="http://103.236.201.34:3000/replicate" class="btn btn-dark"><i class= "fa-solid fa-rotate fa-beat-fade fa-xl"></i> Synch Data</a>
+    <a href="#" onclick="syncData(); return false;" class="btn btn-dark"><i class= "fa-solid fa-rotate fa-beat-fade fa-xl"></i> Synch Data</a>
   </div>
 
 <!-- Date Filter -->
@@ -380,3 +380,23 @@ if (isset($_SESSION['info'])):
 endif;
 ?>
 <script src="../assets/js/page/modules-datatables.js"></script>
+
+<!-- Tambahkan script berikut di bagian bawah file -->
+<script>
+    function syncData() {
+        // Panggil API di sini
+        // Contoh:
+        $.ajax({
+            url: 'http://103.236.201.34:3000/replicate',
+            method: 'GET',
+            success: function(response) {
+                // Handle response
+                location.reload(); // Reload halaman setelah pemanggilan API berhasil
+            },
+            error: function(xhr, status, error) {
+                // Handle error
+            }
+        });
+        alert('Memanggil API untuk sinkronisasi data...');
+    }
+</script>
