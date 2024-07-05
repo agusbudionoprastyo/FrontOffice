@@ -59,7 +59,7 @@ require_once '../helper/connection.php';
 <section class="section">
   <div class="section-header d-flex justify-content-between">
     <b><i class="fa-solid fa-fire"></i> FrontOffice <i class="fa-solid fa-folder-open"></i> Regcard Guestfolio</b>
-    <a href="regform_create.php" class="btn btn-default"><i class="fa-solid fa-circle-plus fa-beat-fade fa-xl"></i> REGISTRATION</a>
+    <a href="http://103.236.201.34:3000/replicate" class="btn btn-default"><i class= "fa-solid fa-rotate fa-beat-fade fa-xl"></i> Synch Data</a>
   </div>
 
 <!-- Date Filter -->
