@@ -157,27 +157,20 @@ require_once '../helper/connection.php';
                                 <tr>
                                     <td>
                                         <?php $foliostatus = trim($row['foliostatus']); ?>
-                                        <?php switch ($foliostatus): ?>
-                                            <?php case 'I': ?>
-                                                <span style="color: green;">inHouse</span>
-                                                <?php break; ?>
-                                            <?php case 'O': ?>
-                                                <span style="color: red;">CheckOut</span>
-                                                <?php break; ?>
-                                            <?php case 'C': ?>
-                                                <span style="color: grey;">Confirm</span>
-                                                <?php break; ?>
-                                            <?php case 'G': ?>
-                                                <span style="color: blue;">Guarantee</span>
-                                                <?php break; ?>
-                                            <?php case 'T': ?>
-                                                <span style="color: orange;">Tentative</span>
-                                                <?php break; ?>
-                                            <?php default: ?>
-                                                <span class="text-muted">Unknown Status</span>
-                                        <?php endswitch; ?>
+                                        <?php if ($foliostatus == 'I'): ?>
+                                            <span style="color: green;">inHouse</span>
+                                        <?php elseif ($foliostatus == 'O'): ?>
+                                            <span style="color: red;">CheckOut</span>
+                                        <?php elseif ($foliostatus == 'C'): ?>
+                                            <span style="color: grey;">Confirm</span>
+                                        <?php elseif ($foliostatus == 'G'): ?>
+                                            <span style="color: blue;">Guarantee</span>
+                                        <?php elseif ($foliostatus == 'T'): ?>
+                                            <span style="color: orange;">Tentative</span>
+                                        <?php else: ?>
+                                            <span class="text-muted">Unknown Status</span>
+                                        <?php endif; ?>
                                     </td>
-
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><?php echo $row['birthday']; ?></td>
                                     <td><?php echo $row['resv_phone']; ?></td>
