@@ -395,6 +395,7 @@ endif;
             },
             error: function(xhr, status, error) {
                 // Handle error
+                console.error('Error:', error);
             }
         });
     }
