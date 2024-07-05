@@ -79,10 +79,10 @@ require_once '../helper/connection.php';
             <label for="end-date" class="btn btn-light rounded-pill custom-datepicker-button"><i class="fa-solid fa-calendar-days"></i></label>        
         </div>
         <div class="col-auto">
-            <input type="text" class="rounded-pill custom-datepicker-input" id="date_create" name="date_create" autocomplete="off" 
-                   value="<?php echo isset($_GET['date_create']) ? $_GET['date_create'] : ''; ?>" 
+            <input type="text" class="rounded-pill custom-datepicker-input" id="datecreate" name="datecreate" autocomplete="off" 
+                   value="<?php echo isset($_GET['datecreate']) ? $_GET['datecreate'] : ''; ?>" 
                    placeholder="Date Created">
-            <label for="date_create" class="btn btn-info rounded-pill custom-datepicker-button"><i class="fa-solid fa-calendar-days"></i></label>        
+            <label for="datecreate" class="btn btn-info rounded-pill custom-datepicker-button"><i class="fa-solid fa-calendar-days"></i></label>        
         </div>
         <div class="col-auto">
             <button type="button" class="btn btn-danger rounded-pill" id="reset-filter"><i class="fa-solid fa-filter-circle-xmark"></i></button>
@@ -108,6 +108,7 @@ require_once '../helper/connection.php';
                                 <th>ROOMTYPE</th>
                                 <th>CHECKIN</th>
                                 <th>CHECKOUT</th>
+                                <th>DATECREATE</th>
                                 <th>REGCARD</th>
                                 <th>GUESTBILL</th>
                                 <th>CL / VOUCHER</th>
@@ -133,9 +134,9 @@ require_once '../helper/connection.php';
                             }
 
                             // Check if create date is provided
-                            if (isset($_GET['date_create']) && !empty($_GET['date_create']) && empty($_GET['start_date']) && empty($_GET['end_date'])) {
-                                $date_create = $_GET['date_create'];
-                                $sql .= " WHERE date_created = '$date_create'";
+                            if (isset($_GET['datecreate']) && !empty($_GET['datecreate']) && empty($_GET['start_date']) && empty($_GET['end_date'])) {
+                                $datecreate = $_GET['datecreate'];
+                                $sql .= " WHERE date_created = '$datecreate'";
                             }
 
                             // Add ORDER BY clause
@@ -162,6 +163,7 @@ require_once '../helper/connection.php';
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td><?php echo $row['dateci']; ?></td>
                                     <td><?php echo $row['dateco']; ?></td>
+                                    <td><?php echo $row['datecreate']; ?></td>
                                     <td>
                                         <?php if (empty($row['rc_signature_path'])): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_sign_update.php?id=<?php echo $row['id']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></a>
