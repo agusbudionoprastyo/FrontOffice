@@ -155,23 +155,29 @@ require_once '../helper/connection.php';
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
                                 <tr>
-                                    <!-- <td><?php echo $row['foliostatus']; ?></td> -->
                                     <td>
-                                    <?php $foliostatus = trim($row['foliostatus']); ?>
-                                    <?php if ($foliostatus == 'I'): ?>
-                                        <a class="btn btn-sm btn-success rounded-pill mb-md-0 mb-1">inHouse</a>
-                                    <?php elseif ($foliostatus == 'O'): ?>
-                                        <a class="btn btn-sm btn-danger rounded-pill mb-md-0 mb-1">CheckOut</a>
-                                    <?php elseif ($foliostatus == 'C'): ?>
-                                        <a class="btn btn-sm btn-light rounded-pill mb-md-0 mb-1">Confirm</a>
-                                    <?php elseif ($foliostatus == 'G'): ?>
-                                        <a class="btn btn-sm btn-primary rounded-pill mb-md-0 mb-1">Guarantee</a>
-                                    <?php elseif ($foliostatus == 'T'): ?>
-                                        <a class="btn btn-sm btn-warning rounded-pill mb-md-0 mb-1">Tentative</a>
-                                    <?php else: ?>
-                                        <span class="text-muted">Unknown Status</span>
-                                    <?php endif; ?>
+                                        <?php $foliostatus = trim($row['foliostatus']); ?>
+                                        <?php switch ($foliostatus): ?>
+                                            <?php case 'I': ?>
+                                                <span style="color: green;">inHouse</span>
+                                                <?php break; ?>
+                                            <?php case 'O': ?>
+                                                <span style="color: red;">CheckOut</span>
+                                                <?php break; ?>
+                                            <?php case 'C': ?>
+                                                <span style="color: grey;">Confirm</span>
+                                                <?php break; ?>
+                                            <?php case 'G': ?>
+                                                <span style="color: blue;">Guarantee</span>
+                                                <?php break; ?>
+                                            <?php case 'T': ?>
+                                                <span style="color: orange;">Tentative</span>
+                                                <?php break; ?>
+                                            <?php default: ?>
+                                                <span class="text-muted">Unknown Status</span>
+                                        <?php endswitch; ?>
                                     </td>
+
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><?php echo $row['birthday']; ?></td>
                                     <td><?php echo $row['resv_phone']; ?></td>
