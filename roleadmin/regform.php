@@ -118,7 +118,7 @@ require_once '../helper/connection.php';
                         <tbody>
                             <?php
                             // Default SQL query
-                            $sql = "SELECT * FROM regform";
+                            $sql = "SELECT * FROM FOGUEST";
 
                             // Check if start date is provided
                             if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
