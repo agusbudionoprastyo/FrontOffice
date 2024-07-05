@@ -136,7 +136,7 @@ require_once '../helper/connection.php';
                             // Check if create date is provided
                             if (isset($_GET['datecreate']) && !empty($_GET['datecreate']) && empty($_GET['start_date']) && empty($_GET['end_date'])) {
                                 $datecreate = $_GET['datecreate'];
-                                $sql .= " WHERE date_created = '$datecreate'";
+                                $sql .= " WHERE datecreate = '$datecreate'";
                             }
 
                             // Add ORDER BY clause
