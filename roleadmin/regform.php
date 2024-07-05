@@ -99,7 +99,6 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>NAME</th>
                                 <th>DATEOFBIRTH</th>
                                 <th>PHONE</th>
@@ -154,7 +153,6 @@ require_once '../helper/connection.php';
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
                                 <tr>
-                                    <td><?php echo $row['id']; ?></td>
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><?php echo $row['birthday']; ?></td>
                                     <td><?php echo $row['resv_phone']; ?></td>
