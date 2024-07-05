@@ -102,7 +102,6 @@ require_once '../helper/connection.php';
                                 <th>ID</th>
                                 <th>NAME</th>
                                 <th>DATEOFBIRTH</th>
-                                <th>GENDER</th>
                                 <th>PHONE</th>
                                 <th>EMAIL</th>
                                 <th>FOLIO</th>
@@ -156,18 +155,17 @@ require_once '../helper/connection.php';
                                 ?>
                                 <tr>
                                     <td><?php echo $row['id']; ?></td>
-                                    <td><?php echo $row['nama']; ?></td>
-                                    <td><?php echo $row['tempat_tanggal_lahir']; ?></td>
-                                    <td><?php echo $row['jenis_kelamin']; ?></td>
-                                    <td><?php echo $row['no_telp']; ?></td>
-                                    <td><?php echo $row['email']; ?></td>
+                                    <td><?php echo $row['fname']; ?></td>
+                                    <td><?php echo $row['birthday']; ?></td>
+                                    <td><?php echo $row['resv_phone']; ?></td>
+                                    <td><?php echo $row['resv_email']; ?></td>
                                     <td><?php echo $row['folio']; ?></td>
                                     <td><?php echo $row['room']; ?></td>
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td><?php echo $row['dateci']; ?></td>
                                     <td><?php echo $row['dateco']; ?></td>
                                     <td>
-                                        <?php if (empty($row['signature_path'])): ?>
+                                        <?php if (empty($row['rc_signature_path'])): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_sign_update.php?id=<?php echo $row['id']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></a>
                                         <?php endif; ?>
                                         <?php if ($row['at_regform']): ?>
@@ -176,10 +174,10 @@ require_once '../helper/connection.php';
                                         <?php if (empty($row['room'])): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_edit.php?id=<?php echo $row['id']; ?>"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
                                         <?php endif; ?>
-                                        <?php if (empty($row['signature_path'])): ?>
+                                        <?php if (empty($row['rc_signature_path'])): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1">unsigned <i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i></a>
                                         <?php endif; ?>
-                                        <?php if ($row['signature_path']): ?>
+                                        <?php if ($row['rc_signature_path']): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1">signed <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
                                         <?php endif; ?>
                                     </td>
