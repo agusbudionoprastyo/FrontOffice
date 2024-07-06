@@ -13,12 +13,12 @@ document.addEventListener('DOMContentLoaded', function() {
             Swal.fire({
                 icon: 'info',
                 title: 'Guestfolio',
-                text: `Guestfolio ${data.folio}, nama ${data.nama} siap untuk di tandatangani!`,
+                text: `Guestfolio ${data.folio}, nama ${data.fname} siap untuk di tandatangani!`,
                 showConfirmButton: false
             });
 
             // Update form fields with received data
-            document.getElementById('id').value = data.id;
+            // document.getElementById('id').value = data.id;
             document.getElementById('pdfFile').value = data.at_guestfolio;
             document.getElementById('folio').value = data.folio;
 
@@ -113,7 +113,7 @@ function unlinkDevice(tokenId) {
 
 function sendData(id, signatureData, pdfFile, folio) { // Ganti 'device_token' dengan 'id'
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://card.dafam.cloud/g_sign_store.php', true);
+    xhr.open('POST', 'https://fo.dafam.cloud/g_sign_store.php', true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     
     // Format the data to be sent
