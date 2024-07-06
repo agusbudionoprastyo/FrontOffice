@@ -3,7 +3,7 @@ session_start();
 require_once '../helper/connection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+    $folio = isset($_POST['folio']) ? intval($_POST['folio']) : 0;
 
     // Deklarasi direktori tempat menyimpan file PDF yang diunggah
     $target_dir = "../attachement_pdf/";
@@ -19,9 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!empty($_FILES["pdfFile"]["name"])) {
         if (move_uploaded_file($_FILES["pdfFile"]["tmp_name"], $targetFilePath)) {
-            $updateQuery = "UPDATE regform SET at_guestfolio = ? WHERE id = ?";
+            $updateQuery = "UPDATE FOGUEST SET at_guestfolio = ? WHERE folio = ?";
             $stmt = mysqli_prepare($connection, $updateQuery);
-            mysqli_stmt_bind_param($stmt, "si", $targetFilePath, $id);
+            mysqli_stmt_bind_param($stmt, "si", $targetFilePath, $folio);
             mysqli_stmt_execute($stmt);
 
             if (mysqli_stmt_affected_rows($stmt) > 0) {
