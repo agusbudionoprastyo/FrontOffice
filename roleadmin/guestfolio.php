@@ -4,9 +4,9 @@ require_once '../helper/connection.php';
 
 // Fetch data for displaying in the form
 // Sanitize input
-$id = isset($_GET['id']) ? mysqli_real_escape_string($connection, $_GET['id']) : '';
+$folio = isset($_GET['folio']) ? mysqli_real_escape_string($connection, $_GET['folio']) : '';
 
-$query = mysqli_query($connection, "SELECT * FROM regform WHERE id='$id'");
+$query = mysqli_query($connection, "SELECT * FROM FOGUEST WHERE folio='$folio'");
 $row = mysqli_fetch_array($query);
 ?>
 
@@ -47,7 +47,6 @@ $row = mysqli_fetch_array($query);
                 <tr><td><i><?= $row['dateci'] ?></i></td><td><i><?= $row['dateco'] ?></i></td></tr>
                 </table>
                 <!-- File input and submit button -->
-                <input type="hidden" id="id" name="id" value="<?= $row['id'] ?>"></input>
                 <input type="hidden" id="folio" name="folio" value="<?= $row['folio'] ?>"></input>
                 <input type="file" class="custom-file-input" id="pdfFile" name="pdfFile" accept=".pdf" required />
                 <span id="fileInfo"></span> <!-- Span to display file info -->
