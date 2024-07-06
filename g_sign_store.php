@@ -7,7 +7,6 @@ use setasign\Fpdi\Tcpdf\Fpdi;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $signatureData = $_POST['signature'];
-    $id = $_POST['id'];
     $pdfFile = $_POST['pdfFile'];
     $folio = $_POST['folio'];
 
@@ -47,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Prepare the SQL statement for updating the table regform
-        $stmt = $connection->prepare("UPDATE regform SET g_signature_path = ?, at_guestfolio = ?, gf_device_token = NULL WHERE id = ?");
+        $stmt = $connection->prepare("UPDATE FOGUEST SET g_signature_path = ?, at_guestfolio = ?, gf_device_token = NULL WHERE folio = ?");
         if ($stmt === false) {
             throw new Exception("Prepare failed: " . $connection->error);
         }
