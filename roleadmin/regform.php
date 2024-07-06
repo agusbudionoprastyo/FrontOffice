@@ -96,24 +96,23 @@ require_once '../helper/connection.php';
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover table-striped w-100" id="table-1">
+                    <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
+                                <th>NAME</th>
+                                <th>FOLIO</th>
                                 <th>ROOM STATUS</th>
                                 <th>ROOM</th>
                                 <th>ROOMTYPE</th>
                                 <th>CHECKIN</th>
                                 <th>CHECKOUT</th>
-                                <th>NAME</th>
-                                <!-- <th>DATEOFBIRTH</th>
+                                <th>DATEOFBIRTH</th>
                                 <th>PHONE</th>
-                                <th>EMAIL</th> -->
-                                <th>FOLIO</th>
+                                <th>EMAIL</th>
                                 <th>REGCARD</th>
                                 <th>GUESTBILL</th>
                                 <th>CL / VOUCHER</th>
                                 <th>STATUS</th>
-                                <!-- <th>DATECREATE</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -161,6 +160,8 @@ require_once '../helper/connection.php';
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
                                 <tr>
+                                    <td><?php echo $row['fname']; ?></td>
+                                    <td><?php echo $row['folio']; ?></td>
                                     <td>
                                         <?php $foliostatus = trim($row['foliostatus']); ?>
                                         <?php if ($foliostatus == 'I'): ?>
@@ -181,20 +182,18 @@ require_once '../helper/connection.php';
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td><?php echo $row['dateci']; ?></td>
                                     <td><?php echo $row['dateco']; ?></td>
-                                    <td><?php echo $row['fname']; ?></td>
-                                    <!-- <td><?php echo $row['birthday']; ?></td>
+                                    <td><?php echo $row['birthday']; ?></td>
                                     <td><?php echo $row['resv_phone']; ?></td>
-                                    <td><?php echo $row['resv_email']; ?></td> -->
-                                    <td><?php echo $row['folio']; ?></td>
+                                    <td><?php echo $row['resv_email']; ?></td>
                                     <td>
                                         <?php if (empty($row['rc_signature_path'])): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_sign_update.php?id=<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></a>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_sign_update.php?folio=<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></a>
                                         <?php endif; ?>
                                         <?php if ($row['at_regform']): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl"></i></a>                                
                                         <?php endif; ?>
                                         <?php if (empty($row['room'])): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_edit.php?id=<?php echo $row['folio']; ?>"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_edit.php?folio=<?php echo $row['folio']; ?>"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
                                         <?php endif; ?>
                                         <?php if (empty($row['rc_signature_path'])): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1">unsigned <i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i></a>
@@ -205,7 +204,7 @@ require_once '../helper/connection.php';
                                     </td>
                                     <td>
                                         <!-- <?php if ((empty($row['g_signature_path'])) && ($row['at_guestfolio'])): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="guestfolio_sign_update.php?id=<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></a>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="guestfolio_sign_update.php?folio=<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></a>
                                         <?php endif; ?> -->
                                         <?php if ((empty($row['g_signature_path'])) && ($row['at_guestfolio'])): ?>
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>">
@@ -216,7 +215,7 @@ require_once '../helper/connection.php';
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_guestfolio']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl"></i></a>
                                         <?php endif; ?>
                                         <?php if (empty($row['at_guestfolio'])): ?>
-                                        <a class="btn btn-sm btn-light rounded-pill mb-md-0 mb-1" href="guestfolio.php?id=<?php echo $row['folio']; ?>"><i class="fa-solid fa-cloud-arrow-up fa-xl" style="color: #0f97ff;"></i> upload</a>
+                                        <a class="btn btn-sm btn-light rounded-pill mb-md-0 mb-1" href="guestfolio.php?folio=<?php echo $row['folio']; ?>"><i class="fa-solid fa-cloud-arrow-up fa-xl" style="color: #0f97ff;"></i> upload</a>
                                         <?php endif; ?>
                                         <?php if ((empty($row['g_signature_path'])) && ($row['at_guestfolio'])): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1">unsigned <i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i></a>
@@ -231,7 +230,7 @@ require_once '../helper/connection.php';
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1">uploaded <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
                                         <?php endif; ?>
                                         <?php if (empty($row['at_ota_voucher'])): ?>
-                                        <a class="btn btn-sm btn-light rounded-pill mb-md-0 mb-1" href="ota_voucher.php?id=<?php echo $row['folio']; ?>"><i class="fa-solid fa-cloud-arrow-up fa-xl" style="color: #f82b85;"></i> upload</a>
+                                        <a class="btn btn-sm btn-light rounded-pill mb-md-0 mb-1" href="ota_voucher.php?folio=<?php echo $row['folio']; ?>"><i class="fa-solid fa-cloud-arrow-up fa-xl" style="color: #f82b85;"></i> upload</a>
                                         <?php endif; ?>
                                     </td>
                                     <td>
