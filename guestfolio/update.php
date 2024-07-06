@@ -24,7 +24,7 @@ if ($lastIdData) {
 
 while (true) {
     // Ambil last_id dari tabel device_token setiap kali loop
-    $queryLastId = mysqli_query($connection, "SELECT regform_id AS last_id FROM token_device WHERE token_id = '$deviceToken'");
+    $queryLastId = mysqli_query($connection, "SELECT folio_id AS last_id FROM token_device WHERE token_id = '$deviceToken'");
     $lastIdData = mysqli_fetch_assoc($queryLastId);
     $lastId = $lastIdData['last_id'] ?? 0;
 
@@ -32,7 +32,7 @@ while (true) {
     while ($row = mysqli_fetch_array($query)) {
         echo "data: " . json_encode($row) . "\n\n";
         flush(); // Pastikan data terkirim
-        $lastId = $row['id']; // Perbarui last_id dengan id terbaru yang dikirim
+        $lastId = $row['folio']; // Perbarui last_id dengan id terbaru yang dikirim
     }
 
     sleep(1); // Anda bisa sesuaikan waktu sesuai kebutuhan
