@@ -15,7 +15,7 @@ if ($tokenId === null || $guestfolioId === null || !is_numeric($tokenId) || !is_
 }
 
 // Query untuk update gf_device_token di regform
-$queryRegform = "UPDATE regform SET gf_device_token = ? WHERE id = ?";
+$queryRegform = "UPDATE FOGUEST SET gf_device_token = ? WHERE folio = ?";
 
 // Query untuk update regform_id di token_device
 $queryTokenDevice = "UPDATE token_device SET regform_id = ? WHERE token_id = ?";
