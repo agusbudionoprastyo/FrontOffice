@@ -10,7 +10,7 @@ header('Cache-Control: no-cache');
 $deviceToken = $_GET['device_token'] ?? 'default_token'; // Gunakan default token jika tidak ada yang dikirim
 
 // Ambil last_id dari tabel device_token
-$queryLastId = mysqli_query($connection, "SELECT regform_id AS last_id FROM token_device WHERE token_id = '$deviceToken'");
+$queryLastId = mysqli_query($connection, "SELECT folio_id AS last_id FROM token_device WHERE token_id = '$deviceToken'");
 if (!$queryLastId) {
     echo "Error: " . mysqli_error($connection) . "\n"; // Tampilkan error jika query gagal
 }
@@ -28,7 +28,7 @@ while (true) {
     $lastIdData = mysqli_fetch_assoc($queryLastId);
     $lastId = $lastIdData['last_id'] ?? 0;
 
-    $query = mysqli_query($connection, "SELECT * FROM regform WHERE id = '$lastId'");
+    $query = mysqli_query($connection, "SELECT * FROM FOGUEST WHERE folio = '$lastId'");
     while ($row = mysqli_fetch_array($query)) {
         echo "data: " . json_encode($row) . "\n\n";
         flush(); // Pastikan data terkirim
