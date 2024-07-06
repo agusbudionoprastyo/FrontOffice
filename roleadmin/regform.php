@@ -113,6 +113,7 @@ require_once '../helper/connection.php';
                                 <th>GUESTBILL</th>
                                 <th>CL / VOUCHER</th>
                                 <th>STATUS</th>
+                                <th>DATECREATE</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -160,7 +161,14 @@ require_once '../helper/connection.php';
                             while ($row = mysqli_fetch_array($result)) {
                                 ?>
                                 <tr>
-                                    <td><?php echo $row['fname']; ?></td>
+                                    <td>
+                                    <?php if (empty($row['signature_path'])): ?>
+                                            <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>">
+                                                <i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i>
+                                            </button>
+                                        <?php endif; ?>
+                                        <?php echo $row['fname']; ?>
+                                    </td>
                                     <td><?php echo $row['folio']; ?></td>
                                     <td>
                                         <?php $foliostatus = trim($row['foliostatus']); ?>
@@ -203,9 +211,6 @@ require_once '../helper/connection.php';
                                         <?php endif; ?>
                                     </td>
                                     <td>
-                                        <!-- <?php if ((empty($row['g_signature_path'])) && ($row['at_guestfolio'])): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="guestfolio_sign_update.php?folio=<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></a>
-                                        <?php endif; ?> -->
                                         <?php if ((empty($row['g_signature_path'])) && ($row['at_guestfolio'])): ?>
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>">
                                                 <i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i>
@@ -241,7 +246,7 @@ require_once '../helper/connection.php';
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1">checked <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
                                         <?php endif; ?>
                                     </td>
-                                    <!-- <td><?php echo $row['datecreate']; ?></td> -->
+                                    <td><?php echo $row['datecreate']; ?></td>
                                 </tr>
                                 <?php
                             }
