@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             throw new Exception("Prepare failed: " . $connection->error);
         }
 
-        $stmt->bind_param("sss", $signatureFilename, $at_guestfolio, $id);
+        $stmt->bind_param("sss", $signatureFilename, $at_guestfolio, $folio);
 
         // Eksekusi pernyataan SQL
         if (!$stmt->execute()) {
