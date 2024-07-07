@@ -194,9 +194,6 @@ require_once '../helper/connection.php';
                                     <td><?php echo $row['resv_phone']; ?></td>
                                     <td><?php echo $row['resv_email']; ?></td>
                                     <td>
-                                        <?php if (empty($row['rc_signature_path'])): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_sign_update.php?folio=<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></a>
-                                        <?php endif; ?>
                                         <?php if ($row['at_regform']): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl"></i></a>                                
                                         <?php endif; ?>
