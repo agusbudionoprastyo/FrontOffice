@@ -2,60 +2,68 @@
 session_start();
 require_once '../helper/connection.php';
 
-// Fungsi untuk memeriksa apakah tabel 'device' kosong
-function isDeviceTableEmpty($connection) {
-    $result = mysqli_query($connection, "SELECT COUNT(*) as count FROM device");
-    $row = mysqli_fetch_assoc($result);
-    return $row['count'] == 0;
-}
+$tokenId = isset($_GET['token_id']) ? $_GET['token_id'] : null;
+$regformId = isset($_GET['regform_id']) ? $_GET['regform_id'] : null;
 
-// Fungsi untuk menambahkan data ke tabel 'device'
-function addDataToDeviceTable($connection, $id) {
-    $id = mysqli_real_escape_string($connection, $id);
-    $query = "INSERT INTO device (device_id) VALUES ('$id')";
-    return mysqli_query($connection, $query);
-}
-
-// Fungsi untuk menghapus semua entri dari tabel 'device'
-function truncateDeviceTable($connection) {
-    $query = "TRUNCATE TABLE device";
-    return mysqli_query($connection, $query);
-}
-
-$id = isset($_GET['id']) ? $_GET['id'] : null;
-
-if ($id === null || !is_numeric($id)) {
+if ($tokenId === null || $regformId === null || !is_numeric($tokenId) || !is_numeric($regformId)) {
     $_SESSION['info'] = [
         'status' => 'failed',
-        'message' => 'Invalid ID'
+        'message' => 'ID tidak valid atau tidak lengkap'
     ];
     header('Location: regform.php');
     exit;
 }
 
-if (!isDeviceTableEmpty($connection)) {
-    // Jika tabel tidak kosong, hapus semua entri
-    if (truncateDeviceTable($connection)) {
-        echo "'device' UnSynch.";
-    } else {
-        echo "Gagal mengosongkan tabel 'device'.";
-        exit;
-    }
-}
+// Query untuk update gf_device_token di regform
+$queryRegform = "UPDATE FOGUEST SET rc_device_token = ? WHERE folio = ?";
 
-// Tambahkan data ke tabel 'device'
-if (addDataToDeviceTable($connection, $id)) {
-    $_SESSION['info'] = [
-        'status' => 'success',
-        'message' => 'Registration card terkirim ke tablet'
-    ];
+// Query untuk update folio_id di token_device
+$queryTokenDevice = "UPDATE token_device SET regcard_id = ? WHERE token_id = ?";
+
+// Persiapan statement untuk regform
+if ($stmtRegform = mysqli_prepare($connection, $queryRegform)) {
+    mysqli_stmt_bind_param($stmtRegform, "ii", $tokenId, $regformId);
+    mysqli_stmt_execute($stmtRegform);
+
+    if (mysqli_stmt_affected_rows($stmtRegform) > 0) {
+        $_SESSION['info'] = [
+            'status' => 'success',
+            'message' => 'Token device berhasil dikirim'
+        ];
+    } else {
+        // Jika tidak ada perubahan data di regform, tetap set status ke success tapi ubah pesannya
+        $_SESSION['info'] = [
+            'status' => 'success',
+            'message' => 'Token device berhasil dikirim'
+        ];
+    }
+
+    mysqli_stmt_close($stmtRegform);
 } else {
     $_SESSION['info'] = [
         'status' => 'failed',
-        'message' => 'Gagal menambahkan registration card ke tablet'
+        'message' => 'Kesalahan saat menyiapkan query regform: ' . mysqli_error($connection)
+    ];
+}
+
+// Persiapan statement untuk token_device
+if ($stmtTokenDevice = mysqli_prepare($connection, $queryTokenDevice)) {
+    mysqli_stmt_bind_param($stmtTokenDevice, "ii", $regformId, $tokenId);
+    mysqli_stmt_execute($stmtTokenDevice);
+
+    if (mysqli_stmt_affected_rows($stmtTokenDevice) > 0) {
+        $_SESSION['info']['message'] .= ' dan siap untuk di tandatangani';
+    } else {
+        $_SESSION['info']['message'] .= ' Tidak ada perubahan data';
+    }
+
+    mysqli_stmt_close($stmtTokenDevice);
+} else {
+    $_SESSION['info'] = [
+        'status' => 'failed',
+        'message' => 'Kesalahan saat menyiapkan query token_device: ' . mysqli_error($connection)
     ];
 }
 
 header('Location: regform.php');
 exit;
-?>
