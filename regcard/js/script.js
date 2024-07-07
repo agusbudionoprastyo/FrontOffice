@@ -40,8 +40,8 @@ eventSource.onmessage = function(event) {
         showClear();
     }
 
-    // Update the previous device ID
-    previousDeviceId = data.device_id;
+    // Perbarui lastId dengan id baru
+    lastId = data.id;
 };
 
 eventSource.onerror = function(error) {
@@ -125,7 +125,6 @@ function showSmokingRoom() {
 
 document.getElementById('save-btn').addEventListener('click', function () {
     var no_telp = document.getElementById('text9').value;
-    var device_id = document.getElementById('device_id').value;
     var pdfFile = document.getElementById('pdfFile').value;
     var folio = document.getElementById('text2').value;
     var email = document.getElementById('email').value;
