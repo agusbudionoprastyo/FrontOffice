@@ -59,7 +59,7 @@ require_once '../helper/connection.php';
 <section class="section">
   <div class="section-header d-flex justify-content-between">
     <b><i class="fa-solid fa-fire"></i> FrontOffice <i class="fa-solid fa-folder-open"></i> Regcard Guestfolio</b>
-    <a href="#" onclick="syncData(); return false;" class="btn btn-dark"><i class= "fa-solid fa-rotate fa-beat-fade fa-xl"></i> Synch Data</a>
+    <a href="#" onclick="syncData(); return false;" class="btn btn-dark rounded-2"><i class= "fa-solid fa-rotate fa-beat-fade fa-xl"></i></a>
   </div>
 
 <!-- Date Filter -->
@@ -212,7 +212,7 @@ require_once '../helper/connection.php';
                                     </td>
                                     <td>
                                         <?php if ((empty($row['g_signature_path'])) && ($row['at_guestfolio'])): ?>
-                                            <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>">
+                                            <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal2" data-id="<?php echo $row['folio']; ?>">
                                                 <i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i>
                                             </button>
                                         <?php endif; ?>
@@ -267,6 +267,15 @@ require_once '../layout/_bottom.php';
 <script>
 $(document).ready(function(){
     $('#deviceModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Tombol yang memicu modal
+        var recipientId = button.data('id'); // Ekstrak info dari atribut data-id
+        var modal = $(this);
+        modal.find('.modal-body form').attr('action', 'regform_sign_update.php');
+        modal.find('.modal-body form').append('<input type="hidden" name="regform_id" value="' + recipientId + '">');
+    });
+
+    // Event listener untuk tombol kedua
+    $('#deviceModal2').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Tombol yang memicu modal
         var recipientId = button.data('id'); // Ekstrak info dari atribut data-id
         var modal = $(this);
