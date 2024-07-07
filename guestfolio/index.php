@@ -89,14 +89,12 @@
         <button type="button" class="floating-btn" id="pairing-btn" style="display:none;"><i class="fa-solid fa-arrows-rotate"></i></button>
         <button type="button" class="floating-btn" id="unpair-btn" style="display:none;"><i class="fa-solid fa-x" style="color: #ff0000;"></i></button>
         <button type="button" class="floating-btn" id="toggle-btn"><i class="fa-brands fa-apple"></i></button>
-        </div>
+            </div>
         <div id="signature-pad">
             <label><h3>SIGNATURE</h3></label>
             <canvas></canvas>
             <div class="input-group">
                 <div class="input-wrapper">
-                    <!-- <button type="button" class="undoClear" id="pairing-btn"><i class="fa-solid fa-arrows-rotate"></i></button>
-                    <button type="button" class="undoClear" id="unpair-btn"><i class="fa-solid fa-ban"></i></button> -->
                     <button type="button" class="undoClear" data-action="clear"><i class="fa-solid fa-eraser"></i></button>
                     <button type="button" data-action="undo"><i class="fa-solid fa-rotate-left"></i></button>
                     <button type="button" id="save-btn" class="cyan">SUBMIT</button>

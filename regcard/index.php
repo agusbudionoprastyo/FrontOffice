@@ -13,8 +13,27 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://kit.fontawesome.com/3595b79eb9.js" crossorigin="anonymous"></script>
 
-    <script>
+    <style>
+            /* Mengatur container tombol */
+            #button-container {
+                display: flex; /* Menggunakan flexbox untuk menyusun tombol secara sejajar */
+                justify-content: flex-end; /* Menyelaraskan tombol dari kanan */
+                gap: 10px; /* Memberikan jarak antar tombol */
+                position: fixed; /* Mengambang di posisi tetap pada layar */
+                top: 5px; /* Jarak dari atas layar */
+                right: 20px; /* Jarak dari kanan layar */
+                z-index: 1000; /* Z-index untuk memastikan container di atas elemen lain */
+            }
 
+            /* Mengatur gaya tombol yang mengambang */
+            .floating-btn {
+                position: relative; /* Menggunakan relative untuk posisi relatif dalam flexbox */
+                top: 5px; /* Jarak dari atas */
+                z-index: 1000; /* Z-index untuk stacking */
+            }
+    </style>
+
+    <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('service-worker.js')
             .then(registration => {
@@ -46,6 +65,12 @@
         <input type="hidden" id="device_id"/>
         <input type="hidden" id="roomType"/>
         <input type="hidden" id="pdfFile"/>
+
+        <div id="button-container">
+            <button type="button" class="floating-btn" id="pairing-btn" style="display:none;"><i class="fa-solid fa-arrows-rotate"></i></button>
+            <button type="button" class="floating-btn" id="unpair-btn" style="display:none;"><i class="fa-solid fa-x" style="color: #ff0000;"></i></button>
+            <button type="button" class="floating-btn" id="toggle-btn"><i class="fa-brands fa-apple"></i></button>
+        </div>
 
         <div class="input-group">
             <div class="input-wrapper">
@@ -108,6 +133,46 @@
             </div>
         </div>
     </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var tokenId = localStorage.getItem('deviceTokenId'); // Pastikan kunci 'token_id' sesuai dengan yang Anda set di localStorage
+
+        if (tokenId) {
+            fetch('fetch_device_name.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'deviceTokenId=' + tokenId
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('toggle-btn').innerHTML += ' ' +data;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    });
+    </script>
+
+    <script>
+    document.getElementById('toggle-btn').addEventListener('click', function() {
+        var btnPair = document.getElementById('pairing-btn');
+        var btnUnpair = document.getElementById('unpair-btn');
+        var btnUnlink = document.getElementById('unlink-btn');
+        
+        // Toggle visibility
+        if (btnPair.style.display === 'none' || btnPair.style.display === '') {
+            btnPair.style.display = 'block';
+            btnUnpair.style.display = 'block';
+            btnUnlink.style.display = 'block';
+        } else {
+            btnPair.style.display = 'none';
+            btnUnpair.style.display = 'none';
+            btnUnlink.style.display = 'none';
+        }
+    });
+</script>
 
     <script src="sweetalert2/dist/sweetalert2.min.js"></script>
     <script src="js/signature_pad.umd.js"></script>
