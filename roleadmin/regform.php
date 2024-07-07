@@ -315,6 +315,36 @@ $(document).ready(function(){
     </div>
   </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="deviceModal2" tabindex="-1" role="dialog" aria-labelledby="deviceModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deviceModalLabel"><i class="fa-solid fa-tablet"></i> Select Device</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="get">
+          <div class="form-group">
+            <label for="device_id"><i>pilih tablet untuk sign dokumen</i></label>
+            <select name="token_id" id="device_id" class="form-control">
+              <?php
+              require_once '../helper/connection.php';
+              $query = "SELECT token_id, device_name FROM token_device";
+              $result = mysqli_query($connection, $query);
+              while ($row = mysqli_fetch_assoc($result)): ?>
+                <option value="<?= $row['token_id'] ?>"><?= $row['device_name'] ?></option>
+              <?php endwhile; ?>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">PILIH</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Bootstrap Datepicker JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
