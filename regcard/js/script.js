@@ -1,13 +1,15 @@
-let previousDeviceId = null;
+document.addEventListener('DOMContentLoaded', function() {
+    var deviceToken = localStorage.getItem('deviceTokenId') || 'default_token';
+    let eventSource = new EventSource(`../update.php?device_token=${deviceToken}`);
 
-// Set up EventSource for real-time updates
-const eventSource = new EventSource('../update.php');
+    let lastId = null; 
 
 eventSource.onmessage = function(event) {
     const data = JSON.parse(event.data);
 
     // Check if device_id has changed
-    if (data.device_id && (!previousDeviceId || previousDeviceId !== data.device_id)) {
+    // Hanya perbarui tampilan jika ID baru berbeda dari ID terakhir
+    if (data.id !== lastId) {
         Swal.fire({
             icon: 'info',
             title: 'Registration Card',
@@ -45,8 +47,9 @@ eventSource.onmessage = function(event) {
 
 eventSource.onerror = function(error) {
     console.error('EventSource failed:', error);
-    // Handle the error as needed
-};
+        // Handle the error as needed
+    };
+});
 
 
  function showNonSmokingRoom() {
@@ -152,7 +155,22 @@ document.getElementById('save-btn').addEventListener('click', function () {
         // Mengirim data ke server
         sendData(no_telp, device_id, signatureData, pdfFile, folio, email);
     }
+    unlinkDevice(tokenId);
 });
+
+function unlinkDevice(tokenId) {
+    $.ajax({
+        url: 'unlinkDevice.php',
+        type: 'POST',
+        data: { token_id: tokenId, regform_id: '0' }, // Menambahkan status 'unpaired'
+        success: function(response) {
+            console.log("Doc unlinked");
+        },
+        error: function() {
+            console.error("Failed to unlink doc");
+        }
+    });
+}
 
 
 function sendData(no_telp, device_id, signatureData, pdfFile, folio, email) {
