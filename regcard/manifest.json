@@ -1,6 +1,6 @@
 {
-    "name": "Regcard",
-    "short_name": "Regcard",
+    "name": "GuestFolio",
+    "short_name": "GuestFolio",
     "description": "Hotel Dafam Semarang",
     "icons": [
       {
@@ -31,7 +31,7 @@
     ],
     "start_url": "/index.php",
     "display": "standalone",
-    "background_color": "#ebecf0",
-    "theme_color": "#ebecf0"
+    "background_color": "#fff",
+    "theme_color": "#fff"
   }
   

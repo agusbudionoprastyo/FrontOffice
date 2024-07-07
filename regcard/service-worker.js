@@ -1,4 +1,4 @@
-const CACHE_NAME = 'regcard_v1';
+const CACHE_NAME = 'guestfolio_v1';
 const urlsToCache = [
   '/',
   '/index.php',
@@ -6,7 +6,7 @@ const urlsToCache = [
   '/js/app.js',
   '/js/script.js',
   '/js/signature_pad.umd.js',
-  '/images/logo.png',
+  '/images/icon',
 ];
 
 // Install event
