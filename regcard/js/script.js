@@ -13,23 +13,22 @@ eventSource.onmessage = function(event) {
         Swal.fire({
             icon: 'info',
             title: 'Registration Card',
-            text: `Registration card folio ${data.folio}, nama ${data.nama} siap di tandatangani!`,
+            text: `Registration card folio ${data.folio}, nama ${data.fnama} siap di tandatangani!`,
             showConfirmButton: false
         });
     }
 
     // Update form fields with received data
-    document.getElementById('device_id').value = data.device_id;
     document.getElementById('roomType').value = data.roomtype;
     document.getElementById('pdfFile').value = data.at_regform;
     document.getElementById('text1').value = data.room;
     document.getElementById('text2').value = data.folio;
     document.getElementById('text3').value = data.dateci;
     document.getElementById('text4').value = data.dateco;
-    document.getElementById('text5').value = data.nama;
+    document.getElementById('text5').value = data.fnama;
     document.getElementById('text6').value = data.jenis_kelamin;
-    document.getElementById('text7').value = data.tempat_tanggal_lahir;
-    document.getElementById('text8').value = data.alamat;
+    document.getElementById('text7').value = data.birthday;
+    document.getElementById('text8').value = data.address;
 
     // Update message based on the new room type
     const roomType = data.roomtype;
