@@ -1,5 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: https://guestfolio.dafam.cloud");
+header("Access-Control-Allow-Origin: https://gf.dafam.cloud");
 require_once 'helper/connection.php'; // Memuat file connection.php
 require_once 'vendor/autoload.php'; // Memuat TCPDF dan FPDI
 
