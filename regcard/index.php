@@ -113,6 +113,8 @@
             </div>
         </div>
 
+        <div id="message"></div>
+        
         <div id="signature-pad">
             <label><h3>SIGNATURE</h3></label>
             <canvas></canvas>
