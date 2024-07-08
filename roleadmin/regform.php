@@ -420,4 +420,16 @@ endif;
     }
 </script>
 
+<!-- Include Socket.io client library -->
+<script src="https://cdn.socket.io/socket.io-4.0.0.min.js"></script>
+<script>
+    const socket = io('https://103.236.201.34:3000'); // Ganti dengan domain atau IP server Anda
+
+    socket.on('dataReplicated', (data) => {
+        alert(data.message); // Tampilkan pesan (opsional)
+        location.reload(); // Muat ulang halaman
+    });
+</script>
+
+
 <script src="../assets/js/page/modules-datatables.js"></script>
