@@ -59,7 +59,6 @@
 <body>
     <form id="imageForm"> 
     <img src="images/logo.png" alt="logo" class="logo">
-        <input type="hidden" id="id"/>
         <input type="hidden" id="pdfFile"/>
 
     <div id="button-container">

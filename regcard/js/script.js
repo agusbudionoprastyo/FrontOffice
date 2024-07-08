@@ -38,8 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.getElementById('save-btn').addEventListener('click', function () {
-    var id = document.getElementById('id').value; // Ganti 'device_token' dengan 'id'
-    var pdfFile = document.getElementById('pdfFile').value;
     var folio = document.getElementById('folio').value;
 
     if (signaturePad.isEmpty()) {
