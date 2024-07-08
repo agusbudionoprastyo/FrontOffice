@@ -29,6 +29,14 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('roomtype').value = data.roomtype;
             document.getElementById('email').value = data.email;
 
+            const emailInput = data.email;
+
+            emailInput.addEventListener('blur', function() {
+                if (emailInput.value.trim() === '') {
+                    emailInput.placeholder = 'dafam@mail.com'; // Mengatur kembali placeholder jika input kosong
+                }
+            });
+
             // Update message based on the new room type
             const roomType = data.roomtype;
             if (roomType.toLowerCase().endsWith('n')) { // Mengubah kondisi untuk mengecek huruf terakhir dari roomType

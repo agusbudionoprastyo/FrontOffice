@@ -114,7 +114,7 @@
 
         <div id="message"></div>
         <input type="hidden" id="roomtype"/>
-        <input type="text" id="pdfFile"/>
+        <input type="hidden" id="pdfFile"/>
         
         <div id="signature-pad">
             <label><h3>SIGNATURE</h3></label>

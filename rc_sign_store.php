@@ -111,7 +111,7 @@ function addSignatureToPdf($inputPdfPath, $signatureImagePath, $outputPdfPath, $
             $pdf->SetFont('', '', 8); // Set ukuran font ke 9
             $pdf->Text(148, 50, $name);
             $pdf->Text(116, 154, $phone);
-            $pdf->Text(137, 57, 'EMAIL: ' . $email);
+            $pdf->Text(137, 57, 'EMAIL  ' . $email);
             $pdf->Text(53, 50, $dateci);
             $pdf->Text(53, 55, $dateco);
             $pdf->Text(125, 165, $birthday);
