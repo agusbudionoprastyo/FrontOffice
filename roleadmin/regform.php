@@ -400,7 +400,7 @@ if (isset($_SESSION['info'])):
 endif;
 ?>
 
-<!-- Tambahkan script berikut di bagian bawah file -->
+<!-- Tambahkan script berikut di bagian bawah file
 <script>
     function syncData() {
         $.ajax({
@@ -422,7 +422,25 @@ endif;
             }
         });
     }
-</script>
+</script> -->
+
+<script>
+        // Ketika tombol ditekan, lakukan panggilan AJAX ke server
+        function syncData() {
+            $.ajax({
+                url: 'https://103.236.201.34:3000/replicate', // Ganti dengan URL sesuai dengan endpoint server Anda
+                method: 'GET',
+                success: function(response) {
+                    console.log('Response from server:', response);
+                    alert('Replikasi data berhasil: ' + response.message); // Tampilkan pesan sukses ke user
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat melakukan replikasi data');
+                }
+            });
+        });
+    </script>
 
 
 <script src="../assets/js/page/modules-datatables.js"></script>
