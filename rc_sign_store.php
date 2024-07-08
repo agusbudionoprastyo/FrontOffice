@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    // Simpan tanda tangan ke direktori server
    file_put_contents($signatureFilePath, $decodedSignature);
 
-   $inputPdfFilename = __DIR__ . '/attachement_pdf/' . $pdfFile;
+   $inputPdfFilename = __DIR__ . '/RegcardPDF/' . $pdfFile;
    $outputPdfFilename = 'regcard_' . $folio . '_signed.pdf';
    $outputPdfFilePath = __DIR__ . '/signed_doc/' . $outputPdfFilename;
    $at_regform = '../signed_doc/' . $outputPdfFilename;
