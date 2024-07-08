@@ -180,9 +180,7 @@ function sendData(signatureData, folio, room, name, phone, dateci, dateco, birth
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     
     // Format the data to be sent
-    var params = `signatureData=${encodeURIComponent(signatureData)}&folio=${encodeURIComponent(folio)}&room=${encodeURIComponent(room)}
-                    &name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&dateci=${encodeURIComponent(dateci)}&dateco=${encodeURIComponent(dateco)}
-                    &birthday=${encodeURIComponent(birthday)}&address=${encodeURIComponent(address)}&roomtype=${encodeURIComponent(roomtype)}&email=${encodeURIComponent(email)}`;
+    var params = `signatureData=${encodeURIComponent(signatureData)}&folio=${encodeURIComponent(folio)}&room=${encodeURIComponent(room)}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&dateci=${encodeURIComponent(dateci)}&dateco=${encodeURIComponent(dateco)}&birthday=${encodeURIComponent(birthday)}&address=${encodeURIComponent(address)}&roomtype=${encodeURIComponent(roomtype)}&email=${encodeURIComponent(email)}`;
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
