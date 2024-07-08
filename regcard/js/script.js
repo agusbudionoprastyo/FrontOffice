@@ -30,12 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('email').value = data.email;
 
             const emailInput = data.email;
-
-            emailInput.addEventListener('blur', function() {
                 if (emailInput.value.trim() === '') {
-                    emailInput.placeholder = 'dafam@mail.com'; // Mengatur kembali placeholder jika input kosong
-                }
-            });
+                emailInput.placeholder = 'dafam@mail.com'; // Mengatur kembali placeholder jika input kosong
+            }
 
             // Update message based on the new room type
             const roomType = data.roomtype;
