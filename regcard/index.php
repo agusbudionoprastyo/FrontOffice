@@ -59,7 +59,6 @@
 <body>
     <form id="imageForm"> 
     <img src="images/logo.png" alt="logo" class="logo">
-        <input type="hidden" id="pdfFile"/>
 
     <div id="button-container">
         <button type="button" class="floating-btn" id="pairing-btn" style="display:none;"><i class="fa-solid fa-arrows-rotate"></i></button>
@@ -114,6 +113,7 @@
         </div>
 
         <div id="message"></div>
+        <input type="hidden" id="roomtype"/>
         
         <div id="signature-pad">
             <label><h3>SIGNATURE</h3></label>

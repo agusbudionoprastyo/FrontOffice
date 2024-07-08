@@ -26,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('dateco').value = data.dateco;
             document.getElementById('birthday').value = data.birthday;
             document.getElementById('address').value = data.address;
+            document.getElementById('roomtype').value = data.roomtype;
+
 
             // Update message based on the new room type
             const roomType = data.roomtype;
