@@ -226,10 +226,11 @@ function addSignatureToPdf($inputPdfPath, $signatureImagePath, $outputPdfPath) {
         $pdf->useTemplate($templateId);
 
         if ($pageNo == $pageCount) {
-            $x = 160;
-            $y = 190;
+            $x = 150;
+            $y = 235;
             $pdf->Image($signatureImagePath, $x, $y, 40, 20, 'PNG');
         }
+        
     }
 
     // Simpan PDF ke jalur output
