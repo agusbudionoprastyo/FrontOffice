@@ -70,7 +70,7 @@
 
         <div class="input-group">
             <div class="input-wrapper">
-                <input type="text" id="name" placeholder="NAME" disabled/>
+                <input type="text" id="name" placeholder="NAME" disabled style="margin-right: 10px;"/>
                 <input type="text" id="phone" placeholder="PHONE NUMBER"/>
             </div>
         </div>
