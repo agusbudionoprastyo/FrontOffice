@@ -19,7 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $birthday = $_POST['birthday'];
     $address = $_POST['address'];
     $roomtype = $_POST['roomtype'];
-    $email = $_POST['email']; // Menambahkan variabel email dari POST data
+    $email = $_POST['email'];
+    $pdfFile = $_POST['pdfFile'];
 
     // Dekode data tanda tangan dari base64 menjadi gambar
     $decodedSignature = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $signatureData));
@@ -35,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     file_put_contents($signatureFilePath, $decodedSignature);
 
     // Path file PDF yang akan diolah dan path untuk menyimpan hasil PDF yang ditandatangani
-    $inputPdfFilename = __DIR__ . '/attachment_pdf/' . 'regcard_nonsmoking.pdf';
+    $inputPdfFilename = __DIR__ . '/attachment_pdf/' . $pdfFile;
     $outputPdfFilename = 'regform_' . $folio . '_signed.pdf';
     $outputPdfFilePath = __DIR__ . '/signed_doc/' . $outputPdfFilename;
     $at_regform = '../signed_doc/' . $outputPdfFilename;

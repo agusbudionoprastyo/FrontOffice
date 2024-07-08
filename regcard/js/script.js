@@ -135,6 +135,7 @@ document.getElementById('save-btn').addEventListener('click', function () {
     var address = document.getElementById('address').value;
     var roomtype = document.getElementById('roomtype').value;
     var email = document.getElementById('email').value;
+    var pdfFile = document.getElementById('pdfFile').value;
 
     if (signaturePad.isEmpty()) {
         // Memeriksa apakah tanda tangan kosong
@@ -149,7 +150,7 @@ document.getElementById('save-btn').addEventListener('click', function () {
         var signatureData = signaturePad.toDataURL();
         
         // Mengirim data ke server
-        sendData(signatureData, folio, room, name, phone, dateci, dateco, birthday, address, roomtype, email);
+        sendData(signatureData, folio, room, name, phone, dateci, dateco, birthday, address, roomtype, email, pdfFile);
 
         // Memanggil fungsi unpairDevice
         var tokenId = localStorage.getItem('deviceTokenId');
@@ -175,13 +176,13 @@ function unlinkDevice(tokenId) {
     });
 }
 
-function sendData(signatureData, folio, room, name, phone, dateci, dateco, birthday, address, roomtype, email) {
+function sendData(signatureData, folio, room, name, phone, dateci, dateco, birthday, address, roomtype, email, pdfFile) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://fo.dafam.cloud/rc_sign_store.php', true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     
     // Format the data to be sent
-    var params = `signatureData=${encodeURIComponent(signatureData)}&folio=${encodeURIComponent(folio)}&room=${encodeURIComponent(room)}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&dateci=${encodeURIComponent(dateci)}&dateco=${encodeURIComponent(dateco)}&birthday=${encodeURIComponent(birthday)}&address=${encodeURIComponent(address)}&roomtype=${encodeURIComponent(roomtype)}&email=${encodeURIComponent(email)}`;
+    var params = `signatureData=${encodeURIComponent(signatureData)}&folio=${encodeURIComponent(folio)}&room=${encodeURIComponent(room)}&name=${encodeURIComponent(name)}&phone=${encodeURIComponent(phone)}&dateci=${encodeURIComponent(dateci)}&dateco=${encodeURIComponent(dateco)}&birthday=${encodeURIComponent(birthday)}&address=${encodeURIComponent(address)}&roomtype=${encodeURIComponent(roomtype)}&email=${encodeURIComponent(email)}&pdfFile=${encodeURIComponent(pdfFile)}`;
 
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -221,7 +222,8 @@ function sendData(signatureData, folio, room, name, phone, dateci, dateco, birth
                     '&birthday=' + encodeURIComponent(birthday) +
                     '&address=' + encodeURIComponent(address) +
                     '&roomtype=' + encodeURIComponent(roomtype) +
-                    '&email=' + encodeURIComponent(email);
+                    '&email=' + encodeURIComponent(email) +
+                    '&pdfFile=' + encodeURIComponent(pdfFile);
 
     // Mengirim data ke server
     xhr.send(formData);
