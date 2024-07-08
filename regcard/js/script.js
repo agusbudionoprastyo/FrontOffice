@@ -27,13 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('birthday').value = data.birthday;
             document.getElementById('address').value = data.address;
             document.getElementById('roomtype').value = data.roomtype;
-            document.getElementById('email').value = data.email;
-
-            const emailInput = data.email;
-                if (emailInput.value.trim() === '') {
-                emailInput.placeholder = 'dafam@mail.com'; // Mengatur kembali placeholder jika input kosong
-            }
-
+            document.getElementById('email').value = data.resv_email;
+            
             // Update message based on the new room type
             const roomType = data.roomtype;
             if (roomType.toLowerCase().endsWith('n')) { // Mengubah kondisi untuk mengecek huruf terakhir dari roomType
