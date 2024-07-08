@@ -143,6 +143,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $roomtype = $_POST['roomtype'];
     $email = $_POST['email'];
     $pdfFile = $_POST['pdfFile'];
+    $signatureData = $_POST['signature'];
+
 
 
    // Dekode data tanda tangan dari base64 menjadi gambar
@@ -230,7 +232,7 @@ function addSignatureToPdf($inputPdfPath, $signatureImagePath, $outputPdfPath) {
             $y = 235;
             $pdf->Image($signatureImagePath, $x, $y, 40, 20, 'PNG');
         }
-        
+
     }
 
     // Simpan PDF ke jalur output
