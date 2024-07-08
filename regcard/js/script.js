@@ -151,7 +151,7 @@ document.getElementById('save-btn').addEventListener('click', function () {
         // Memanggil fungsi unpairDevice
         var tokenId = localStorage.getItem('deviceTokenId');
         if (tokenId) {
-            unlinkDevice(tokenId);
+            // unlinkDevice(tokenId);
         } else {
             console.error("No deviceTokenId found in localStorage.");
         }
