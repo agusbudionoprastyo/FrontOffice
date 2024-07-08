@@ -426,7 +426,6 @@ function syncData() {
             });
             // location.reload();
         }
-        location.reload();
     });
 };
 </script>
