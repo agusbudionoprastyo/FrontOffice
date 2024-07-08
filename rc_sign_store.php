@@ -231,8 +231,8 @@ function addSignatureToPdf($inputPdfPath, $signatureImagePath, $outputPdfPath, $
         if ($pageNo == $pageCount) {
             $pdf->Image($signatureImagePath, 150, 235, 40, 20, 'PNG');
             $pdf->SetFont('', '', 9); // Set ukuran font ke 9
-            $pdf->Text(147, 46, $name);
-            $pdf->Text(137, 61, 'PHONE     ' . $phone);
+            $pdf->Text(148, 52, $name);
+            $pdf->Text(116, 154, $phone);
         }
 
     }
