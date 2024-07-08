@@ -18,44 +18,14 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // Update form fields with received data
-            // document.getElementById('id').value = data.id;
-            document.getElementById('pdfFile').value = data.at_guestfolio;
             document.getElementById('folio').value = data.folio;
-
-            // Langsung muat dan render PDF
-            const pdfUrl = data.at_guestfolio;
-            const loadingTask = pdfjsLib.getDocument(pdfUrl);
-            loadingTask.promise.then(function(pdf) {
-                console.log('PDF loaded');
-                // Ambil halaman pertama PDF
-                pdf.getPage(1).then(function(page) {
-                    console.log('Page loaded');
-                    const scale = 1;
-                    const viewport = page.getViewport({scale: scale});
-                    // Buat canvas untuk menampilkan halaman PDF
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-                    // Menggambar halaman PDF ke dalam canvas
-                    const renderContext = {
-                        canvasContext: context,
-                        viewport: viewport
-                    };
-                    const renderTask = page.render(renderContext);
-                    renderTask.promise.then(function() {
-                        console.log('Page rendered');
-                        // Hapus konten lama dari pdf-viewer
-                        const pdfViewer = document.getElementById('pdf-container');
-                        pdfViewer.innerHTML = '';
-                        // Menambahkan canvas ke dalam div
-                        pdfViewer.appendChild(canvas);
-                    });
-                });
-            }).catch(function(reason) {
-                // Jika gagal memuat PDF
-                console.error('Error: ' + reason);
-            });
+            document.getElementById('room').value = data.room;
+            document.getElementById('name').value = data.name;
+            document.getElementById('phone').value = data.phone;
+            document.getElementById('dateci').value = data.dateci;
+            document.getElementById('dateco').value = data.dateco;
+            document.getElementById('birthday').value = data.birthday;
+            document.getElementById('address').value = data.address;
 
             // Perbarui lastId dengan id baru
             lastId = data.id;
