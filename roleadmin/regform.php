@@ -423,7 +423,7 @@ endif;
 <!-- Include Socket.io client library -->
 <script src="https://cdn.socket.io/4.1.2/socket.io.min.js"></script>
 <script>
-    const socket = io('https://103.236.201.34:3000'); // Ganti dengan domain atau IP server Anda
+    const socket = io('http://103.236.201.34:3000'); // Ganti dengan domain atau IP server Anda
 
     socket.on('dataReplicated', (data) => {
         alert(data.message); // Tampilkan pesan (opsional)
