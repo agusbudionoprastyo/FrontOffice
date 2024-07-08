@@ -163,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $inputPdfFilename = __DIR__ . '/attachement_pdf/' . $pdfFile;
    $outputPdfFilename = 'regcard_' . $folio . '_signed.pdf';
    $outputPdfFilePath = __DIR__ . '/signed_doc/' . $outputPdfFilename;
-   $at_guestfolio = '../signed_doc/' . $outputPdfFilename;
+   $at_regform = '../signed_doc/' . $outputPdfFilename;
 
    // Cek apakah direktori 'signed_doc' ada, jika tidak, buat direktori tersebut
    if (!is_dir(__DIR__ . '/signed_doc')) {
@@ -182,13 +182,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Persiapan statement SQL untuk memperbarui tabel FOGUEST
-        $stmt = $connection->prepare("UPDATE FOGUEST SET rc_signature_path = ?, resv_phone = ?, resv_email = ? WHERE folio = ?");
+        $stmt = $connection->prepare("UPDATE FOGUEST SET rc_signature_path = ?, at_regform = ?, resv_phone = ?, resv_email = ? WHERE folio = ?");
         if ($stmt === false) {
             throw new Exception("Prepare failed: " . $connection->error);
         }
 
         // Bind parameter ke statement SQL
-        $stmt->bind_param("ssss", $signatureFilename, $phone, $email, $folio);
+        $stmt->bind_param("sssss", $signatureFilename, $at_regform, $phone, $email, $folio);
 
         // Eksekusi statement SQL
         if (!$stmt->execute()) {
@@ -227,10 +227,12 @@ function addSignatureToPdf($inputPdfPath, $signatureImagePath, $outputPdfPath) {
         $pdf->AddPage();
         $pdf->useTemplate($templateId);
 
+        // Jika sudah pada halaman terakhir, tambahkan tanda tangan dan informasi lainnya
         if ($pageNo == $pageCount) {
-            $x = 150;
-            $y = 235;
-            $pdf->Image($signatureImagePath, $x, $y, 40, 20, 'PNG');
+            $pdf->Image($signatureImagePath, 150, 235, 40, 20, 'PNG');
+            $pdf->SetFont('', '', 9); // Set ukuran font ke 9
+            $pdf->Text(137, 56, 'NAME       ' . $name);
+            $pdf->Text(137, 61, 'MOBILE     ' . $phone);
         }
 
     }
