@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     file_put_contents($signatureFilePath, $decodedSignature);
 
     // Path file PDF yang akan diolah dan path untuk menyimpan hasil PDF yang ditandatangani
-    $inputPdfFilename = __DIR__ . '/attachment_pdf/' 'regcard_nonsmoking.pdf';
+    $inputPdfFilename = __DIR__ . '/attachment_pdf/' . 'regcard_nonsmoking.pdf';
     $outputPdfFilename = 'regform_' . $folio . '_signed.pdf';
     $outputPdfFilePath = __DIR__ . '/signed_doc/' . $outputPdfFilename;
     $at_regform = '../signed_doc/' . $outputPdfFilename;
@@ -87,9 +87,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Menutup statement dan koneksi database
     if (isset($stmt)) {
         $stmt->close();
-    }
-    if (isset($truncateStmt)) {
-        $truncateStmt->close();
     }
     $connection->close();
 } else {
