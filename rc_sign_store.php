@@ -128,6 +128,8 @@ header("Access-Control-Allow-Origin: https://rc.dafam.cloud");
 require_once 'helper/connection.php';
 require_once 'vendor/autoload.php'; // Memuat TCPDF dan FPDI
 
+use setasign\Fpdi\Tcpdf\Fpdi;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Mengambil data yang dikirimkan melalui POST
     $folio = $_POST['folio'];
@@ -140,14 +142,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $address = $_POST['address'];
     $roomtype = $_POST['roomtype'];
     $email = $_POST['email'];
-    $signatureData = $_POST['signature'];
+    $pdfFile = $_POST['pdfFile'];
 
 
-    // Memeriksa koneksi ke database (gunakan $connection dari connection.php)
-    if (!$connection) {
-        die("Koneksi gagal: " . mysqli_connect_error());
-    }
+   // Dekode data tanda tangan dari base64 menjadi gambar
+   $decodedSignature = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $signatureData));
+   $signatureFilename = 'signature_' . uniqid() . '.png';
+   $signatureFilePath = __DIR__ . '/signature/' . $signatureFilename;
 
+   // Cek apakah direktori 'signature' ada, jika tidak, buat direktori tersebut
+   if (!is_dir(__DIR__ . '/signature')) {
+       mkdir(__DIR__ . '/signature', 0775, true);
+   }
+
+   // Simpan tanda tangan ke direktori server
+   file_put_contents($signatureFilePath, $decodedSignature);
+
+   $inputPdfFilename = __DIR__ . '/attachement_pdf/' . $pdfFile;
+   $outputPdfFilename = 'regcard_' . $folio . '_signed.pdf';
+   $outputPdfFilePath = __DIR__ . '/signed_doc/' . $outputPdfFilename;
+   $at_guestfolio = '../signed_doc/' . $outputPdfFilename;
+
+   // Cek apakah direktori 'signed_doc' ada, jika tidak, buat direktori tersebut
+   if (!is_dir(__DIR__ . '/signed_doc')) {
+       mkdir(__DIR__ . '/signed_doc', 0775, true);
+   }
+
+   // Tambahkan tanda tangan ke PDF
+   addSignatureToPdf($inputPdfFilename, $signatureFilePath, $outputPdfFilePath);
+
+   // Memeriksa koneksi (gunakan $connection dari connection.php)
+   if (!$connection) {
+       die("Koneksi gagal: " . mysqli_connect_error());
+   }
     // Memulai transaksi database
     $connection->begin_transaction();
 
@@ -188,6 +215,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Jika bukan metode POST, kirim respons HTTP 405 (Method Not Allowed)
     http_response_code(405);
     echo "Metode tidak diizinkan.";
+}
+
+function addSignatureToPdf($inputPdfPath, $signatureImagePath, $outputPdfPath) {
+    $pdf = new FPDI();
+    $pageCount = $pdf->setSourceFile($inputPdfPath);
+    for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+        $templateId = $pdf->importPage($pageNo);
+        $pdf->AddPage();
+        $pdf->useTemplate($templateId);
+
+        if ($pageNo == $pageCount) {
+            $x = 160;
+            $y = 190;
+            $pdf->Image($signatureImagePath, $x, $y, 40, 20, 'PNG');
+        }
+    }
+
+    // Simpan PDF ke jalur output
+    $pdf->Output($outputPdfPath, 'F');
 }
 
 ?>
