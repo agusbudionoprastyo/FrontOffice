@@ -403,14 +403,18 @@ endif;
 <!-- Tambahkan script berikut di bagian bawah file -->
 <script>
     function syncData() {
-        // Panggil API di sini
-        // Contoh:
         $.ajax({
             url: 'https://103.236.201.34:3000/replicate',
             method: 'GET',
             success: function(response) {
-                // Handle response
-                location.reload(); // Reload halaman setelah pemanggilan API berhasil
+                // Misalnya, server memberikan respons 'success' jika operasi berhasil
+                if (response.status === 'success') {
+                    // Reload halaman jika operasi berhasil
+                    location.reload();
+                } else {
+                    // Handle other cases if needed
+                    console.error('Unexpected response:', response);
+                }
             },
             error: function(xhr, status, error) {
                 // Handle error
@@ -419,5 +423,6 @@ endif;
         });
     }
 </script>
+
 
 <script src="../assets/js/page/modules-datatables.js"></script>
