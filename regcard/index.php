@@ -176,5 +176,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.0.279/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.0.279/pdf.worker.min.js"></script>
 
+    <script>
+        var lastScrollTop = 0;
+        var floatingBtn = document.getElementById('button-container');
+
+        window.addEventListener("scroll", function() {
+            var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (currentScroll > lastScrollTop) {
+                // Downscroll code
+                floatingBtn.style.display = 'none';
+            } else {
+                // Upscroll code
+                floatingBtn.style.display = 'block';
+            }
+
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+        });
+    </script>
+
 </body>
 </html>
