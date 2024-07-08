@@ -439,7 +439,7 @@ endif;
                     alert('Terjadi kesalahan saat melakukan replikasi data');
                 }
             });
-        });
+        };
     </script>
 
 
