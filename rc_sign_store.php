@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $birthday = $_POST['birthday'];
     $address = $_POST['address'];
     $roomtype = $_POST['roomtype'];
-    $pdfSource = $roomtype.endsWith('S') ? 'regcard_smoking.pdf' : ($roomtype.endsWith('N') ? 'regcard_nonsmoking.pdf' : 'default.pdf');
+    $pdfSource = $roomtype.endsWith('S') ? 'regcard_smoking' : ($roomtype.endsWith('N') ? 'regcard_nonsmoking' : 'default');
 
     // Dekode data tanda tangan dari base64 menjadi gambar
     $decodedSignature = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $signatureData));
