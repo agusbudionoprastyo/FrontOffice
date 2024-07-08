@@ -400,30 +400,6 @@ if (isset($_SESSION['info'])):
 endif;
 ?>
 
-<!-- Tambahkan script berikut di bagian bawah file
-<script>
-    function syncData() {
-        $.ajax({
-            url: 'https://103.236.201.34:3000/replicate',
-            method: 'GET',
-            success: function(response) {
-                // Misalnya, server memberikan respons 'success' jika operasi berhasil
-                if (response.status === 'Data replication successful') {
-                    // Reload halaman jika operasi berhasil
-                    location.reload();
-                } else {
-                    // Handle other cases if needed
-                    console.error('Unexpected response:', response);
-                }
-            },
-            error: function(xhr, status, error) {
-                // Handle error
-                console.error('Error:', error);
-            }
-        });
-    }
-</script> -->
-
 <script>
         // Ketika tombol ditekan, lakukan panggilan AJAX ke server
         function syncData() {
@@ -432,11 +408,23 @@ endif;
                 method: 'GET',
                 success: function(response) {
                     console.log('Response from server:', response);
-                    alert('Replikasi data berhasil: ' + response.message); // Tampilkan pesan sukses ke user
+                    iziToast.success({
+                        title: 'Sukses',
+                        message: 'Replikasi data berhasil: ' + response.message,
+                        position: 'topCenter',
+                        timeout: 5000
+                    });
+                    location.reload();
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', error);
-                    alert('Terjadi kesalahan saat melakukan replikasi data');
+                    iziToast.error({
+                        title: 'Gagal',
+                        message: 'Terjadi kesalahan saat melakukan replikasi data',
+                        position: 'topCenter',
+                        timeout: 5000
+                    });
+                    location.reload();
                 }
             });
         };
