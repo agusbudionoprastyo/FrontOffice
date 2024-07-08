@@ -150,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Persiapan statement SQL untuk memperbarui tabel FOGUEST
-        $stmt = $connection->prepare("UPDATE FOGUEST SET phone = ?, email = ? WHERE folio = ?");
+        $stmt = $connection->prepare("UPDATE FOGUEST SET resv_phone = ?, resv_email = ? WHERE folio = ?");
         if ($stmt === false) {
             throw new Exception("Prepare failed: " . $connection->error);
         }
