@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update form fields with received data
             document.getElementById('folio').value = data.folio;
             document.getElementById('room').value = data.room;
-            document.getElementById('name').value = data.name;
-            document.getElementById('phone').value = data.phone;
+            document.getElementById('name').value = data.fname;
+            document.getElementById('phone').value = data.resv_phone;
             document.getElementById('dateci').value = data.dateci;
             document.getElementById('dateco').value = data.dateco;
             document.getElementById('birthday').value = data.birthday;
