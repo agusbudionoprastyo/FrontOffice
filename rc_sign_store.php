@@ -95,29 +95,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Metode tidak diizinkan.";
 }
 
-// Fungsi untuk menambahkan tanda tangan ke PDF menggunakan library FPDI
-function addSignatureToPdf($inputPdfPath, $signatureImagePath, $outputPdfPath, $name, $phone) {
-    $pdf = new Fpdi();
+// // Fungsi untuk menambahkan tanda tangan ke PDF menggunakan library FPDI
+// function addSignatureToPdf($inputPdfPath, $signatureImagePath, $outputPdfPath, $name, $phone) {
+//     $pdf = new Fpdi();
 
-    // Mengambil jumlah halaman dari file PDF
-    $pageCount = $pdf->setSourceFile($inputPdfPath);
+//     // Mengambil jumlah halaman dari file PDF
+//     $pageCount = $pdf->setSourceFile($inputPdfPath);
 
-    // Iterasi setiap halaman
-    for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
-        $templateId = $pdf->importPage($pageNo);
-        $pdf->AddPage();
-        $pdf->useTemplate($templateId);
+//     // Iterasi setiap halaman
+//     for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+//         $templateId = $pdf->importPage($pageNo);
+//         $pdf->AddPage();
+//         $pdf->useTemplate($templateId);
 
-        // Jika sudah pada halaman terakhir, tambahkan tanda tangan dan informasi lainnya
-        if ($pageNo == $pageCount) {
-            $pdf->Image($signatureImagePath, 150, 235, 40, 20, 'PNG');
-            $pdf->SetFont('', '', 9); // Set ukuran font ke 9
-            $pdf->Text(137, 56, 'NAME       ' . $name);
-            $pdf->Text(137, 61, 'MOBILE     ' . $phone);
-        }
-    }
+//         // Jika sudah pada halaman terakhir, tambahkan tanda tangan dan informasi lainnya
+//         if ($pageNo == $pageCount) {
+//             $pdf->Image($signatureImagePath, 150, 235, 40, 20, 'PNG');
+//             $pdf->SetFont('', '', 9); // Set ukuran font ke 9
+//             $pdf->Text(137, 56, 'NAME       ' . $name);
+//             $pdf->Text(137, 61, 'MOBILE     ' . $phone);
+//         }
+//     }
 
-    // Simpan PDF ke path yang ditentukan
-    $pdf->Output($outputPdfPath, 'F');
-}
+//     // Simpan PDF ke path yang ditentukan
+//     $pdf->Output($outputPdfPath, 'F');
+// }
 ?>
