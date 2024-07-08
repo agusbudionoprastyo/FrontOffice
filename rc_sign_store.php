@@ -171,7 +171,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    }
 
    // Tambahkan tanda tangan ke PDF
-   addSignatureToPdf($inputPdfFilename, $signatureFilePath, $outputPdfFilePath);
+   addSignatureToPdf($inputPdfFilename, $signatureFilePath, $outputPdfFilePath, $name, $phone);
 
    // Memeriksa koneksi (gunakan $connection dari connection.php)
    if (!$connection) {
@@ -219,7 +219,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Metode tidak diizinkan.";
 }
 
-function addSignatureToPdf($inputPdfPath, $signatureImagePath, $outputPdfPath) {
+function addSignatureToPdf($inputPdfPath, $signatureImagePath, $outputPdfPath, $name, $phone) {
     $pdf = new FPDI();
     $pageCount = $pdf->setSourceFile($inputPdfPath);
     for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
@@ -231,8 +231,8 @@ function addSignatureToPdf($inputPdfPath, $signatureImagePath, $outputPdfPath) {
         if ($pageNo == $pageCount) {
             $pdf->Image($signatureImagePath, 150, 235, 40, 20, 'PNG');
             $pdf->SetFont('', '', 9); // Set ukuran font ke 9
-            $pdf->Text(137, 56, 'NAME       ' . $name);
-            $pdf->Text(137, 61, 'MOBILE     ' . $phone);
+            $pdf->Text(147, 46, $name);
+            $pdf->Text(137, 61, 'PHONE     ' . $phone);
         }
 
     }
