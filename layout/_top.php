@@ -75,6 +75,3 @@ isLogin();
       ?>
       <!-- Main Content -->
       <div class="main-content">
-
-      <!-- Include Socket.io client library -->
-<script src="https://cdn.socket.io/4.1.2/socket.io.min.js"></script>

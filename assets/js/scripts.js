@@ -1,12 +1,5 @@
 "use strict";
 
-const socket = io('https://103.236.201.34:3000'); // Ganti dengan domain atau IP server Anda
-
-socket.on('dataReplicated', (data) => {
-    alert(data.message); // Tampilkan pesan (opsional)
-    location.reload(); // Muat ulang halaman
-});
-
 // ChartJS
 if(window.Chart) {
   Chart.defaults.global.defaultFontFamily = "'Nunito', 'Segoe UI', 'Arial'";
