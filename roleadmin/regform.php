@@ -408,7 +408,7 @@ endif;
             method: 'GET',
             success: function(response) {
                 // Misalnya, server memberikan respons 'success' jika operasi berhasil
-                if (response.status === 'success') {
+                if (response.status === 'Data replication successful') {
                     // Reload halaman jika operasi berhasil
                     location.reload();
                 } else {
