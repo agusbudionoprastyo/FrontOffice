@@ -407,16 +407,20 @@ function syncData() {
         url: 'https://103.236.201.34:3000/replicate', // Ganti dengan URL sesuai dengan endpoint server Anda
         method: 'GET',
         success: function(response) {
-            console.log('Response from server:', response);
-            location.reload();
-            
-            iziToast.success({
-                title: 'Sukses',
-                message: 'Replikasi data berhasil: ' + response.message,
-                position: 'topCenter',
-                timeout: 5000
-            });
-        },
+        console.log('Response from server:', response);
+        
+        iziToast.success({
+        title: 'Sukses',
+        message: 'Replikasi data berhasil: ' + response.message,
+        position: 'topCenter',
+        timeout: 5000
+    });
+    setTimeout(function() {
+        location.reload();
+    }, 1000); // Delay reload untuk memberi waktu untuk menampilkan pesan toast
+}
+
+
         error: function(xhr, status, error) {
             console.error('Error:', error);
             iziToast.error({
