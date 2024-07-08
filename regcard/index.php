@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Card</title>
+    <link rel="icon" href="images/icon/drawable-hdpi/icon.png" type="image/x-icon">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" type="text/css" href="sweetalert2/dist/sweetalert2.min.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
