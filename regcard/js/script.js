@@ -162,7 +162,7 @@ function unlinkDevice(tokenId) {
     $.ajax({
         url: 'unlinkDevice.php',
         type: 'POST',
-        data: { token_id: tokenId, regform_id: '0' }, // Menambahkan status 'unpaired'
+        data: { token_id: tokenId, regcard_id: '0' }, // Menambahkan status 'unpaired'
         success: function(response) {
             console.log("Doc unlinked");
         },
