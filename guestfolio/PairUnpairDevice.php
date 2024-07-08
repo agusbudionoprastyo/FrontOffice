@@ -5,7 +5,7 @@ if (isset($_POST['token_id'])) {
     $token_id = $_POST['token_id'];
 
     // Memperbarui query untuk menggunakan status yang diterima dari permintaan dan mengatur regform_id menjadi 0
-    $query = mysqli_query($connection, "UPDATE token_device SET regform_id = 0 WHERE token_id = '$token_id'");
+    $query = mysqli_query($connection, "UPDATE token_device SET folio_id = 0 WHERE token_id = '$token_id'");
 
     if ($query) {
         echo "Status updated successfully";
