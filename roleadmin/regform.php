@@ -408,13 +408,14 @@ function syncData() {
         method: 'GET',
         success: function(response) {
             console.log('Response from server:', response);
+            location.reload();
+            
             iziToast.success({
                 title: 'Sukses',
                 message: 'Replikasi data berhasil: ' + response.message,
                 position: 'topCenter',
                 timeout: 5000
             });
-            // location.reload();
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
