@@ -400,7 +400,7 @@ if (isset($_SESSION['info'])):
 endif;
 ?>
 
-<!-- <script>
+<script>
 // Ketika tombol ditekan, lakukan panggilan AJAX ke server
 function syncData() {
     $.ajax({
@@ -414,7 +414,7 @@ function syncData() {
                 position: 'topCenter',
                 timeout: 5000
             });
-            location.reload();
+            // location.reload();
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
@@ -424,39 +424,10 @@ function syncData() {
                 position: 'topCenter',
                 timeout: 5000
             });
-            location.reload();
-        }
-    });
-};
-</script> -->
-
-<script>
-// Ketika tombol ditekan, lakukan panggilan AJAX ke server
-function syncData() {
-    $.ajax({
-        url: 'https://103.236.201.34:3000/replicate', // Ganti dengan URL sesuai dengan endpoint server Anda
-        method: 'GET',
-        success: function(response) {
-            console.log('Response from server:', response);
-        },
-        error: function(xhr, status, error) {
-            console.error('Error:', error);
-        },
-        complete: function(xhr, status) {
-            // Menampilkan iziToast setelah request selesai (baik sukses maupun gagal)
-            iziToast.success({
-                title: 'Sukses',
-                message: 'Replikasi data berhasil',
-                position: 'topCenter',
-                timeout: 5000
-            });
-            // Reload halaman setelah menampilkan iziToast
-            location.reload();
+            // location.reload();
         }
     });
 };
 </script>
-
-
 
 <script src="../assets/js/page/modules-datatables.js"></script>
