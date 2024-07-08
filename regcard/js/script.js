@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Tampilkan notifikasi
             Swal.fire({
                 icon: 'info',
-                title: 'Guestfolio',
-                text: `Guestfolio ${data.folio}, nama ${data.fname} siap untuk di tandatangani!`,
+                title: 'Registration Card',
+                text: `Registration Card ${data.folio}, nama ${data.fname} siap untuk di tandatangani!`,
                 showConfirmButton: false
             });
 
