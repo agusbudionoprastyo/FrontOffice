@@ -29,13 +29,14 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('roomtype').value = data.roomtype;
             document.getElementById('email').value = data.email;
 
-
             // Update message based on the new room type
             const roomType = data.roomtype;
             if (roomType.toLowerCase().endsWith('n')) { // Mengubah kondisi untuk mengecek huruf terakhir dari roomType
                 showNonSmokingRoom();
+                document.getElementById('pdfFile').value = 'regcard_nonsmoking.pdf';
             } else if (roomType.toLowerCase().endsWith('s')) {
                 showSmokingRoom();
+                document.getElementById('pdfFile').value = 'regcard_smoking.pdf';
             } else {
                 showClear();
             }
