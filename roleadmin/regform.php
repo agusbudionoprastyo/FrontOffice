@@ -54,6 +54,10 @@ require_once '../helper/connection.php';
     font-size: 12px;
 }
 
+#table-2_filter {
+    display: none; /* Menyembunyikan kotak pencarian */
+}
+
 #table-2 th:nth-child(1),
 #table-2 td:nth-child(1) {
 min-width: 200px; /* Kolom REGCARD */
@@ -116,7 +120,7 @@ min-width: 250px; /* Kolom NAME */
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover table-striped w-100" id="table-2" data-searchable="false">
+                    <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
                                 <th>REGCARD</th>
