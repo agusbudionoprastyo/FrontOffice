@@ -553,11 +553,11 @@ function printDocumentWithQR(room, qrText) {
     // Menambahkan elemen untuk QR code di dokumen pencetakan
     printDocument += '<div id="qrcode" style="float: left; margin-right: 5mm;"></div>';
 
-    // Menambahkan room details dalam satu baris
-    printDocument += '<div style="clear: both; width: 100%; text-align: left; margin-top: 5mm;">';
-    printDocument += '<span style="display: inline-block; width: 33%;">ROOM ' + room + '</span>';
-    printDocument += '<span style="display: inline-block; width: 33%;">WIFI dafamsemarang</span>';
-    printDocument += '<span style="display: inline-block; width: 33%;">PASSWORD krasansare</span>';
+    // Menambahkan room details di sebelah kanan QR code
+    printDocument += '<div style="float: left; margin-top: 5mm;">';
+    printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
+    printDocument += '<h3 style="margin: 0;">WIFI dafamsemarang</h3>';
+    printDocument += '<h3 style="margin: 0;">PASSWORD krasansare</h3>';
     printDocument += '</div>';
 
     printDocument += '</body></html>';
