@@ -504,16 +504,41 @@ function printQRCode(button) {
     var fname = button.getAttribute('data-fname');
 
     // Panggil fungsi untuk menghasilkan QR code dan mencetak
-    generateAndPrintQRCode(room, roomType, fname);
+    generateQRCode(room, roomType, fname, function(qrText) {
+        // Setelah QR code dibuat, panggil fungsi untuk mencetak
+        printDocumentWithQR(room, roomType, fname, qrText);
+    });
 }
 
-// Function untuk menghasilkan QR code dan melakukan pencetakan
-function generateAndPrintQRCode(room, roomType, fname) {
+// Function untuk menghasilkan QR code
+function generateQRCode(room, roomType, fname, callback) {
     const url = 'https://fo.dafam.cloud';
 
+    // Menyiapkan teks untuk QR code dengan informasi tambahan
+    var qrText = url + '?room=' + room + '&roomType=' + roomType + '&fname=' + fname;
+
+    // Menggunakan QRCode.js untuk menghasilkan QR code dengan teks yang disiapkan
+    var qrcode = new QRCode('qrcode', {
+        text: qrText,
+        width: 128,
+        height: 128
+    });
+
+    // Memanggil makeCode() untuk menghasilkan QR code dengan teks yang diberikan
+    qrcode.makeCode(qrText);
+
+    // Memanggil callback dengan qrText setelah QR code selesai dibuat
+    if (typeof callback === 'function') {
+        callback(qrText);
+    }
+}
+
+// Function untuk menulis dokumen ke iframe dan melakukan pencetakan
+function printDocumentWithQR(room, roomType, fname, qrText) {
     // Membuat elemen untuk QR code
     var qrCodeDiv = document.createElement('div');
     qrCodeDiv.id = 'qrcode';
+    qrCodeDiv.style.display = 'none'; // Sembunyikan elemen QR code di dokumen asli
     document.body.appendChild(qrCodeDiv);
 
     // Menyiapkan dokumen untuk pencetakan
@@ -522,7 +547,7 @@ function generateAndPrintQRCode(room, roomType, fname) {
     printDocument += '<h3>Room Type ' + roomType + '</h3>';
     printDocument += '<h3>Name ' + fname + '</h3>';
 
-    // Menambahkan elemen untuk QR code
+    // Menambahkan elemen untuk QR code di dokumen pencetakan
     printDocument += '<div id="qrcode"></div>';
 
     printDocument += '</body></html>';
@@ -535,16 +560,23 @@ function generateAndPrintQRCode(room, roomType, fname) {
     iframe.style.border = 'none';
     document.body.appendChild(iframe);
 
-    // Menulis dokumen ke iframe
+    // Menulis dokumen pencetakan ke dalam iframe
     var doc = iframe.contentWindow.document;
     doc.open();
     doc.write(printDocument);
     doc.close();
 
-    // Memanggil generateQRCode untuk membuat QR code dalam dokumen yang disiapkan
-    generateQRCode(url, room, roomType, fname);
+    // Ambil elemen QR code yang sudah di-generate sebelumnya
+    var qrCodeInPrint = document.getElementById('qrcode');
 
-    // Melakukan pencetakan setelah QR code selesai dibuat
+    // Salin QR code yang sudah di-generate ke dalam dokumen pencetakan di iframe
+    if (qrCodeInPrint) {
+        var qrImage = new Image();
+        qrImage.src = qrCodeInPrint.firstChild.toDataURL(); // Ambil gambar QR code dari canvas QRCode.js
+        doc.body.appendChild(qrImage); // Masukkan gambar QR code ke dalam dokumen pencetakan di iframe
+    }
+
+    // Melakukan pencetakan setelah QR code dan dokumen selesai disiapkan
     setTimeout(function() {
         iframe.contentWindow.focus();
         iframe.contentWindow.print();
@@ -552,31 +584,9 @@ function generateAndPrintQRCode(room, roomType, fname) {
         // Hapus elemen iframe setelah pencetakan selesai
         setTimeout(function() {
             document.body.removeChild(iframe);
+            document.body.removeChild(qrCodeDiv); // Hapus elemen QR code dari dokumen asli setelah pencetakan
         }, 1000); // Menunggu 1 detik sebelum menghapus iframe
     }, 500); // Menunggu 0.5 detik sebelum melakukan pencetakan
-}
-
-// Function untuk menghasilkan QR code menggunakan QRCode.js
-function generateQRCode(url, room, roomType, fname) {
-    // Pastikan elemen dengan ID 'qrcode' tersedia di halaman
-    var el = document.getElementById('qrcode');
-    if (!el) {
-        console.error('Elemen dengan ID "qrcode" tidak ditemukan.');
-        return;
-    }
-
-    // Menyiapkan teks untuk QR code dengan informasi tambahan
-    var qrText = url + '?room=' + room + '&roomType=' + roomType + '&fname=' + fname;
-
-    // Menggunakan QRCode.js untuk menghasilkan QR code dengan teks yang disiapkan
-    var qrcode = new QRCode(el, {
-        text: qrText,
-        width: 128,
-        height: 128
-    });
-
-    // Memanggil makeCode() untuk menghasilkan QR code dengan teks yang diberikan
-    qrcode.makeCode(qrText);
 }
 
 
