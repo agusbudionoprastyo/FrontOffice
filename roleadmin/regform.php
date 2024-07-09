@@ -465,6 +465,11 @@ function syncData() {
 
 <script>
 $(document).ready(function() {
+    // Hapus inisialisasi DataTable sebelumnya
+    if ($.fn.DataTable.isDataTable('#table-2')) {
+        $('#table-2').DataTable().destroy();
+    }
+
     // Inisialisasi DataTables
     var table = $('#table-2').DataTable({
         // Pengaturan-pengaturan DataTables lainnya
