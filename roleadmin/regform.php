@@ -210,7 +210,7 @@ min-width: 250px; /* Kolom NAME */
                                                 <i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i>
                                             </button>
                                              
-                                            <button onclick="window.print();" class="btn btn-primary rounded-pill">Print</button>
+                                            <button onclick="window.print();" class="btn btn-default rounded-pill"><i class="fa-solid fa-qrcode fa-xl"></i></button>
  
                                         <?php endif; ?>
                                         
