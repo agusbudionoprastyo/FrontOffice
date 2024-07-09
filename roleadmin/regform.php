@@ -168,7 +168,7 @@ require_once '../helper/connection.php';
                             }
 
                             // Add ORDER BY clause
-                            $sql .= " ORDER BY dateci DESC";
+                            $sql .= " ORDER BY folio DESC";
 
                             // Perform the query
                             $result = mysqli_query($connection, $sql);
