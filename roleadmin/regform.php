@@ -491,14 +491,14 @@ function syncData() {
     });
 };
 
-// function generateQRCode(url) {
-//     // Using QRCode.js library to generate QR code
-//     var qrcode = new QRCode(document.getElementById("qrcode"), {
-//         text: url,
-//         width: 128,
-//         height: 128
-//     });
-// }
+function generateQRCode(url) {
+    // Using QRCode.js library to generate QR code
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: url,
+        width: 128,
+        height: 128
+    });
+}
 
 function printContent() {
     const url = 'https://fo.dafam.cloud';
