@@ -56,7 +56,7 @@ require_once '../helper/connection.php';
 
 #table-2_wrapper .dataTables_filter {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center; /* Pilihan untuk menengahkan secara vertical */
     margin-right: 10px; /* Opsi untuk menetapkan jarak kanan */
 }
