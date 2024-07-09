@@ -509,11 +509,11 @@ function printQRCode(button) {
     console.log("Name:", fname);
 
     // Panggil fungsi untuk menghasilkan QR code
-    generateAndPrintQRCode(room, roomType, fname);
+    PrintQRCode(room, roomType, fname);
 }
 
 // Function untuk menghasilkan dan mencetak QR code
-function generateAndPrintQRCode(room, roomType, fname) {
+function PrintQRCode(room, roomType, fname) {
     const url = 'https://fo.dafam.cloud';
 
     // Menyiapkan dokumen untuk pencetakan
@@ -542,7 +542,7 @@ function generateAndPrintQRCode(room, roomType, fname) {
     doc.close();
 
     // Memanggil generateQRCode untuk membuat QR code dalam dokumen yang disiapkan
-    generateQRCode(url, room, roomType, fname);
+    generateQRCode(url);
 
     // Melakukan pencetakan
     iframe.contentWindow.focus();
@@ -555,7 +555,7 @@ function generateAndPrintQRCode(room, roomType, fname) {
 }
 
 // Function untuk menghasilkan QR code menggunakan QRCode.js
-function generateQRCode(url, room, roomType, fname) {
+function generateQRCode(url) {
     // Pastikan elemen dengan ID 'qrcode' tersedia di halaman
     var el = document.getElementById('qrcode');
     if (!el) {
@@ -571,7 +571,7 @@ function generateQRCode(url, room, roomType, fname) {
     });
 
     // Tambahkan informasi room, roomType, dan fname ke dalam QR code
-    qrcode.makeCode('Room: ' + room + '\nRoom Type: ' + roomType + '\nName: ' + fname);
+    qrcode.makeCode();
 }
 
 
