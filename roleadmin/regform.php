@@ -419,6 +419,7 @@ function syncData() {
                 position: 'topCenter',
                 timeout: 5000
             });
+            location.reload()
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
