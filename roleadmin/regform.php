@@ -526,35 +526,33 @@ function syncData() {
 // }
 
 function generateQRCode(url) {
-    // Membuat instance QRCode tanpa menentukan elemen DOM target
-    var qrcode = new QRCode({
+    // Pastikan elemen dengan ID 'qrcode' tersedia di halaman
+    var el = document.getElementById('qrcode');
+    if (!el) {
+        console.error('Elemen dengan ID "qrcode" tidak ditemukan.');
+        return;
+    }
+
+    // Menggunakan QRCode.js untuk menghasilkan QR code
+    var qrcode = new QRCode(el, {
         text: url,
         width: 128,
         height: 128
     });
-
-    // Menghasilkan QR code
-    qrcode.makeCode(url);
-
-    // Mengembalikan data URL dari gambar QR code yang dihasilkan
-    var qrDataURL = qrcode.toDataURL();
-    
-    return qrDataURL;
 }
 
 function printQRCode() {
     const url = 'https://fo.dafam.cloud';
-    var qrDataURL = generateQRCode(url); // Mendapatkan data URL dari gambar QR code
+    generateQRCode(url); // Memanggil fungsi untuk menghasilkan QR code
 
     // Membuat jendela baru untuk mencetak QR code
     var printWindow = window.open('', 'Print Window', 'height=400,width=600');
     printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
-    printWindow.document.write('<img src="' + qrDataURL + '"/>');
+    printWindow.document.write('<img src="' + document.getElementById('qrcode').getElementsByTagName('canvas')[0].toDataURL() + '"/>');
     printWindow.document.write('</body></html>');
     printWindow.document.close(); // Menutup dokumen agar browser dapat memprosesnya
     printWindow.print(); // Memulai proses pencetakan
 }
-
 
 </script>
 
