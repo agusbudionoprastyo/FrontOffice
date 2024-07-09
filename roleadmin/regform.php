@@ -550,10 +550,10 @@ function printDocumentWithQR(room, qrText) {
     printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 8pt; }</style>'; // Ganti sesuai kebutuhan
     printDocument += '</head><body>';
 
-    // Container untuk QR code dan detail ROOM, WIFI, PASSWORD
+    // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
     printDocument += '<div style="clear: both;">';
-    printDocument += '<div id="qrcodeContainer" style="float: left; margin-right: 5mm;">';
-    printDocument += '<div id="qrcode" style="margin-bottom: 5mm;"></div>'; // Letakkan QR code di dalam container ini
+    printDocument += '<div style="float: left; margin-right: 5mm;">';
+    printDocument += '<div id="qrcodeContainer" style="margin-bottom: 5mm;"></div>'; // Letakkan QR code di dalam container ini
     printDocument += '</div>';
 
     // Detail ROOM, WIFI, PASSWORD di sebelah kanan QR code
