@@ -128,21 +128,15 @@ min-width: 250px; /* Kolom NAME */
             <button type="button" class="btn btn-danger rounded-pill" id="reset-filter"><i class="fa-solid fa-filter-circle-xmark"></i></button>
         </div>
 
-        <div class="col-auto">
-            <input type="text" class="rounded-pill custom-search-input" aria-describedby="basic-addon2" id="search-input" placeholder="Search...">
         </div>
-
+        <!-- Input pencarian di sebelah kanan halaman -->
+        <div class="row justify-content-end mb-3">
+            <div class="col-auto">
+                <input type="text" class="rounded-pill custom-search-input" aria-describedby="basic-addon2" id="search-input" placeholder="Search...">
+            </div>
         </div>
     </div>
 </form>
-
-<!-- Input pencarian di sebelah kanan halaman -->
-<div class="row justify-content-end mb-3">
-    <div class="col-auto">
-        <input type="text" class="rounded-pill custom-search-input" aria-describedby="basic-addon2" id="search-input" placeholder="Search...">
-    </div>
-</div>
-
 
 <div class="row">
     <div class="col-12">
