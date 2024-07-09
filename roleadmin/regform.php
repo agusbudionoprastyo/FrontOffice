@@ -133,7 +133,7 @@ min-width: 250px; /* Kolom NAME */
                 <button class="btn btn-outline-secondary" type="button" id="search-button">Search</button>
             </div>
         </div>
-        
+
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -464,9 +464,17 @@ function syncData() {
 </script>
 
 <script>
-document.getElementById('search-button').addEventListener('click', function() {
-    var searchText = document.getElementById('search-input').value;
-    table.search(searchText).draw();
+$(document).ready(function() {
+    // Inisialisasi DataTables
+    var table = $('#table-2').DataTable({
+        // Pengaturan-pengaturan DataTables lainnya
+    });
+
+    // Fungsi pencarian
+    document.getElementById('search-button').addEventListener('click', function() {
+        var searchText = document.getElementById('search-input').value;
+        table.search(searchText).draw();
+    });
 });
 </script>
 
