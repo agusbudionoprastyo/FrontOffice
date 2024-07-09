@@ -414,27 +414,11 @@ function syncData() {
         success: function(response) {
             console.log('Response from server:', response);
             hideLoading();
-
-            // Tampilkan iziToast untuk sukses
-            iziToast.success({
-                title: 'Data Synced',
-                message: 'Data has been successfully synchronized.',
-                position: 'topRight',
-                onClosed: function() {
-                    location.reload(); // Reload halaman setelah iziToast ditutup (opsional)
-                }
-            });
+            location.reload(); // Reload halaman setelah iziToast ditutup (opsional)
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
             hideLoading();
-
-            // Tampilkan iziToast untuk error
-            iziToast.error({
-                title: 'Error',
-                message: 'Failed to sync data. Please try again later.',
-                position: 'topRight'
-            });
         }
     });
 };
