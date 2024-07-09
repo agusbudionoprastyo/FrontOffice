@@ -57,7 +57,7 @@ require_once '../helper/connection.php';
 </style>
 
 <div id="loading" style="display: none;">
-    <img src="../assets/img/loading.gif" alt="Loading..." />
+    <img src="../assets/image/loading.gif" alt="Loading..." />
 </div>
 
 <section class="section">
