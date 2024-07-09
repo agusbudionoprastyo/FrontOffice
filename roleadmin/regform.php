@@ -116,7 +116,7 @@ min-width: 250px; /* Kolom NAME */
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover table-striped w-100" id="table-2">
+                    <table class="table table-hover table-striped w-100" id="table-2" data-searchable="false">
                         <thead>
                             <tr>
                                 <th>REGCARD</th>
