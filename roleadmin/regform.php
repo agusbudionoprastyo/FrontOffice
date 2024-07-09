@@ -61,8 +61,8 @@ require_once '../helper/connection.php';
     z-index: 9999;
     top: 0;
     left: 0;
-    width: 30%;
-    height: 30%;
+    width: 100%;
+    height: 100%;
     background-color: rgba(255, 255, 255, 0.8); /* Transparan putih untuk overlay */
 }
 
@@ -70,6 +70,8 @@ require_once '../helper/connection.php';
     position: absolute;
     top: 50%;
     left: 50%;
+    width: 20%;
+    height: 20%;
     transform: translate(-50%, -50%);
 }
 
@@ -145,12 +147,6 @@ require_once '../helper/connection.php';
                             <?php
                             // Default SQL query
                             $sql = "SELECT * FROM FOGUEST";
-
-                            // Check if start date is provided
-                            if (isset($_GET['today']) && !empty($_GET['today'])) {
-                                $today = $_GET['today'];
-                                $sql .= " WHERE dateci = '$today'";
-                            }
 
                             // Check if start date is provided
                             if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
