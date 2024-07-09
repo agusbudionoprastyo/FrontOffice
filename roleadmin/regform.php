@@ -56,6 +56,10 @@ require_once '../helper/connection.php';
 
 </style>
 
+<div id="loading" style="display: none;">
+    <img src="../assets/img/loading.gif" alt="Loading..." />
+</div>
+
 <section class="section">
   <div class="section-header d-flex justify-content-between">
     <b><i class="fa-solid fa-fire"></i> FrontOffice <i class="fa-solid fa-folder-open"></i> Regcard Guestfolio</b>
@@ -401,20 +405,15 @@ endif;
 ?>
 
 <script>
-// Ketika tombol ditekan, lakukan panggilan AJAX ke server
 function syncData() {
+    // Tampilkan animasi loading sebelum memulai AJAX
+    document.getElementById('loading').style.display = 'block';
+
     $.ajax({
         url: 'https://103.236.201.34:3000/replicate', // Ganti dengan URL sesuai dengan endpoint server Anda
         method: 'GET',
         success: function(response) {
             console.log('Response from server:', response);
-            iziToast.success({
-                title: 'Sukses',
-                message: 'Replikasi data berhasil: ' + response.message,
-                position: 'topCenter',
-                timeout: 5000
-            });
-            // location.reload();
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
@@ -424,10 +423,22 @@ function syncData() {
                 position: 'topCenter',
                 timeout: 5000
             });
-            // location.reload();
+            location.reload();
+        },
+        complete: function() {
+            // Sembunyikan animasi loading setelah selesai AJAX (baik sukses atau gagal)
+            document.getElementById('loading').style.display = 'none';
+            iziToast.success({
+                title: 'Sukses',
+                message: 'Replikasi data berhasil: ' + response.message,
+                position: 'topCenter',
+                timeout: 5000
+            });
+            location.reload();
         }
     });
 };
 </script>
+
 
 <script src="../assets/js/page/modules-datatables.js"></script>
