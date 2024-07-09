@@ -54,12 +54,17 @@ require_once '../helper/connection.php';
     font-size: 12px;
 }
 
-#table-2_wrapper .dataTables_filter {
+#table-container {
     display: flex;
-    justify-content: flex-end;
-    align-items: center; /* Pilihan untuk menengahkan secara vertical */
-    margin-right: 0; /* Opsi untuk menetapkan jarak kanan */
+    justify-content: space-between; /* Membuat ruang di sekitar tabel */
+    align-items: center; /* Menyelaraskan secara vertikal */
+    margin-bottom: 10px; /* Jarak bawah */
 }
+
+.dataTables_filter {
+    margin-left: auto; /* Menggeser kotak pencarian ke kanan */
+}
+
 
 
 #table-2 th:nth-child(1),
@@ -121,6 +126,14 @@ min-width: 250px; /* Kolom NAME */
 
 <div class="row">
     <div class="col-12">
+                <!-- Kotak pencarian ditempatkan di luar card -->
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Search</button>
+            </div>
+        </div>
+        
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
