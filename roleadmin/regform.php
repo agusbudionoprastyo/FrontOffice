@@ -102,6 +102,7 @@ min-width: 250px; /* Kolom NAME */
 <section class="section">
   <div class="section-header d-flex justify-content-between">
     <b><i class="fa-solid fa-fire"></i> FrontOffice <i class="fa-solid fa-folder-open"></i> Regcard Guestfolio</b>
+    <div id="qrcode"></div>
     <a href="#" onclick="syncData(); return false;" class="btn btn-dark rounded-pill"><i class= "fa-solid fa-rotate fa-beat-fade"></i> SYNC DATA</a>
   </div>
 
@@ -209,7 +210,6 @@ min-width: 250px; /* Kolom NAME */
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
                                             <button onclick="printQRCode();" class="btn btn-default mb-md-0 mb-1"><i class="fa-solid fa-qrcode fa-xl"></i></button>
                                         <?php endif; ?>
-                                        <div id="qrcode"></div>
                                         <?php if ($row['at_regform']): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl"></i></a>                                
                                         <?php endif; ?>
