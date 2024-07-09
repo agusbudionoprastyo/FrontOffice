@@ -210,8 +210,14 @@ min-width: 250px; /* Kolom NAME */
                                     <td>
                                         <?php if (empty($row['at_regform'])): ?>
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
-                                            <button onclick="printQRCode();" class="btn btn-default mb-md-0 mb-1" folio_id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-print fa-xl"></i></button>
+                                            <button onclick="printQRCode(this);" class="btn btn-default mb-md-0 mb-1"
+                                                data-room="<?php echo htmlspecialchars($row['room']); ?>"
+                                                data-roomtype="<?php echo htmlspecialchars($row['roomtype']); ?>"
+                                                data-fname="<?php echo htmlspecialchars($row['fname']); ?>">
+                                                <i class="fa-solid fa-print fa-xl"></i>
+                                            </button>
                                         <?php endif; ?>
+
                                         <?php if ($row['at_regform']): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl"></i></a>                                
                                         <?php endif; ?>
@@ -527,14 +533,21 @@ function generateQRCode(url) {
 //     printWindow.print(); // Memulai proses pencetakan
 // }
 
-// Event listener untuk tombol cetak QR code
-$(document).on('click', '.print-button', function() {
-        var room = $(this).data('room');
-        var roomtype = $(this).data('roomtype');
-        var name = $(this).data('fname');
+function printQRCode(button) {
+    // Dapatkan nilai data dari tombol cetak yang ditekan
+    var room = button.getAttribute('data-room');
+    var roomType = button.getAttribute('data-roomtype');
+    var fname = button.getAttribute('data-fname');
 
-        printQRCode(room, roomtype, name);
-    });
+    // Contoh untuk menampilkan nilai
+    console.log("Room:", room);
+    console.log("Room Type:", roomType);
+    console.log("Name:", fname);
+
+    // Panggil fungsi printQRCode dengan nilai-nilai yang diperlukan
+    printQRCode(room, roomType, fname);
+}
+
 
     // Function untuk mencetak QR code
     function printQRCode(room, roomtype, name) {
