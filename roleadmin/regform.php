@@ -56,13 +56,24 @@ require_once '../helper/connection.php';
 
 #table-2 th:nth-child(1),
 #table-2 td:nth-child(1) {
-min-width: 250px; /* Kolom REGCARD */
+min-width: 200px; /* Kolom REGCARD */
 }
 
 #table-2 th:nth-child(2),
 #table-2 td:nth-child(2) {
-min-width: 250px; /* Kolom GUESTBILL */
+min-width: 150px; /* Kolom GUESTBILL */
 }
+
+#table-2 th:nth-child(3),
+#table-2 td:nth-child(3) {
+min-width: 150px; /* Kolom CL / VOUCHER */
+}
+
+#table-2 th:nth-child(4),
+#table-2 td:nth-child(4) {
+min-width: 250px; /* Kolom NAME */
+}
+
 </style>
 
 <section class="section">
