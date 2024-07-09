@@ -93,6 +93,10 @@ min-width: 150px; /* Kolom CL / VOUCHER */
 min-width: 250px; /* Kolom NAME */
 }
 
+.dataTables_wrapper .dataTables_filter {
+    display: none;
+}
+
 </style>
 
 <section class="section">
@@ -486,28 +490,5 @@ function syncData() {
 };
 
 </script>
-
-<!-- <script>
-$(document).ready(function() {
-    // CSS untuk menyembunyikan kotak pencarian
-    $('.dataTables_filter').hide();
-
-    // Hapus inisialisasi DataTable sebelumnya
-    if ($.fn.DataTable.isDataTable('#table-2')) {
-        $('#table-2').DataTable().destroy();
-    }
-
-    // Inisialisasi DataTables
-    var table = $('#table-2').DataTable({
-        // Pengaturan-pengaturan DataTables lainnya
-    });
-
-    // Fungsi pencarian
-    document.getElementById('search-button').addEventListener('click', function() {
-        var searchText = document.getElementById('search-input').value;
-        table.search(searchText).draw();
-    });
-});
-</script> -->
 
 <script src="../assets/js/page/modules-datatables.js"></script>
