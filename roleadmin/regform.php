@@ -54,6 +54,15 @@ require_once '../helper/connection.php';
     font-size: 12px;
 }
 
+#table-2 th:nth-child(1),
+#table-2 td:nth-child(1) {
+min-width: 250px; /* Kolom REGCARD */
+}
+
+#table-2 th:nth-child(2),
+#table-2 td:nth-child(2) {
+min-width: 250px; /* Kolom GUESTBILL */
+}
 </style>
 
 <section class="section">
