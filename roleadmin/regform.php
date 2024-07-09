@@ -209,7 +209,7 @@ min-width: 250px; /* Kolom NAME */
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
                                             <button onclick="printQRCode();" class="btn btn-default mb-md-0 mb-1"><i class="fa-solid fa-qrcode fa-xl"></i></button>
                                         <?php endif; ?>
-                                        
+                                        <div id="qrcode"></div>
                                         <?php if ($row['at_regform']): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl"></i></a>                                
                                         <?php endif; ?>
@@ -383,11 +383,8 @@ $(document).ready(function(){
     </div>
   </div>
 </div>
-
-<div id="qrcode"></div>
 <!-- Bootstrap Datepicker JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- <script type="text/javascript" src="assets/js/qrCode/jquery.min.js"></script> -->
 <script type="text/javascript" src="../assets/js/qrCode/qrcode.js"></script>
 <!-- Initialize Datepicker -->
 <script>
@@ -490,40 +487,6 @@ function syncData() {
         }
     });
 };
-
-// function generateQRCode(url) {
-//     // Menggunakan library QRCode.js untuk menghasilkan QR code
-//     var qrcode = new QRCode(document.getElementById("qrcode"), {
-//         text: url,
-//         width: 128,
-//         height: 128
-//     });
-// }
-
-// function printContent() {
-//     const url = 'https://fo.dafam.cloud';
-//     generateQRCode(url); // Memanggil fungsi untuk menghasilkan QR code
-
-//     // Membuat jendela baru untuk menampilkan QR code
-//     var printWindow = window.open('', 'Print Window', 'height=400,width=600');
-
-//     // Menunggu sebentar untuk memastikan QR code telah dirender dengan sempurna
-//     setTimeout(function() {
-//         // Mendapatkan gambar QR code dalam format data URL
-//         var qrImageSrc = document.getElementById('qrcode').children[0].toDataURL();
-
-//         // Menulis HTML ke dalam jendela baru untuk mencetak QR code
-//         printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
-//         printWindow.document.write('<img src="' + qrImageSrc + '"/>');
-//         printWindow.document.write('</body></html>');
-
-//         // Menutup dokumen agar browser dapat memprosesnya
-//         printWindow.document.close();
-
-//         // Memulai proses pencetakan
-//         printWindow.print();
-//     }, 500); // Mengatur timeout untuk memastikan QR code dirender dengan baik
-// }
 
 function generateQRCode(url) {
     // Pastikan elemen dengan ID 'qrcode' tersedia di halaman
