@@ -540,6 +540,8 @@ function printDocumentWithQR(room, qrText) {
     var qrCodeDiv = document.createElement('div');
     qrCodeDiv.id = 'qrcode';
     qrCodeDiv.style.display = 'none'; // Sembunyikan elemen QR code di dokumen asli
+    qrCodeDiv.style.float = 'left'; // Meletakkan QR code di sebelah kiri
+    qrCodeDiv.style.marginRight = '5mm';
     document.body.appendChild(qrCodeDiv);
 
     // Menyiapkan dokumen untuk pencetakan
@@ -552,9 +554,10 @@ function printDocumentWithQR(room, qrText) {
     printDocument += '<h3 style="margin: 0;">WIFI       dafamsemarang</h3>';
     printDocument += '<h3 style="margin: 0;">PASSWORD   krasansare</h3>';
     // Menambahkan elemen untuk QR code di dokumen pencetakan
-    printDocument += '<div id="qrcode"></div>';
+    // printDocument += '<div id="qrcode"></div>';
     printDocument += '</div>'
-
+    // Menambahkan elemen untuk QR code di dokumen pencetakan
+    printDocument += '<div id="qrcode" style="float: left; margin-right: 5mm;"></div>';
     printDocument += '</body></html>';
 
     // Membuat elemen iframe untuk mencetak dokumen
