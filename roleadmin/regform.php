@@ -213,7 +213,8 @@ min-width: 250px; /* Kolom NAME */
                                             <button onclick="printQRCode(this);" class="btn btn-default mb-md-0 mb-1"
                                                 data-room="<?php echo htmlspecialchars($row['room']); ?>"
                                                 data-roomtype="<?php echo htmlspecialchars($row['roomtype']); ?>"
-                                                data-fname="<?php echo htmlspecialchars($row['fname']); ?>">
+                                                data-fname="<?php echo htmlspecialchars($row['fname']); ?>"
+                                                data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
                                                 <i class="fa-solid fa-print fa-xl"></i>
                                             </button>
                                         <?php endif; ?>
@@ -502,20 +503,22 @@ function printQRCode(button) {
     var room = button.getAttribute('data-room');
     var roomType = button.getAttribute('data-roomtype');
     var fname = button.getAttribute('data-fname');
+    var folio = button.getAttribute('data-folio');
+
 
     // Panggil fungsi untuk menghasilkan QR code dan mencetak
-    generateQRCode(room, roomType, fname, function(qrText) {
+    generateQRCode(folio, function(qrText) {
         // Setelah QR code dibuat, panggil fungsi untuk mencetak
         printDocumentWithQR(room, roomType, fname, qrText);
     });
 }
 
 // Function untuk menghasilkan QR code
-function generateQRCode(room, roomType, fname, callback) {
-    const url = 'https://fo.dafam.cloud';
+function generateQRCode(folio, callback) {
+    const url = 'https://ecard.dafam.cloud/';
 
     // Menyiapkan teks untuk QR code dengan informasi tambahan
-    var qrText = url + '?room=' + room + '&roomType=' + roomType + '&fname=' + fname;
+    var qrText = url + '?folio=' + folio;
 
     // Menggunakan QRCode.js untuk menghasilkan QR code dengan teks yang disiapkan
     var qrcode = new QRCode('qrcode', {
@@ -543,9 +546,9 @@ function printDocumentWithQR(room, roomType, fname, qrText) {
 
     // Menyiapkan dokumen untuk pencetakan
     var printDocument = '<html><head><title>Print Label</title></head><body>';
-    printDocument += '<h3>Room ' + room + '</h3>';
+    printDocument += '<h3>Name      ' + fname + '</h3>';
+    printDocument += '<h3>Room      ' + room + '</h3>';
     printDocument += '<h3>Room Type ' + roomType + '</h3>';
-    printDocument += '<h3>Name ' + fname + '</h3>';
 
     // Menambahkan elemen untuk QR code di dokumen pencetakan
     printDocument += '<div id="qrcode"></div>';
