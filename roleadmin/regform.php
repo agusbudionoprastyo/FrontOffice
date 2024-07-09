@@ -125,11 +125,11 @@ min-width: 250px; /* Kolom NAME */
         </div>
 
         <div class="col-auto">
-            <button type="button" class="btn btn-danger rounded-pill" id="reset-filter"><i class="fa-solid fa-filter-circle-xmark"></i></button>
+            <input type="text" class="rounded-pill custom-search-input" aria-describedby="basic-addon2" id="search-input" placeholder="Search...">
         </div>
 
         <div class="col-auto">
-            <input type="text" class="rounded-pill custom-search-input" aria-describedby="basic-addon2" id="search-input" placeholder="Search...">
+            <button type="button" class="btn btn-danger rounded-pill" id="reset-filter"><i class="fa-solid fa-filter-circle-xmark"></i></button>
         </div>
 
         </div>
@@ -403,6 +403,16 @@ $(document).ready(function(){
             $('.custom-datepicker-input').datepicker('setDate', null); // Mengatur tanggal datepicker ke null
             $('#filter').submit(); 
         });
+            // Event listener untuk tombol "Enter" pada #search-input
+        $('#search-input').keypress(function(event) {
+            if (event.which === 13) {
+                // Ambil nilai pencarian dari #search-input
+                var searchText = $(this).val();
+
+                // Lakukan pencarian pada tabel
+                table.search(searchText).draw();
+            }
+        });
     });
 </script>
 
@@ -467,7 +477,7 @@ function syncData() {
 
 </script>
 
-<script>
+<!-- <script>
 $(document).ready(function() {
     // CSS untuk menyembunyikan kotak pencarian
     $('.dataTables_filter').hide();
@@ -488,6 +498,6 @@ $(document).ready(function() {
         table.search(searchText).draw();
     });
 });
-</script>
+</script> -->
 
 <script src="../assets/js/page/modules-datatables.js"></script>
