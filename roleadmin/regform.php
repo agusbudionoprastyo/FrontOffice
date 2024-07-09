@@ -514,7 +514,7 @@ function printQRCode() {
     printWindow.document.write('<img src="' + document.getElementById('qrcode').getElementsByTagName('canvas')[0].toDataURL() + '"/>');
     printWindow.document.write('</body></html>');
     printWindow.document.close(); // Menutup dokumen agar browser dapat memprosesnya
-    printWindow.print(); // Memulai proses pencetakan
+    // printWindow.print(); // Memulai proses pencetakan
 }
 
 </script>
