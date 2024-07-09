@@ -32,41 +32,33 @@ isLogin();
   <!-- <link rel="stylesheet" href="../assets/css/components.css"> -->
 
   <style>
-        .loading {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-        }
-        .loading img {
-            width: 32px; /* Adjust width as needed */
-            height: 32px; /* Adjust height as needed */
-        }
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Background color with transparency */
-            z-index: 9998; /* Put overlay behind loading animation */
-        }
-            /* CSS untuk membuat input readonly tanpa latar belakang */
-            .readonly-input {
-            background-color: transparent !important; /* Menghapus latar belakang */
-            border-color: lightblue;
-        }
+/* CSS */
+    #loading-overlay {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.8); /* Transparan putih untuk overlay */
+    }
+
+    #loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
     </style>
 </head>
 
 <body>
-    <div class="overlay"></div>
-    <div class="loading">
-        <img src="../assets/image/loading.gif" alt="Loading...">
-    </div>
+<div id="loading-overlay">
+<div id="loading">
+    <img src="../assets/image/loading.gif" style="width: 30px; height: 30px;" alt="Loading..."/>
+</div>
+</div>
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
       <?php

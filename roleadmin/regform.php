@@ -54,32 +54,7 @@ require_once '../helper/connection.php';
     font-size: 12px;
 }
 
-/* CSS */
-#loading-overlay {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8); /* Transparan putih untuk overlay */
-}
-
-#loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 </style>
-
-<div id="loading-overlay">
-<div id="loading">
-    <img src="../assets/image/loading.gif" style="width: 30px; height: 30px;" alt="Loading..."/>
-</div>
-</div>
 
 <section class="section">
   <div class="section-header d-flex justify-content-between">
@@ -165,13 +140,8 @@ require_once '../helper/connection.php';
                                 $sql .= " WHERE datecreate = '$datecreate'";
                             }
 
-                            // Check if start date, end date, and create date are not provided
-                            if (empty($_GET['start_date']) && empty($_GET['end_date']) && empty($_GET['datecreate'])) {
-                                $sql .= " ORDER BY folio DESC";
-                            }
-
-                            // // Add ORDER BY clause
-                            // $sql .= " ORDER BY folio DESC";
+                            // Add ORDER BY clause
+                            $sql .= " ORDER BY folio DESC";
 
                             // Perform the query
                             $result = mysqli_query($connection, $sql);
