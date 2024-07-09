@@ -70,8 +70,6 @@ require_once '../helper/connection.php';
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 20%;
-    height: 20%;
     transform: translate(-50%, -50%);
 }
 
@@ -79,7 +77,7 @@ require_once '../helper/connection.php';
 
 <div id="loading-overlay">
 <div id="loading">
-    <img src="../assets/image/loading.gif" alt="Loading..." />
+    <img src="../assets/image/loading.gif" style="width: 30px; height: 30px;" alt="Loading..."/>
 </div>
 </div>
 
