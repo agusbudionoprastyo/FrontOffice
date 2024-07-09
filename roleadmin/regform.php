@@ -426,38 +426,44 @@ endif;
 ?>
 
 <script>
+// JavaScript
+function showLoading() {
+    document.getElementById('loading-overlay').style.display = 'block';
+}
+
+function hideLoading() {
+    document.getElementById('loading-overlay').style.display = 'none';
+}
+
 function syncData() {
-    // Tampilkan animasi loading sebelum memulai AJAX
-    document.getElementById('loading').style.display = 'block';
+    showLoading();
 
     $.ajax({
         url: 'https://103.236.201.34:3000/replicate', // Ganti dengan URL sesuai dengan endpoint server Anda
         method: 'GET',
         success: function(response) {
             console.log('Response from server:', response);
+            hideLoading();
+            iziToast.success({
+                title: 'Sukses',
+                message: 'Replikasi data berhasil',
+                position: 'topCenter',
+                timeout: 5000
+            });
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
-        },
-        complete: function(xhr, status) {
-            // Sembunyikan animasi loading setelah selesai AJAX (baik sukses atau gagal)
-            document.getElementById('loading').style.display = 'none';
-
-            // Lakukan reload halaman setelah sembunyikan loading
-            location.reload(true); // true untuk reload dari server, false atau tanpa parameter untuk reload dari cache
-
-            // Tampilkan pesan iziToast untuk sukses setelah reload
-            $(window).on('load', function() {
-                iziToast.success({
-                    title: 'Sukses',
-                    message: 'Replikasi data berhasil',
-                    position: 'topCenter',
-                    timeout: 5000
-                });
+            hideLoading();
+            iziToast.error({
+                title: 'Gagal',
+                message: 'Terjadi kesalahan saat melakukan replikasi data',
+                position: 'topCenter',
+                timeout: 5000
             });
         }
     });
 };
+
 </script>
 
 <script src="../assets/js/page/modules-datatables.js"></script>
