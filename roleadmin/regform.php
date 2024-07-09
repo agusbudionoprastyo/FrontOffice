@@ -531,9 +531,9 @@ function printQRCode() {
     const url = 'https://fo.dafam.cloud';
     generateQRCode(url); // Menghasilkan QR code
 
-    const room = '<?php echo $row['room']; ?>';
-    const roomtype = '<?php echo $row['roomtype']; ?>';
-    const name = '<?php echo $row['fname']; ?>';
+    const room = $(this).data('room');
+    const roomtype = $(this).data('roomtype');
+    const name = $(this).data('fname');
 
     // Menyiapkan dokumen untuk pencetakan
     var printDocument = '<html><head><title>Print Label</title></head><body>';
