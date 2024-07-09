@@ -549,12 +549,11 @@ function printDocumentWithQR(room, qrText) {
     printDocument += '<style>@page { size: 60mm 40mm; margin: 0; }</style>'; // Set ukuran kertas label
     printDocument += '</head><body style="font-family: Arial, sans-serif; font-size: 8pt;">'; // Ganti sesuai kebutuhan
     // Menambahkan elemen untuk QR code di dokumen pencetakan
-    printDocument += '<div id="qrcode" style="float: left; margin-right: 5mm;">';
+    printDocument += '<div id="qrcode" style="float: left; margin-right: 5mm;"></div>';
     printDocument += '<div style="width: 100%; text-align: left; margin-top: 5mm;">';
     printDocument += '<h3 style="margin: 0;">ROOM      ' + room + '</h3>';
     printDocument += '<h3 style="margin: 0;">WIFI      dafamsemarang</h3>';
     printDocument += '<h3 style="margin: 0;">PASSWORD  krasansare</h3>';
-    printDocument += '</div>';
     printDocument += '</div>';
 
 
