@@ -11,6 +11,19 @@ require_once '../helper/connection.php';
 
 <!-- Custom CSS -->
 <style>
+
+    /* Custom datepicker input */
+.custom-search-input {
+    width: 150px; /* Adjust width as needed */
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 /* Custom datepicker container */
 .datepicker-container {
     position: relative;
@@ -110,7 +123,7 @@ min-width: 250px; /* Kolom NAME */
         </div>
 
         <div class="col-auto">
-            <input type="text" class="rounded-pill" aria-describedby="basic-addon2" id="search-input" placeholder="Search...">
+            <input type="text" class="rounded-pill custom-search-input" aria-describedby="basic-addon2" id="search-input" placeholder="Search...">
         </div>
 
         </div>
