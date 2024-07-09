@@ -206,12 +206,8 @@ min-width: 250px; /* Kolom NAME */
                                 <tr>
                                     <td>
                                         <?php if (empty($row['at_regform'])): ?>
-                                            <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>">
-                                                <i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i>
-                                            </button>
-                                             
-                                            <button onclick="window.print();" class="btn btn-default rounded-pill"><i class="fa-solid fa-qrcode fa-xl"></i></button>
- 
+                                            <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
+                                            <button onclick="printContent();" class="btn btn-default mb-md-0 mb-1"><i class="fa-solid fa-qrcode fa-xl"></i></button>
                                         <?php endif; ?>
                                         
                                         <?php if ($row['at_regform']): ?>
@@ -388,6 +384,7 @@ $(document).ready(function(){
   </div>
 </div>
 
+<div id="qrcode"></div>
 <!-- Bootstrap Datepicker JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -492,6 +489,21 @@ function syncData() {
         }
     });
 };
+
+function generateQRCode(url) {
+    // Using QRCode.js library to generate QR code
+    var qr = new QRCode(document.getElementById("qrcode"), {
+        text: url,
+        width: 128,
+        height: 128
+    });
+}
+
+function printContent() {
+    const url = 'https://fo.dafam.cloud';
+    generateQRCode(url);
+    // Add your code here to initiate printing
+}
 
 </script>
 
