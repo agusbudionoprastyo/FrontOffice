@@ -54,10 +54,31 @@ require_once '../helper/connection.php';
     font-size: 12px;
 }
 
+/* CSS */
+#loading-overlay {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8); /* Transparan putih untuk overlay */
+}
+
+#loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 </style>
 
+<div id="loading-overlay">
 <div id="loading" style="display: none;">
     <img src="../assets/image/loading.gif" alt="Loading..." />
+</div>
 </div>
 
 <section class="section">
@@ -417,28 +438,26 @@ function syncData() {
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
-            iziToast.error({
-                title: 'Gagal',
-                message: 'Terjadi kesalahan saat melakukan replikasi data',
-                position: 'topCenter',
-                timeout: 5000
-            });
-            location.reload();
         },
-        complete: function() {
+        complete: function(xhr, status) {
             // Sembunyikan animasi loading setelah selesai AJAX (baik sukses atau gagal)
             document.getElementById('loading').style.display = 'none';
-            iziToast.success({
-                title: 'Sukses',
-                message: 'Replikasi data berhasil: ' + response.message,
-                position: 'topCenter',
-                timeout: 5000
+
+            // Lakukan reload halaman setelah sembunyikan loading
+            location.reload(true); // true untuk reload dari server, false atau tanpa parameter untuk reload dari cache
+
+            // Tampilkan pesan iziToast untuk sukses setelah reload
+            $(window).on('load', function() {
+                iziToast.success({
+                    title: 'Sukses',
+                    message: 'Replikasi data berhasil',
+                    position: 'topCenter',
+                    timeout: 5000
+                });
             });
-            location.reload();
         }
     });
 };
 </script>
-
 
 <script src="../assets/js/page/modules-datatables.js"></script>
