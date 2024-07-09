@@ -165,6 +165,11 @@ require_once '../helper/connection.php';
                                 $sql .= " WHERE datecreate = '$datecreate'";
                             }
 
+                            // Check if start date, end date, and create date are not provided
+                            if (empty($_GET['start_date']) && empty($_GET['end_date']) && empty($_GET['datecreate'])) {
+                                $sql .= " ORDER BY folio DESC";
+                            }
+
                             // Add ORDER BY clause
                             $sql .= " ORDER BY folio DESC";
 
