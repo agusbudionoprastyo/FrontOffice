@@ -545,6 +545,8 @@ function printDocumentWithQR(room, qrText) {
     // Menyiapkan dokumen untuk pencetakan
     var printDocument = '<html><head><title>Print Label</title></head><body>';
     printDocument += '<h3>Room ' + room + '</h3>';
+    printDocument += '<h3>wifi dafamsemarang</h3>';
+    printDocument += '<h3>password krasansare</h3>';
 
     // Menambahkan elemen untuk QR code di dokumen pencetakan
     printDocument += '<div id="qrcode"></div>';
