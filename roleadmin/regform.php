@@ -125,7 +125,7 @@ min-width: 250px; /* Kolom NAME */
             <input type="text" class="rounded-pill custom-datepicker-input" id="datecreate" name="datecreate" autocomplete="off" 
                    value="<?php echo isset($_GET['datecreate']) ? $_GET['datecreate'] : ''; ?>" 
                    placeholder="Date Created">
-            <label for="datecreate" class="btn btn-info rounded-pill custom-datepicker-button"><i class="fa-solid fa-calendar-days"></i></label>        
+            <label for="datecreate" class="btn btn-light rounded-pill custom-datepicker-button"><i class="fa-solid fa-calendar-days"></i></label>        
         </div>
 
         <div class="col-auto">
