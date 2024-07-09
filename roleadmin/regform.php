@@ -531,15 +531,15 @@ function printQRCode() {
     const url = 'https://fo.dafam.cloud';
     generateQRCode(url); // Menghasilkan QR code
 
-    const room = 'Room 101';
-    const roomtype = 'Suite';
-    const name = 'John Doe';
+    const room = data.room;
+    const roomtype = data.roomtype;
+    const name = data.fname;
 
     // Menyiapkan dokumen untuk pencetakan
     var printDocument = '<html><head><title>Print Label</title></head><body>';
-    printDocument += '<h3>Room: ' + room + '</h3>';
-    printDocument += '<h3>Room Type: ' + roomtype + '</h3>';
-    printDocument += '<h3>Name: ' + name + '</h3>';
+    printDocument += '<h3>Room ' + room + '</h3>';
+    printDocument += '<h3>Room Type ' + roomtype + '</h3>';
+    printDocument += '<h3>Name ' + name + '</h3>';
     printDocument += '<img src="' + document.getElementById('qrcode').getElementsByTagName('canvas')[0].toDataURL() + '"/>';
     printDocument += '</body></html>';
 
