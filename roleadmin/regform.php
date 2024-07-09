@@ -104,17 +104,18 @@ min-width: 250px; /* Kolom NAME */
                    placeholder="Date Created">
             <label for="datecreate" class="btn btn-info rounded-pill custom-datepicker-button"><i class="fa-solid fa-calendar-days"></i></label>        
         </div>
+
         <div class="col-auto">
             <button type="button" class="btn btn-danger rounded-pill" id="reset-filter"><i class="fa-solid fa-filter-circle-xmark"></i></button>
         </div>
         </div>
         <!-- Kotak pencarian ditempatkan di luar card -->
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2" id="search-input">
+            <div class="col-auto">
+                <input type="text" class="rounded-pill custom-datepicker-input" aria-describedby="basic-addon2" id="search-input">
                 <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button" id="search-button">Search</button>
             </div>
-            </div>
+        </div>
     </div>
 </form>
 
