@@ -511,6 +511,11 @@ function printQRCode(button) {
 function generateAndPrintQRCode(room, roomType, fname) {
     const url = 'https://fo.dafam.cloud';
 
+    // Membuat elemen untuk QR code
+    var qrCodeDiv = document.createElement('div');
+    qrCodeDiv.id = 'qrcode';
+    document.body.appendChild(qrCodeDiv);
+
     // Menyiapkan dokumen untuk pencetakan
     var printDocument = '<html><head><title>Print Label</title></head><body>';
     printDocument += '<h3>Room ' + room + '</h3>';
@@ -537,8 +542,10 @@ function generateAndPrintQRCode(room, roomType, fname) {
     doc.close();
 
     // Memanggil generateQRCode untuk membuat QR code dalam dokumen yang disiapkan
-    generateQRCode(url, room, roomType, fname, function() {
-        // Setelah QR code dibuat, lakukan pencetakan
+    generateQRCode(url, room, roomType, fname);
+
+    // Melakukan pencetakan setelah QR code selesai dibuat
+    setTimeout(function() {
         iframe.contentWindow.focus();
         iframe.contentWindow.print();
 
@@ -546,11 +553,11 @@ function generateAndPrintQRCode(room, roomType, fname) {
         setTimeout(function() {
             document.body.removeChild(iframe);
         }, 1000); // Menunggu 1 detik sebelum menghapus iframe
-    });
+    }, 500); // Menunggu 0.5 detik sebelum melakukan pencetakan
 }
 
 // Function untuk menghasilkan QR code menggunakan QRCode.js
-function generateQRCode(url, room, roomType, fname, callback) {
+function generateQRCode(url, room, roomType, fname) {
     // Pastikan elemen dengan ID 'qrcode' tersedia di halaman
     var el = document.getElementById('qrcode');
     if (!el) {
@@ -570,11 +577,6 @@ function generateQRCode(url, room, roomType, fname, callback) {
 
     // Memanggil makeCode() untuk menghasilkan QR code dengan teks yang diberikan
     qrcode.makeCode(qrText);
-
-    // Memanggil callback setelah QR code selesai dibuat
-    if (typeof callback === 'function') {
-        callback();
-    }
 }
 
 
