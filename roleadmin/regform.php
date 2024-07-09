@@ -207,7 +207,7 @@ min-width: 250px; /* Kolom NAME */
                                     <td>
                                         <?php if (empty($row['at_regform'])): ?>
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
-                                            <button onclick="printContent();" class="btn btn-default mb-md-0 mb-1"><i class="fa-solid fa-qrcode fa-xl"></i></button>
+                                            <button onclick="printQRCode();" class="btn btn-default mb-md-0 mb-1"><i class="fa-solid fa-qrcode fa-xl"></i></button>
                                         <?php endif; ?>
                                         
                                         <?php if ($row['at_regform']): ?>
