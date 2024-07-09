@@ -491,20 +491,32 @@ function syncData() {
     });
 };
 
-function generateQRCode(url) {
-    // Using QRCode.js library to generate QR code
-    var qrcode = new QRCode(document.getElementById("qrcode"), {
-        text: url,
-        width: 128,
-        height: 128
-    });
-}
+// function generateQRCode(url) {
+//     // Using QRCode.js library to generate QR code
+//     var qrcode = new QRCode(document.getElementById("qrcode"), {
+//         text: url,
+//         width: 128,
+//         height: 128
+//     });
+// }
 
 function printContent() {
     const url = 'https://fo.dafam.cloud';
     generateQRCode(url);
     // Add your code here to initiate printing
 }
+
+    // Membuat elemen baru untuk menampilkan QR code
+    var printWindow = window.open('', 'Print Window', 'height=400,width=600');
+
+    // Mengisi elemen baru dengan konten HTML yang berisi QR code
+    printWindow.document.write('<html><head><title>Print QR Code</title></head><body>');
+    printWindow.document.write('<img src="' + document.getElementById('qrcode').children[0].toDataURL() + '"/>');
+    printWindow.document.write('</body></html>');
+
+    // Memanggil fungsi print pada window baru
+    printWindow.document.close(); // Menutup dokumen agar browser dapat memprosesnya
+    printWindow.print(); // Memulai proses pencetakan
 
 </script>
 
