@@ -521,8 +521,8 @@ function generateQRCode(folio, callback) {
     // Menggunakan QRCode.js untuk menghasilkan QR code dengan teks yang disiapkan
     var qrcode = new QRCode('qrcode', {
         text: qrText,
-        width: 128,
-        height: 128
+        width: 80,
+        height: 80
     });
 
     // Memanggil makeCode() untuk menghasilkan QR code dengan teks yang diberikan
@@ -543,13 +543,18 @@ function printDocumentWithQR(room, qrText) {
     document.body.appendChild(qrCodeDiv);
 
     // Menyiapkan dokumen untuk pencetakan
-    var printDocument = '<html><head><title>Print Label</title></head><body>';
-    printDocument += '<h3>Room ' + room + '</h3>';
-    printDocument += '<h3>wifi dafamsemarang</h3>';
-    printDocument += '<h3>password krasansare</h3>';
+    var printDocument = '<html><head><title>Cetak Label</title>';
+    printDocument += '<style>@page { size: 60mm 40mm; margin: 0; }</style>'; // Set ukuran kertas label
+    printDocument += '</head><body style="font-family: Arial, sans-serif; font-size: 8pt;">'; // Ganti sesuai kebutuhan
+
+    printDocument += '<div style="text-align: center; margin-top: 5mm;">';
+    printDocument += '<h3 style="margin: 0;">Ruangan ' + room + '</h3>';
+    printDocument += '<h3 style="margin: 0;">WiFi: dafamsemarang</h3>';
+    printDocument += '<h3 style="margin: 0;">Password: krasansare</h3>';
+    printDocument += '</div>';
 
     // Menambahkan elemen untuk QR code di dokumen pencetakan
-    printDocument += '<div id="qrcode"></div>';
+    printDocument += '<div id="qrcode" style="text-align: center; margin-top: 5mm;"></div>';
 
     printDocument += '</body></html>';
 
