@@ -396,14 +396,6 @@ endif;
 
 <script>
 // JavaScript
-function showLoading() {
-    document.getElementById('loading-overlay').style.display = 'block';
-}
-
-function hideLoading() {
-    document.getElementById('loading-overlay').style.display = 'none';
-}
-
 function syncData() {
     showLoading();
 
@@ -413,22 +405,26 @@ function syncData() {
         success: function(response) {
             console.log('Response from server:', response);
             hideLoading();
+
+            // Tampilkan iziToast untuk sukses
             iziToast.success({
-                title: 'Sukses',
-                message: 'Replikasi data berhasil',
-                position: 'topCenter',
-                timeout: 5000
+                title: 'Data Synced',
+                message: 'Data has been successfully synchronized.',
+                position: 'topRight',
+                onClosed: function() {
+                    location.reload(); // Reload halaman setelah iziToast ditutup (opsional)
+                }
             });
-            location.reload()
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
             hideLoading();
+
+            // Tampilkan iziToast untuk error
             iziToast.error({
-                title: 'Gagal',
-                message: 'Terjadi kesalahan saat melakukan replikasi data',
-                position: 'topCenter',
-                timeout: 5000
+                title: 'Error',
+                message: 'Failed to sync data. Please try again later.',
+                position: 'topRight'
             });
         }
     });
