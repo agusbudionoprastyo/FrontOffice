@@ -54,19 +54,6 @@ require_once '../helper/connection.php';
     font-size: 12px;
 }
 
-#table-container {
-    display: flex;
-    justify-content: space-between; /* Membuat ruang di sekitar tabel */
-    align-items: center; /* Menyelaraskan secara vertikal */
-    margin-bottom: 10px; /* Jarak bawah */
-}
-
-.dataTables_filter {
-    margin-left: auto; /* Menggeser kotak pencarian ke kanan */
-}
-
-
-
 #table-2 th:nth-child(1),
 #table-2 td:nth-child(1) {
 min-width: 200px; /* Kolom REGCARD */
@@ -465,6 +452,9 @@ function syncData() {
 
 <script>
 $(document).ready(function() {
+    // CSS untuk menyembunyikan kotak pencarian
+    $('.dataTables_filter').hide();
+    
     // Hapus inisialisasi DataTable sebelumnya
     if ($.fn.DataTable.isDataTable('#table-2')) {
         $('#table-2').DataTable().destroy();
