@@ -99,7 +99,7 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                                <th>REGCARD</th>
+                            <th scope="col" class="col-10">REGCARD</th>
                                 <th>GUESTBILL</th>
                                 <th>CL / VOUCHER</th>
                                 <th>NAME</th>
