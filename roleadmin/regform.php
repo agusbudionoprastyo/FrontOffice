@@ -501,15 +501,13 @@ function syncData() {
 function printQRCode(button) {
     // Dapatkan nilai data dari tombol cetak yang ditekan
     var room = button.getAttribute('data-room');
-    var roomType = button.getAttribute('data-roomtype');
-    var fname = button.getAttribute('data-fname');
     var folio = button.getAttribute('data-folio');
 
 
     // Panggil fungsi untuk menghasilkan QR code dan mencetak
     generateQRCode(folio, function(qrText) {
         // Setelah QR code dibuat, panggil fungsi untuk mencetak
-        printDocumentWithQR(room, roomType, fname, qrText);
+        printDocumentWithQR(room, qrText);
     });
 }
 
@@ -537,7 +535,7 @@ function generateQRCode(folio, callback) {
 }
 
 // Function untuk menulis dokumen ke iframe dan melakukan pencetakan
-function printDocumentWithQR(room, roomType, fname, qrText) {
+function printDocumentWithQR(room, qrText) {
     // Membuat elemen untuk QR code
     var qrCodeDiv = document.createElement('div');
     qrCodeDiv.id = 'qrcode';
@@ -546,9 +544,7 @@ function printDocumentWithQR(room, roomType, fname, qrText) {
 
     // Menyiapkan dokumen untuk pencetakan
     var printDocument = '<html><head><title>Print Label</title></head><body>';
-    printDocument += '<h3>Name      ' + fname + '</h3>';
-    printDocument += '<h3>Room      ' + room + '</h3>';
-    printDocument += '<h3>Room Type ' + roomType + '</h3>';
+    printDocument += '<h3>Room ' + room + '</h3>';
 
     // Menambahkan elemen untuk QR code di dokumen pencetakan
     printDocument += '<div id="qrcode"></div>';
