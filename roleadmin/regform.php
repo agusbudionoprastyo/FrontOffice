@@ -92,7 +92,7 @@ require_once '../helper/connection.php';
 </form>
 
 <div class="row">
-    <div class="col-12">
+    <div class="col-auto">
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
