@@ -491,39 +491,70 @@ function syncData() {
     });
 };
 
+// function generateQRCode(url) {
+//     // Menggunakan library QRCode.js untuk menghasilkan QR code
+//     var qrcode = new QRCode(document.getElementById("qrcode"), {
+//         text: url,
+//         width: 128,
+//         height: 128
+//     });
+// }
+
+// function printContent() {
+//     const url = 'https://fo.dafam.cloud';
+//     generateQRCode(url); // Memanggil fungsi untuk menghasilkan QR code
+
+//     // Membuat jendela baru untuk menampilkan QR code
+//     var printWindow = window.open('', 'Print Window', 'height=400,width=600');
+
+//     // Menunggu sebentar untuk memastikan QR code telah dirender dengan sempurna
+//     setTimeout(function() {
+//         // Mendapatkan gambar QR code dalam format data URL
+//         var qrImageSrc = document.getElementById('qrcode').children[0].toDataURL();
+
+//         // Menulis HTML ke dalam jendela baru untuk mencetak QR code
+//         printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
+//         printWindow.document.write('<img src="' + qrImageSrc + '"/>');
+//         printWindow.document.write('</body></html>');
+
+//         // Menutup dokumen agar browser dapat memprosesnya
+//         printWindow.document.close();
+
+//         // Memulai proses pencetakan
+//         printWindow.print();
+//     }, 500); // Mengatur timeout untuk memastikan QR code dirender dengan baik
+// }
+
 function generateQRCode(url) {
-    // Menggunakan library QRCode.js untuk menghasilkan QR code
-    var qrcode = new QRCode(document.getElementById("qrcode"), {
+    // Membuat instance QRCode tanpa menentukan elemen DOM target
+    var qrcode = new QRCode({
         text: url,
         width: 128,
         height: 128
     });
+
+    // Menghasilkan QR code
+    qrcode.makeCode(url);
+
+    // Mengembalikan data URL dari gambar QR code yang dihasilkan
+    var qrDataURL = qrcode.toDataURL();
+    
+    return qrDataURL;
 }
 
-function printContent() {
+function printQRCode() {
     const url = 'https://fo.dafam.cloud';
-    generateQRCode(url); // Memanggil fungsi untuk menghasilkan QR code
+    var qrDataURL = generateQRCode(url); // Mendapatkan data URL dari gambar QR code
 
-    // Membuat jendela baru untuk menampilkan QR code
+    // Membuat jendela baru untuk mencetak QR code
     var printWindow = window.open('', 'Print Window', 'height=400,width=600');
-
-    // Menunggu sebentar untuk memastikan QR code telah dirender dengan sempurna
-    setTimeout(function() {
-        // Mendapatkan gambar QR code dalam format data URL
-        var qrImageSrc = document.getElementById('qrcode').children[0].toDataURL();
-
-        // Menulis HTML ke dalam jendela baru untuk mencetak QR code
-        printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
-        printWindow.document.write('<img src="' + qrImageSrc + '"/>');
-        printWindow.document.write('</body></html>');
-
-        // Menutup dokumen agar browser dapat memprosesnya
-        printWindow.document.close();
-
-        // Memulai proses pencetakan
-        printWindow.print();
-    }, 500); // Mengatur timeout untuk memastikan QR code dirender dengan baik
+    printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
+    printWindow.document.write('<img src="' + qrDataURL + '"/>');
+    printWindow.document.write('</body></html>');
+    printWindow.document.close(); // Menutup dokumen agar browser dapat memprosesnya
+    printWindow.print(); // Memulai proses pencetakan
 }
+
 
 </script>
 
