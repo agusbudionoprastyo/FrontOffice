@@ -54,6 +54,12 @@ require_once '../helper/connection.php';
     font-size: 12px;
 }
 
+.custo-width {
+    width: 150px; /* Atur min-width sesuai kebutuhan */
+}
+
+
+
 </style>
 
 <section class="section">
@@ -99,7 +105,7 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                            <th scope="col" class="col-10">REGCARD</th>
+                            <th scope="col" class="custo-width">REGCARD</th>
                                 <th>GUESTBILL</th>
                                 <th>CL / VOUCHER</th>
                                 <th>NAME</th>
