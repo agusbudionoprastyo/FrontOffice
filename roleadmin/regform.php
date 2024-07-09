@@ -126,14 +126,14 @@ min-width: 250px; /* Kolom NAME */
 
 <div class="row">
     <div class="col-12">
-                <!-- Kotak pencarian ditempatkan di luar card -->
+        <!-- Kotak pencarian ditempatkan di luar card -->
         <div class="input-group mb-3">
-            <input type="search" class="form-control" placeholder="Search..." aria-label="Search" aria-control="table-2">
+            <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2" id="search-input">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">Search</button>
+                <button class="btn btn-outline-secondary" type="button" id="search-button">Search</button>
             </div>
         </div>
-
+        
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -461,6 +461,13 @@ function syncData() {
     });
 };
 
+</script>
+
+<script>
+document.getElementById('search-button').addEventListener('click', function() {
+    var searchText = document.getElementById('search-input').value;
+    table.search(searchText).draw();
+});
 </script>
 
 <script src="../assets/js/page/modules-datatables.js"></script>
