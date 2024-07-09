@@ -111,9 +111,7 @@ min-width: 250px; /* Kolom NAME */
 
         <div class="col-auto">
             <input type="text" class="rounded-pill custom-datepicker-input" aria-describedby="basic-addon2" id="search-input">
-                <div class="input-group-append">
-                <label for="search-input" class="btn btn-danger rounded-pill" id="search-button"><i class="fa-solid fa-filter-circle-xmark"></i></label>
-            </div>
+            <label for="search-input" class="btn btn-danger rounded-pill" id="search-button"><i class="fa-solid fa-filter-circle-xmark"></i></label>
         </div>
 
         </div>
