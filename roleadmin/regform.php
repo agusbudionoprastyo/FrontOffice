@@ -170,8 +170,8 @@ require_once '../helper/connection.php';
                                 $sql .= " ORDER BY folio DESC";
                             }
 
-                            // Add ORDER BY clause
-                            $sql .= " ORDER BY folio DESC";
+                            // // Add ORDER BY clause
+                            // $sql .= " ORDER BY folio DESC";
 
                             // Perform the query
                             $result = mysqli_query($connection, $sql);
