@@ -490,21 +490,21 @@ function syncData() {
     });
 };
 
-// function generateQRCode(url) {
-//     // Pastikan elemen dengan ID 'qrcode' tersedia di halaman
-//     var el = document.getElementById('qrcode');
-//     if (!el) {
-//         console.error('Elemen dengan ID "qrcode" tidak ditemukan.');
-//         return;
-//     }
+function generateQRCode(url) {
+    // Pastikan elemen dengan ID 'qrcode' tersedia di halaman
+    var el = document.getElementById('qrcode');
+    if (!el) {
+        console.error('Elemen dengan ID "qrcode" tidak ditemukan.');
+        return;
+    }
 
-//     // Menggunakan QRCode.js untuk menghasilkan QR code
-//     var qrcode = new QRCode(el, {
-//         text: url,
-//         width: 128,
-//         height: 128
-//     });
-// }
+    // Menggunakan QRCode.js untuk menghasilkan QR code
+    var qrcode = new QRCode(el, {
+        text: url,
+        width: 128,
+        height: 128
+    });
+}
 
 // function printQRCode() {
 //     const url = 'https://fo.dafam.cloud';
