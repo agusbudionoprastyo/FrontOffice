@@ -210,7 +210,7 @@ min-width: 250px; /* Kolom NAME */
                                     <td>
                                         <?php if (empty($row['at_regform'])): ?>
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
-                                            <button onclick="printQRCode();" class="btn btn-default mb-md-0 mb-1"><i class="fa-solid fa-qrcode fa-xl"></i></button>
+                                            <button onclick="printQRCode();" class="btn btn-default mb-md-0 mb-1"><i class="fa-solid fa-print fa-xl"></i></button>
                                         <?php endif; ?>
                                         <?php if ($row['at_regform']): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl"></i></a>                                
@@ -490,43 +490,84 @@ function syncData() {
     });
 };
 
-function generateQRCode(url) {
-    // Pastikan elemen dengan ID 'qrcode' tersedia di halaman
-    var el = document.getElementById('qrcode');
-    if (!el) {
-        console.error('Elemen dengan ID "qrcode" tidak ditemukan.');
-        return;
-    }
+// function generateQRCode(url) {
+//     // Pastikan elemen dengan ID 'qrcode' tersedia di halaman
+//     var el = document.getElementById('qrcode');
+//     if (!el) {
+//         console.error('Elemen dengan ID "qrcode" tidak ditemukan.');
+//         return;
+//     }
 
-    // Menggunakan QRCode.js untuk menghasilkan QR code
-    var qrcode = new QRCode(el, {
-        text: url,
-        width: 128,
-        height: 128
-    });
-}
+//     // Menggunakan QRCode.js untuk menghasilkan QR code
+//     var qrcode = new QRCode(el, {
+//         text: url,
+//         width: 128,
+//         height: 128
+//     });
+// }
+
+// function printQRCode() {
+//     const url = 'https://fo.dafam.cloud';
+//     generateQRCode(url); // Memanggil fungsi untuk menghasilkan QR code
+
+//     // Mendapatkan informasi room, roomtype, dan name
+//     const room = 'Room 101';
+//     const roomtype = 'Suite';
+//     const name = 'John Doe';
+
+//     // Membuat jendela baru untuk mencetak QR code beserta informasi
+//     var printWindow = window.open('', 'Print Window', 'height=400,width=600');
+//     printWindow.document.write('<html><head><title>Print Label</title></head><body>');
+//     printWindow.document.write('<h3>Room: ' + room + '</h3>');
+//     printWindow.document.write('<h3>Room Type: ' + roomtype + '</h3>');
+//     printWindow.document.write('<h3>Name: ' + name + '</h3>');
+//     printWindow.document.write('<img src="' + document.getElementById('qrcode').getElementsByTagName('canvas')[0].toDataURL() + '"/>');
+//     printWindow.document.write('</body></html>');
+//     printWindow.document.close(); // Menutup dokumen agar browser dapat memprosesnya
+//     printWindow.print(); // Memulai proses pencetakan
+// }
 
 function printQRCode() {
     const url = 'https://fo.dafam.cloud';
-    generateQRCode(url); // Memanggil fungsi untuk menghasilkan QR code
+    generateQRCode(url); // Menghasilkan QR code
 
-    // Mendapatkan informasi room, roomtype, dan name
     const room = 'Room 101';
     const roomtype = 'Suite';
     const name = 'John Doe';
 
-    // Membuat jendela baru untuk mencetak QR code beserta informasi
-    var printWindow = window.open('', 'Print Window', 'height=400,width=600');
-    printWindow.document.write('<html><head><title>Print Label</title></head><body>');
-    printWindow.document.write('<h3>Room: ' + room + '</h3>');
-    printWindow.document.write('<h3>Room Type: ' + roomtype + '</h3>');
-    printWindow.document.write('<h3>Name: ' + name + '</h3>');
-    printWindow.document.write('<img src="' + document.getElementById('qrcode').getElementsByTagName('canvas')[0].toDataURL() + '"/>');
-    printWindow.document.write('</body></html>');
-    printWindow.document.close(); // Menutup dokumen agar browser dapat memprosesnya
-    printWindow.print(); // Memulai proses pencetakan
+    // Menyiapkan dokumen untuk pencetakan
+    var printDocument = '<html><head><title>Print Label</title></head><body>';
+    printDocument += '<h3>Room: ' + room + '</h3>';
+    printDocument += '<h3>Room Type: ' + roomtype + '</h3>';
+    printDocument += '<h3>Name: ' + name + '</h3>';
+    printDocument += '<img src="' + document.getElementById('qrcode').getElementsByTagName('canvas')[0].toDataURL() + '"/>';
+    printDocument += '</body></html>';
+
+    // Membuat elemen iframe untuk mencetak dokumen
+    var iframe = document.createElement('iframe');
+    iframe.style.position = 'absolute';
+    iframe.style.width = '0px';
+    iframe.style.height = '0px';
+    iframe.style.border = 'none';
+    document.body.appendChild(iframe);
+
+    // Menulis dokumen ke iframe
+    var doc = iframe.contentWindow.document;
+    doc.open();
+    doc.write(printDocument);
+    doc.close();
+
+    // Melakukan pencetakan
+    iframe.contentWindow.focus();
+    iframe.contentWindow.print();
+
+    // Menghapus iframe setelah selesai mencetak
+    setTimeout(function() {
+        document.body.removeChild(iframe);
+    }, 1000); // Menunggu 1 detik sebelum menghapus iframe
 }
 
-</script>
+
+// </script>
 
 <script src="../assets/js/page/modules-datatables.js"></script>
