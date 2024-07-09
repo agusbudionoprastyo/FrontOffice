@@ -99,6 +99,9 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
+                                <th>REGCARD</th>
+                                <th>GUESTBILL</th>
+                                <th>CL / VOUCHER</th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
                                 <th>ROOM STATUS</th>
@@ -109,9 +112,6 @@ require_once '../helper/connection.php';
                                 <th>DATEOFBIRTH</th>
                                 <th>PHONE</th>
                                 <th>EMAIL</th>
-                                <th>REGCARD</th>
-                                <th>GUESTBILL</th>
-                                <th>CL / VOUCHER</th>
                                 <th>STATUS</th>
                                 <th>DATECREATE</th>
                             </tr>
@@ -156,38 +156,11 @@ require_once '../helper/connection.php';
                                 ?>
                                 <tr>
                                     <td>
-                                    <?php if (empty($row['at_regform'])): ?>
+                                        <?php if (empty($row['at_regform'])): ?>
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>">
                                                 <i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i>
                                             </button>
                                         <?php endif; ?>
-                                        <?php echo $row['fname']; ?>
-                                    </td>
-                                    <td><?php echo $row['folio']; ?></td>
-                                    <td>
-                                        <?php $foliostatus = trim($row['foliostatus']); ?>
-                                        <?php if ($foliostatus == 'I'): ?>
-                                            <span style="color: #15F5BA;">inHouse</span>
-                                        <?php elseif ($foliostatus == 'O'): ?>
-                                            <span style="color: #FF3EA5;">CheckOut</span>
-                                        <?php elseif ($foliostatus == 'C'): ?>
-                                            <span style="color: #15F5BA;">Confirm</span>
-                                        <?php elseif ($foliostatus == 'G'): ?>
-                                            <span style="color: #FF204E;">Guarantee</span>
-                                        <?php elseif ($foliostatus == 'T'): ?>
-                                            <span style="color: #43919B;">Tentative</span>
-                                        <?php else: ?>
-                                            <span class="text-muted">Unknown Status</span>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td><?php echo $row['room']; ?></td>
-                                    <td><?php echo $row['roomtype']; ?></td>
-                                    <td><?php echo $row['dateci']; ?></td>
-                                    <td><?php echo $row['dateco']; ?></td>
-                                    <td><?php echo $row['birthday']; ?></td>
-                                    <td><?php echo $row['resv_phone']; ?></td>
-                                    <td><?php echo $row['resv_email']; ?></td>
-                                    <td>
                                         <?php if ($row['at_regform']): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl"></i></a>                                
                                         <?php endif; ?>
@@ -229,6 +202,31 @@ require_once '../helper/connection.php';
                                         <a class="btn btn-sm btn-light rounded-pill mb-md-0 mb-1" href="ota_voucher.php?folio=<?php echo $row['folio']; ?>"><i class="fa-solid fa-cloud-arrow-up fa-xl" style="color: #f82b85;"></i> upload</a>
                                         <?php endif; ?>
                                     </td>
+                                    <td><?php echo $row['fname']; ?></td>
+                                    <td><?php echo $row['folio']; ?></td>
+                                    <td>
+                                        <?php $foliostatus = trim($row['foliostatus']); ?>
+                                        <?php if ($foliostatus == 'I'): ?>
+                                            <span style="color: #15F5BA;">inHouse</span>
+                                        <?php elseif ($foliostatus == 'O'): ?>
+                                            <span style="color: #FF3EA5;">CheckOut</span>
+                                        <?php elseif ($foliostatus == 'C'): ?>
+                                            <span style="color: #15F5BA;">Confirm</span>
+                                        <?php elseif ($foliostatus == 'G'): ?>
+                                            <span style="color: #FF204E;">Guarantee</span>
+                                        <?php elseif ($foliostatus == 'T'): ?>
+                                            <span style="color: #43919B;">Tentative</span>
+                                        <?php else: ?>
+                                            <span class="text-muted">Unknown Status</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?php echo $row['room']; ?></td>
+                                    <td><?php echo $row['roomtype']; ?></td>
+                                    <td><?php echo $row['dateci']; ?></td>
+                                    <td><?php echo $row['dateco']; ?></td>
+                                    <td><?php echo $row['birthday']; ?></td>
+                                    <td><?php echo $row['resv_phone']; ?></td>
+                                    <td><?php echo $row['resv_email']; ?></td>
                                     <td>
                                         <?php if ($row['status'] === '0'): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1">unchecked <i class="fa-solid fa-circle-question" style="color: #ff0000;"></i></a>
