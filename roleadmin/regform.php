@@ -108,15 +108,17 @@ min-width: 250px; /* Kolom NAME */
         <div class="col-auto">
             <button type="button" class="btn btn-danger rounded-pill" id="reset-filter"><i class="fa-solid fa-filter-circle-xmark"></i></button>
         </div>
-
-        <div class="col-auto">
-            <input type="text" class="rounded-pill custom-datepicker-input" aria-describedby="basic-addon2" id="search-input">
-            <label for="search-input" class="btn btn-danger rounded-pill" id="search-button"><i class="fa-solid fa-filter-circle-xmark"></i></label>
-        </div>
-
         </div>
     </div>
 </form>
+
+<div class="datepicker-container">
+    <div class="form-row align-items-center mb-3">
+        <div class="col-auto">
+            <input type="text" class="rounded-pill custom-datepicker-input" aria-describedby="basic-addon2" id="search-input">
+        </div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-12">
