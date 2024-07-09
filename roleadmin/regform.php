@@ -396,6 +396,15 @@ endif;
 
 <script>
 // JavaScript
+// JavaScript
+function showLoading() {
+    document.getElementById('loading-overlay').style.display = 'block';
+}
+
+function hideLoading() {
+    document.getElementById('loading-overlay').style.display = 'none';
+}
+
 function syncData() {
     showLoading();
 
