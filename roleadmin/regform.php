@@ -492,7 +492,7 @@ function syncData() {
 };
 
 function generateQRCode(url) {
-    // Using QRCode.js library to generate QR code
+    // Menggunakan library QRCode.js untuk menghasilkan QR code
     var qrcode = new QRCode(document.getElementById("qrcode"), {
         text: url,
         width: 128,
@@ -502,21 +502,28 @@ function generateQRCode(url) {
 
 function printContent() {
     const url = 'https://fo.dafam.cloud';
-    generateQRCode(url);
-    // Add your code here to initiate printing
-}
+    generateQRCode(url); // Memanggil fungsi untuk menghasilkan QR code
 
-    // Membuat elemen baru untuk menampilkan QR code
+    // Membuat jendela baru untuk menampilkan QR code
     var printWindow = window.open('', 'Print Window', 'height=400,width=600');
 
-    // Mengisi elemen baru dengan konten HTML yang berisi QR code
-    printWindow.document.write('<html><head><title>Print QR Code</title></head><body>');
-    printWindow.document.write('<img src="' + document.getElementById('qrcode').children[0].toDataURL() + '"/>');
-    printWindow.document.write('</body></html>');
+    // Menunggu sebentar untuk memastikan QR code telah dirender dengan sempurna
+    setTimeout(function() {
+        // Mendapatkan gambar QR code dalam format data URL
+        var qrImageSrc = document.getElementById('qrcode').children[0].toDataURL();
 
-    // Memanggil fungsi print pada window baru
-    printWindow.document.close(); // Menutup dokumen agar browser dapat memprosesnya
-    printWindow.print(); // Memulai proses pencetakan
+        // Menulis HTML ke dalam jendela baru untuk mencetak QR code
+        printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
+        printWindow.document.write('<img src="' + qrImageSrc + '"/>');
+        printWindow.document.write('</body></html>');
+
+        // Menutup dokumen agar browser dapat memprosesnya
+        printWindow.document.close();
+
+        // Memulai proses pencetakan
+        printWindow.print();
+    }, 500); // Mengatur timeout untuk memastikan QR code dirender dengan baik
+}
 
 </script>
 
