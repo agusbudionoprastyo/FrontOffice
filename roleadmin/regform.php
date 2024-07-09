@@ -54,9 +54,13 @@ require_once '../helper/connection.php';
     font-size: 12px;
 }
 
-#table-2_filter {
-    display: none; /* Menyembunyikan kotak pencarian */
+#table-2_wrapper .dataTables_filter {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; /* Pilihan untuk menengahkan secara vertical */
+    margin-right: 10px; /* Opsi untuk menetapkan jarak kanan */
 }
+
 
 #table-2 th:nth-child(1),
 #table-2 td:nth-child(1) {
