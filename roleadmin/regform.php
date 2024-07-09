@@ -108,13 +108,14 @@ min-width: 250px; /* Kolom NAME */
         <div class="col-auto">
             <button type="button" class="btn btn-danger rounded-pill" id="reset-filter"><i class="fa-solid fa-filter-circle-xmark"></i></button>
         </div>
-        </div>
-        <!-- Kotak pencarian ditempatkan di luar card -->
-            <div class="col-auto">
-                <input type="text" class="rounded-pill custom-datepicker-input" aria-describedby="basic-addon2" id="search-input">
+
+        <div class="col-auto">
+            <input type="text" class="rounded-pill custom-datepicker-input" aria-describedby="basic-addon2" id="search-input">
                 <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="search-button">Search</button>
+                <label for="search-input" class="btn btn-danger rounded-pill" id="search-button"><i class="fa-solid fa-filter-circle-xmark"></i></label>
             </div>
+        </div>
+
         </div>
     </div>
 </form>
