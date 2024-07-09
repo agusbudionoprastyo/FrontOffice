@@ -210,7 +210,7 @@ min-width: 250px; /* Kolom NAME */
                                     <td>
                                         <?php if (empty($row['at_regform'])): ?>
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
-                                            <button onclick="printQRCode();" class="btn btn-default mb-md-0 mb-1"><i class="fa-solid fa-print fa-xl"></i></button>
+                                            <button onclick="printQRCode();" class="btn btn-default mb-md-0 mb-1" folio_id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-print fa-xl"></i></button>
                                         <?php endif; ?>
                                         <?php if ($row['at_regform']): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl"></i></a>                                
@@ -531,9 +531,9 @@ function printQRCode() {
     const url = 'https://fo.dafam.cloud';
     generateQRCode(url); // Menghasilkan QR code
 
-    const room = data.room;
-    const roomtype = data.roomtype;
-    const name = data.fname;
+    const room = '<?php echo $row['room']; ?>';
+    const roomtype = '<?php echo $row['roomtype']; ?>';
+    const name = '<?php echo $row['fname']; ?>';
 
     // Menyiapkan dokumen untuk pencetakan
     var printDocument = '<html><head><title>Print Label</title></head><body>';
