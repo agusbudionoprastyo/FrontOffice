@@ -97,12 +97,14 @@ min-width: 250px; /* Kolom NAME */
     display: none;
 }
 
+#qrcode {
+    display: none;
+}
 </style>
-
+<div id="qrcode"></div>
 <section class="section">
   <div class="section-header d-flex justify-content-between">
     <b><i class="fa-solid fa-fire"></i> FrontOffice <i class="fa-solid fa-folder-open"></i> Regcard Guestfolio</b>
-    <div id="qrcode"></div>
     <a href="#" onclick="syncData(); return false;" class="btn btn-dark rounded-pill"><i class= "fa-solid fa-rotate fa-beat-fade"></i> SYNC DATA</a>
   </div>
 
@@ -510,7 +512,7 @@ function printQRCode() {
 
     // Membuat jendela baru untuk mencetak QR code
     var printWindow = window.open('', 'Print Window', 'height=400,width=600');
-    printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
+    printWindow.document.write('<html><head><title>Print Label</title></head><body>');
     printWindow.document.write('<img src="' + document.getElementById('qrcode').getElementsByTagName('canvas')[0].toDataURL() + '"/>');
     printWindow.document.write('</body></html>');
     printWindow.document.close(); // Menutup dokumen agar browser dapat memprosesnya
