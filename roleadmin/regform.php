@@ -11,10 +11,15 @@ require_once '../helper/connection.php';
 
 <!-- Custom CSS -->
 <style>
+#search-input {
+    width: 300px; /* Sesuaikan lebar sesuai kebutuhan */
+    margin-right: 20px; /* Jarak dari tepi kanan halaman */
+    margin-top: 10px; /* Jarak dari bagian atas halaman */
+    /* Tambahkan gaya tambahan sesuai kebutuhan */
+}
 
-    /* Custom datepicker input */
+/* Custom datepicker input */
 .custom-search-input {
-    margin-right: 0;
     width: 150px; /* Adjust width as needed */
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
@@ -130,6 +135,13 @@ min-width: 250px; /* Kolom NAME */
         </div>
     </div>
 </form>
+
+<!-- Input pencarian di sebelah kanan halaman -->
+<div class="row justify-content-end mb-3">
+    <div class="col-auto">
+        <input type="text" class="rounded-pill custom-search-input" aria-describedby="basic-addon2" id="search-input" placeholder="Search...">
+    </div>
+</div>
 
 
 <div class="row">
