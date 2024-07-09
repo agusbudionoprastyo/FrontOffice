@@ -61,8 +61,8 @@ require_once '../helper/connection.php';
     z-index: 9999;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 30%;
+    height: 30%;
     background-color: rgba(255, 255, 255, 0.8); /* Transparan putih untuk overlay */
 }
 
@@ -172,7 +172,7 @@ require_once '../helper/connection.php';
                             }
 
                             // Add ORDER BY clause
-                            $sql .= " ORDER BY datecreate DESC";
+                            $sql .= " ORDER BY dateci DESC";
 
                             // Perform the query
                             $result = mysqli_query($connection, $sql);
