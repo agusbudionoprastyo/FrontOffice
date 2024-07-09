@@ -128,12 +128,12 @@ min-width: 250px; /* Kolom NAME */
     <div class="col-12">
                 <!-- Kotak pencarian ditempatkan di luar card -->
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
+            <input type="search" class="form-control" placeholder="Search..." aria-label="Search" aria-control="table-2">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button">Search</button>
             </div>
         </div>
-        
+
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
