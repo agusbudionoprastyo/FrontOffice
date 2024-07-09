@@ -54,12 +54,6 @@ require_once '../helper/connection.php';
     font-size: 12px;
 }
 
-.custom-width {
-    width: 150px; /* Atur min-width sesuai kebutuhan */
-}
-
-
-
 </style>
 
 <section class="section">
@@ -98,14 +92,14 @@ require_once '../helper/connection.php';
 </form>
 
 <div class="row">
-    <div class="custom-width">
+    <div class="col-12">
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                            <th>REGCARD</th>
+                                <th>REGCARD</th>
                                 <th>GUESTBILL</th>
                                 <th>CL / VOUCHER</th>
                                 <th>NAME</th>
