@@ -496,25 +496,35 @@ function syncData() {
     });
 };
 
-// Function untuk mencetak QR code dengan nilai room, roomType, dan fname
-function printQRCode(room, roomType, fname) {
-    const url = 'https://fo.dafam.cloud';
+// Function untuk mencetak QR code
+function printQRCode(button) {
+    // Dapatkan nilai data dari tombol cetak yang ditekan
+    var room = button.getAttribute('data-room');
+    var roomType = button.getAttribute('data-roomtype');
+    var fname = button.getAttribute('data-fname');
 
-    // Menghasilkan QR code dengan menggunakan QRCode.js
-    var qrcode = new QRCode(document.getElementById('qrcode'), {
-        text: url,
-        width: 128,
-        height: 128
-    });
+    // Periksa nilai yang diperoleh dari atribut
+    console.log("Room:", room);
+    console.log("Room Type:", roomType);
+    console.log("Name:", fname);
+
+    // Panggil fungsi untuk menghasilkan QR code
+    generateAndPrintQRCode(room, roomType, fname);
+}
+
+// Function untuk menghasilkan dan mencetak QR code
+function generateAndPrintQRCode(room, roomType, fname) {
+    const url = 'https://fo.dafam.cloud';
 
     // Menyiapkan dokumen untuk pencetakan
     var printDocument = '<html><head><title>Print Label</title></head><body>';
     printDocument += '<h3>Room ' + room + '</h3>';
     printDocument += '<h3>Room Type ' + roomType + '</h3>';
     printDocument += '<h3>Name ' + fname + '</h3>';
-    printDocument += '<img src="' + qrcode._el.childNodes[0].toDataURL("image/png") + '"/>'; // Mendapatkan gambar QR code
 
-    // Menambahkan QR code ke dokumen untuk pencetakan
+    // Menambahkan elemen untuk QR code
+    printDocument += '<div id="qrcode"></div>';
+
     printDocument += '</body></html>';
 
     // Membuat elemen iframe untuk mencetak dokumen
@@ -525,11 +535,14 @@ function printQRCode(room, roomType, fname) {
     iframe.style.border = 'none';
     document.body.appendChild(iframe);
 
-    // Menulis dokumen ke dalam iframe
+    // Menulis dokumen ke iframe
     var doc = iframe.contentWindow.document;
     doc.open();
     doc.write(printDocument);
     doc.close();
+
+    // Memanggil generateQRCode untuk membuat QR code dalam dokumen yang disiapkan
+    generateQRCode(url, room, roomType, fname);
 
     // Melakukan pencetakan
     iframe.contentWindow.focus();
@@ -539,6 +552,26 @@ function printQRCode(room, roomType, fname) {
     setTimeout(function() {
         document.body.removeChild(iframe);
     }, 1000); // Menunggu 1 detik sebelum menghapus iframe
+}
+
+// Function untuk menghasilkan QR code menggunakan QRCode.js
+function generateQRCode(url, room, roomType, fname) {
+    // Pastikan elemen dengan ID 'qrcode' tersedia di halaman
+    var el = document.getElementById('qrcode');
+    if (!el) {
+        console.error('Elemen dengan ID "qrcode" tidak ditemukan.');
+        return;
+    }
+
+    // Menggunakan QRCode.js untuk menghasilkan QR code
+    var qrcode = new QRCode(el, {
+        text: url,
+        width: 128,
+        height: 128
+    });
+
+    // Tambahkan informasi room, roomType, dan fname ke dalam QR code
+    qrcode.makeCode('Room: ' + room + '\nRoom Type: ' + roomType + '\nName: ' + fname);
 }
 
 
