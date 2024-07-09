@@ -58,7 +58,7 @@ require_once '../helper/connection.php';
     display: flex;
     justify-content: flex-end;
     align-items: center; /* Pilihan untuk menengahkan secara vertical */
-    margin-right: 10px; /* Opsi untuk menetapkan jarak kanan */
+    margin-right: 0; /* Opsi untuk menetapkan jarak kanan */
 }
 
 
