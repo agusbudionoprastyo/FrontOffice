@@ -80,17 +80,7 @@ min-width: 200px; /* Kolom REGCARD */
 
 #table-2 th:nth-child(2),
 #table-2 td:nth-child(2) {
-min-width: 150px; /* Kolom GUESTBILL */
-}
-
-#table-2 th:nth-child(3),
-#table-2 td:nth-child(3) {
-min-width: 150px; /* Kolom CL / VOUCHER */
-}
-
-#table-2 th:nth-child(4),
-#table-2 td:nth-child(4) {
-min-width: 250px; /* Kolom NAME */
+min-width: 250px; /* Kolom GUESTBILL */
 }
 
 .dataTables_wrapper .dataTables_filter {
