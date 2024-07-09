@@ -13,8 +13,8 @@ require_once '../helper/connection.php';
 <style>
 #search-input {
     width: 300px; /* Sesuaikan lebar sesuai kebutuhan */
-    margin-right: 20px; /* Jarak dari tepi kanan halaman */
-    margin-top: 10px; /* Jarak dari bagian atas halaman */
+    margin-right: 0; /* Jarak dari tepi kanan halaman */
+    margin-top: 0; /* Jarak dari bagian atas halaman */
     /* Tambahkan gaya tambahan sesuai kebutuhan */
 }
 
