@@ -398,12 +398,16 @@ $(document).ready(function(){
             $('#filter').submit();
         });
 
-        // Handler untuk tombol reset filter
-        $('#reset-filter').click(function() {
-            $('.custom-datepicker-input').datepicker('setDate', null); // Mengatur tanggal datepicker ke null
-            $('#filter').submit(); 
-        });
-            // Event listener untuk tombol "Enter" pada #search-input
+        // Hapus inisialisasi DataTable sebelumnya
+        if ($.fn.DataTable.isDataTable('#table-2')) {
+            $('#table-2').DataTable().destroy();
+        }
+
+        // Inisialisasi DataTables
+        var table = $('#table-2').DataTable({
+                // Pengaturan-pengaturan DataTables lainnya
+            });
+                // Event listener untuk tombol "Enter" pada #search-input
         $('#search-input').keypress(function(event) {
             if (event.which === 13) {
                 // Ambil nilai pencarian dari #search-input
@@ -412,6 +416,12 @@ $(document).ready(function(){
                 // Lakukan pencarian pada tabel
                 table.search(searchText).draw();
             }
+        });
+
+        // Handler untuk tombol reset filter
+        $('#reset-filter').click(function() {
+            $('.custom-datepicker-input').datepicker('setDate', null); // Mengatur tanggal datepicker ke null
+            $('#filter').submit(); 
         });
     });
 </script>
