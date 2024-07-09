@@ -14,7 +14,7 @@ require_once '../helper/connection.php';
 
     /* Custom datepicker input */
 .custom-search-input {
-    display: flex-end;
+    margin-right: 0;
     width: 150px; /* Adjust width as needed */
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
