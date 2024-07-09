@@ -76,7 +76,7 @@ require_once '../helper/connection.php';
 </style>
 
 <div id="loading-overlay">
-<div id="loading" style="display: none;">
+<div id="loading">
     <img src="../assets/image/loading.gif" alt="Loading..." />
 </div>
 </div>
