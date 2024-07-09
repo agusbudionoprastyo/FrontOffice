@@ -387,7 +387,8 @@ $(document).ready(function(){
 <div id="qrcode"></div>
 <!-- Bootstrap Datepicker JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<!-- <script type="text/javascript" src="assets/js/qrCode/jquery.min.js"></script> -->
+<script type="text/javascript" src="assets/js/qrCode/qrcode.js"></script>
 <!-- Initialize Datepicker -->
 <script>
     $(document).ready(function(){
@@ -492,7 +493,7 @@ function syncData() {
 
 function generateQRCode(url) {
     // Using QRCode.js library to generate QR code
-    var qr = new QRCode(document.getElementById("qrcode"), {
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
         text: url,
         width: 128,
         height: 128
