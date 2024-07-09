@@ -156,7 +156,7 @@ require_once '../helper/connection.php';
                                 ?>
                                 <tr>
                                     <td>
-                                    <?php if (empty($row['signature_path'])): ?>
+                                    <?php if (empty($row['at_regform'])): ?>
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>">
                                                 <i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i>
                                             </button>
@@ -395,7 +395,6 @@ endif;
 ?>
 
 <script>
-// JavaScript
 // JavaScript
 function showLoading() {
     document.getElementById('loading-overlay').style.display = 'block';
