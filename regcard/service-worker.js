@@ -1,4 +1,4 @@
-const CACHE_NAME = 'guestfolio_v1';
+const CACHE_NAME = 'regcard_v1';
 const urlsToCache = [
   '/',
   '/index.php',
