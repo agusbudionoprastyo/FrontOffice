@@ -36,7 +36,7 @@ $data = mysqli_fetch_assoc($query);
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"> 
         <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
 
-        <title><?= $data['nama'] ?></title>
+        <title><?= $data['fname'] ?></title>
 
         <style>
             .rounded {
@@ -124,7 +124,7 @@ $data = mysqli_fetch_assoc($query);
                 <div class="home__container container grid">
                     <div class="home__data">
                         <span class="home__data-subtitle"><?= !empty($data['pesan']) ? $data['pesan'] : 'Selamat Datang' ?></span>
-                        <h1 class="home__data-title"><?= isset($data['jenkel']) ? (($data['jenkel'] == 'Laki-laki') ? 'Mr. ' : 'Mrs. ') : 'di Hotel Dafam Semarang' ?><b><?= $data['fname'] ?></b></h1>
+                        <h1 class="home__data-title"><?= isset($data['jenkel']) ? (($data['jenkel'] == 'Laki-laki') ? 'Mr. ' : 'Mrs. ') : 'di Hotel Dafam Semarang ' ?><b><?= $data['fname'] ?></b></h1>
                         <div id="container" class="button"><i class="fa-solid fa-file-pdf"></i> Hotel Directory</div>
                         <div id="canting" class="button"><i class="fa-solid fa-file-pdf"></i> F&B Menu </div>
                     </div>
@@ -187,9 +187,9 @@ $data = mysqli_fetch_assoc($query);
                         <div class="about__img-overlay">
                             <img src="assets/img/canting2.png" alt="" class="about__img-one">
                             <?php if (!empty($data['room'])): ?>
-                                <a href="https://cantingfood.my.id/#/menu/dafam-<?= $data['room'] ?>" class="button3">Open App</a>
+                                <a href="https://cantingfood.my.id/#/menu/dafam-<?= ltrim($data['room'], '0') ?>" class="button3">To Order..</a>
                             <?php else: ?>
-                                <button onclick="showAlert()" class="button3">Open App</button>
+                                <button onclick="showAlert()" class="button3">To Order..</button>
                             <?php endif; ?>
                         </div>
                         <div class="about__img-overlay">
@@ -512,7 +512,7 @@ $data = mysqli_fetch_assoc($query);
         </a>
 
         <!--========== whatsapp ==========-->
-        <a href="https://wa.me/6289524580971?text=Hi%20Hotel%20Dafam,%20saya%20<?=$data['nama']?>%20dari%20kamar%20<?=$data['room']?>" class="whatsapp" id="whatsapp">
+        <a href="https://wa.me/6289524580971?text=Hi%20Hotel%20Dafam,%20saya%20<?=$data['fname']?>%20dari%20kamar%20<?=$data['room']?>" class="whatsapp" id="whatsapp">
         <i class="ri-whatsapp-fill whatsapp__icon"></i>
         </a>
 
