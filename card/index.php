@@ -179,7 +179,7 @@ $data = mysqli_fetch_assoc($query);
                 <div class="about__container container grid">
                         <div class="about__data">
                             <h3 class="section__title about__title"><b>Order Now!</b></h3>
-                            <p class="about__description">Mau room service food & beverage?<br>sekarang bisa pakai aplikasi <b><canting>cantingfood!</canting></b>
+                            <p class="about__description">Mau room service food & beverage?<br>pakai aja <b><canting>cantingfood!</canting></b>
                             </p>
                         </div>
         
