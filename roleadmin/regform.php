@@ -91,7 +91,7 @@ min-width: 250px; /* Kolom GUESTBILL */
     display: none;
 }
 </style>
-<!-- <div id="qrcode"></div> -->
+<div id="qrcode"></div>
 <section class="section">
   <div class="section-header d-flex justify-content-between">
     <b><i class="fa-solid fa-fire"></i> FrontOffice <i class="fa-solid fa-folder-open"></i> Regcard Guestfolio</b>
@@ -506,6 +506,12 @@ function printQRCode(button) {
 function generateQRCode(folio, callback) {
     const url = 'https://ecard.dafam.cloud/';
 
+    // Hapus QR code yang sudah ada jika ada
+    var existingQRCode = document.getElementById('qrcode');
+        if (existingQRCode) {
+            existingQRCode.parentNode.removeChild(existingQRCode);
+    }
+
     // Menyiapkan teks untuk QR code dengan informasi tambahan
     var qrText = url + '?folio=' + folio;
 
@@ -590,7 +596,6 @@ function printDocumentWithQR(room, qrText) {
         }, 1000); // Menunggu 1 detik sebelum menghapus iframe
     }, 500); // Menunggu 0.5 detik sebelum melakukan pencetakan
 }
-
 
 </script>
 
