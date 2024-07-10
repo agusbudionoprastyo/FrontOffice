@@ -132,7 +132,7 @@ $data = mysqli_fetch_assoc($query);
 
                     <?= !empty($data['room']) ?
                     <p class="home__social-link">
-                    <i class="fa-solid fa-bed"></i><span> <?= $data['room'] ?></span>
+                        <i class="fa-solid fa-bed"></i><span> <?= $data['room'] ?></span>
                     </p> 
                     <p class="home__social-link">
                         <i class="fa-solid fa-wifi"></i><span> dafamsemarang</span> 
@@ -142,11 +142,11 @@ $data = mysqli_fetch_assoc($query);
                     </p>
                     : 
                     <p class="home__social-link">
-                    <i class="fa-solid fa-wifi"></i><span> dafamsemarang</span> 
+                        <i class="fa-solid fa-wifi"></i><span> dafamsemarang</span> 
                     </p>
                     <p class="home__social-link">
-                        <i class="fa-solid fa-key"></i><span> krasansare</span> 
-                    </p>
+                    <i class="fa-solid fa-key"></i><span> krasansare</span> 
+                    </p>    
                     ?>
 
                     <div class="home__info">
