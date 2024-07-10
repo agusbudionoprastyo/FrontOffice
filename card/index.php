@@ -1,7 +1,7 @@
 <?php
 require_once 'koneksi.php';
 $folio = $_GET['folio'];
-$query = mysqli_query($conn, "SELECT * FROM FOGUEST WHERE folio='$folio'");
+$query = mysqli_query($conn, "SELECT * FROM FOGUEST WHERE folio='$folio' AND foliostatus='I'");
 $data = mysqli_fetch_assoc($query);
 ?>
 <!DOCTYPE html>
