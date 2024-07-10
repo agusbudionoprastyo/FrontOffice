@@ -87,9 +87,9 @@ min-width: 250px; /* Kolom GUESTBILL */
     display: none;
 }
 
-#qrcode {
+/* #qrcode {
     display: none;
-}
+} */
 </style>
 
 <div id="qrcode"></div>
@@ -532,72 +532,6 @@ function generateQRCode(folio, callback) {
     }
 }
 
-// // Function untuk menulis dokumen ke iframe dan melakukan pencetakan
-// function printDocumentWithQR(room, qrText) {
-//     // Membuat elemen untuk QR code
-//     var qrCodeDiv = document.createElement('div');
-//     qrCodeDiv.id = 'qrcode';
-//     qrCodeDiv.style.display = 'none'; // Sembunyikan elemen QR code di dokumen asli
-//     qrCodeDiv.style.float = 'left'; // Meletakkan QR code di sebelah kiri
-//     qrCodeDiv.style.marginRight = '5mm';
-//     document.body.appendChild(qrCodeDiv);
-
-//     // Menyiapkan dokumen untuk pencetakan
-//     var printDocument = '<html><head><title>Cetak Label</title>';
-//     printDocument += '<style>@page { size: 60mm 40mm; margin: 0; }</style>'; // Set ukuran kertas label
-//     printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 8pt; }</style>'; // Ganti sesuai kebutuhan
-//     printDocument += '</head><body>';
-
-//     // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
-//     printDocument += '<div style="float: left; margin-right: 5mm;">';
-//     printDocument += '<div id="qrcodeContainer" style="margin: 0;"></div>'; // Letakkan QR code di dalam container ini
-//     printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
-//     printDocument += '<br>'
-//     printDocument += '<h3 style="margin: 0;">Wifi</h3>';
-//     printDocument += '<i style="margin: 0;">dafamsemarang</i>';
-//     printDocument += '<h3 style="margin: 0;">Password</h3>';
-//     printDocument += '<i style="margin: 0;">krasansare</i>';
-//     printDocument += '</div>';
-
-//     printDocument += '</body></html>';
-
-//     // Membuat elemen iframe untuk mencetak dokumen
-//     var iframe = document.createElement('iframe');
-//     iframe.style.position = 'absolute';
-//     iframe.style.width = '0px';
-//     iframe.style.height = '0px';
-//     iframe.style.border = 'none';
-//     document.body.appendChild(iframe);
-
-//     // Menulis dokumen pencetakan ke dalam iframe
-//     var doc = iframe.contentWindow.document;
-//     doc.open();
-//     doc.write(printDocument);
-//     doc.close();
-
-//     // Ambil elemen QR code yang sudah di-generate sebelumnya
-//     var qrCodeInPrint = document.getElementById('qrcode');
-
-//     // Salin QR code yang sudah di-generate ke dalam dokumen pencetakan di iframe
-//     if (qrCodeInPrint) {
-//         var qrImage = new Image();
-//         qrImage.src = qrCodeInPrint.firstChild.toDataURL(); // Ambil gambar QR code dari canvas QRCode.js
-//         doc.body.appendChild(qrImage); // Masukkan gambar QR code ke dalam dokumen pencetakan di iframe
-//     }
-
-//     // Melakukan pencetakan setelah QR code dan dokumen selesai disiapkan
-//     setTimeout(function() {
-//         iframe.contentWindow.focus();
-//         iframe.contentWindow.print();
-
-//         // Hapus elemen iframe setelah pencetakan selesai
-//         setTimeout(function() {
-//             document.body.removeChild(iframe);
-//             document.body.removeChild(qrCodeDiv); // Hapus elemen QR code dari dokumen asli setelah pencetakan
-//         }, 1000); // Menunggu 1 detik sebelum menghapus iframe
-//     }, 500); // Menunggu 0.5 detik sebelum melakukan pencetakan
-// }
-
 // Function untuk menulis dokumen ke iframe dan melakukan pencetakan
 function printDocumentWithQR(room, qrText) {
     // Membuat elemen untuk QR code
@@ -641,19 +575,12 @@ function printDocumentWithQR(room, qrText) {
     doc.write(printDocument);
     doc.close();
 
-    // Hapus gambar QR code yang lama jika ada
-    var existingQRImage = doc.getElementById('qrcodeImage');
-    if (existingQRImage) {
-        existingQRImage.parentNode.removeChild(existingQRImage);
-    }
-
     // Ambil elemen QR code yang sudah di-generate sebelumnya
     var qrCodeInPrint = document.getElementById('qrcode');
 
     // Salin QR code yang sudah di-generate ke dalam dokumen pencetakan di iframe
     if (qrCodeInPrint) {
         var qrImage = new Image();
-        qrImage.id = 'qrcodeImage';
         qrImage.src = qrCodeInPrint.firstChild.toDataURL(); // Ambil gambar QR code dari canvas QRCode.js
         doc.body.appendChild(qrImage); // Masukkan gambar QR code ke dalam dokumen pencetakan di iframe
     }
@@ -670,7 +597,6 @@ function printDocumentWithQR(room, qrText) {
         }, 1000); // Menunggu 1 detik sebelum menghapus iframe
     }, 500); // Menunggu 0.5 detik sebelum melakukan pencetakan
 }
-
 
 </script>
 
