@@ -190,7 +190,7 @@ $data = mysqli_fetch_assoc($query);
                             <?php if (!empty($data['room'])): ?>
                                 <a href="https://cantingfood.my.id/#/menu/dafam-<?= ltrim($data['room'], '0') ?>" class="button3">To Order</a>
                             <?php else: ?>
-                                <button onclick="showAlert()" class="button3">To Order</button>
+                                <a href="javascript:void(0);" onclick="showAlert()" class="button3">To Order</a>
                             <?php endif; ?>
                         </div>
                         <div class="about__img-overlay">
