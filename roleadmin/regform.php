@@ -91,7 +91,7 @@ min-width: 250px; /* Kolom GUESTBILL */
     display: none;
 }
 </style>
-<div id="qrcode"></div>
+<!-- <div id="qrcode"></div> -->
 <section class="section">
   <div class="section-header d-flex justify-content-between">
     <b><i class="fa-solid fa-fire"></i> FrontOffice <i class="fa-solid fa-folder-open"></i> Regcard Guestfolio</b>
