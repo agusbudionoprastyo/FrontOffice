@@ -37,5 +37,6 @@
         </ul>
       </li>
     </ul>
+    <div id="qrcode"></div>
   </aside>
 </div>
