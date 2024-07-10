@@ -224,7 +224,7 @@ min-width: 250px; /* Kolom GUESTBILL */
                                     </td>
                                     
                                     <td><?php echo $row['fname']; ?></td>
-                                    <td><?php echo $row['folio']; ?><a href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><i class="fa-solid fa-envelope-open fa-xl"></i></a></td>
+                                    <td><a href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><?php echo $row['folio']; ?></a></td>
                                     <td><?php echo $row['room']; ?></td>
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td>
