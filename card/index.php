@@ -187,9 +187,9 @@ $data = mysqli_fetch_assoc($query);
                         <div class="about__img-overlay">
                             <img src="assets/img/canting2.png" alt="" class="about__img-one">
                             <?php if (!empty($data['room'])): ?>
-                                <a href="https://cantingfood.my.id/#/menu/dafam-<?= ltrim($data['room'], '0') ?>" class="button3">To Order..</a>
+                                <a href="https://cantingfood.my.id/#/menu/dafam-<?= ltrim($data['room'], '0') ?>" class="button3">To Order</a>
                             <?php else: ?>
-                                <button onclick="showAlert()" class="button3">To Order..</button>
+                                <button onclick="showAlert()" class="button3">To Order</button>
                             <?php endif; ?>
                         </div>
                         <div class="about__img-overlay">
