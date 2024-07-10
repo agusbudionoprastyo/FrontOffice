@@ -240,7 +240,7 @@ min-width: 250px; /* Kolom GUESTBILL */
                                         <?php elseif ($foliostatus == 'T'): ?>
                                             <span style="color: #43919B;">Tentative</span>
                                         <?php else: ?>
-                                            <span class="text-muted">Unknown Status</span>
+                                            <span class="text-muted">Cancel</span>
                                         <?php endif; ?>
                                     </td>
                                     <td><?php echo $row['dateci']; ?></td>
