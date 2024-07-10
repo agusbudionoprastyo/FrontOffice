@@ -36,7 +36,7 @@
         <?php endif; ?>
         </ul>
       </li>
+      <div id="qrcode"></div>
     </ul>
-    <div id="qrcode"></div>
   </aside>
 </div>
