@@ -130,7 +130,7 @@ $data = mysqli_fetch_assoc($query);
                         <div id="canting" class="button"><i class="fa-solid fa-file-pdf"></i> F&B Menu </div>
                     </div>
 
-                    <?= (!empty($data['room']))?
+                    <?= !empty($data['room']) ?
                     <p class="home__social-link">
                     <i class="fa-solid fa-bed"></i><span> <?= $data['room'] ?></span>
                     </p> 
