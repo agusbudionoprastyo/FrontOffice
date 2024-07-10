@@ -2980,3 +2980,83 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
   100% {
     -webkit-transform: scale(1.2, 1.2);
     opacity: 0.0; } }
+
+    #search-input {
+      width: 300px; /* Sesuaikan lebar sesuai kebutuhan */
+      margin-right: 0; /* Jarak dari tepi kanan halaman */
+      margin-top: 0; /* Jarak dari bagian atas halaman */
+      /* Tambahkan gaya tambahan sesuai kebutuhan */
+  }
+  
+  /* Custom datepicker input */
+  .custom-search-input {
+      width: 150px; /* Adjust width as needed */
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #495057;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  /* Custom datepicker container */
+  .datepicker-container {
+      position: relative;
+      display: inline-block;
+  }
+  
+  /* Custom datepicker input */
+  .custom-datepicker-input {
+      width: 150px; /* Adjust width as needed */
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #495057; 
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+  
+  /* Custom datepicker button */
+  .custom-datepicker-button {
+      position: absolute;
+      top: .18rem;
+      right: .5rem;
+      padding: 0.175rem 0.55rem;
+      border-top-right-radius: 0.25rem;
+      border-bottom-right-radius: 0.25rem;
+  }
+  
+  /* Custom datepicker button icon */
+  .custom-datepicker-button i {
+      vertical-align: middle;
+  }
+  
+  .button-spacing {
+      margin-bottom: 10px;
+  }
+  
+  /* Sembunyikan teks "Clear" */
+  .datepicker{
+      font-size: 12px;
+  }
+  
+  #table-2 th:nth-child(1),
+  #table-2 td:nth-child(1) {
+  min-width: 200px; /* Kolom REGCARD */
+  }
+  
+  #table-2 th:nth-child(2),
+  #table-2 td:nth-child(2) {
+  min-width: 250px; /* Kolom GUESTBILL */
+  }
+  
+  .dataTables_wrapper .dataTables_filter {
+      display: none;
+  }
+  
+  #qrcode {
+      display: none;
+  }
