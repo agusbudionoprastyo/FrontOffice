@@ -493,7 +493,7 @@ function syncData() {
 function printQRCode(button) {
     // Hapus QR code lama jika ada
     var qrCodeDiv = document.getElementById('qrcode');
-    if (qrCodeDiv) {
+    if (qrCodeDiv && qrCodeDiv.parentNode === document.body) {
         document.body.removeChild(qrCodeDiv);
     }
 
