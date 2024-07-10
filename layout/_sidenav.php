@@ -4,6 +4,7 @@
       <a href="../">
         <img src="/assets/image/Logo.png" alt="logo" width="100">
       </a>
+      <div id="qrcode"></div>
     </div>
 
     <div class="sidebar-brand sidebar-brand-sm">
@@ -35,9 +36,6 @@
         <li><a class="nav-link" href="../roleadmin/regform_guestfolio_audit.php"><i class="fa-solid fa-file-pdf fa-lg"></i> Regcard Guestfolio</a></li>
         <?php endif; ?>
         </ul>
-      </li>
-      <li>
-      <div id="qrcode"></div>
       </li>
     </ul>
   </aside>
