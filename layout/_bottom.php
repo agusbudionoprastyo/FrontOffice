@@ -3,8 +3,7 @@
   <div class="footer-left">
     &copy; Ag</a>
   </div>
-  <div class="footer-right">
-
+  <div class="footer-right" id="qrcode">
   </div>
 </footer>
 </div>
