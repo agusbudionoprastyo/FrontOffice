@@ -123,9 +123,9 @@ $data = mysqli_fetch_assoc($query);
 
                 <div class="home__container container grid">
                     <div class="home__data">
-                        <span class="home__data-subtitle"><?= !empty($data['pesan']) ? $data['pesan'] : 'Selamat Datang' ?> 
-                        <h1><?= trim(explode(',', $data['fname'])[1]) . '.' ?> <b><?= trim(explode(',', $data['fname'])[0]) ?></b></h1></span>
-                        <h2 class="home__data-title">di Hotel Dafam Semarang</h2>
+                        <span class="home__data-subtitle"><?= !empty($data['pesan']) ? $data['pesan'] : 'Selamat Datang di ' ?> 
+                        <h2>Hotel Dafam Semarang</h2></span>
+                        <h1 class="home__data-title"><?= trim(explode(',', $data['fname'])[1]) . '.' ?> <b><?= trim(explode(',', $data['fname'])[0]) ?></b></h1>
                         <div id="container" class="button"><i class="fa-solid fa-file-pdf"></i> Hotel Directory</div>
                         <div id="canting" class="button"><i class="fa-solid fa-file-pdf"></i> F&B Menu </div>
                     </div>
