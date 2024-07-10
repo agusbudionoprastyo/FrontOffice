@@ -92,11 +92,10 @@ min-width: 250px; /* Kolom GUESTBILL */
 } */
 </style>
 
-<div id="qrcode"></div>
-
 <section class="section">
   <div class="section-header d-flex justify-content-between">
     <b><i class="fa-solid fa-fire"></i> FrontOffice <i class="fa-solid fa-folder-open"></i> Regcard Guestfolio</b>
+    <div id="qrcode"></div>
     <a href="#" onclick="syncData(); return false;" class="btn btn-dark rounded-pill"><i class= "fa-solid fa-rotate fa-beat-fade"></i> SYNC DATA</a>
   </div>
 
@@ -488,26 +487,6 @@ function syncData() {
         }
     });
 };
-
-// // Function untuk mencetak QR code
-// function printQRCode(button) {
-//     // Hapus QR code lama jika ada
-//     var qrCodeDiv = document.getElementById('qrcode');
-//     if (qrCodeDiv && qrCodeDiv.parentNode === document.body) {
-//         document.body.removeChild(qrCodeDiv);
-//     }
-
-//     // Dapatkan nilai data dari tombol cetak yang ditekan
-//     var room = button.getAttribute('data-room');
-//     var folio = button.getAttribute('data-folio');
-
-
-//     // Panggil fungsi untuk menghasilkan QR code dan mencetak
-//     generateQRCode(folio, function(qrText) {
-//         // Setelah QR code dibuat, panggil fungsi untuk mencetak
-//         printDocumentWithQR(room, qrText);
-//     });
-// }
 
 // Function untuk mencetak QR code
 function printQRCode(button) {
