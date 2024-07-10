@@ -491,6 +491,12 @@ function syncData() {
 
 // Function untuk mencetak QR code
 function printQRCode(button) {
+    // Hapus QR code lama jika ada
+    var qrCodeDiv = document.getElementById('qrcode');
+    if (qrCodeDiv) {
+        document.body.removeChild(qrCodeDiv);
+    }
+
     // Dapatkan nilai data dari tombol cetak yang ditekan
     var room = button.getAttribute('data-room');
     var folio = button.getAttribute('data-folio');
