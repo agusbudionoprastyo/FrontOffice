@@ -489,18 +489,43 @@ function syncData() {
     });
 };
 
+// // Function untuk mencetak QR code
+// function printQRCode(button) {
+//     // Hapus QR code lama jika ada
+//     var qrCodeDiv = document.getElementById('qrcode');
+//     if (qrCodeDiv && qrCodeDiv.parentNode === document.body) {
+//         document.body.removeChild(qrCodeDiv);
+//     }
+
+//     // Dapatkan nilai data dari tombol cetak yang ditekan
+//     var room = button.getAttribute('data-room');
+//     var folio = button.getAttribute('data-folio');
+
+
+//     // Panggil fungsi untuk menghasilkan QR code dan mencetak
+//     generateQRCode(folio, function(qrText) {
+//         // Setelah QR code dibuat, panggil fungsi untuk mencetak
+//         printDocumentWithQR(room, qrText);
+//     });
+// }
+
 // Function untuk mencetak QR code
 function printQRCode(button) {
-    // Hapus QR code lama jika ada
-    var qrCodeDiv = document.getElementById('qrcode');
-    if (qrCodeDiv && qrCodeDiv.parentNode === document.body) {
-        document.body.removeChild(qrCodeDiv);
-    }
-
     // Dapatkan nilai data dari tombol cetak yang ditekan
     var room = button.getAttribute('data-room');
     var folio = button.getAttribute('data-folio');
 
+    // Hapus isi dari div dengan id 'qrcode' jika ada
+    var qrCodeDiv = document.getElementById('qrcode');
+    if (qrCodeDiv) {
+        qrCodeDiv.innerHTML = ''; // Menghapus semua elemen yang ada di dalamnya
+    } else {
+        // Jika qrCodeDiv belum ada, buat elemennya
+        qrCodeDiv = document.createElement('div');
+        qrCodeDiv.id = 'qrcode';
+        qrCodeDiv.style.display = 'none'; // Sembunyikan elemen QR code di dokumen asli
+        document.body.appendChild(qrCodeDiv);
+    }
 
     // Panggil fungsi untuk menghasilkan QR code dan mencetak
     generateQRCode(folio, function(qrText) {
@@ -508,6 +533,7 @@ function printQRCode(button) {
         printDocumentWithQR(room, qrText);
     });
 }
+
 
 // Function untuk menghasilkan QR code
 function generateQRCode(folio, callback) {
