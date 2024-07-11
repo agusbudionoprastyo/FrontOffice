@@ -153,12 +153,12 @@ function printDocumentWithQR(room, qrText) {
 
     // Menyiapkan dokumen untuk pencetakan
     var printDocument = '<html><head><title>Cetak Label</title>';
-    printDocument += '<style>@page { size: 40mm 20mm; margin: 0; }</style>'; // Set ukuran kertas label
+    printDocument += '<style>@page { size: 60mm 30mm; margin: 0; }</style>'; // Set ukuran kertas label
     printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>'; // Ganti sesuai kebutuhan
     printDocument += '</head><body>';
 
     // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
-    printDocument += '<div style="float: left; margin: 5mm;">';
+    printDocument += '<div style="float: left; margin-left: auto; object-fit: cover;">';
     printDocument += '<div id="qrcodeContainer"></div>'; // Letakkan QR code di dalam container ini
     printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
     printDocument += '<br>'
