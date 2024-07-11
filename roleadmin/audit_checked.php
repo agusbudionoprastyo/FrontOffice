@@ -31,7 +31,7 @@ $row = mysqli_fetch_assoc($result);
 
 if ($row['folio']) {
     // If row exists, update its status to 1
-    $update_query = "UPDATE regform SET status = 1 WHERE folio = $folio";
+    $update_query = "UPDATE FOGUEST SET status = 1 WHERE folio = $folio";
     if (mysqli_query($connection, $update_query)) {
         echo "Regform status updated successfully.";
     } else {
