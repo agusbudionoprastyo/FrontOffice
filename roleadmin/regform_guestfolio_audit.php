@@ -115,7 +115,7 @@ require_once '../helper/connection.php';
                                 <tr>
                                     <td>
                                     <?php if ($row['status'] === '0'): ?>
-                                            <a class="btn btn-sm btn-primary mb-md-0 mb-1" href="audit_checked.php?id=<?php echo $row['id']; ?>"><i class="fa-solid fa-circle-check fa-xl"></i></a>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="audit_checked.php?folio=<?php echo $row['folio']; ?>"><i class="fa-solid fa-circle-check fa-xl"></i></a>
                                         <?php endif; ?>
                                         <?php if ($row['status'] === '1'): ?>
                                             <a class="btn btn-sm btn-secondary mb-md-0 mb-1"><i class="fa-solid fa-circle-check fa-xl"></i></a>
