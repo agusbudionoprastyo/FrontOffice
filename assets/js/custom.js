@@ -153,8 +153,8 @@ function printDocumentWithQR(room, qrText) {
     printDocument += '<style>@page { size: 40mm 20mm; margin: 0; }</style>';
     printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>';
     printDocument += '<style>.label-container { display: flex; align-items: center; height: 100%; }</style>';
-    printDocument += '<style>.label-content { display: flex; justify-content: flex-start;}</style>';
-    printDocument += '<style>.label-qr { display: flex; justify-content: flex-end;}</style>';
+    printDocument += '<style>.label-content {justify-content: flex-start;}</style>';
+    printDocument += '<style>.label-qr {justify-content: flex-end;}</style>';
 
     printDocument += '</head><body>';
 
