@@ -146,9 +146,9 @@ require_once '../helper/connection.php';
                                     <td>
                                         <?php $foliostatus = trim($row['foliostatus']); ?>
                                         <?php if ($foliostatus == 'I'): ?>
-                                            <span style="color: #15F5BA;">inHouse</span>
+                                            <span style="color: #36BA98;">inHouse</span>
                                         <?php elseif ($foliostatus == 'O'): ?>
-                                            <span style="color: #FF3EA5;">CheckOut</span>
+                                            <span class="text-muted">CheckOut</span>
                                         <?php elseif ($foliostatus == 'C'): ?>
                                             <span style="color: #15F5BA;">Confirm</span>
                                         <?php elseif ($foliostatus == 'G'): ?>
