@@ -175,8 +175,7 @@ function printDocumentWithQR(room, qrText) {
     printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>';
     printDocument += '<style>.label-container { display: flex; align-items: center; justify-content: space-between; height: 100%;}</style>';
     printDocument += '<style>.label-content { flex: 1; }</style>';
-    printDocument += '<style>.label-qr { flex-shrink: 0; margin-left: 10px;}</style>';
-    printDocument += '<style>.label-qr img { width: 60px; height: 60px;}';
+    printDocument += '<style>.label-qr { flex-shrink: 0; margin-left: 10px; width: 60px; height: 60px;}</style>';
     printDocument += '</head><body>';
 
     // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
