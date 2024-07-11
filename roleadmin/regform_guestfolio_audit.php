@@ -58,8 +58,9 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                                <th>STATUS</th>
                                 <th>REGCARD</th>
+                                <th>GUESTBILL</th>
+                                <th>CL / VOUCHER</th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
                                 <th>ROOM</th>
@@ -70,8 +71,6 @@ require_once '../helper/connection.php';
                                 <th>DATEOFBIRTH</th>
                                 <th>PHONE</th>
                                 <th>EMAIL</th>
-                                <th>GUESTBILL</th>
-                                <th>CL / VOUCHER</th>
                                 <th>DATECREATE</th>
                             </tr>
                         </thead>
@@ -115,14 +114,12 @@ require_once '../helper/connection.php';
                                 ?>
                                 <tr>
                                     <td>
-                                        <?php if ($row['status'] === '0'): ?>
+                                    <?php if ($row['status'] === '0'): ?>
                                             <a class="btn btn-sm btn-primary mb-md-0 mb-1" href="audit_checked.php?id=<?php echo $row['id']; ?>"><i class="fa-solid fa-circle-check fa-xl"></i></a>
                                         <?php endif; ?>
                                         <?php if ($row['status'] === '1'): ?>
                                             <a class="btn btn-sm btn-secondary mb-md-0 mb-1"><i class="fa-solid fa-circle-check fa-xl"></i></a>
                                         <?php endif; ?>
-                                    </td>
-                                    <td>
                                         <?php if ($row['at_regform']): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl" style="color: #B5120C;"></i></a>                                
                                         <?php endif; ?>
@@ -136,7 +133,23 @@ require_once '../helper/connection.php';
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1">signed <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
                                         <?php endif; ?>
                                     </td>
-                                    
+                                    <td>
+                                        <?php if ($row['at_guestfolio']): ?>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_guestfolio']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl" style="color: #B5120C;"></i></a>
+                                        <?php endif; ?>
+                                        <?php if ((empty($row['g_signature_path'])) && ($row['at_guestfolio'])): ?>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">unsigned <i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i></a>
+                                        <?php endif; ?>
+                                        <?php if ($row['g_signature_path']): ?>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">signed <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if ($row['at_ota_voucher']): ?>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_ota_voucher']; ?>" target="_blank"><i class="fa-solid fa-file-zipper fa-xl"></i></a>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">uploaded <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
+                                        <?php endif; ?>
+                                    </td>
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><?php echo $row['folio']; ?></a></td>
                                     <td><?php echo $row['room']; ?></td>
@@ -162,23 +175,6 @@ require_once '../helper/connection.php';
                                     <td><?php echo $row['birthday']; ?></td>
                                     <td><?php echo $row['resv_phone']; ?></td>
                                     <td><?php echo $row['resv_email']; ?></td>
-                                    <td>
-                                        <?php if ($row['at_guestfolio']): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_guestfolio']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl" style="color: #B5120C;"></i></a>
-                                        <?php endif; ?>
-                                        <?php if ((empty($row['g_signature_path'])) && ($row['at_guestfolio'])): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">unsigned <i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i></a>
-                                        <?php endif; ?>
-                                        <?php if ($row['g_signature_path']): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">signed <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <?php if ($row['at_ota_voucher']): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_ota_voucher']; ?>" target="_blank"><i class="fa-solid fa-file-zipper fa-xl"></i></a>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">uploaded <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
-                                        <?php endif; ?>
-                                    </td>
                                     <td><?php echo $row['datecreate']; ?></td>
                                 </tr>
                                 <?php
