@@ -128,8 +128,8 @@ function generateQRCode(folio, callback) {
     // Menggunakan QRCode.js untuk menghasilkan QR code dengan teks yang disiapkan
     var qrcode = new QRCode('qrcode', {
         text: qrText,
-        width: 60,
-        height: 60
+        width: 40,
+        height: 40
     });
 
     // Memanggil makeCode() untuk menghasilkan QR code dengan teks yang diberikan
@@ -175,7 +175,7 @@ function printDocumentWithQR(room, qrText) {
     printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>';
     printDocument += '<style>.label-container { display: flex; align-items: center; justify-content: space-between; height: 100%;}</style>';
     printDocument += '<style>.label-content { flex: 1; }</style>';
-    printDocument += '<style>.label-qr { flex-shrink: 0; margin-left: 10px; width: 20px; height: 20px;}</style>';
+    printDocument += '<style>.label-qr { flex-shrink: 0; margin-left: 10px;}</style>';
     printDocument += '</head><body>';
 
     // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
