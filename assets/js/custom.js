@@ -151,7 +151,7 @@ function printDocumentWithQR(room, qrText) {
     // Menyiapkan dokumen untuk pencetakan
     var printDocument = '<html><head><title>Cetak Label</title>';
     printDocument += '<style>@page { size: 40mm 20mm; margin: 0; }</style>'; // Set ukuran kertas label
-    printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 4pt; }</style>'; // Ganti sesuai kebutuhan
+    printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 5pt; }</style>'; // Ganti sesuai kebutuhan
     printDocument += '</head><body>';
 
     // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
