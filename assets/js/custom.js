@@ -141,46 +141,23 @@ function generateQRCode(folio, callback) {
     }
 }
 
-// Function untuk menulis dokumen ke iframe dan melakukan pencetakan
 function printDocumentWithQR(room, qrText) {
     // Membuat elemen untuk QR code
     var qrCodeDiv = document.createElement('div');
     qrCodeDiv.id = 'qrcode';
     qrCodeDiv.style.display = 'none'; // Sembunyikan elemen QR code di dokumen asli
-    // qrCodeDiv.style.float = 'left'; // Meletakkan QR code di sebelah kiri
-    // qrCodeDiv.style.marginRight = '5mm';
     document.body.appendChild(qrCodeDiv);
 
     // Menyiapkan dokumen untuk pencetakan
-    // var printDocument = '<html><head><title>Cetak Label</title>';
-    // printDocument += '<style>@page { size: 60mm 30mm; margin: 0; }</style>'; // Set ukuran kertas label
-    // printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>'; // Ganti sesuai kebutuhan
-    // printDocument += '</head><body>';
-
-    // // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
-    // printDocument += '<div style="float: left; margin-left: auto; object-fit: cover;">';
-    // printDocument += '<div id="qrcodeContainer"></div>'; // Letakkan QR code di dalam container ini
-    // printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
-    // printDocument += '<br>'
-    // printDocument += '<h3 style="margin: 0;">Wifi</h3>';
-    // printDocument += '<i style="margin: 0;">dafamsemarang</i>';
-    // printDocument += '<h3 style="margin: 0;">Password</h3>';
-    // printDocument += '<i style="margin: 0;">krasansare</i>';
-    // printDocument += '</div>';
-
-    // printDocument += '</body></html>';
-
     var printDocument = '<html><head><title>Cetak Label</title>';
     printDocument += '<style>@page { size: 40mm 20mm; margin: 0; }</style>';
     printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>';
-    printDocument += '<style>.label-container { display: flex; align-items: center; justify-content: space-between; height: 100%;}</style>';
-    printDocument += '<style>.label-content { flex: 1; }</style>';
-    printDocument += '<style>.label-qr { flex: 1 }</style>';
+    printDocument += '<style>.label-container { display: flex; align-items: center; justify-content: space-between; height: 100%; }</style>';
     printDocument += '</head><body>';
 
     // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
     printDocument += '<div class="label-container">';
-    printDocument += '<div class="label-content">';
+    printDocument += '<div>';
     printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
     printDocument += '<br>';
     printDocument += '<h3 style="margin: 0;">Wifi</h3>';
@@ -188,18 +165,12 @@ function printDocumentWithQR(room, qrText) {
     printDocument += '<h3 style="margin: 0;">Password</h3>';
     printDocument += '<i style="margin: 0;">krasansare</i>';
     printDocument += '</div>';
-    printDocument += '<div class="label-qr">';
+    printDocument += '<div>';
     printDocument += '<div id="qrcodeContainer"></div>';
     printDocument += '</div>';
     printDocument += '</div>';
 
     printDocument += '</body></html>';
-
-    
-    // Setelah Anda memiliki dokumen HTML seperti di atas, Anda bisa mencetaknya menggunakan metode yang sesuai di lingkungan Anda (misalnya, dengan menggunakan JavaScript untuk membuka jendela cetak).
-    
-
-
 
     // Membuat elemen iframe untuk mencetak dokumen
     var iframe = document.createElement('iframe');
@@ -221,8 +192,8 @@ function printDocumentWithQR(room, qrText) {
     // Salin QR code yang sudah di-generate ke dalam dokumen pencetakan di iframe
     if (qrCodeInPrint) {
         var qrImage = new Image();
-        qrImage.src = qrCodeInPrint.firstChild.toDataURL(); // Ambil gambar QR code dari canvas QRCode.js
-        doc.body.appendChild(qrImage); // Masukkan gambar QR code ke dalam dokumen pencetakan di iframe
+        qrImage.src = qrCodeInPrint.firstChild.toDataURL();
+        doc.body.appendChild(qrImage);
     }
 
     // Melakukan pencetakan setelah QR code dan dokumen selesai disiapkan
@@ -237,5 +208,6 @@ function printDocumentWithQR(room, qrText) {
         }, 1000); // Menunggu 1 detik sebelum menghapus iframe
     }, 500); // Menunggu 0.5 detik sebelum melakukan pencetakan
 }
+
 
 "use strict";
