@@ -128,8 +128,8 @@ function generateQRCode(folio, callback) {
     // Menggunakan QRCode.js untuk menghasilkan QR code dengan teks yang disiapkan
     var qrcode = new QRCode('qrcode', {
         text: qrText,
-        width: 40,
-        height: 40
+        width: 60,
+        height: 60
     });
 
     // Memanggil makeCode() untuk menghasilkan QR code dengan teks yang diberikan
