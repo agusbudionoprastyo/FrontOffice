@@ -152,23 +152,44 @@ function printDocumentWithQR(room, qrText) {
     document.body.appendChild(qrCodeDiv);
 
     // Menyiapkan dokumen untuk pencetakan
+    // var printDocument = '<html><head><title>Cetak Label</title>';
+    // printDocument += '<style>@page { size: 60mm 30mm; margin: 0; }</style>'; // Set ukuran kertas label
+    // printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>'; // Ganti sesuai kebutuhan
+    // printDocument += '</head><body>';
+
+    // // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
+    // printDocument += '<div style="float: left; margin-left: auto; object-fit: cover;">';
+    // printDocument += '<div id="qrcodeContainer"></div>'; // Letakkan QR code di dalam container ini
+    // printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
+    // printDocument += '<br>'
+    // printDocument += '<h3 style="margin: 0;">Wifi</h3>';
+    // printDocument += '<i style="margin: 0;">dafamsemarang</i>';
+    // printDocument += '<h3 style="margin: 0;">Password</h3>';
+    // printDocument += '<i style="margin: 0;">krasansare</i>';
+    // printDocument += '</div>';
+
+    // printDocument += '</body></html>';
     var printDocument = '<html><head><title>Cetak Label</title>';
-    printDocument += '<style>@page { size: 60mm 30mm; margin: 0; }</style>'; // Set ukuran kertas label
-    printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>'; // Ganti sesuai kebutuhan
-    printDocument += '</head><body>';
+printDocument += '<style>@page { size: 60mm 30mm; margin: 0; }</style>'; // Set ukuran kertas label
+printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>'; // Ganti sesuai kebutuhan
+printDocument += '<style>.label-container { display: flex; align-items: center; justify-content: center; height: 100%; }</style>'; // CSS untuk container label
+printDocument += '</head><body>';
 
-    // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
-    printDocument += '<div style="float: left; margin-left: auto; object-fit: cover;">';
-    printDocument += '<div id="qrcodeContainer"></div>'; // Letakkan QR code di dalam container ini
-    printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
-    printDocument += '<br>'
-    printDocument += '<h3 style="margin: 0;">Wifi</h3>';
-    printDocument += '<i style="margin: 0;">dafamsemarang</i>';
-    printDocument += '<h3 style="margin: 0;">Password</h3>';
-    printDocument += '<i style="margin: 0;">krasansare</i>';
-    printDocument += '</div>';
+// Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
+printDocument += '<div class="label-container">';
+printDocument += '<div style="text-align: center;">'; // Center align konten di dalam label-container
+printDocument += '<div id="qrcodeContainer"></div>'; // Letakkan QR code di dalam container ini
+printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
+printDocument += '<br>';
+printDocument += '<h3 style="margin: 0;">Wifi</h3>';
+printDocument += '<i style="margin: 0;">dafamsemarang</i>';
+printDocument += '<h3 style="margin: 0;">Password</h3>';
+printDocument += '<i style="margin: 0;">krasansare</i>';
+printDocument += '</div>';
+printDocument += '</div>';
 
-    printDocument += '</body></html>';
+printDocument += '</body></html>';
+
 
     // Membuat elemen iframe untuk mencetak dokumen
     var iframe = document.createElement('iframe');
