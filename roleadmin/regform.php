@@ -150,7 +150,7 @@ require_once '../helper/connection.php';
                                         <?php elseif ($foliostatus == 'O'): ?>
                                             <span class="text-muted">CheckOut</span>
                                         <?php elseif ($foliostatus == 'C'): ?>
-                                            <span style="color: #15F5BA;">Confirm</span>
+                                            <span style="color: #DC0083;">Confirm</span>
                                         <?php elseif ($foliostatus == 'G'): ?>
                                             <span style="color: #FF204E;">Guarantee</span>
                                         <?php elseif ($foliostatus == 'T'): ?>
