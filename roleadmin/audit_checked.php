@@ -33,9 +33,17 @@ if ($row['folio']) {
     // If row exists, update its status to 1
     $update_query = "UPDATE FOGUEST SET status = 1 WHERE folio = $folio";
     if (mysqli_query($connection, $update_query)) {
-        echo "Regform status updated successfully.";
+        $_SESSION['info'] = [
+            'status' => 'succes',
+            'message' => 'Folio Checked'
+        ];
+        header('Location: regform_guestfolio_audit.php');
     } else {
-        echo "Failed to update regform status.";
+        $_SESSION['info'] = [
+            'status' => 'failed',
+            'message' => 'Invalid Folio'
+        ];
+        header('Location: regform_guestfolio_audit.php');
         exit;
     }
 }

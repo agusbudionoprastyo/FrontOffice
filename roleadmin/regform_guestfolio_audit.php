@@ -123,12 +123,6 @@ require_once '../helper/connection.php';
                                         <?php if ($row['at_regform']): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl" style="color: #B5120C;"></i></a>                                
                                         <?php endif; ?>
-                                        <?php if (empty($row['rc_signature_path'])): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">unsigned <i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i></a>
-                                        <?php endif; ?>
-                                        <?php if ($row['rc_signature_path']): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">signed <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
-                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <?php if ($row['at_guestfolio']): ?>
