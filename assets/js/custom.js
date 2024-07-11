@@ -153,7 +153,7 @@ function printDocumentWithQR(room, qrText) {
 
     // Menyiapkan dokumen untuk pencetakan
     var printDocument = '<html><head><title>Cetak Label</title>';
-    printDocument += '<style>@page { size: 60mm 40mm; margin: 0; }</style>'; // Set ukuran kertas label
+    printDocument += '<style>@page { size: 40mm 20mm; margin: 0; }</style>'; // Set ukuran kertas label
     printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 8pt; }</style>'; // Ganti sesuai kebutuhan
     printDocument += '</head><body>';
 
