@@ -118,15 +118,15 @@ require_once '../helper/connection.php';
                                         <?php if (empty($row['at_regform'])): ?>
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
                                         <?php endif; ?>
+                                        <?php if ($row['at_regform']): ?>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl"></i></a>                                
+                                        <?php endif; ?>
                                         <?php if (!empty($row['room'])): ?>
                                             <button onclick="printQRCode(this);" class="btn btn-default mb-md-0 mb-1"
                                                 data-room="<?php echo htmlspecialchars($row['room']); ?>"
                                                 data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
                                                 <i class="fa-solid fa-print fa-xl"></i>
                                             </button>
-                                        <?php endif; ?>
-                                        <?php if ($row['at_regform']): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl"></i></a>                                
                                         <?php endif; ?>
                                         <?php if (empty($row['room'])): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_edit.php?folio=<?php echo $row['folio']; ?>"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
@@ -140,7 +140,7 @@ require_once '../helper/connection.php';
                                     </td>
                                     
                                     <td><?php echo $row['fname']; ?></td>
-                                    <td><a class="btn btn-sm btn-default mb-md-0 mb-1" href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><?php echo $row['folio']; ?></a></td>
+                                    <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><?php echo $row['folio']; ?></a></td>
                                     <td><?php echo $row['room']; ?></td>
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td>
