@@ -155,10 +155,10 @@ function printDocumentWithQR(room, qrText) {
     printDocument += '</head><body>';
 
     // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
-    printDocument += '<div style="float: left; margin-right: 8mm;">';
+    printDocument += '<div style="float: left; margin-right: 6mm;">';
     printDocument += '<div id="qrcodeContainer"></div>'; // Letakkan QR code di dalam container ini
 
-    printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
+    printDocument += '<h3 style="margin-bottom: 5mm;">ROOM ' + room + '</h3>';
     printDocument += '<h3 style="margin: 0;">Wifi</h3>';
     printDocument += '<i style="margin: 0;">dafamsemarang</i>';
     printDocument += '<h3 style="margin: 0;">Password</h3>';
