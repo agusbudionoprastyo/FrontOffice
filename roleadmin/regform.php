@@ -148,11 +148,11 @@ require_once '../helper/connection.php';
                                         <?php if ($foliostatus == 'I'): ?>
                                             <span style="color: #36BA98;">inHouse</span>
                                         <?php elseif ($foliostatus == 'O'): ?>
-                                            <span class="text-muted">CheckOut</span>
+                                            <span style="color: #C80036">CheckOut</span>
                                         <?php elseif ($foliostatus == 'C'): ?>
-                                            <span style="color: #DC0083;">Confirm</span>
+                                            <span style="color: #1679AB;">Confirm</span>
                                         <?php elseif ($foliostatus == 'G'): ?>
-                                            <span style="color: #FF204E;">Guarantee</span>
+                                            <span style="color: #102C57;">Guarantee</span>
                                         <?php elseif ($foliostatus == 'T'): ?>
                                             <span style="color: #43919B;">Tentative</span>
                                         <?php else: ?>
