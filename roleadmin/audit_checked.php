@@ -25,7 +25,7 @@ if ($folio === null || !is_numeric($folio)) {
     exit;
 }
 
-$query = "SELECT * FROM regform WHERE folio = $folio";
+$query = "SELECT * FROM FOGUEST WHERE folio = $folio";
 $result = mysqli_query($connection, $query);
 $row = mysqli_fetch_assoc($result);
 
