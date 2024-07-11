@@ -169,15 +169,17 @@ function printDocumentWithQR(room, qrText) {
     // printDocument += '</div>';
 
     // printDocument += '</body></html>';
+
     var printDocument = '<html><head><title>Cetak Label</title>';
 printDocument += '<style>@page { size: 60mm 30mm; margin: 0; }</style>'; // Set ukuran kertas label
 printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>'; // Ganti sesuai kebutuhan
 printDocument += '<style>.label-container { display: flex; align-items: center; justify-content: center; height: 100%; }</style>'; // CSS untuk container label
+printDocument += '<style>.label-content { text-align: left; }</style>'; // Konten teks tetap rata kiri
 printDocument += '</head><body>';
 
 // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
 printDocument += '<div class="label-container">';
-printDocument += '<div style="text-align: center;">'; // Center align konten di dalam label-container
+printDocument += '<div class="label-content">'; // Konten teks tetap rata kiri
 printDocument += '<div id="qrcodeContainer"></div>'; // Letakkan QR code di dalam container ini
 printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
 printDocument += '<br>';
@@ -189,6 +191,7 @@ printDocument += '</div>';
 printDocument += '</div>';
 
 printDocument += '</body></html>';
+
 
 
     // Membuat elemen iframe untuk mencetak dokumen
