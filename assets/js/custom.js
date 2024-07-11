@@ -153,9 +153,8 @@ function printDocumentWithQR(room, qrText) {
     printDocument += '<style>@page { size: 40mm 20mm; margin: 0; }</style>';
     printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>';
     printDocument += '<style>.label-container { display: flex; align-items: center; height: 100%; }</style>';
-    printDocument += '<style>.label-content {justify-content: flex-start;}</style>';
-    printDocument += '<style>.label-qr {justify-content: flex-end;}</style>';
-
+    printDocument += '<style>.label-content { flex: 1; padding: 5px; }</style>'; // Menggunakan padding untuk mengatur jarak
+    printDocument += '<style>.label-qr { flex: 1; display: flex; justify-content: flex-end; align-items: center; }</style>';
     printDocument += '</head><body>';
 
     // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
@@ -174,6 +173,7 @@ function printDocumentWithQR(room, qrText) {
     printDocument += '</div>';
 
     printDocument += '</body></html>';
+
 
     // Membuat elemen iframe untuk mencetak dokumen
     var iframe = document.createElement('iframe');
