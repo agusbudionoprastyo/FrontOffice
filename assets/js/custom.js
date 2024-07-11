@@ -128,8 +128,8 @@ function generateQRCode(folio, callback) {
     // Menggunakan QRCode.js untuk menghasilkan QR code dengan teks yang disiapkan
     var qrcode = new QRCode('qrcode', {
         text: qrText,
-        width: 80,
-        height: 80
+        width: 40,
+        height: 40
     });
 
     // Memanggil makeCode() untuk menghasilkan QR code dengan teks yang diberikan
@@ -154,7 +154,7 @@ function printDocumentWithQR(room, qrText) {
     // Menyiapkan dokumen untuk pencetakan
     var printDocument = '<html><head><title>Cetak Label</title>';
     printDocument += '<style>@page { size: 40mm 20mm; margin: 0; }</style>'; // Set ukuran kertas label
-    printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 8pt; }</style>'; // Ganti sesuai kebutuhan
+    printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>'; // Ganti sesuai kebutuhan
     printDocument += '</head><body>';
 
     // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
