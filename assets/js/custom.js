@@ -152,12 +152,15 @@ function printDocumentWithQR(room, qrText) {
     var printDocument = '<html><head><title>Cetak Label</title>';
     printDocument += '<style>@page { size: 40mm 20mm; margin: 0; }</style>';
     printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>';
-    printDocument += '<style>.label-container { display: flex; align-items: center; justify-content: space-between; height: 100%; }</style>';
+    printDocument += '<style>.label-container { display: flex; align-items: center; height: 100%; }</style>';
+    printDocument += '<style>.label-content { display: absolute; justify-content: flex-start;}</style>';
+    printDocument += '<style>.label-qr { display: absolute; justify-content: flex-end;}</style>';
+
     printDocument += '</head><body>';
 
     // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
     printDocument += '<div class="label-container">';
-    printDocument += '<div>';
+    printDocument += '<div class="label-content">';
     printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
     printDocument += '<br>';
     printDocument += '<h3 style="margin: 0;">Wifi</h3>';
@@ -165,7 +168,7 @@ function printDocumentWithQR(room, qrText) {
     printDocument += '<h3 style="margin: 0;">Password</h3>';
     printDocument += '<i style="margin: 0;">krasansare</i>';
     printDocument += '</div>';
-    printDocument += '<div>';
+    printDocument += '<div class="label-qr">';
     printDocument += '<div id="qrcodeContainer"></div>';
     printDocument += '</div>';
     printDocument += '</div>';
