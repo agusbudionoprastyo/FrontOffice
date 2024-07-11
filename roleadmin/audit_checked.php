@@ -14,24 +14,24 @@ if ($_SESSION['login']['role'] !== 'admin') {
   exit();
 }
 
-$id = isset($_GET['id']) ? $_GET['id'] : null;
+$folio = isset($_GET['folio']) ? $_GET['folio'] : null;
 
-if ($id === null || !is_numeric($id)) {
+if ($folio === null || !is_numeric($folio)) {
     $_SESSION['info'] = [
         'status' => 'failed',
-        'message' => 'Invalid ID'
+        'message' => 'Invalid Folio'
     ];
     header('Location: regform_guestfolio_audit.php');
     exit;
 }
 
-$query = "SELECT * FROM regform WHERE id = $id";
+$query = "SELECT * FROM regform WHERE folio = $folio";
 $result = mysqli_query($connection, $query);
 $row = mysqli_fetch_assoc($result);
 
-if ($row['id']) {
+if ($row['folio']) {
     // If row exists, update its status to 1
-    $update_query = "UPDATE regform SET status = 1 WHERE id = $id";
+    $update_query = "UPDATE regform SET status = 1 WHERE folio = $folio";
     if (mysqli_query($connection, $update_query)) {
         echo "Regform status updated successfully.";
     } else {
