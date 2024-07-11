@@ -171,11 +171,11 @@ function printDocumentWithQR(room, qrText) {
     // printDocument += '</body></html>';
 
     var printDocument = '<html><head><title>Cetak Label</title>';
-    printDocument += '<style>@page { size: 60mm 30mm; margin: 0; }</style>';
+    printDocument += '<style>@page { size: 40mm 20mm; margin: 0; }</style>';
     printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>';
-    printDocument += '<style>.label-container { display: flex; align-items: center; justify-content: flex-start; height: 30mm; padding: 0 5mm; }</style>';
-    printDocument += '<style>.label-content { text-align: left; flex: 1; }</style>';
-    printDocument += '<style>.label-qr { flex: 1; display: flex; justify-content: flex-end; }</style>';
+    printDocument += '<style>.label-container { display: flex; align-items: center; justify-content: space-between; height: 100%;}</style>';
+    printDocument += '<style>.label-content { flex: 1; }</style>';
+    printDocument += '<style>.label-qr { flex-shrink: 0; margin-left: 10px;}</style>';
     printDocument += '</head><body>';
 
     // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
