@@ -63,13 +63,13 @@ if (!imagepng($image, $filename)) {
 imagedestroy($image);
 
 // Cetak gambar langsung ke printer (macOS)
-$printer_name = 'EPSON L120 Series'; // Ganti dengan nama printer yang sesuai di sistem Anda
+$printer_name = 'EPSON_L120_Series'; // Ganti dengan nama printer yang sesuai di sistem Anda
 
 // Perintah print di macOS menggunakan lp
-// $command = "lp -d $printer_name $filename";
+$command = "lp -d $printer_name $filename";
 
 // Perintah print di Windows
-$command = "print $filename $printer_name";
+// $command = "print $filename $printer_name";
 
 // Jalankan perintah menggunakan exec
 exec($command, $output, $return_var);
