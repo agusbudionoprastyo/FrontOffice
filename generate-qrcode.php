@@ -37,7 +37,7 @@ if (!$image) {
 $text_color = imagecolorallocate($image, 0, 0, 0);
 
 // Font untuk teks tambahan (misalnya Arial)
-$font = 'arial.ttf'; // Sesuaikan dengan path font yang sesuai di sistem Anda
+$font = 'assets/fonts/nunito-v9-latin-regular.ttf'; // Sesuaikan dengan path font yang sesuai di sistem Anda
 
 // Periksa apakah font tersedia
 if (!file_exists($font)) {
