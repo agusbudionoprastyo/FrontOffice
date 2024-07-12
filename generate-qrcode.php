@@ -2,6 +2,11 @@
 // Include file PHP QR Code
 include 'phpqrcode/qrlib.php';
 
+// Pastikan folio ada dalam POST request
+if (!isset($_POST['folio'])) {
+    die('Folio tidak tersedia.');
+}
+
 // Ambil nilai 'folio' dari permintaan POST
 $folio = $_POST['folio'];
 
@@ -24,11 +29,20 @@ QRcode::png($data, $filename, $level, $size);
 // Membuat gambar baru dengan teks tambahan di bawah QR Code
 $image = imagecreatefrompng($filename);
 
+if (!$image) {
+    die('Gagal membuat gambar dari QR Code.');
+}
+
 // Warna teks (hitam)
 $text_color = imagecolorallocate($image, 0, 0, 0);
 
 // Font untuk teks tambahan (misalnya Arial)
 $font = 'arial.ttf'; // Sesuaikan dengan path font yang sesuai di sistem Anda
+
+// Periksa apakah font tersedia
+if (!file_exists($font)) {
+    die('File font tidak ditemukan.');
+}
 
 // Ukuran font teks tambahan
 $font_size = 8;
@@ -41,19 +55,18 @@ $text_y = $size * 4 + 40; // Sesuaikan dengan jarak yang diinginkan dari QR Code
 imagettftext($image, $font_size, 0, $text_x, $text_y, $text_color, $font, $additional_text);
 
 // Menyimpan gambar yang telah diubah dengan teks tambahan
-imagepng($image, $filename);
+if (!imagepng($image, $filename)) {
+    die('Gagal menyimpan gambar QR Code.');
+}
 
 // Hapus gambar sementara dari memori
 imagedestroy($image);
 
-// Cetak gambar langsung ke printer (Windows)
+// Cetak gambar langsung ke printer (macOS)
 $printer_name = 'EPSON L120 Series'; // Ganti dengan nama printer yang sesuai di sistem Anda
 
 // Perintah print di macOS menggunakan lp
 $command = "lp -d $printer_name $filename";
-
-// // Perintah print di Windows
-// $command = "print $filename $printer_name";
 
 // Jalankan perintah menggunakan exec
 exec($command, $output, $return_var);
