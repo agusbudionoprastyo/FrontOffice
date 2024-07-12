@@ -65,8 +65,3 @@ imagedestroy($image);
 // Hapus file QR Code setelah dicetak (opsional)
 unlink($filename);
 ?>
-
-<script>
-// Auto print saat halaman dimuat
-window.print();
-</script>
