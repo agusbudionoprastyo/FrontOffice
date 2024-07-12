@@ -2,6 +2,11 @@
 // Include file PHP QR Code
 include 'phpqrcode/qrlib.php';
 
+// Include file escpos-php
+require 'escpos-php/autoload.php';
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\Printer;
+
 // Pastikan folio ada dalam POST request
 if (!isset($_POST['folio'])) {
     die('Folio tidak tersedia.');
@@ -54,31 +59,22 @@ $text_y = $size * 4 + 40; // Sesuaikan dengan jarak yang diinginkan dari QR Code
 // Menambahkan teks tambahan ke gambar
 imagettftext($image, $font_size, 0, $text_x, $text_y, $text_color, $font, $additional_text);
 
-// Menyimpan gambar yang telah diubah dengan teks tambahan
-if (!imagepng($image, $filename)) {
-    die('Gagal menyimpan gambar QR Code.');
-}
+// Inisialisasi ESC/POS Printer
+$connector = new FilePrintConnector("php://stdout");
+$printer = new Printer($connector);
 
-// Hapus gambar sementara dari memori
-imagedestroy($image);
+try {
+    // Cetak gambar QR Code dengan teks tambahan
+    $printer->graphics($image);
+    $printer->feed();
+    $printer->cut();
 
-// Cetak gambar langsung ke printer (macOS)
-$printer_name = 'EPSON_L120_Series'; // Ganti dengan nama printer yang sesuai di sistem Anda
-
-// Perintah print di macOS menggunakan lp
-$command = "lp -d $printer_name $filename";
-
-// Perintah print di Windows
-// $command = "print $filename $printer_name";
-
-// Jalankan perintah menggunakan exec
-shell_exec($command, $output, $return_var);
-
-// Cek status eksekusi
-if ($return_var === 0) {
     echo "File berhasil dicetak.";
-} else {
-    echo "Gagal mencetak file. Error code: $return_var";
+} catch (Exception $e) {
+    echo "Gagal mencetak file: " . $e->getMessage();
+} finally {
+    // Tutup koneksi printer
+    $printer->close();
 }
 
 // Hapus file QR Code setelah dicetak (opsional)
