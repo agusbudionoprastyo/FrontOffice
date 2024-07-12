@@ -226,9 +226,9 @@ function printDocumentWithQR(qrCodeFile) {
     console.log('QR Code file:', qrCodeFile);
 }
 
-// document.getElementById('printQRButton').addEventListener('click', function() {
-//     printQRCode(this);
-// });
+document.getElementById('printQRButton').addEventListener('click', function() {
+    printQRCode(this);
+});
 
 
 "use strict";
