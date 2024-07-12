@@ -66,7 +66,10 @@ imagedestroy($image);
 $printer_name = 'EPSON L120 Series'; // Ganti dengan nama printer yang sesuai di sistem Anda
 
 // Perintah print di macOS menggunakan lp
-$command = "lp -d $printer_name $filename";
+// $command = "lp -d $printer_name $filename";
+
+// Perintah print di Windows
+$command = "print $filename $printer_name";
 
 // Jalankan perintah menggunakan exec
 exec($command, $output, $return_var);
