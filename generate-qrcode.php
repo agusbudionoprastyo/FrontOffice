@@ -21,9 +21,6 @@ $level = 'H'; // Level error correction (L, M, Q, H)
 // Membuat QR Code
 QRcode::png($data, $filename, $level, $size);
 
-// Mendapatkan ukuran gambar QR Code yang dibuat
-list($qr_width, $qr_height) = getimagesize($filename);
-
 // Membuat gambar baru dengan teks tambahan di bawah QR Code
 $image = imagecreatefrompng($filename);
 
@@ -37,8 +34,8 @@ $font = 'arial.ttf'; // Sesuaikan dengan path font yang sesuai di sistem Anda
 $font_size = 8;
 
 // Koordinat untuk teks tambahan (dibuat agar berada di bawah QR Code)
-$text_x = ($qr_width - imagettfbbox($font_size, 0, $font, $additional_text)[2]) / 2;
-$text_y = $qr_height + 15; // Sesuaikan dengan jarak yang diinginkan dari QR Code
+$text_x = ($size * 4) + 10; // Sesuaikan dengan jarak yang diinginkan dari QR Code
+$text_y = $size * 4 + 40; // Sesuaikan dengan jarak yang diinginkan dari QR Code
 
 // Menambahkan teks tambahan ke gambar
 imagettftext($image, $font_size, 0, $text_x, $text_y, $text_color, $font, $additional_text);
@@ -46,12 +43,28 @@ imagettftext($image, $font_size, 0, $text_x, $text_y, $text_color, $font, $addit
 // Menyimpan gambar yang telah diubah dengan teks tambahan
 imagepng($image, $filename);
 
-// Hapus gambar sumber QR Code setelah digunakan (opsional)
-unlink($filename);
-
 // Hapus gambar sementara dari memori
 imagedestroy($image);
 
-// Mengembalikan nama file QR Code yang telah di-generate
-echo $filename;
+// Cetak gambar langsung ke printer (Windows)
+$printer_name = 'EPSON L120 Series'; // Ganti dengan nama printer yang sesuai di sistem Anda
+
+// Perintah print di macOS menggunakan lp
+$command = "lp -d $printer_name $filename";
+
+// Perintah print di Windows
+$command = "print $filename $printer_name";
+
+// Jalankan perintah menggunakan exec
+exec($command, $output, $return_var);
+
+// Cek status eksekusi
+if ($return_var === 0) {
+    echo "File berhasil dicetak.";
+} else {
+    echo "Gagal mencetak file. Error code: $return_var";
+}
+
+// Hapus file QR Code setelah dicetak (opsional)
+unlink($filename);
 ?>
