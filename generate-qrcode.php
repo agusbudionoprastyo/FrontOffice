@@ -62,19 +62,11 @@ if (!imagepng($image, $filename)) {
 // Hapus gambar sementara dari memori
 imagedestroy($image);
 
-// Perintah print di Windows
-$command = "window.print();";
-
-// Jalankan perintah menggunakan exec
-shell_exec($command, $output, $return_var);
-
-// Cek status eksekusi
-if ($return_var === 0) {
-    echo "File berhasil dicetak.";
-} else {
-    echo "Gagal mencetak file. Error code: $return_var";
-}
-
 // Hapus file QR Code setelah dicetak (opsional)
 unlink($filename);
 ?>
+
+<script>
+// Auto print saat halaman dimuat
+window.print();
+</script>
