@@ -72,7 +72,7 @@ $command = "lp -d $printer_name $filename";
 // $command = "print $filename $printer_name";
 
 // Jalankan perintah menggunakan exec
-exec($command, $output, $return_var);
+shell_exec($command, $output, $return_var);
 
 // Cek status eksekusi
 if ($return_var === 0) {
