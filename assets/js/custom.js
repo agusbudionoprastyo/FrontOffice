@@ -221,14 +221,14 @@ function printQRCode(button) {
     };
     xhr.send('folio=' + folio);
 }
+
 function printDocumentWithQR(qrCodeFile) {
-    // In a real scenario, you would handle printing the document here
-    // For demonstration purposes, we'll simulate printing by logging the filename
-    console.log('Printing document with QR code:', qrCodeFile);
+    console.log('QR Code file:', qrCodeFile);
 }
 
 document.getElementById('printQRButton').addEventListener('click', function() {
     printQRCode(this);
 });
+
 
 "use strict";
