@@ -207,7 +207,6 @@ function syncData() {
 //     }, 500); // Menunggu 0.5 detik sebelum melakukan pencetakan
 // }
 
-// Function untuk mencetak QR code dari checkbox yang dipilih
 function printSelectedQRCode() {
     var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
     var printList = [];
@@ -231,19 +230,18 @@ function printSelectedQRCode() {
 
     // Untuk setiap item yang dipilih, buat QR code dan lakukan pencetakan
     printList.forEach(function(item) {
-        generateQRCode(item);
+        generateAndPrintQRCode(item);
     });
 }
 
-// Function untuk menghasilkan QR code dari item yang dipilih
-function generateQRCode(item) {
+function generateAndPrintQRCode(item) {
     const url = 'https://ecard.dafam.cloud/';
     var qrText = url + '?folio=' + item.folio;
 
     // Buat elemen canvas baru untuk QR code
     var canvas = document.createElement('canvas');
     var ctx = canvas.getContext('2d');
-    
+
     // Menggunakan QRCode.js untuk menghasilkan QR code
     new QRCode(canvas, {
         text: qrText,
@@ -251,32 +249,17 @@ function generateQRCode(item) {
         height: 80
     });
 
-    // Tampilkan QR code di dalam container yang sesuai
-    var qrcodeContainer = document.getElementById('qrcodeContainer');
-    qrcodeContainer.innerHTML = ''; // Kosongkan isi sebelumnya
-    qrcodeContainer.appendChild(canvas);
-
-    // Setelah QR code ditampilkan, panggil fungsi untuk mencetak
-    printDocument(item);
-}
-
-// Function untuk mencetak dokumen dengan QR code
-function printDocument(item) {
-    var room = item.room;
-    var folio = item.folio;
-
-    // Membuat dokumen untuk pencetakan
+    // Setelah QR code dihasilkan, buat dokumen pencetakan
     var printDocument = '<html><head><title>Cetak Label</title>';
     printDocument += '<style>@page { size: 50mm 25mm; margin: 0; }</style>';
     printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>';
     printDocument += '</head><body>';
 
-    // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
     printDocument += '<div style="float: left; margin-right: 5mm;">';
-    printDocument += '<div id="qrcodeContainer"></div>'; // Letakkan QR code di dalam container ini
+    printDocument += '<div id="qrcodeContainer-' + item.folio + '"></div>'; // ID unik berdasarkan folio
 
     printDocument += '<h3 style="margin: 0;">Scan Me!</h3>';
-    printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
+    printDocument += '<h3 style="margin: 0;">ROOM ' + item.room + '</h3>';
     printDocument += '<br><br>';
     printDocument += '<i style="margin: 0;">Wifi</i>';
     printDocument += '<h3 style="margin: 0;">dafamsemarang</h3>';
@@ -300,41 +283,30 @@ function printDocument(item) {
     doc.write(printDocument);
     doc.close();
 
-    // Setelah dokumen terbuka, panggil fungsi untuk menambahkan QR code yang sudah ditampilkan
+    // Tunggu sebentar sebelum menambahkan QR code ke dokumen
     setTimeout(function() {
-        addQRCodeToPrint(doc, item);
+        // Temukan qrcodeContainer yang sesuai di dokumen pencetakan
+        var qrcodeContainer = doc.getElementById('qrcodeContainer-' + item.folio);
+
+        // Buat elemen canvas untuk QR code yang sudah ditampilkan
+        var canvasCopy = canvas.cloneNode(true);
+
+        // Salin QR code yang sudah ditampilkan ke dalam dokumen pencetakan di iframe
+        qrcodeContainer.appendChild(canvasCopy);
+
+        // Setelah QR code ditambahkan, lakukan pencetakan
+        setTimeout(function() {
+            iframe.contentWindow.focus();
+            iframe.contentWindow.print();
+
+            // Hapus elemen iframe setelah pencetakan selesai
+            setTimeout(function() {
+                document.body.removeChild(iframe);
+            }, 1000); // Tunggu sebentar sebelum menghapus iframe
+        }, 500); // Tunggu sebentar sebelum melakukan pencetakan
     }, 100); // Tunggu sebentar sebelum menambahkan QR code ke dokumen
 }
 
-// Function untuk menambahkan QR code yang sudah ditampilkan ke dalam dokumen untuk pencetakan
-function addQRCodeToPrint(doc, item) {
-    var qrcodeContainer = doc.getElementById('qrcodeContainer');
-
-    // Buat elemen canvas untuk QR code yang sudah ditampilkan
-    var canvas = document.createElement('canvas');
-    var ctx = canvas.getContext('2d');
-    
-    // Menggunakan QRCode.js untuk menghasilkan QR code
-    new QRCode(canvas, {
-        text: 'https://ecard.dafam.cloud/?folio=' + item.folio,
-        width: 80,
-        height: 80
-    });
-
-    // Salin QR code yang sudah ditampilkan ke dalam dokumen pencetakan di iframe
-    qrcodeContainer.appendChild(canvas);
-
-    // Setelah QR code ditambahkan, lakukan pencetakan
-    setTimeout(function() {
-        iframe.contentWindow.focus();
-        iframe.contentWindow.print();
-
-        // Hapus elemen iframe setelah pencetakan selesai
-        setTimeout(function() {
-            document.body.removeChild(iframe);
-        }, 1000); // Tunggu sebentar sebelum menghapus iframe
-    }, 500); // Tunggu sebentar sebelum melakukan pencetakan
-}
 
 
 "use strict";
