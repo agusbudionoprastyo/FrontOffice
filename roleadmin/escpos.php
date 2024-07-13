@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\Printer;
 
 // Tangkap nilai folio dari permintaan POST
@@ -9,8 +9,8 @@ $folio = $_POST['folio'] ?? '';
 
 if ($folio != '') {
     try {
-        // Buat koneksi ke printer ESC/POS
-        $connector = new WindowsPrintConnector("Q300_Printer"); // Ganti dengan nama printer yang sesuai
+        // Buat koneksi ke printer virtual (file)
+        $connector = new FilePrintConnector("php://stdout"); // Ganti dengan path file yang sesuai jika ingin menyimpan ke file
         $printer = new Printer($connector);
 
         // Set ukuran kertas (contoh untuk ukuran 50mm x 25mm)
