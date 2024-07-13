@@ -230,7 +230,9 @@ function syncData() {
 //     printQRCode(this);
 // });
 
-function printFolio(folio) {
+function printQRCode(button) {
+    var folio = button.getAttribute('data-folio');
+
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '../roleadmin/escpos.php', true); // Sesuaikan dengan URL yang sesuai
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -245,9 +247,5 @@ function printFolio(folio) {
     };
     xhr.send('folio=' + folio);
 }
-
-// Contoh pemanggilan dari tombol atau fungsi lain
-var folioToPrint = 'ABC123'; // Ganti dengan folio yang sesuai
-printFolio(folioToPrint);
 
 "use strict";
