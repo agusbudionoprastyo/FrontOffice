@@ -302,27 +302,26 @@ function printSelectedQRCode() {
     }
 
     // Konfigurasi ukuran QR Code
-    const qrCodeSize = 80; // Ukuran dalam pixel
-    const qrCodeWidthMM = 15; // Ukuran dalam mm, sesuai dengan resolusi cetakan
+    const qrCodeSize = 128; // Ukuran dalam pixel
+    const qrCodeWidthMM = 50; // Ukuran lebar label dalam mm
 
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
-
-    let leftMargin = 0; // Margin kiri, dalam mm
-    let topMargin = 0; // Margin atas, dalam mm
-    const gapBetweenLabels = 3; // Jarak antara label, dalam mm
+    let pageIndex = 0; // Index halaman
+    let printWindow = null;
 
     // Loop untuk setiap checkbox yang dipilih
     selectedCheckboxes.forEach((checkbox, index) => {
-        // Menghitung posisi label berdasarkan index dan jarak antar label
-        const labelLeft = leftMargin + (index % 2) * (qrCodeWidthMM + gapBetweenLabels);
-        const labelTop = topMargin + Math.floor(index / 2) * (qrCodeSize + gapBetweenLabels);
+        // Cetak halaman baru setiap kali index habis dibagi 1 (1 QR Code per halaman)
+        if (index % 1 === 0) {
+            if (printWindow) {
+                printWindow.document.write('</body></html>');
+                printWindow.document.close();
+                printWindow.print();
+            }
 
-        // Membuat div untuk label
-        const labelContainer = document.createElement('div');
-        labelContainer.style.position = 'absolute';
-        labelContainer.style.left = `${labelLeft}mm`;
-        labelContainer.style.top = `${labelTop}mm`;
+            // Buat jendela baru untuk mencetak halaman
+            printWindow = window.open('', '_blank');
+            printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
+        }
 
         // Membuat QR Code
         const qrCodeContainer = document.createElement('div');
@@ -331,15 +330,17 @@ function printSelectedQRCode() {
             width: qrCodeSize,
             height: qrCodeSize
         });
-        labelContainer.appendChild(qrCodeContainer);
 
-        // Menambahkan label ke dokumen cetak
-        printWindow.document.body.appendChild(labelContainer);
+        // Menambahkan QR Code ke dokumen cetak
+        printWindow.document.body.appendChild(qrCodeContainer);
     });
 
-    printWindow.document.write('</body></html>');
-    printWindow.document.close();
-    printWindow.print();
+    // Cetak halaman terakhir
+    if (printWindow) {
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
 }
 </script>
 
