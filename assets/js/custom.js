@@ -160,10 +160,10 @@ function printDocumentWithQR(room, qrText) {
 
     printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
     printDocument += '<br><br>';
-    // printDocument += '<h3 style="margin: 0;">wifi</h3>';
-    printDocument += '<h3 style="margin: 0;"><i class="fa-solid fa-wifi"></i> dafamsemarang</h3>';
-    // printDocument += '<h3 style="margin: 0;">Password</h3>';
-    printDocument += '<h3 style="margin: 0;"><i class="fa-solid fa-key"></i> krasansare</h3>';
+    printDocument += '<i style="margin: 0;">wifi</i>';
+    printDocument += '<h3 style="margin: 0;">dafamsemarang</h3>';
+    printDocument += '<i style="margin: 0;">Password</i>';
+    printDocument += '<h3 style="margin: 0;">krasansare</h3>';
     printDocument += '</div>';
 
     printDocument += '</body></html>';
