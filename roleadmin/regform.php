@@ -302,25 +302,18 @@ function printSelectedQRCode() {
     }
 
     // Konfigurasi ukuran QR Code
-    const qrCodeSize = 128; // Ukuran dalam pixel
+    const qrCodeSize = 80; // Ukuran dalam pixel
     const qrCodeWidthMM = 50; // Ukuran lebar label dalam mm
 
-    let pageIndex = 0; // Index halaman
-    let printWindow = null;
+    // Buat jendela baru untuk mencetak
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
 
     // Loop untuk setiap checkbox yang dipilih
     selectedCheckboxes.forEach((checkbox, index) => {
-        // Cetak halaman baru setiap kali index habis dibagi 1 (1 QR Code per halaman)
-        if (index % 1 === 0) {
-            if (printWindow) {
-                printWindow.document.write('</body></html>');
-                printWindow.document.close();
-                printWindow.print();
-            }
-
-            // Buat jendela baru untuk mencetak halaman
-            printWindow = window.open('', '_blank');
-            printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
+        // Cetak tag <br> untuk memisahkan halaman
+        if (index > 0) {
+            printWindow.document.write('<br style="page-break-before: always;">');
         }
 
         // Membuat QR Code
@@ -335,12 +328,10 @@ function printSelectedQRCode() {
         printWindow.document.body.appendChild(qrCodeContainer);
     });
 
-    // Cetak halaman terakhir
-    if (printWindow) {
-        printWindow.document.write('</body></html>');
-        printWindow.document.close();
-        printWindow.print();
-    }
+    // Tutup dokumen dan selesaikan pencetakan
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
 }
 </script>
 
