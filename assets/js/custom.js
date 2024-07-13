@@ -239,11 +239,17 @@ function printQRCode(button) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
-                console.log(xhr.responseText); // Tampilkan pesan dari server (opsional)
+                console.log('Server response:', xhr.responseText); // Tampilkan pesan dari server (opsional)
+                alert('Printing successful: ' + xhr.responseText); // Tambahkan alert untuk debugging
             } else {
                 console.error('Failed to print:', xhr.statusText); // Tampilkan pesan kesalahan (opsional)
+                alert('Failed to print: ' + xhr.statusText); // Tambahkan alert untuk debugging
             }
         }
+    };
+    xhr.onerror = function() {
+        console.error('Request error'); // Tampilkan pesan kesalahan (opsional)
+        alert('Request error'); // Tambahkan alert untuk debugging
     };
     xhr.send('folio=' + folio);
 }
