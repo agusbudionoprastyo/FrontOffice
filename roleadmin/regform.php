@@ -293,8 +293,6 @@ require_once '../layout/_bottom.php';
 <script type="text/javascript" src="../assets/js/qrCode/qrcode.js"></script>
 <!-- Bagian tombol dan script untuk mencetak QR Code -->
 
-
-<!-- Script untuk QR Code -->
 <script>
 function printSelectedQRCode() {
     const selectedCheckboxes = document.querySelectorAll('.rowCheckbox:checked');
@@ -303,18 +301,40 @@ function printSelectedQRCode() {
         return;
     }
 
+    // Konfigurasi ukuran QR Code
+    const qrCodeSize = 80; // Ukuran dalam pixel
+    const qrCodeWidthMM = 15; // Ukuran dalam mm, sesuai dengan resolusi cetakan
+
     const printWindow = window.open('', '_blank');
     printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
 
-    selectedCheckboxes.forEach(checkbox => {
-        const folio = checkbox.value;
+    let leftMargin = 0; // Margin kiri, dalam mm
+    let topMargin = 0; // Margin atas, dalam mm
+    const gapBetweenLabels = 3; // Jarak antara label, dalam mm
+
+    // Loop untuk setiap checkbox yang dipilih
+    selectedCheckboxes.forEach((checkbox, index) => {
+        // Menghitung posisi label berdasarkan index dan jarak antar label
+        const labelLeft = leftMargin + (index % 2) * (qrCodeWidthMM + gapBetweenLabels);
+        const labelTop = topMargin + Math.floor(index / 2) * (qrCodeSize + gapBetweenLabels);
+
+        // Membuat div untuk label
+        const labelContainer = document.createElement('div');
+        labelContainer.style.position = 'absolute';
+        labelContainer.style.left = `${labelLeft}mm`;
+        labelContainer.style.top = `${labelTop}mm`;
+
+        // Membuat QR Code
         const qrCodeContainer = document.createElement('div');
         const qrCode = new QRCode(qrCodeContainer, {
-            text: folio,
-            width: 80,
-            height: 80
+            text: checkbox.value, // Menggunakan nilai folio dari checkbox
+            width: qrCodeSize,
+            height: qrCodeSize
         });
-        printWindow.document.body.appendChild(qrCodeContainer);
+        labelContainer.appendChild(qrCodeContainer);
+
+        // Menambahkan label ke dokumen cetak
+        printWindow.document.body.appendChild(labelContainer);
     });
 
     printWindow.document.write('</body></html>');
@@ -322,6 +342,7 @@ function printSelectedQRCode() {
     printWindow.print();
 }
 </script>
+
 
 <!-- Page Specific JS File -->
 <?php
