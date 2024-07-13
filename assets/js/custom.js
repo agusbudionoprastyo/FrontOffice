@@ -208,7 +208,7 @@ function syncData() {
 // }
 
 function printSelectedQRCode() {
-    var selectedRows = document.querySelectorAll('#dataTable tbody tr input.rowCheckbox:checked');
+    var selectedRows = document.querySelectorAll('#table-2 tbody input.rowCheckbox:checked');
     var rowsData = [];
 
     selectedRows.forEach(function(row) {
@@ -220,8 +220,13 @@ function printSelectedQRCode() {
         });
     });
 
-    printQRCode(rowsData);
+    if (rowsData.length > 0) {
+        printQRCode(rowsData);
+    } else {
+        alert('Select at least one row to print QR Codes.');
+    }
 }
+
 
 function printQRCode(rowsData) {
     var printDocument = '<html><head><title>Cetak QR Code</title></head><body>';
@@ -291,63 +296,6 @@ function generateQRCode(folio, callback) {
             src: qrImageUrl
         });
     }
-}
-
-
-function printSelectedDocuments(qrTexts) {
-    var printDocument = '<html><head><title>Cetak Label</title>';
-    printDocument += '<style>@page { size: 50mm 25mm; margin: 0; }</style>'; // Set ukuran kertas label
-    printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>'; // Ganti sesuai kebutuhan
-    printDocument += '</head><body>';
-
-    qrTexts.forEach(function(item) {
-        var room = item.room;
-        var qrText = item.qrText;
-
-        printDocument += '<div style="float: left; margin-right: 5mm;">';
-        printDocument += '<div id="qrcodeContainer"></div>';
-
-        printDocument += '<h3 style="margin: 0;">Scan Me!</h3>';
-        printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
-        printDocument += '<br><br>';
-        printDocument += '<i style="margin: 0;">Wifi</i>';
-        printDocument += '<h3 style="margin: 0;">dafamsemarang</h3>';
-        printDocument += '<i style="margin: 0;">Password</i>';
-        printDocument += '<h3 style="margin: 0;">krasansare</h3>';
-        printDocument += '</div>';
-    });
-
-    printDocument += '</body></html>';
-
-    var iframe = document.createElement('iframe');
-    iframe.style.position = 'absolute';
-    iframe.style.width = '0px';
-    iframe.style.height = '0px';
-    iframe.style.border = 'none';
-    document.body.appendChild(iframe);
-
-    var doc = iframe.contentWindow.document;
-    doc.open();
-    doc.write(printDocument);
-    doc.close();
-
-    var qrCodeInPrint = document.getElementById('qrcode');
-
-    if (qrCodeInPrint) {
-        var qrImage = new Image();
-        qrImage.src = qrCodeInPrint.firstChild.toDataURL();
-        doc.body.appendChild(qrImage);
-    }
-
-    setTimeout(function() {
-        iframe.contentWindow.focus();
-        iframe.contentWindow.print();
-
-        setTimeout(function() {
-            document.body.removeChild(iframe);
-            document.body.removeChild(qrCodeDiv);
-        }, 1000);
-    }, 500);
 }
 
 "use strict";
