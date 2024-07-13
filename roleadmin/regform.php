@@ -312,16 +312,16 @@ if (isset($_SESSION['info'])):
 
 <script>
 function printSelectedQRCode() {
-    // Ambil semua checkbox yang dipilih
+    // Implementasi fungsi untuk mencetak QR Code
     const selectedCheckboxes = document.querySelectorAll('.rowCheckbox:checked');
     if (selectedCheckboxes.length === 0) {
         alert('Pilih setidaknya satu folio untuk mencetak QR Code.');
         return;
     }
 
-    // Buat jendela baru untuk mencetak
+    // Membuka jendela baru untuk mencetak
     const printWindow = window.open('', '_blank');
-    printWindow.document.write('<html><head><title>Print QR Codes</title></head><body>');
+    printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
 
     // Loop melalui checkbox yang dipilih dan buat QR code untuk setiap folio
     selectedCheckboxes.forEach(checkbox => {
@@ -339,7 +339,8 @@ function printSelectedQRCode() {
     printWindow.document.close();
     printWindow.print();
 }
-      </script>
+</script>
+
 
       <script>
       iziToast.error({
