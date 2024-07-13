@@ -302,14 +302,15 @@ function printSelectedQRCode() {
     }
 
     // Konfigurasi ukuran QR Code
-    const qrCodeSize = 80; // Ukuran dalam pixel
+    const qrCodeSize = 128; // Ukuran dalam pixel
 
     // Ukuran kertas label (dalam mm)
-    const labelWidthMM = 25;
-    const labelHeightMM = 50;
+    const labelWidthMM = 50;
+    const labelHeightMM = 25;
 
     // Hitung jumlah QR Code per halaman
     const numQRPerRow = Math.floor(labelWidthMM / (qrCodeSize / 25.4)); // 25.4 mm = 1 inch
+    const numQRPerPage = Math.floor(labelHeightMM / (qrCodeSize / 25.4));
 
     // Buat jendela baru untuk mencetak
     const printWindow = window.open('', '_blank');
@@ -317,9 +318,20 @@ function printSelectedQRCode() {
 
     // Loop untuk setiap checkbox yang dipilih
     selectedCheckboxes.forEach((checkbox, index) => {
-        // Hitung posisi X dan Y untuk QR Code berdasarkan index
-        const rowIndex = Math.floor(index / numQRPerRow);
-        const colIndex = index % numQRPerRow;
+        // Hitung nomor halaman
+        const pageIndex = Math.floor(index / (numQRPerPage * numQRPerRow));
+        if (pageIndex > 0) {
+            // Jika bukan halaman pertama, tambahkan halaman baru
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+            printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
+        }
+
+        // Hitung posisi X dan Y untuk QR Code berdasarkan index di halaman
+        const qrIndexInPage = index % (numQRPerPage * numQRPerRow);
+        const rowIndex = Math.floor(qrIndexInPage / numQRPerRow);
+        const colIndex = qrIndexInPage % numQRPerRow;
 
         // Hitung posisi absolut QR Code di kertas label (dalam pixel)
         const qrCodeX = colIndex * (qrCodeSize + 10); // 10 pixel gap antar QR Code
