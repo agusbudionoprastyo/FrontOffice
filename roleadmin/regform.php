@@ -311,8 +311,8 @@ function printSelectedQRCode() {
         const qrCodeContainer = document.createElement('div');
         const qrCode = new QRCode(qrCodeContainer, {
             text: folio,
-            width: 128,
-            height: 128
+            width: 80,
+            height: 80
         });
         printWindow.document.body.appendChild(qrCodeContainer);
     });
