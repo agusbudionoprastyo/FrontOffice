@@ -302,7 +302,7 @@ function printSelectedQRCode() {
     }
 
     // Konfigurasi ukuran QR Code
-    const qrCodeSize = 128; // Ukuran dalam pixel
+    const qrCodeSize = 80; // Ukuran dalam pixel
 
     // Ukuran kertas label (dalam mm)
     const labelWidthMM = 25;
