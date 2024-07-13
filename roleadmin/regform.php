@@ -58,7 +58,7 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                                <th>Select</th>
+                                <th>QRCODE</th>
                                 <th>REGCARD</th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
@@ -308,7 +308,40 @@ if (isset($_SESSION['info'])):
 <?php
   } else {
 ?>
-    <script>
+// ... existing code ...
+
+<script>
+function printSelectedQRCode() {
+    // Ambil semua checkbox yang dipilih
+    const selectedCheckboxes = document.querySelectorAll('.rowCheckbox:checked');
+    if (selectedCheckboxes.length === 0) {
+        alert('Pilih setidaknya satu folio untuk mencetak QR Code.');
+        return;
+    }
+
+    // Buat jendela baru untuk mencetak
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write('<html><head><title>Print QR Codes</title></head><body>');
+
+    // Loop melalui checkbox yang dipilih dan buat QR code untuk setiap folio
+    selectedCheckboxes.forEach(checkbox => {
+        const folio = checkbox.value;
+        const qrCodeContainer = document.createElement('div');
+        const qrCode = new QRCode(qrCodeContainer, {
+            text: folio,
+            width: 128,
+            height: 128
+        });
+        printWindow.document.body.appendChild(qrCodeContainer);
+    });
+
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+}
+      </script>
+
+      <script>
       iziToast.error({
         title: 'Gagal',
         message: `<?= $_SESSION['info']['message'] ?>`,
