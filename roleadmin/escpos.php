@@ -29,7 +29,9 @@ if ($folio != '') {
 
         echo "Printing successful"; // Respon ke client bahwa pencetakan berhasil
     } catch (Exception $e) {
-        echo "Printing failed: " . $e->getMessage();
+        // Tampilkan pesan error yang lebih detail
+        echo "Printing failed: " . $e->getMessage() . "\n";
+        echo "Trace: " . $e->getTraceAsString();
     }
 } else {
     echo "Invalid folio"; // Respon ke client jika nilai folio tidak valid
