@@ -10,7 +10,7 @@ $folio = $_POST['folio'] ?? '';
 if ($folio != '') {
     try {
         // Buat koneksi ke printer ESC/POS
-        $connector = new WindowsPrintConnector("Q300 Printer"); // Ganti dengan nama printer yang sesuai
+        $connector = new WindowsPrintConnector("Q300_Printer"); // Ganti dengan nama printer yang sesuai
         $printer = new Printer($connector);
 
         // Set ukuran kertas (contoh untuk ukuran 50mm x 25mm)
