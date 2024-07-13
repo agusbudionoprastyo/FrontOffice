@@ -4,10 +4,10 @@ require __DIR__ . '/../vendor/autoload.php';
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\Printer;
 
-// Tangkap nilai folio dari permintaan POST
-$folio = $_POST['folio'] ?? '';
+// Tetapkan nilai folio secara langsung sebagai string
+$folio = "123456"; // Ganti dengan nilai folio yang diinginkan
 
-if ($folio != '') {
+if ($folio !== '') {
     try {
         // Buat koneksi ke printer virtual (file)
         $connector = new FilePrintConnector("php://stdout"); // Ganti dengan path file yang sesuai jika ingin menyimpan ke file
