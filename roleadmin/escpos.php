@@ -1,5 +1,8 @@
 <?php
+session_start();
 require __DIR__ . '/../vendor/autoload.php';
+require_once '../helper/connection.php';
+
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 
