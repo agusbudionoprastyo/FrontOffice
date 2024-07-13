@@ -158,6 +158,7 @@ function printDocumentWithQR(room, qrText) {
     printDocument += '<div style="float: left; margin-right: 5mm;">';
     printDocument += '<div id="qrcodeContainer"></div>'; // Letakkan QR code di dalam container ini
 
+    printDocument += '<h3 style="margin: 0;">Scan Me!</h3>';
     printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
     printDocument += '<br><br>';
     printDocument += '<i style="margin: 0;">Wifi</i>';
