@@ -270,32 +270,29 @@ function printQRCode(rowsData) {
 }
 
 function generateQRCode(folio, callback) {
-    const url = 'https://ecard.dafam.cloud/?folio=' + folio;
+    const url = 'https://ecard.dafam.cloud/';
+    var qrText = url + '?folio=' + folio;
+
+    // Create a new Image object
+    var qrImage = new Image();
+
+    // Generate QR Code
     var qrcode = new QRCode('qrcode', {
-        text: url,
-        width: 200,
-        height: 200,
-        colorDark: '#000000',
-        colorLight: '#ffffff',
-        correctLevel: QRCode.CorrectLevel.H
+        text: qrText,
+        width: 80,
+        height: 80
     });
 
-    // Mengonversi QR code menjadi gambar
-    var qrImage = document.getElementById('qrcode').firstChild;
-    var canvas = document.createElement('canvas');
-    var context = canvas.getContext('2d');
+    // Set the src attribute of the Image object to the generated QR code
+    qrImage.src = qrcode.toDataURL();
 
-    canvas.width = qrImage.width;
-    canvas.height = qrImage.height;
-    context.drawImage(qrImage, 0, 0);
-
-    var qrImageUrl = canvas.toDataURL('image/png');
-
-    if (typeof callback === 'function') {
-        callback({
-            src: qrImageUrl
-        });
-    }
+    // Handle the onload event to ensure the image is loaded before using it
+    qrImage.onload = function() {
+        // Callback with the QR image object
+        if (typeof callback === 'function') {
+            callback(qrImage);
+        }
+    };
 }
 
 "use strict";
