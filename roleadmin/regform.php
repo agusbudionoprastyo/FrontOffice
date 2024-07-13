@@ -291,39 +291,21 @@ require_once '../layout/_bottom.php';
 <!-- Bootstrap Datepicker JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="../assets/js/qrCode/qrcode.js"></script>
+<!-- Bagian tombol dan script untuk mencetak QR Code -->
 
-<!-- Page Specific JS File -->
-<?php
-if (isset($_SESSION['info'])):
-  if ($_SESSION['info']['status'] == 'success') {
-?>
-    <script>
-      iziToast.success({
-        title: 'Sukses',
-        message: `<?= $_SESSION['info']['message'] ?>`,
-        position: 'topCenter',
-        timeout: 5000
-      });
-    </script>
-<?php
-  } else {
-?>
-// ... existing code ...
 
+<!-- Script untuk QR Code -->
 <script>
 function printSelectedQRCode() {
-    // Implementasi fungsi untuk mencetak QR Code
     const selectedCheckboxes = document.querySelectorAll('.rowCheckbox:checked');
     if (selectedCheckboxes.length === 0) {
         alert('Pilih setidaknya satu folio untuk mencetak QR Code.');
         return;
     }
 
-    // Membuka jendela baru untuk mencetak
     const printWindow = window.open('', '_blank');
     printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
 
-    // Loop melalui checkbox yang dipilih dan buat QR code untuk setiap folio
     selectedCheckboxes.forEach(checkbox => {
         const folio = checkbox.value;
         const qrCodeContainer = document.createElement('div');
@@ -341,7 +323,22 @@ function printSelectedQRCode() {
 }
 </script>
 
-
+<!-- Page Specific JS File -->
+<?php
+if (isset($_SESSION['info'])):
+  if ($_SESSION['info']['status'] == 'success') {
+?>
+    <script>
+      iziToast.success({
+        title: 'Sukses',
+        message: `<?= $_SESSION['info']['message'] ?>`,
+        position: 'topCenter',
+        timeout: 5000
+      });
+    </script>
+<?php
+  } else {
+?>
       <script>
       iziToast.error({
         title: 'Gagal',
