@@ -206,28 +206,4 @@ function printDocumentWithQR(room, qrText) {
     }, 500); // Menunggu 0.5 detik sebelum melakukan pencetakan
 }
 
-
-function printQRCode(button) {
-    var folio = button.getAttribute('data-folio');
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../roleadmin/escpos.php', true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var qrCodeFile = xhr.responseText;
-            printDocumentWithQR(qrCodeFile);
-        }
-    };
-    xhr.send('folio=' + folio);
-}
-
-function printDocumentWithQR(qrCodeFile) {
-    console.log('QR Code file:', qrCodeFile);
-}
-
-document.getElementById('printQRButton').addEventListener('click', function() {
-    printQRCode(this);
-});
-
 "use strict";
