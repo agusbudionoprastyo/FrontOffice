@@ -224,51 +224,75 @@ function printSelectedQRCode() {
 }
 
 function printQRCode(rowsData) {
-    var qrCodeDiv = document.getElementById('qrcode');
-    if (qrCodeDiv) {
-        qrCodeDiv.innerHTML = '';
-    } else {
-        qrCodeDiv = document.createElement('div');
-        qrCodeDiv.id = 'qrcode';
-        qrCodeDiv.style.display = 'none';
-        document.body.appendChild(qrCodeDiv);
-    }
-
-    var qrTexts = [];
+    var printDocument = '<html><head><title>Cetak QR Code</title></head><body>';
 
     rowsData.forEach(function(data) {
         var room = data.room;
         var folio = data.folio;
 
-        generateQRCode(folio, function(qrText) {
-            qrTexts.push({
-                room: room,
-                qrText: qrText
-            });
+        // Generate QR Code
+        generateQRCode(folio, function(qrImage) {
+            printDocument += '<div style="page-break-after: always; text-align: center;">';
+            printDocument += '<h3>Room ' + room + '</h3>';
+            printDocument += '<img src="' + qrImage.src + '" style="width: 200px; height: auto;">';
+            printDocument += '</div>';
 
-            if (qrTexts.length === rowsData.length) {
-                printSelectedDocuments(qrTexts);
+            // Cetak setelah QR code terakhir dibuat
+            if (data === rowsData[rowsData.length - 1]) {
+                printDocument += '</body></html>';
+
+                var iframe = document.createElement('iframe');
+                iframe.style.position = 'absolute';
+                iframe.style.width = '0px';
+                iframe.style.height = '0px';
+                iframe.style.border = 'none';
+                document.body.appendChild(iframe);
+
+                var doc = iframe.contentWindow.document;
+                doc.open();
+                doc.write(printDocument);
+                doc.close();
+
+                // Menunggu sebentar sebelum mencetak
+                setTimeout(function() {
+                    iframe.contentWindow.focus();
+                    iframe.contentWindow.print();
+                    document.body.removeChild(iframe);
+                }, 1000);
             }
         });
     });
 }
 
 function generateQRCode(folio, callback) {
-    const url = 'https://ecard.dafam.cloud/';
-    var qrText = url + '?folio=' + folio;
-
+    const url = 'https://ecard.dafam.cloud/?folio=' + folio;
     var qrcode = new QRCode('qrcode', {
-        text: qrText,
-        width: 80,
-        height: 80
+        text: url,
+        width: 200,
+        height: 200,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
     });
 
-    qrcode.makeCode(qrText);
+    // Mengonversi QR code menjadi gambar
+    var qrImage = document.getElementById('qrcode').firstChild;
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+
+    canvas.width = qrImage.width;
+    canvas.height = qrImage.height;
+    context.drawImage(qrImage, 0, 0);
+
+    var qrImageUrl = canvas.toDataURL('image/png');
 
     if (typeof callback === 'function') {
-        callback(qrText);
+        callback({
+            src: qrImageUrl
+        });
     }
 }
+
 
 function printSelectedDocuments(qrTexts) {
     var printDocument = '<html><head><title>Cetak Label</title>';
