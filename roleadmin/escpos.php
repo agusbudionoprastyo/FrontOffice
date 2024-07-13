@@ -5,7 +5,7 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
 
 try {
-    $connector = new WindowsPrintConnector("Q300_Printer");
+    $connector = new WindowsPrintConnector("Q300 Printer");
     $printer = new Printer($connector);
 
     // Set ukuran kertas (contoh untuk ukuran 50mm x 25mm)
