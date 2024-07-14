@@ -55,10 +55,13 @@ require_once '../helper/connection.php';
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
+                  <div class="form-group mt-3">
+                    <input type="checkbox" id="selectAllCheckbox">Select All <button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i></button>
+                  </div>
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                                <th><input type="checkbox" id="selectAllCheckbox"> REGCARD <button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i></button></th>
+                                <th>REGCARD</th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
                                 <th>ROOM</th>
