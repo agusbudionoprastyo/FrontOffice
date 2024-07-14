@@ -58,11 +58,10 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                                <th><input type="checkbox" id="selectAllCheckbox"><button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> ROOM</button></th>
-                                <th>REGCARD</th>
+                                <th><input type="checkbox" id="selectAllCheckbox"> REGCARD <button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i></button></th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
-                                <!-- <th>ROOM</th> -->
+                                <th>ROOM</th>
                                 <th>ROOMTYPE</th>
                                 <th>ROOM STATUS</th>
                                 <th>CHECKIN</th>
@@ -116,12 +115,10 @@ require_once '../helper/connection.php';
                                 ?>
                                 <tr>
                                     <td>
-                                    <input type="checkbox" class="rowCheckbox" name="selectedRows[]" 
+                                        <input type="checkbox" class="rowCheckbox" name="selectedRows[]" 
                                         value="<?php echo $row['folio']; ?>"
                                             data-room="<?php echo htmlspecialchars($row['room']); ?>"
                                             data-folio="<?php echo htmlspecialchars($row['folio']); ?>">  
-                                            <?php echo $row['room']; ?>
-                                    <td>
                                         <?php if (empty($row['at_regform'])): ?>
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
                                         <?php endif; ?>
@@ -141,7 +138,7 @@ require_once '../helper/connection.php';
                                     
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><?php echo $row['folio']; ?></a></td>
-                                    <!-- <td><?php echo $row['room']; ?></td> -->
+                                    <td><?php echo $row['room']; ?></td>
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td>
                                         <?php $foliostatus = trim($row['foliostatus']); ?>
