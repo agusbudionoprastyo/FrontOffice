@@ -319,41 +319,45 @@ function printSelectedQRCode() {
         return;
     }
 
-    var labelsContainer = document.createElement('div'); // Create a container for labels
-    labelsContainer.id = 'labels-container'; // Assign an id to the container
-
     selectedRows.forEach(function(row) {
-        var label = document.createElement('div');
-        label.classList.add('label');
+        var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(row.room) + '&size=80x80';
 
-        var qrDiv = document.createElement('div');
-        qrDiv.classList.add('qrcode');
-        
-        // Using QRCode.js to generate QR code
-        var qr = qrcode(0, 'M');
-        qr.addData(row.room); // Assuming 'room' is the property in your selected rows
-        qr.make();
-        qrDiv.innerHTML = qr.createImgTag(4); // Size 4 for 80x80 pixels
+        var iframe = document.createElement('iframe');
+        iframe.style.position = 'absolute';
+        iframe.style.left = '-9999px'; // Position off-screen
+        iframe.style.width = '50mm'; // Set iframe width as per label style
+        iframe.style.height = '25mm'; // Set iframe height as per label style
+        iframe.style.border = 'none'; // Remove iframe border
+        document.body.appendChild(iframe);
 
-        var textDiv = document.createElement('div');
-        textDiv.classList.add('text');
-        textDiv.innerHTML = '<b>Room</b>: ' + row.room; // Example data, modify as per your needs
-        label.appendChild(textDiv);
-        label.appendChild(qrDiv);
+        var iframeDocument = iframe.contentWindow.document;
+        iframeDocument.open();
+        iframeDocument.write('<html><head><style>' +
+                             '@page { size: 50mm 25mm; margin: 0; } ' +
+                             'body { font-family: Arial, sans-serif; margin: 0; padding: 0; } ' +
+                             '.label { width: 50mm; height: 25mm; padding: 5mm; box-sizing: border-box; ' +
+                             'page-break-after: always; display: flex; flex-direction: row; align-items: center; ' +
+                             'justify-content: center; overflow: hidden; position: relative; } ' +
+                             '.qrcode { width: 15mm; height: 15mm; display: flex; justify-content: center; ' +
+                             'align-items: center; } ' +
+                             '.text { font-size: 8pt; text-align: left; margin-right: 10mm; } ' +
+                             '</style></head><body>' +
+                             '<div class="label">' +
+                             '<div class="text">Room: ' + row.room + '</div>' +
+                             '<div class="qrcode"><img src="' + qrCodeUrl + '"></div>' +
+                             '</div></body></html>');
+        iframeDocument.close();
 
-        labelsContainer.appendChild(label);
+        iframe.onload = function() {
+            iframe.contentWindow.print();
+            setTimeout(function() {
+                document.body.removeChild(iframe);
+            }, 100);
+        };
     });
-
-    // Append the labels container to the body (or where you want to print from)
-    document.body.appendChild(labelsContainer);
-
-    // Use setTimeout to ensure elements are rendered before printing
-    setTimeout(function() {
-        window.print();
-        labelsContainer.remove(); // Remove the container after printing
-    }, 1000); // Delay 1000ms for rendering
 }
 </script>
+
 
 
 <!-- Page Specific JS File -->
