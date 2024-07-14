@@ -58,11 +58,11 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                                <th><input type="checkbox" id="selectAllCheckbox"><button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> PRINT LABEL</button></th>
+                                <th><input type="checkbox" id="selectAllCheckbox"><button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> ROOM</button></th>
                                 <th>REGCARD</th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
-                                <th>ROOM</th>
+                                <!-- <th>ROOM</th> -->
                                 <th>ROOMTYPE</th>
                                 <th>ROOM STATUS</th>
                                 <th>CHECKIN</th>
@@ -118,9 +118,8 @@ require_once '../helper/connection.php';
                                     <td>
                                     <input type="checkbox" class="rowCheckbox" name="selectedRows[]" 
                                         value="<?php echo $row['folio']; ?>"
-                                        data-room="<?php echo htmlspecialchars($row['room']); ?>"
-                                          data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
-                                            <?php echo $row['fname']; ?>
+                                            data-room="<?php echo htmlspecialchars($row['room']); ?>"
+                                            data-folio="<?php echo htmlspecialchars($row['folio']); ?>">  
                                             <?php echo $row['room']; ?>
                                     <td>
                                         <?php if (empty($row['at_regform'])): ?>
@@ -142,7 +141,7 @@ require_once '../helper/connection.php';
                                     
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><?php echo $row['folio']; ?></a></td>
-                                    <td><?php echo $row['room']; ?></td>
+                                    <!-- <td><?php echo $row['room']; ?></td> -->
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td>
                                         <?php $foliostatus = trim($row['foliostatus']); ?>
@@ -286,84 +285,6 @@ require_once '../layout/_bottom.php';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- <script type="text/javascript" src="../assets/js/qrCode/qrcode.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" integrity="sha512-ZDSPMa/JM1D+7kdg2x3BsruQ6T/JpJo3jWDWkCZsP+5yVyp1KfESqLI+7RqB5k24F7p2cV7i2YHh/890y6P6Sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-<script>
-// Function to get selected rows
-function getSelectedRows() {
-    var selectedRows = [];
-    var checkboxes = document.querySelectorAll('.rowCheckbox:checked');
-
-    checkboxes.forEach(function(checkbox) {
-        var row = checkbox.closest('tr');
-        selectedRows.push({
-            room: row.querySelector('td:nth-child(5)').textContent.trim(), // Adjust based on your table structure
-            folio: checkbox.value // Assuming 'folio' is the value you want to collect
-        });
-    });
-
-    return selectedRows;
-}
-
-// Function to print selected QR codes
-function printSelectedQRCode() {
-    var selectedRows = getSelectedRows();
-
-    if (selectedRows.length === 0) {
-        alert('Please select at least one row to print.');
-        return;
-    }
-
-    var iframe = document.createElement('iframe');
-    iframe.style.position = 'absolute';
-    iframe.style.left = '-9999px'; // Position off-screen
-    iframe.style.width = '50mm'; // Set iframe width as per label style
-    iframe.style.height = '25mm'; // Set iframe height as per label style
-    iframe.style.border = 'none'; // Remove iframe border
-    document.body.appendChild(iframe);
-
-    var iframeDocument = iframe.contentWindow.document;
-    iframeDocument.open();
-    iframeDocument.write('<html><head><style>' +
-                         '@page { size: 50mm 25mm; margin: 0; } ' +
-                         'body { font-family: Arial, sans-serif; margin: 0; padding: 0; } ' +
-                         '.label { width: 50mm; height: 25mm; padding: 5mm; box-sizing: border-box; ' +
-                         'page-break-after: always; display: flex; flex-direction: row; align-items: center; ' +
-                         'justify-content: center; overflow: hidden; position: relative; } ' +
-                         '.qrcode { width: 15mm; height: 15mm; display: flex; justify-content: center; ' +
-                         'align-items: center; } ' +
-                         '.text { font-size: 8pt; text-align: left; margin-right: 10mm; } ' +
-                         '</style></head><body>');
-
-    selectedRows.forEach(function(row) {
-        var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=https://ecard.dafam.cloud/?folio=' + encodeURIComponent(row.folio) + '&size=80x80';
-
-        iframeDocument.write('<div class="label">' +
-                             '<div class="text"><b>Room</b> ' + row.room + '<br><br><b>Wifi</b><br> dafam<br><b>Password</b><br> krasansare</div>' +
-                             '<div class="qrcode"><img src="' + qrCodeUrl + '"></div>' +
-                             '</div>');
-    });
-
-    iframeDocument.write('</body></html>');
-    iframeDocument.close();
-
-    iframe.onload = function() {
-        iframe.contentWindow.print();
-        setTimeout(function() {
-            document.body.removeChild(iframe);
-        }, 100);
-    };
-}
-// Function to handle Select All checkbox
-document.getElementById('selectAllCheckbox').addEventListener('click', function() {
-    var checkboxes = document.querySelectorAll('.rowCheckbox');
-    checkboxes.forEach(function(checkbox) {
-        checkbox.checked = document.getElementById('selectAllCheckbox').checked;
-    });
-});
-</script>
-
-
-
 
 <!-- Page Specific JS File -->
 <?php

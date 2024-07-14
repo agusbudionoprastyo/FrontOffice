@@ -92,118 +92,77 @@ function syncData() {
     });
 };
 
-// Function untuk mencetak QR code
-function printQRCode(button) {
-    // Dapatkan nilai data dari tombol cetak yang ditekan
-    var room = button.getAttribute('data-room');
-    var folio = button.getAttribute('data-folio');
+// Function to get selected rows
+function getSelectedRows() {
+    var selectedRows = [];
+    var checkboxes = document.querySelectorAll('.rowCheckbox:checked');
 
-    // Hapus isi dari div dengan id 'qrcode' jika ada
-    var qrCodeDiv = document.getElementById('qrcode');
-    if (qrCodeDiv) {
-        qrCodeDiv.innerHTML = ''; // Menghapus semua elemen yang ada di dalamnya
-    } else {
-        // Jika qrCodeDiv belum ada, buat elemennya
-        qrCodeDiv = document.createElement('div');
-        qrCodeDiv.id = 'qrcode';
-        qrCodeDiv.style.display = 'none'; // Sembunyikan elemen QR code di dokumen asli
-        document.body.appendChild(qrCodeDiv);
-    }
-
-    // Panggil fungsi untuk menghasilkan QR code dan mencetak
-    generateQRCode(folio, function(qrText) {
-        // Setelah QR code dibuat, panggil fungsi untuk mencetak
-        printDocumentWithQR(room, qrText);
-    });
-}
-
-
-// Function untuk menghasilkan QR code
-function generateQRCode(folio, callback) {
-    const url = 'https://ecard.dafam.cloud/';
-
-    // Menyiapkan teks untuk QR code dengan informasi tambahan
-    var qrText = url + '?folio=' + folio;
-
-    // Menggunakan QRCode.js untuk menghasilkan QR code dengan teks yang disiapkan
-    var qrcode = new QRCode('qrcode', {
-        text: qrText,
-        width: 80,
-        height: 80
+    checkboxes.forEach(function(checkbox) {
+        var row = checkbox.closest('tr');
+        selectedRows.push({
+            room: row.querySelector('td:nth-child(5)').textContent.trim(), // Adjust based on your table structure
+            folio: checkbox.value // Assuming 'folio' is the value you want to collect
+        });
     });
 
-    // Memanggil makeCode() untuk menghasilkan QR code dengan teks yang diberikan
-    qrcode.makeCode(qrText);
-
-    // Memanggil callback dengan qrText setelah QR code selesai dibuat
-    if (typeof callback === 'function') {
-        callback(qrText);
-    }
+    return selectedRows;
 }
 
-function printDocumentWithQR(room, qrText) {
-    // Membuat elemen untuk QR code
-    var qrCodeDiv = document.createElement('div');
-    qrCodeDiv.id = 'qrcode';
-    qrCodeDiv.style.display = 'none'; // Sembunyikan elemen QR code di dokumen asli
-    document.body.appendChild(qrCodeDiv);
+// Function to print selected QR codes
+function printSelectedQRCode() {
+    var selectedRows = getSelectedRows();
 
-    // Menyiapkan dokumen untuk pencetakan
-    var printDocument = '<html><head><title>Cetak Label</title>';
-    printDocument += '<style>@page { size: 50mm 25mm; margin: 0; }</style>'; // Set ukuran kertas label
-    printDocument += '<style>body { font-family: Arial, sans-serif; font-size: 6pt; }</style>'; // Ganti sesuai kebutuhan
-    printDocument += '</head><body>';
+    if (selectedRows.length === 0) {
+        alert('Please select at least one row to print.');
+        return;
+    }
 
-    // Container untuk QR code dan detail ROOM, WIFI, PASSWORD dalam satu baris
-    printDocument += '<div style="float: left; margin-right: 5mm;">';
-    printDocument += '<div id="qrcodeContainer"></div>'; // Letakkan QR code di dalam container ini
-
-    printDocument += '<h3 style="margin: 0;">Scan Me!</h3>';
-    printDocument += '<h3 style="margin: 0;">ROOM ' + room + '</h3>';
-    printDocument += '<br><br>';
-    printDocument += '<i style="margin: 0;">Wifi</i>';
-    printDocument += '<h3 style="margin: 0;">dafamsemarang</h3>';
-    printDocument += '<i style="margin: 0;">Password</i>';
-    printDocument += '<h3 style="margin: 0;">krasansare</h3>';
-    printDocument += '</div>';
-
-    printDocument += '</body></html>';
-
-
-    // Membuat elemen iframe untuk mencetak dokumen
     var iframe = document.createElement('iframe');
     iframe.style.position = 'absolute';
-    iframe.style.width = '0px';
-    iframe.style.height = '0px';
-    iframe.style.border = 'none';
+    iframe.style.left = '-9999px'; // Position off-screen
+    iframe.style.width = '50mm'; // Set iframe width as per label style
+    iframe.style.height = '25mm'; // Set iframe height as per label style
+    iframe.style.border = 'none'; // Remove iframe border
     document.body.appendChild(iframe);
 
-    // Menulis dokumen pencetakan ke dalam iframe
-    var doc = iframe.contentWindow.document;
-    doc.open();
-    doc.write(printDocument);
-    doc.close();
+    var iframeDocument = iframe.contentWindow.document;
+    iframeDocument.open();
+    iframeDocument.write('<html><head><style>' +
+                         '@page { size: 50mm 25mm; margin: 0; } ' +
+                         'body { font-family: Arial, sans-serif; margin: 0; padding: 0; } ' +
+                         '.label { width: 50mm; height: 25mm; padding: 5mm; box-sizing: border-box; ' +
+                         'page-break-after: always; display: flex; flex-direction: row; align-items: center; ' +
+                         'justify-content: center; overflow: hidden; position: relative; } ' +
+                         '.qrcode { width: 15mm; height: 15mm; display: flex; justify-content: center; ' +
+                         'align-items: center; } ' +
+                         '.text { font-size: 8pt; text-align: left; margin-right: 10mm; } ' +
+                         '</style></head><body>');
 
-    // Ambil elemen QR code yang sudah di-generate sebelumnya
-    var qrCodeInPrint = document.getElementById('qrcode');
+    selectedRows.forEach(function(row) {
+        var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=https://ecard.dafam.cloud/?folio=' + encodeURIComponent(row.folio) + '&size=80x80';
 
-    // Salin QR code yang sudah di-generate ke dalam dokumen pencetakan di iframe
-    if (qrCodeInPrint) {
-        var qrImage = new Image();
-        qrImage.src = qrCodeInPrint.firstChild.toDataURL();
-        doc.body.appendChild(qrImage);
-    }
+        iframeDocument.write('<div class="label">' +
+                             '<div class="text"><b>Room</b> ' + row.room + '<br><br><b>Wifi</b><br> dafam<br><b>Password</b><br> krasansare</div>' +
+                             '<div class="qrcode"><img src="' + qrCodeUrl + '"></div>' +
+                             '</div>');
+    });
 
-    // Melakukan pencetakan setelah QR code dan dokumen selesai disiapkan
-    setTimeout(function() {
-        iframe.contentWindow.focus();
+    iframeDocument.write('</body></html>');
+    iframeDocument.close();
+
+    iframe.onload = function() {
         iframe.contentWindow.print();
-
-        // Hapus elemen iframe setelah pencetakan selesai
         setTimeout(function() {
             document.body.removeChild(iframe);
-            document.body.removeChild(qrCodeDiv); // Hapus elemen QR code dari dokumen asli setelah pencetakan
-        }, 1000); // Menunggu 1 detik sebelum menghapus iframe
-    }, 500); // Menunggu 0.5 detik sebelum melakukan pencetakan
+        }, 100);
+    };
 }
+// Function to handle Select All checkbox
+document.getElementById('selectAllCheckbox').addEventListener('click', function() {
+    var checkboxes = document.querySelectorAll('.rowCheckbox');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = document.getElementById('selectAllCheckbox').checked;
+    });
+});
+
 "use strict";
