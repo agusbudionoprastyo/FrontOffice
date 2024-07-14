@@ -58,7 +58,7 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox"> <button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> REGCARD</button></th>
+                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox"> <button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> PRINT LABEL</button></th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
                                 <th>ROOM</th>
