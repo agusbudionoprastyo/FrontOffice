@@ -293,11 +293,27 @@ require_once '../layout/_bottom.php';
 <!-- <script type="text/javascript" src="../assets/js/qrCode/qrcode.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" integrity="sha512-ZDSPMa/JM1D+7kdg2x3BsruQ6T/JpJo3jWDWkCZsP+5yVyp1KfESqLI+7RqB5k24F7p2cV7i2YHh/890y6P6Sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<!-- Bagian tombol dan script untuk mencetak QR Code -->
 <script>
+// Function to get selected rows
+function getSelectedRows() {
+    var selectedRows = [];
+    var checkboxes = document.querySelectorAll('.rowCheckbox:checked');
+
+    checkboxes.forEach(function(checkbox) {
+        var row = checkbox.closest('tr');
+        selectedRows.push({
+            room: row.querySelector('td:nth-child(5)').textContent.trim(), // Adjust based on your table structure
+            folio: checkbox.value // Assuming 'folio' is the value you want to collect
+        });
+    });
+
+    return selectedRows;
+}
+
+// Function to print selected QR codes
 function printSelectedQRCode() {
-    const selectedRows = getSelectedRows();
-    
+    var selectedRows = getSelectedRows();
+
     if (selectedRows.length === 0) {
         alert('Please select at least one row to print.');
         return;
@@ -305,13 +321,15 @@ function printSelectedQRCode() {
 
     var labelsContainer = document.createElement('div'); // Create a container for labels
     labelsContainer.id = 'labels-container'; // Assign an id to the container
-    
+
     selectedRows.forEach(function(row) {
         var label = document.createElement('div');
         label.classList.add('label');
 
         var qrDiv = document.createElement('div');
         qrDiv.classList.add('qrcode');
+        
+        // Using QRCode.js to generate QR code
         var qr = qrcode(0, 'M');
         qr.addData(row.room); // Assuming 'room' is the property in your selected rows
         qr.make();
