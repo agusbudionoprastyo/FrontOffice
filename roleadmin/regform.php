@@ -58,7 +58,7 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                                <th><button type="button" class="btn btn-primary" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> PRINT LABEL</button></th>
+                                <th><input type="checkbox" id="selectAllCheckbox"><button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> PRINT LABEL</button></th>
                                 <th>REGCARD</th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
@@ -128,13 +128,6 @@ require_once '../helper/connection.php';
                                         <?php endif; ?>
                                         <?php if ($row['at_regform']): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl" style="color: #B5120C;"></i></a>                                
-                                        <?php endif; ?>
-                                        <?php if (!empty($row['room'])): ?>
-                                            <button onclick="printQRCode(this);" class="btn btn-default mb-md-0 mb-1"
-                                                data-room="<?php echo htmlspecialchars($row['room']); ?>"
-                                                data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
-                                                <i class="fa-solid fa-print fa-xl"></i>
-                                            </button>
                                         <?php endif; ?>
                                         <?php if (empty($row['room'])): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_edit.php?folio=<?php echo $row['folio']; ?>"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
@@ -360,6 +353,13 @@ function printSelectedQRCode() {
         }, 100);
     };
 }
+// Function to handle Select All checkbox
+document.getElementById('selectAllCheckbox').addEventListener('click', function() {
+    var checkboxes = document.querySelectorAll('.rowCheckbox');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.checked = document.getElementById('selectAllCheckbox').checked;
+    });
+});
 </script>
 
 
