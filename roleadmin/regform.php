@@ -58,7 +58,7 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                                <th>QRCODE</th>
+                                <th><button type="button" class="btn btn-primary" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> PRINT LABEL</button></th>
                                 <th>REGCARD</th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
@@ -214,10 +214,10 @@ require_once '../helper/connection.php';
                             ?>
                         </tbody>
                     </table>
-                    <!-- Tombol Pencetakan QR Code -->
+                    <!-- Tombol Pencetakan QR Code
                     <div class="form-group mt-3">
                         <button type="button" class="btn btn-primary" onclick="printSelectedQRCode();">Print Selected QR Codes</button>
-                  </div>
+                  </div> -->
                 </div>
             </div>
         </div>
