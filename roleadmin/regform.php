@@ -344,7 +344,7 @@ function printSelectedQRCode() {
         var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=https://ecard.dafam.cloud/?folio=' + encodeURIComponent(row.folio) + '&size=80x80';
 
         iframeDocument.write('<div class="label">' +
-                             '<div class="text"><b>Room</b> ' + row.room + '<br><br><b>Wifi</b> dafamsemarang<br><b>Password</b><br> krasansare</div>' +
+                             '<div class="text"><b>Room</b> ' + row.room + '<br><br><b>Wifi</b><br> dafam<br><b>Password</b><br> krasansare</div>' +
                              '<div class="qrcode"><img src="' + qrCodeUrl + '"></div>' +
                              '</div>');
     });
