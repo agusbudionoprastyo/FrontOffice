@@ -58,7 +58,7 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox"> <button type="button" class="btn btn-dark" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i></button> REGCARD</th>
+                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox"> <button type="button" class="btn btn-dark" onclick="selectCheckboxAndPrint();"><i class="fa-solid fa-print fa-xl"></i></button></th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
                                 <th>ROOM</th>
@@ -119,6 +119,7 @@ require_once '../helper/connection.php';
                                         value="<?php echo $row['folio']; ?>"
                                             data-room="<?php echo htmlspecialchars($row['room']); ?>"
                                             data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
+                                        <button type="button" class="btn btn-dark" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i></button>
                                         <!-- <input type="checkbox" id="selectAllCheckbox"> Select All <button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i></button> -->
                                         <?php if (empty($row['at_regform'])): ?>
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
