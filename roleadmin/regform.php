@@ -57,9 +57,6 @@ require_once '../helper/connection.php';
                 <div class="table-responsive">
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
-                        <div class="form-group mt-3">
-                              <input type="checkbox" id="selectAllCheckbox"> Select All <button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i></button>
-                        </div>
                             <tr>
                                 <th>REGCARD</th>
                                 <th>NAME</th>
@@ -207,10 +204,10 @@ require_once '../helper/connection.php';
                             ?>
                         </tbody>
                     </table>
-                    <!-- Tombol Pencetakan QR Code
-                    <div class="form-group mt-3">
-                        <button type="button" class="btn btn-primary" onclick="printSelectedQRCode();">Print Selected QR Codes</button>
-                  </div> -->
+                     <!-- Tombol Pencetakan QR Code -->
+                        <div class="form-group mt-3">
+                              <input type="checkbox" id="selectAllCheckbox"> Select All <button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i></button>
+                        </div>
                 </div>
             </div>
         </div>
