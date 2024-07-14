@@ -202,12 +202,12 @@ require_once '../helper/connection.php';
                                 <?php
                             }
                             ?>
-                        </tbody>
-                    </table>
-                     <!-- Tombol Pencetakan QR Code -->
+                                                 <!-- Tombol Pencetakan QR Code -->
                         <div class="form-group mt-3">
                               <input type="checkbox" id="selectAllCheckbox"> Select All <button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i></button>
                         </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
