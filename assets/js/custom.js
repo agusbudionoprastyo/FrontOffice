@@ -100,7 +100,7 @@ function getSelectedRows() {
     checkboxes.forEach(function(checkbox) {
         var row = checkbox.closest('tr');
         selectedRows.push({
-            room: row.querySelector('td:nth-child(5)').textContent.trim(), // Adjust based on your table structure
+            room: row.querySelector('td:nth-child(4)').textContent.trim(), // Adjust based on your table structure
             folio: checkbox.value // Assuming 'folio' is the value you want to collect
         });
     });
