@@ -116,10 +116,10 @@ require_once '../helper/connection.php';
                                 ?>
                                 <tr>
                                     <td>
-                                      <input type="checkbox" class="rowCheckbox" name="selectedRows[]" 
-                                            value="<?php echo $row['folio']; ?>"
-                                            data-room="<?php echo htmlspecialchars($row['room']); ?>"
-                                            data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
+                                    <input type="checkbox" class="rowCheckbox" name="selectedRows[]" 
+                                        value="<?php echo $row['folio']; ?>"
+                                        data-room="<?php echo htmlspecialchars($row['room']); ?>"
+                                          data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
                                     </td>
                                     <td>
                                         <?php if (empty($row['at_regform'])): ?>
@@ -291,75 +291,51 @@ require_once '../layout/_bottom.php';
 <!-- Bootstrap Datepicker JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="../assets/js/qrCode/qrcode.js"></script>
-<!-- Bagian tombol dan script untuk mencetak QR Code -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" integrity="sha512-ZDSPMa/JM1D+7kdg2x3BsruQ6T/JpJo3jWDWkCZsP+5yVyp1KfESqLI+7RqB5k24F7p2cV7i2YHh/890y6P6Sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<!-- Bagian tombol dan script untuk mencetak QR Code -->
 <script>
 function printSelectedQRCode() {
-    const selectedCheckboxes = document.querySelectorAll('.rowCheckbox:checked');
-    if (selectedCheckboxes.length === 0) {
-        alert('Pilih setidaknya satu folio untuk mencetak QR Code.');
+    const selectedRows = getSelectedRows();
+    
+    if (selectedRows.length === 0) {
+        alert('Please select at least one row to print.');
         return;
     }
 
-    // Konfigurasi ukuran QR Code
-    const qrCodeSize = 80; // Ukuran dalam pixel
+    var labelsContainer = document.createElement('div'); // Create a container for labels
+    labelsContainer.id = 'labels-container'; // Assign an id to the container
+    
+    selectedRows.forEach(function(row) {
+        var label = document.createElement('div');
+        label.classList.add('label');
 
-    // Ukuran kertas label (dalam mm)
-    const labelWidthMM = 50;
-    const labelHeightMM = 25;
+        var qrDiv = document.createElement('div');
+        qrDiv.classList.add('qrcode');
+        var qr = qrcode(0, 'M');
+        qr.addData(row.room); // Assuming 'room' is the property in your selected rows
+        qr.make();
+        qrDiv.innerHTML = qr.createImgTag(4); // Size 4 for 80x80 pixels
 
-    // Hitung jumlah QR Code per halaman
-    const numQRPerRow = Math.floor(labelWidthMM / (qrCodeSize / 25.4)); // 25.4 mm = 1 inch
-    const numQRPerPage = Math.floor(labelHeightMM / (qrCodeSize / 25.4));
+        var textDiv = document.createElement('div');
+        textDiv.classList.add('text');
+        textDiv.innerHTML = '<b>Room</b>: ' + row.room; // Example data, modify as per your needs
+        label.appendChild(textDiv);
+        label.appendChild(qrDiv);
 
-    // Buat jendela baru untuk mencetak
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
-
-    // Loop untuk setiap checkbox yang dipilih
-    selectedCheckboxes.forEach((checkbox, index) => {
-        // Hitung nomor halaman
-        const pageIndex = Math.floor(index / (numQRPerPage * numQRPerRow));
-        if (pageIndex > 0) {
-            // Jika bukan halaman pertama, tambahkan halaman baru
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            printWindow.print();
-            printWindow.document.write('<html><head><title>Cetak QR Code</title></head><body>');
-        }
-
-        // Hitung posisi X dan Y untuk QR Code berdasarkan index di halaman
-        const qrIndexInPage = index % (numQRPerPage * numQRPerRow);
-        const rowIndex = Math.floor(qrIndexInPage / numQRPerRow);
-        const colIndex = qrIndexInPage % numQRPerRow;
-
-        // Hitung posisi absolut QR Code di kertas label (dalam pixel)
-        const qrCodeX = colIndex * (qrCodeSize + 10); // 10 pixel gap antar QR Code
-        const qrCodeY = rowIndex * (qrCodeSize + 10); // 10 pixel gap antar QR Code
-
-        // Cetak tag <div> untuk memposisikan QR Code di kertas label
-        printWindow.document.write(`<div style="position: absolute; left: ${qrCodeX}px; top: ${qrCodeY}px;">`);
-        
-        // Membuat QR Code
-        const qrCodeContainer = document.createElement('div');
-        const qrCode = new QRCode(qrCodeContainer, {
-            text: checkbox.value, // Menggunakan nilai folio dari checkbox
-            width: qrCodeSize,
-            height: qrCodeSize
-        });
-
-        // Menambahkan QR Code ke dokumen cetak
-        printWindow.document.body.appendChild(qrCodeContainer);
-
-        printWindow.document.write('</div>'); // Tutup tag <div>
+        labelsContainer.appendChild(label);
     });
 
-    // Tutup dokumen dan selesaikan pencetakan
-    printWindow.document.write('</body></html>');
-    printWindow.document.close();
-    printWindow.print();
+    // Append the labels container to the body (or where you want to print from)
+    document.body.appendChild(labelsContainer);
+
+    // Use setTimeout to ensure elements are rendered before printing
+    setTimeout(function() {
+        window.print();
+        labelsContainer.remove(); // Remove the container after printing
+    }, 1000); // Delay 1000ms for rendering
 }
-</script>
+</scrpit>
 
 
 <!-- Page Specific JS File -->
