@@ -54,9 +54,9 @@ require_once '../helper/connection.php';
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+                <button type="button" class="btn btn-dark" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> PRINT LABEL</button>
                 <div class="table-responsive">
                     <table class="table table-hover table-striped w-100" id="table-2">
-                    <button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> PRINT LABEL</button>
                         <thead>
                             <tr>
                                 <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox"> REGCARD</th>
