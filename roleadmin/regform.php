@@ -293,7 +293,7 @@ require_once '../layout/_bottom.php';
 <!-- <script type="text/javascript" src="../assets/js/qrCode/qrcode.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" integrity="sha512-ZDSPMa/JM1D+7kdg2x3BsruQ6T/JpJo3jWDWkCZsP+5yVyp1KfESqLI+7RqB5k24F7p2cV7i2YHh/890y6P6Sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script>
+<!-- <script>
 // Function to get selected rows
 function getSelectedRows() {
     var selectedRows = [];
@@ -356,7 +356,76 @@ function printSelectedQRCode() {
         };
     });
 }
+</script> -->
+
+<script>
+// Function to get selected rows
+function getSelectedRows() {
+    var selectedRows = [];
+    var checkboxes = document.querySelectorAll('.rowCheckbox:checked');
+
+    checkboxes.forEach(function(checkbox) {
+        var row = checkbox.closest('tr');
+        selectedRows.push({
+            room: row.querySelector('td:nth-child(5)').textContent.trim(), // Adjust based on your table structure
+            folio: checkbox.value // Assuming 'folio' is the value you want to collect
+        });
+    });
+
+    return selectedRows;
+}
+
+// Function to print selected QR codes
+function printSelectedQRCode() {
+    var selectedRows = getSelectedRows();
+
+    if (selectedRows.length === 0) {
+        alert('Please select at least one row to print.');
+        return;
+    }
+
+    var iframe = document.createElement('iframe');
+    iframe.style.position = 'absolute';
+    iframe.style.left = '-9999px'; // Position off-screen
+    iframe.style.width = '50mm'; // Set iframe width as per label style
+    iframe.style.height = '25mm'; // Set iframe height as per label style
+    iframe.style.border = 'none'; // Remove iframe border
+    document.body.appendChild(iframe);
+
+    var iframeDocument = iframe.contentWindow.document;
+    iframeDocument.open();
+    iframeDocument.write('<html><head><style>' +
+                         '@page { size: 50mm 25mm; margin: 0; } ' +
+                         'body { font-family: Arial, sans-serif; margin: 0; padding: 0; } ' +
+                         '.label { width: 50mm; height: 25mm; padding: 5mm; box-sizing: border-box; ' +
+                         'page-break-after: always; display: flex; flex-direction: row; align-items: center; ' +
+                         'justify-content: center; overflow: hidden; position: relative; } ' +
+                         '.qrcode { width: 15mm; height: 15mm; display: flex; justify-content: center; ' +
+                         'align-items: center; } ' +
+                         '.text { font-size: 8pt; text-align: left; margin-right: 10mm; } ' +
+                         '</style></head><body>');
+
+    selectedRows.forEach(function(row) {
+        var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=' + encodeURIComponent(row.room) + '&size=80x80';
+
+        iframeDocument.write('<div class="label">' +
+                             '<div class="text">Room: ' + row.room + '</div>' +
+                             '<div class="qrcode"><img src="' + qrCodeUrl + '"></div>' +
+                             '</div>');
+    });
+
+    iframeDocument.write('</body></html>');
+    iframeDocument.close();
+
+    iframe.onload = function() {
+        iframe.contentWindow.print();
+        setTimeout(function() {
+            document.body.removeChild(iframe);
+        }, 100);
+    };
+}
 </script>
+
 
 
 
