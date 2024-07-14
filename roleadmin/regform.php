@@ -120,7 +120,8 @@ require_once '../helper/connection.php';
                                         value="<?php echo $row['folio']; ?>"
                                         data-room="<?php echo htmlspecialchars($row['room']); ?>"
                                           data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
-                                    </td>
+                                            <?php echo $row['fname']; ?>
+                                            <?php echo $row['room']; ?>
                                     <td>
                                         <?php if (empty($row['at_regform'])): ?>
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
