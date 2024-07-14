@@ -290,7 +290,7 @@ require_once '../layout/_bottom.php';
 </div>
 <!-- Bootstrap Datepicker JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/javascript" src="../assets/js/qrCode/qrcode.js"></script>
+<!-- <script type="text/javascript" src="../assets/js/qrCode/qrcode.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" integrity="sha512-ZDSPMa/JM1D+7kdg2x3BsruQ6T/JpJo3jWDWkCZsP+5yVyp1KfESqLI+7RqB5k24F7p2cV7i2YHh/890y6P6Sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- Bagian tombol dan script untuk mencetak QR Code -->
@@ -335,7 +335,7 @@ function printSelectedQRCode() {
         labelsContainer.remove(); // Remove the container after printing
     }, 1000); // Delay 1000ms for rendering
 }
-</scrpit>
+</script>
 
 
 <!-- Page Specific JS File -->
