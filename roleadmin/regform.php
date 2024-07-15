@@ -104,7 +104,7 @@ require_once '../helper/connection.php';
                             }
 
                             // Add ORDER BY clause
-                            $sql .= " ORDER BY datecreate DESC";
+                            $sql .= " ORDER BY folio DESC";
 
                             // Perform the query
                             $result = mysqli_query($connection, $sql);
@@ -140,11 +140,12 @@ require_once '../helper/connection.php';
                                     <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><?php echo $row['folio']; ?></a></td>
                                     <td>
                                           <?php if (!empty($row['room'])): ?>
-                                            <input type="checkbox" class="rowCheckbox" name="selectedRows[]" 
+                                            <input type="checkbox" class="rowCheckbox" name="selectedRows[]" id="selectedRows"
                                                 value="<?php echo $row['folio']; ?>"
                                                   data-room="<?php echo htmlspecialchars($row['room']); ?>"
-                                                    data-folio="<?php echo htmlspecialchars($row['folio']); ?>"><?php echo $row['room']; ?>
-                                          <?php endif; ?> 
+                                                    data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
+                                          <?php endif; ?>
+                                          <label for="selectedRows"><?php echo $row['room']; ?></label>
                                     </td>
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td>
