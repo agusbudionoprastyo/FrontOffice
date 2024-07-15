@@ -157,7 +157,7 @@ function printSelectedQRCode() {
 
         iframeDocument.write('<div class="label-container">' +
                             '<div class="text-container">' +
-                            '<div class="text"><b><i class="fa-solid fa-bed"></i> ' + row.room + '</b><br><br><b><i class="fa-solid fa-wifi"></i> dafam</b><br><br><b><i class="fa-solid fa-key"></i> krasansare</b><br><br></div>' +
+                            '<div class="text"><b><i class="fa-solid fa-bed"></i> ' + row.room + '</b><br><br><b><i class="fa-solid fa-wifi"></i> dafam</b><br><b><i class="fa-solid fa-key"></i> krasansare</b><br><br></div>' +
                             '</div>' +
                             '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
                             '</div>');
@@ -215,7 +215,7 @@ function printQRCode(folio, room) {
 
     iframeDocument.write('<div class="label-container">' +
                         '<div class="text-container">' +
-                        '<div class="text"><b><i class="fa-solid fa-bed"></i> ' + room + '</b><br><br><b><i class="fa-solid fa-wifi"></i> dafam</b><br><br><b><i class="fa-solid fa-key"></i> krasansare</b><br><br></div>' +
+                        '<div class="text"><b><i class="fa-solid fa-bed"></i> ' + room + '</b><br><br><b><i class="fa-solid fa-wifi"></i> dafam</b><br><b><i class="fa-solid fa-key"></i> krasansare</b><br><br></div>' +
                         '</div>' +
                         '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
                         '</div>');
