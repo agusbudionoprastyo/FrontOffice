@@ -146,7 +146,7 @@ function printSelectedQRCode() {
                         '.text-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; } ' +
                         '.qrcode-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
                         '.qrcode img { max-width: 100%; max-height: 100%;} ' +
-                        '.text { font-size: 10pt; text-align: left; } ' +
+                        '.text { font-size: 8pt; text-align: left; } ' +
                         '</style>' +
                         '<script src="https://kit.fontawesome.com/3595b79eb9.js" crossorigin="anonymous"></script>' + // Tambahkan link untuk FontAwesome di sini
                         '</head><body>');
@@ -157,7 +157,7 @@ function printSelectedQRCode() {
 
         iframeDocument.write('<div class="label-container">' +
                             '<div class="text-container">' +
-                            '<div class="text"><br><b><i class="fa-solid fa-bed"></i> ' + row.room + '</b><br><br><b><i class="fa-solid fa-wifi"></i></b> dafam<br><b><i class="fa-solid fa-key"></i></b> krasansare<br></div>' +
+                            '<div class="text"><br><b><i class="fa-solid fa-bed"></i></b> <h3>' + row.room + '</h3><br><br><b><i class="fa-solid fa-wifi"></i></b> dafam<br><b><i class="fa-solid fa-key"></i></b> krasansare<br><br></div>' +
                             '</div>' +
                             '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
                             '</div>');
@@ -215,7 +215,7 @@ function printQRCode(folio, room) {
 
     iframeDocument.write('<div class="label-container">' +
                         '<div class="text-container">' +
-                        '<div class="text"><br><b><i class="fa-solid fa-bed"></i> ' + row.room + '</b><br><br><b><i class="fa-solid fa-wifi"></i></b> dafam<br><b><i class="fa-solid fa-key"></i></b> krasansare<br></div>' +
+                        '<div class="text"><br><b><i class="fa-solid fa-bed"></i></b> <h3>' + room + '</h3><br><br><b><i class="fa-solid fa-wifi"></i></b> dafam<br><b><i class="fa-solid fa-key"></i></b> krasansare<br><br></div>' +
                         '</div>' +
                         '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
                         '</div>');
