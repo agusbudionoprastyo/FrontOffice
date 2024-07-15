@@ -139,15 +139,13 @@ require_once '../helper/connection.php';
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><?php echo $row['folio']; ?></a></td>
                                     <td>
-                                        <input type="checkbox" class="btn rowCheckbox" name="selectedRows[]" id="selectedRows"
+                                        <?php if (!empty($row['room'])): ?>
+                                          <input type="checkbox" class="btn rowCheckbox" name="selectedRows[]" id="selectedRows"
                                           value="<?php echo $row['folio']; ?>"
                                             data-room="<?php echo htmlspecialchars($row['room']); ?>"
-                                              data-folio="<?php echo htmlspecialchars($row['folio']); ?>"> 
-                                                <?php echo $row['room']; ?>
-                                          <?php if (empty($row['room'])): ?> _ _ _
+                                              data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
                                           <?php endif; ?>
-                                         
-                                          
+                                        <?php echo $row['room']; ?>  
                                     </td>
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td>
