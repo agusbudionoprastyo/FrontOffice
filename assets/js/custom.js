@@ -191,11 +191,10 @@ function printRow(button) {
 }
 
 
-function printSelectedQRCode(button) {
-    var row = button.closest('tr');
-    var checkbox = row.querySelector('.rowCheckbox:checked');
+function printSelectedQRCode() {
+    var selectedRows = getSelectedRows();
 
-    if (!checkbox) {
+    if (selectedRows.length === 0) {
         iziToast.error({
             title: 'Error',
             message: 'Please select the row to print.',
@@ -203,9 +202,6 @@ function printSelectedQRCode(button) {
         });
         return;
     }
-
-    var folio = checkbox.value;
-    var room = row.querySelector('td:nth-child(2)').textContent.trim(); // Adjust based on your table structure
 
     printQRCode(folio, room);
 }
