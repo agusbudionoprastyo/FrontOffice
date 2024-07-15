@@ -113,9 +113,14 @@ function printSelectedQRCode() {
     var selectedRows = getSelectedRows();
 
     if (selectedRows.length === 0) {
-        alert('Please select at least one row to print.');
+        iziToast.error({
+            title: 'Error',
+            message: 'Please select at least one row to print.',
+            position: 'topRight'
+        });
         return;
     }
+    header('Location: regform.php');
 
     // Membuat iframe element
     var iframe = document.createElement('iframe');
