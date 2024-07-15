@@ -173,8 +173,8 @@ function printSelectedQRCode() {
                         '@page { size: 50mm 25mm; margin: 0; } ' +
                         'body { font-family: Arial, sans-serif; margin: 0; padding: 0; } ' +
                         '.label-container { width: 50mm; height: 25mm; padding: 0; box-sizing: border-box; page-break-after: always; display: flex; flex-direction: row; align-items: center; justify-content: space-between; overflow: hidden; position: relative; } ' +
-                        '.text-container { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; } ' +
-                        '.qrcode-container { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
+                        '.text-container { width: 25mm; height: 25mm; padding: 0; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; } ' +
+                        '.qrcode-container { width: 25mm; height: 25mm; padding: 0; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
                         '.qrcode { font-size: 6pt; text-align: center; } ' +
                         '.qrcode img { max-width: 100%; max-height: 100%;} ' +
                         '.text { font-size: 8pt; text-align: left; } ' +
@@ -182,7 +182,7 @@ function printSelectedQRCode() {
 
     // Iterasi untuk setiap baris yang dipilih
     selectedRows.forEach(function(row) {
-        var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=https://ecard.dafam.cloud/?folio=' + encodeURIComponent(row.folio) + '&size=15mmx15mm';
+        var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=https://ecard.dafam.cloud/?folio=' + encodeURIComponent(row.folio) + '&size=80x80';
 
         iframeDocument.write('<div class="label-container">' +
                             '<div class="text-container">' +
