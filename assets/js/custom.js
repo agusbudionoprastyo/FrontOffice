@@ -136,7 +136,7 @@ function printSelectedQRCode() {
                          'justify-content: center; overflow: hidden; position: relative; } ' +
                          '.qrcode { width: 15mm; height: 15mm; display: flex; justify-content: center; ' +
                          'align-items: center; margin-left: 8mm;} ' +
-                         '.text { font-size: 8pt; text-align: left; } ' +
+                         '.text { font-size: 8pt; text-align: left; margin-left: 8mm;} ' +
                          '</style></head><body>');
 
     selectedRows.forEach(function(row) {
