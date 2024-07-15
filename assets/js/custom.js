@@ -117,39 +117,84 @@ function printSelectedQRCode() {
         return;
     }
 
+    // var iframe = document.createElement('iframe');
+    // iframe.style.position = 'absolute';
+    // iframe.style.left = '-9999px'; // Position off-screen
+    // iframe.style.width = '50mm'; // Set iframe width as per label style
+    // iframe.style.height = '25mm'; // Set iframe height as per label style
+    // iframe.style.border = 'none'; // Remove iframe border
+    // document.body.appendChild(iframe);
+
+    // var iframeDocument = iframe.contentWindow.document;
+    // iframeDocument.open();
+    // iframeDocument.write('<html><head><style>' +
+    //                      '@page { size: 50mm 25mm; margin: 0; } ' +
+    //                      'body { font-family: Arial, sans-serif; margin: 0; padding: 0; } ' +
+    //                     //  '.qr { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; ' +
+    //                      '.label { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; ' +
+    //                      'page-break-after: always; display: flex; flex-direction: row; align-items: center; ' +
+    //                      'justify-content: center; overflow: hidden; position: relative; } ' +
+    //                      '.qrcode { width: 15mm; height: 15mm; display: flex; justify-content: center; ' +
+    //                      'align-items: center;} ' +
+    //                      '.text { font-size: 8pt; text-align: left; margin-right: 8mm;} ' +
+    //                      '</style></head><body>');
+
+    // selectedRows.forEach(function(row) {
+    //     var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=https://ecard.dafam.cloud/?folio=' + encodeURIComponent(row.folio) + '&size=80x80';
+
+    //     iframeDocument.write('<div class="label">' +
+    //                          '<div class="text"><b>Room</b> ' + row.room + '<br><b>Wifi</b> dafam<br><b>Password</b><br>krasansare<br><br>Scan Me!..</div>' +
+    //                          '<div class="qrcode"><img src="' + qrCodeUrl + '"></div>' +
+    //                          '</div>');
+    // });
+
+    // iframeDocument.write('</body></html>');
+    // iframeDocument.close();
+
+    // Membuat iframe element
     var iframe = document.createElement('iframe');
+
+    // Menetapkan beberapa gaya untuk iframe
     iframe.style.position = 'absolute';
-    iframe.style.left = '-9999px'; // Position off-screen
-    iframe.style.width = '50mm'; // Set iframe width as per label style
-    iframe.style.height = '25mm'; // Set iframe height as per label style
-    iframe.style.border = 'none'; // Remove iframe border
+    iframe.style.left = '-9999px'; // Mengatur posisi di luar layar
+    iframe.style.width = '50mm'; // Menetapkan lebar iframe sesuai gaya label
+    iframe.style.height = '25mm'; // Menetapkan tinggi iframe sesuai gaya label
+    iframe.style.border = 'none'; // Menghapus border iframe
+
+    // Menambahkan iframe ke dalam body dokumen
     document.body.appendChild(iframe);
 
+    // Mendapatkan dokumen di dalam iframe
     var iframeDocument = iframe.contentWindow.document;
+
+    // Menuliskan HTML, CSS, dan konten label ke dalam dokumen iframe
     iframeDocument.open();
     iframeDocument.write('<html><head><style>' +
-                         '@page { size: 50mm 25mm; margin: 0; } ' +
-                         'body { font-family: Arial, sans-serif; margin: 0; padding: 0; } ' +
-                        //  '.qr { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; ' +
-                         '.label { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; ' +
-                         'page-break-after: always; display: flex; flex-direction: row; align-items: center; ' +
-                         'justify-content: center; overflow: hidden; position: relative; } ' +
-                         '.qrcode { width: 15mm; height: 15mm; display: flex; justify-content: center; ' +
-                         'align-items: center; margin-left: 8mm;} ' +
-                         '.text { font-size: 8pt; text-align: left; margin-left: 8mm;} ' +
-                         '</style></head><body>');
+                        '@page { size: 50mm 25mm; margin: 0; } ' +
+                        'body { font-family: Arial, sans-serif; margin: 0; padding: 0; } ' +
+                        '.label-container { width: 50mm; height: 25mm; padding: 0; box-sizing: border-box; page-break-after: always; display: flex; flex-direction: row; align-items: center; justify-content: space-between; overflow: hidden; position: relative; } ' +
+                        '.text-container { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; } ' +
+                        '.qrcode-container { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
+                        '.qrcode img { max-width: 100%; max-height: 100%; } ' +
+                        '.text { font-size: 8pt; text-align: left; } ' +
+                        '</style></head><body>');
 
+    // Iterasi untuk setiap baris yang dipilih
     selectedRows.forEach(function(row) {
         var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=https://ecard.dafam.cloud/?folio=' + encodeURIComponent(row.folio) + '&size=80x80';
 
-        iframeDocument.write('<div class="label">' +
-                             '<div class="text"><b>Room</b> ' + row.room + '<br><b>Wifi</b> dafam<br><b>Password</b><br>krasansare<br><br>Scan Me!..</div>' +
-                             '<div class="qrcode"><img src="' + qrCodeUrl + '"></div>' +
-                             '</div>');
+        iframeDocument.write('<div class="label-container">' +
+                            '<div class="text-container">' +
+                            '<div class="text"><b>Room</b> ' + row.room + '<br><b>Wifi</b> dafam<br><b>Password</b><br>krasansare<br><br>Scan Me!..</div>' +
+                            '</div>' +
+                            '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
+                            '</div>');
     });
 
+    // Menutup dokumen iframe setelah menulis semua konten
     iframeDocument.write('</body></html>');
     iframeDocument.close();
+
 
     iframe.onload = function() {
         iframe.contentWindow.print();
