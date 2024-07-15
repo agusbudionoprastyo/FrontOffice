@@ -12,7 +12,6 @@ require_once '../helper/connection.php';
 <section class="section">
   <div class="section-header d-flex justify-content-between">
     <b><i class="fa-solid fa-fire"></i> FrontOffice <i class="fa-solid fa-folder-open"></i> Regcard Guestfolio</b>
-    <a href="#" onclick="syncData(); return false;" class="btn btn-dark rounded-pill"><i class= "fa-solid fa-rotate fa-beat-fade"></i> SYNC DATA</a>
   </div>
 
 <!-- Date Filter -->
@@ -48,7 +47,9 @@ require_once '../helper/connection.php';
         <div class="col-auto">
             <button type="button" class="btn btn-dark rounded-pill" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> PRINT LABEL</button>
         </div>  
-
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary rounded-pill" onclick="syncData();"><i class="fa-solid fa-rotate fa-beat-fade"></i> SYNC DATA</button>
+        </div>
         </div>
     </div>
 </form>
