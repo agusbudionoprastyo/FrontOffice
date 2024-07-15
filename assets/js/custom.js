@@ -176,13 +176,13 @@ function printSelectedQRCode() {
                         '.text-container { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; } ' +
                         '.qrcode-container { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
                         '.qrcode { font-size: 6pt; text-align: center; } ' +
-                        '.qrcode img { width: 15mm; height: 15mm; max-width: 100%; max-height: 100%;} ' +
+                        '.qrcode img { max-width: 100%; max-height: 100%;} ' +
                         '.text { font-size: 8pt; text-align: left; } ' +
                         '</style></head><body>');
 
     // Iterasi untuk setiap baris yang dipilih
     selectedRows.forEach(function(row) {
-        var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=https://ecard.dafam.cloud/?folio=' + encodeURIComponent(row.folio) + '&size=80x80';
+        var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=https://ecard.dafam.cloud/?folio=' + encodeURIComponent(row.folio) + '&size=15mmx15mm';
 
         iframeDocument.write('<div class="label-container">' +
                             '<div class="text-container">' +
