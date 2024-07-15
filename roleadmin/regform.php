@@ -143,9 +143,8 @@ require_once '../helper/connection.php';
                                             <input type="checkbox" class="rowCheckbox" name="selectedRows[]" 
                                                 value="<?php echo $row['folio']; ?>"
                                                   data-room="<?php echo htmlspecialchars($row['room']); ?>"
-                                                    data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
-                                          <?php endif; ?>
-                                          <?php echo $row['room']; ?>
+                                                    data-folio="<?php echo htmlspecialchars($row['folio']); ?>"><?php echo $row['room']; ?>
+                                          <?php endif; ?> 
                                     </td>
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td>
