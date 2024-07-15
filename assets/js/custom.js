@@ -175,7 +175,8 @@ function printSelectedQRCode() {
                         '.label-container { width: 50mm; height: 25mm; padding: 0; box-sizing: border-box; page-break-after: always; display: flex; flex-direction: row; align-items: center; justify-content: space-between; overflow: hidden; position: relative; } ' +
                         '.text-container { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; } ' +
                         '.qrcode-container { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
-                        '.qrcode img { width: 15mm; height: 15mm; max-width: 100%; max-height: 100%; font-size: 6pt;} ' +
+                        '.qrcode { font-size: 6pt; text-align: center; } ' +
+                        '.qrcode img { width: 15mm; height: 15mm; max-width: 100%; max-height: 100%;} ' +
                         '.text { font-size: 8pt; text-align: left; } ' +
                         '</style></head><body>');
 
