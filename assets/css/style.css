@@ -3045,12 +3045,17 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
   
   #table-2 th:nth-child(1),
   #table-2 td:nth-child(1) {
-  min-width: 200px; /* Kolom REGCARD */
+  min-width: 200px; /* Kolom NAME */
   }
   
   #table-2 th:nth-child(2),
   #table-2 td:nth-child(2) {
-  min-width: 250px; /* Kolom GUESTBILL */
+  min-width: 250px; /* Kolom FOLIO */
+  }
+
+  #table-2 th:nth-child(3),
+  #table-2 td:nth-child(3) {
+  min-width: 150px; /* Kolom ROOM */
   }
   
   .dataTables_wrapper .dataTables_filter {
