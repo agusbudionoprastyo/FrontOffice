@@ -188,7 +188,7 @@ function printSelectedQRCode() {
                             '<div class="text-container">' +
                             '<div class="text"><b>Room</b> ' + row.room + '<br><b>Wifi</b> dafam<b><br>Password</b><br>krasansare<br><br></div>' +
                             '</div>' +
-                            '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div>Scan me..!</div>' +
+                            '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '">Scan me..!</div></div>' +
                             '</div>');
     });
 
