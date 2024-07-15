@@ -45,6 +45,9 @@ require_once '../helper/connection.php';
         <div class="col-auto">
             <button type="button" class="btn btn-danger rounded-pill" id="reset-filter"><i class="fa-solid fa-filter-circle-xmark"></i></button>
         </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-dark rounded-pill" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i></button>
+        </div>  
 
         </div>
     </div>
@@ -58,7 +61,7 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox"> <button type="button" class="btn btn-default" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i></button></th>
+                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox"> SELECT ALL</input></th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
                                 <th>ROOM</th>
