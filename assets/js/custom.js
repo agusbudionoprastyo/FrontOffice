@@ -130,12 +130,13 @@ function printSelectedQRCode() {
     iframeDocument.write('<html><head><style>' +
                          '@page { size: 50mm 25mm; margin: 0; } ' +
                          'body { font-family: Arial, sans-serif; margin: 0; padding: 0; } ' +
-                         '.label { width: 50mm; height: 25mm; padding: 5mm; box-sizing: border-box; ' +
+                        //  '.qr { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; ' +
+                         '.label { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; ' +
                          'page-break-after: always; display: flex; flex-direction: row; align-items: center; ' +
                          'justify-content: center; overflow: hidden; position: relative; } ' +
                          '.qrcode { width: 15mm; height: 15mm; display: flex; justify-content: center; ' +
-                         'align-items: center; } ' +
-                         '.text { font-size: 8pt; text-align: left; margin-right: 10mm; } ' +
+                         'align-items: center; margin-left: 8mm;} ' +
+                         '.text { font-size: 8pt; text-align: left; } ' +
                          '</style></head><body>');
 
     selectedRows.forEach(function(row) {
