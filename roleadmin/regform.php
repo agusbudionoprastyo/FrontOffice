@@ -65,7 +65,7 @@ require_once '../helper/connection.php';
                                 <th>REGCARD</th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
-                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox"> <label for="selectAllCheckbox"># ROOM</label></input></th>
+                                <th data-orderable="false"><input type="hidden" id="selectAllCheckbox"> <label for="selectAllCheckbox"># ROOM</label></input></th>
                                 <th>ROOMTYPE</th>
                                 <th>ROOM STATUS</th>
                                 <th>CHECKIN</th>
