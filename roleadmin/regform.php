@@ -118,10 +118,6 @@ require_once '../helper/connection.php';
                                 ?>
                                 <tr>
                                     <td>
-                                        <input type="checkbox" class="rowCheckbox" name="selectedRows[]" 
-                                        value="<?php echo $row['folio']; ?>"
-                                            data-room="<?php echo htmlspecialchars($row['room']); ?>"
-                                            data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
                                         <?php if (empty($row['at_regform'])): ?>
                                             <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
                                         <?php endif; ?>
@@ -141,7 +137,12 @@ require_once '../helper/connection.php';
                                     
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><?php echo $row['folio']; ?></a></td>
-                                    <td><?php echo $row['room']; ?></td>
+                                    <td><?php echo $row['room']; ?>
+                                    <input type="checkbox" class="rowCheckbox" name="selectedRows[]" 
+                                        value="<?php echo $row['folio']; ?>"
+                                            data-room="<?php echo htmlspecialchars($row['room']); ?>"
+                                            data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
+                                    </td>
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td>
                                         <?php $foliostatus = trim($row['foliostatus']); ?>
