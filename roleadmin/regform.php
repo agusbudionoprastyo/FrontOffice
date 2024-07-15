@@ -104,7 +104,7 @@ require_once '../helper/connection.php';
                             }
 
                             // Add ORDER BY clause
-                            $sql .= " ORDER BY dateci = CURDATE() DESC";
+                            $sql .= " ORDER BY dateci = CURDATE() DESC, folio DESC";
 
                             // Perform the query
                             $result = mysqli_query($connection, $sql);
