@@ -48,7 +48,7 @@ require_once '../helper/connection.php';
             <button type="button" class="btn btn-dark rounded-pill" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> PRINT LABEL</button>
         </div>  
         <div class="col-auto">
-            <button type="button" class="btn btn-primary rounded-pill" onclick="syncData();"><i class="fa-solid fa-rotate fa-beat-fade"></i> SYNC DATA</button>
+            <button type="button" class="btn btn-light rounded-pill" onclick="syncData();"><i class="fa-solid fa-rotate fa-beat-fade"></i> SYNC DATA</button>
         </div>
         </div>
     </div>
@@ -144,8 +144,8 @@ require_once '../helper/connection.php';
                                                 value="<?php echo $row['folio']; ?>"
                                                   data-room="<?php echo htmlspecialchars($row['room']); ?>"
                                                     data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
-                                              <?php echo $row['room']; ?>
                                           <?php endif; ?>
+                                          <?php echo $row['room']; ?>
                                     </td>
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td>
