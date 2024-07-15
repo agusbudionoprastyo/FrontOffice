@@ -147,7 +147,9 @@ function printSelectedQRCode() {
                         '.qrcode-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
                         '.qrcode img { max-width: 100%; max-height: 100%;} ' +
                         '.text { font-size: 10pt; text-align: left; } ' +
-                        '</style></head><body>');
+                        '</style>' +
+                        '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">' + // Tambahkan link untuk FontAwesome di sini
+                        '</head><body>');
 
     // Iterasi untuk setiap baris yang dipilih
     selectedRows.forEach(function(row) {
@@ -155,7 +157,7 @@ function printSelectedQRCode() {
 
         iframeDocument.write('<div class="label-container">' +
                             '<div class="text-container">' +
-                            '<div class="text"><b>Room ' + row.room + '</b><br><br><b>Wifi</b> dafam<b><br>Password</b><br>krasansare<br><br></div>' +
+                            '<div class="text"><br><b>Room ' + row.room + '</b><br><br><b><i class="fa-solid fa-wifi"></i></b> dafam<br><b><i class="fa-solid fa-key"></i></b><br>krasansare</div>' +
                             '</div>' +
                             '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
                             '</div>');
@@ -173,13 +175,6 @@ function printSelectedQRCode() {
         }, 100);
     };
 }
-// // Function to handle Select All checkbox
-// document.getElementById('selectAllCheckbox').addEventListener('click', function() {
-//     var checkboxes = document.querySelectorAll('.rowCheckbox');
-//     checkboxes.forEach(function(checkbox) {
-//         checkbox.checked = document.getElementById('selectAllCheckbox').checked;
-//     });
-// });
 
 function printRow(button) {
     var row = button.closest('tr');
@@ -210,7 +205,6 @@ function printQRCode(folio, room) {
                         '.label-container { width: 50mm; height: 25mm; padding: 0; box-sizing: border-box; page-break-after: always; display: flex; flex-direction: row; align-items: center; justify-content: space-between; overflow: hidden; position: relative; } ' +
                         '.text-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; } ' +
                         '.qrcode-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
-                        '.qrcode { font-size: 6pt; text-align: center; } ' +
                         '.qrcode img { max-width: 100%; max-height: 100%;} ' +
                         '.text { font-size: 10pt; text-align: left; } ' +
                         '</style></head><body>');
