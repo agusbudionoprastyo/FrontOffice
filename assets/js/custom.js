@@ -219,7 +219,7 @@ function printQRCode(folio, room) {
 
     iframeDocument.write('<div class="label-container">' +
                         '<div class="text-container">' +
-                        '<div class="text"><b>Room ' + room + '</b><br><br><b>Wifi</b> dafam<b><br>Password</b><br>krasansare<br><br></div>' +
+                        '<div class="text"><br><b>Room ' + room + '</b><br><br><b>Wifi</b> dafam<b><br>Password</b><br>krasansare<br><br></div>' +
                         '</div>' +
                         '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
                         '</div>');
