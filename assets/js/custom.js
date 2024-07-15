@@ -187,11 +187,11 @@ function printRow(button) {
     var folio = row.querySelector('td:nth-child(2)').textContent.trim(); // Adjust based on your table structure
     var room = row.querySelector('td:nth-child(1)').textContent.trim(); // Adjust based on your table structure
 
-    printQRCodeAndInfo(folio, room);
+    printQRCode(folio, room);
 }
 
 
-function printSelectedRow(button) {
+function printSelectedQRCode(button) {
     var row = button.closest('tr');
     var checkbox = row.querySelector('.rowCheckbox:checked');
 
