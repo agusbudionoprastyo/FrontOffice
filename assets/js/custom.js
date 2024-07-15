@@ -116,7 +116,7 @@ function printSelectedQRCode() {
         iziToast.error({
             title: 'Error',
             message: 'Please select at least one row to print.',
-            position: 'topRight'
+            position: 'topCenter'
         });
         return;
     }
