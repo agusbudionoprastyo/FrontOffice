@@ -93,103 +93,6 @@ function syncData() {
 };
 
 // Function to get selected rows
-// function getSelectedRows() {
-//     var selectedRows = [];
-//     var checkboxes = document.querySelectorAll('.rowCheckbox:checked');
-
-//     checkboxes.forEach(function(checkbox) {
-//         var row = checkbox.closest('tr');
-//         selectedRows.push({
-//             room: row.querySelector('td:nth-child(4)').textContent.trim(), // Adjust based on your table structure
-//             folio: checkbox.value // Assuming 'folio' is the value you want to collect
-//         });
-//     });
-
-//     return selectedRows;
-// }
-
-// // Function to print selected QR codes
-// function printSelectedQRCode() {
-//     var selectedRows = getSelectedRows();
-
-//     if (selectedRows.length === 0) {
-//         iziToast.error({
-//             title: 'Error',
-//             message: 'Please select at least one row to print.',
-//             position: 'topCenter'
-//         });
-//         return;
-//     }
-
-//     // Membuat iframe element
-//     var iframe = document.createElement('iframe');
-
-//     // Menetapkan beberapa gaya untuk iframe
-//     iframe.style.position = 'absolute';
-//     iframe.style.left = '-9999px'; // Mengatur posisi di luar layar
-//     iframe.style.width = '50mm'; // Menetapkan lebar iframe sesuai gaya label
-//     iframe.style.height = '25mm'; // Menetapkan tinggi iframe sesuai gaya label
-//     iframe.style.border = 'none'; // Menghapus border iframe
-
-//     // Menambahkan iframe ke dalam body dokumen
-//     document.body.appendChild(iframe);
-
-//     // Mendapatkan dokumen di dalam iframe
-//     var iframeDocument = iframe.contentWindow.document;
-
-//     // Menuliskan HTML, CSS, dan konten label ke dalam dokumen iframe
-//     iframeDocument.open();
-//     iframeDocument.write('<html><head><style>' +
-//                         '@page { size: 50mm 25mm; margin: 0; } ' +
-//                         'body { font-family: Arial, sans-serif; margin: 0; padding: 0; } ' +
-//                         '.label-container { width: 50mm; height: 25mm; padding: 0; box-sizing: border-box; page-break-after: always; display: flex; flex-direction: row; align-items: center; justify-content: space-between; overflow: hidden; position: relative; } ' +
-//                         '.text-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; } ' +
-//                         '.qrcode-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
-//                         '.qrcode { font-size: 6pt; text-align: center; } ' +
-//                         '.qrcode img { max-width: 100%; max-height: 100%;} ' +
-//                         '.text { font-size: 8pt; text-align: left; } ' +
-//                         '</style></head><body>');
-
-//     // Iterasi untuk setiap baris yang dipilih
-//     selectedRows.forEach(function(row) {
-//         var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=https://ecard.dafam.cloud/?folio=' + encodeURIComponent(row.folio) + '&size=80x80';
-
-//         iframeDocument.write('<div class="label-container">' +
-//                             '<div class="text-container">' +
-//                             '<div class="text"><b>Room</b> ' + row.room + '<br><br><b>Wifi</b><br>dafamsemarang<b><br>Password</b><br>krasansare<br><br></div>' +
-//                             '</div>' +
-//                             '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
-//                             '</div>');
-//     });
-
-//     // Menutup dokumen iframe setelah menulis semua konten
-//     iframeDocument.write('</body></html>');
-//     iframeDocument.close();
-
-
-//     iframe.onload = function() {
-//         iframe.contentWindow.print();
-//         setTimeout(function() {
-//             document.body.removeChild(iframe);
-//         }, 100);
-//     };
-// }
-// // Function to handle Select All checkbox
-// document.getElementById('selectAllCheckbox').addEventListener('click', function() {
-//     var checkboxes = document.querySelectorAll('.rowCheckbox');
-//     checkboxes.forEach(function(checkbox) {
-//         checkbox.checked = document.getElementById('selectAllCheckbox').checked;
-//     });
-// });
-
-function printRow(button) {
-    var row = button.closest('tr');
-    var folio = row.querySelector('td:nth-child(3)').textContent.trim(); // Adjust based on your table structure
-    var room = row.querySelector('td:nth-child(4)').textContent.trim(); // Adjust based on your table structure
-
-    printQRCode(folio, room);
-}
-
 function getSelectedRows() {
     var selectedRows = [];
     var checkboxes = document.querySelectorAll('.rowCheckbox:checked');
@@ -205,21 +108,86 @@ function getSelectedRows() {
     return selectedRows;
 }
 
+// Function to print selected QR codes
 function printSelectedQRCode() {
     var selectedRows = getSelectedRows();
 
     if (selectedRows.length === 0) {
         iziToast.error({
             title: 'Error',
-            message: 'Please select the row to print.',
+            message: 'Please select at least one row to print.',
             position: 'topCenter'
         });
         return;
     }
 
+    // Membuat iframe element
+    var iframe = document.createElement('iframe');
+
+    // Menetapkan beberapa gaya untuk iframe
+    iframe.style.position = 'absolute';
+    iframe.style.left = '-9999px'; // Mengatur posisi di luar layar
+    iframe.style.width = '50mm'; // Menetapkan lebar iframe sesuai gaya label
+    iframe.style.height = '25mm'; // Menetapkan tinggi iframe sesuai gaya label
+    iframe.style.border = 'none'; // Menghapus border iframe
+
+    // Menambahkan iframe ke dalam body dokumen
+    document.body.appendChild(iframe);
+
+    // Mendapatkan dokumen di dalam iframe
+    var iframeDocument = iframe.contentWindow.document;
+
+    // Menuliskan HTML, CSS, dan konten label ke dalam dokumen iframe
+    iframeDocument.open();
+    iframeDocument.write('<html><head><style>' +
+                        '@page { size: 50mm 25mm; margin: 0; } ' +
+                        'body { font-family: Arial, sans-serif; margin: 0; padding: 0; } ' +
+                        '.label-container { width: 50mm; height: 25mm; padding: 0; box-sizing: border-box; page-break-after: always; display: flex; flex-direction: row; align-items: center; justify-content: space-between; overflow: hidden; position: relative; } ' +
+                        '.text-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; } ' +
+                        '.qrcode-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
+                        '.qrcode { font-size: 6pt; text-align: center; } ' +
+                        '.qrcode img { max-width: 100%; max-height: 100%;} ' +
+                        '.text { font-size: 8pt; text-align: left; } ' +
+                        '</style></head><body>');
+
+    // Iterasi untuk setiap baris yang dipilih
     selectedRows.forEach(function(row) {
-        printQRCode(row.folio, row.room);
+        var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=https://ecard.dafam.cloud/?folio=' + encodeURIComponent(row.folio) + '&size=80x80';
+
+        iframeDocument.write('<div class="label-container">' +
+                            '<div class="text-container">' +
+                            '<div class="text"><b>Room</b> ' + row.room + '<br><br><b>Wifi</b><br>dafamsemarang<b><br>Password</b><br>krasansare<br><br></div>' +
+                            '</div>' +
+                            '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
+                            '</div>');
     });
+
+    // Menutup dokumen iframe setelah menulis semua konten
+    iframeDocument.write('</body></html>');
+    iframeDocument.close();
+
+
+    iframe.onload = function() {
+        iframe.contentWindow.print();
+        setTimeout(function() {
+            document.body.removeChild(iframe);
+        }, 100);
+    };
+}
+// // Function to handle Select All checkbox
+// document.getElementById('selectAllCheckbox').addEventListener('click', function() {
+//     var checkboxes = document.querySelectorAll('.rowCheckbox');
+//     checkboxes.forEach(function(checkbox) {
+//         checkbox.checked = document.getElementById('selectAllCheckbox').checked;
+//     });
+// });
+
+function printRow(button) {
+    var row = button.closest('tr');
+    var folio = row.querySelector('td:nth-child(3)').textContent.trim(); // Adjust based on your table structure
+    var room = row.querySelector('td:nth-child(4)').textContent.trim(); // Adjust based on your table structure
+
+    printQRCode(folio, room);
 }
 
 function printQRCode(folio, room) {
