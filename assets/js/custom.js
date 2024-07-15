@@ -147,7 +147,7 @@ function printSelectedQRCode() {
                         '.qrcode-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
                         '.qrcode { font-size: 6pt; text-align: center; } ' +
                         '.qrcode img { max-width: 100%; max-height: 100%;} ' +
-                        '.text { font-size: 8pt; text-align: left; } ' +
+                        '.text { font-size: 10pt; text-align: left; } ' +
                         '</style></head><body>');
 
     // Iterasi untuk setiap baris yang dipilih
@@ -156,7 +156,7 @@ function printSelectedQRCode() {
 
         iframeDocument.write('<div class="label-container">' +
                             '<div class="text-container">' +
-                            '<div class="text"><b>Room</b> ' + row.room + '<br><br><b>Wifi</b><br>dafamsemarang<b><br>Password</b><br>krasansare<br><br></div>' +
+                            '<div class="text"><b>Room ' + row.room + '</b><br><br><b>Wifi</b> dafam<b><br>Password</b><br>krasansare<br><br></div>' +
                             '</div>' +
                             '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
                             '</div>');
@@ -220,7 +220,7 @@ function printQRCode(folio, room) {
 
     iframeDocument.write('<div class="label-container">' +
                         '<div class="text-container">' +
-                        '<div class="text"><b>Room ' + room + '</b><br><b>Wifi</b> dafam<b><br>Password</b><br>krasansare<br><br></div>' +
+                        '<div class="text"><b>Room ' + room + '</b><br><br><b>Wifi</b> dafam<b><br>Password</b><br>krasansare<br><br></div>' +
                         '</div>' +
                         '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
                         '</div>');
