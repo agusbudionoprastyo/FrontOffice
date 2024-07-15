@@ -93,20 +93,20 @@ function syncData() {
 };
 
 // Function to get selected rows
-function getSelectedRows() {
-    var selectedRows = [];
-    var checkboxes = document.querySelectorAll('.rowCheckbox:checked');
+// function getSelectedRows() {
+//     var selectedRows = [];
+//     var checkboxes = document.querySelectorAll('.rowCheckbox:checked');
 
-    checkboxes.forEach(function(checkbox) {
-        var row = checkbox.closest('tr');
-        selectedRows.push({
-            room: row.querySelector('td:nth-child(4)').textContent.trim(), // Adjust based on your table structure
-            folio: checkbox.value // Assuming 'folio' is the value you want to collect
-        });
-    });
+//     checkboxes.forEach(function(checkbox) {
+//         var row = checkbox.closest('tr');
+//         selectedRows.push({
+//             room: row.querySelector('td:nth-child(4)').textContent.trim(), // Adjust based on your table structure
+//             folio: checkbox.value // Assuming 'folio' is the value you want to collect
+//         });
+//     });
 
-    return selectedRows;
-}
+//     return selectedRows;
+// }
 
 // // Function to print selected QR codes
 // function printSelectedQRCode() {
@@ -184,12 +184,26 @@ function getSelectedRows() {
 
 function printRow(button) {
     var row = button.closest('tr');
-    var folio = row.querySelector('td:nth-child(2)').textContent.trim(); // Adjust based on your table structure
-    var room = row.querySelector('td:nth-child(1)').textContent.trim(); // Adjust based on your table structure
+    var folio = row.querySelector('td:nth-child(3)').textContent.trim(); // Adjust based on your table structure
+    var room = row.querySelector('td:nth-child(4)').textContent.trim(); // Adjust based on your table structure
 
     printQRCode(folio, room);
 }
 
+function getSelectedRows() {
+    var selectedRows = [];
+    var checkboxes = document.querySelectorAll('.rowCheckbox:checked');
+
+    checkboxes.forEach(function(checkbox) {
+        var row = checkbox.closest('tr');
+        selectedRows.push({
+            room: row.querySelector('td:nth-child(4)').textContent.trim(), // Adjust based on your table structure
+            folio: checkbox.value // Assuming 'folio' is the value you want to collect
+        });
+    });
+
+    return selectedRows;
+}
 
 function printSelectedQRCode() {
     var selectedRows = getSelectedRows();
@@ -203,7 +217,9 @@ function printSelectedQRCode() {
         return;
     }
 
-    printQRCode(folio, room);
+    selectedRows.forEach(function(row) {
+        printQRCode(row.folio, row.room);
+    });
 }
 
 function printQRCode(folio, room) {
