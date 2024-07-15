@@ -206,7 +206,7 @@ function printQRCode(folio, room) {
                         '.text-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; } ' +
                         '.qrcode-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
                         '.qrcode img { max-width: 100%; max-height: 100%;} ' +
-                        '.text { font-size: 10pt; text-align: left; } ' +
+                        '.text { font-size: 8pt; text-align: left; } ' +
                         '</style>' +
                         '<script src="https://kit.fontawesome.com/3595b79eb9.js" crossorigin="anonymous"></script>' + // Tambahkan link untuk FontAwesome di sini
                         '</head><body>');
