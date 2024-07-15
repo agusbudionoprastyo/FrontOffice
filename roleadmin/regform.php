@@ -61,10 +61,10 @@ require_once '../helper/connection.php';
                     <table class="table table-hover table-striped w-100" id="table-2">
                         <thead>
                             <tr>
-                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox"> # SELECT ALL</input></th>
+                                <th>REGCARD</th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
-                                <th>ROOM</th>
+                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox"><label for="selectAllCheckbox"> # ROOM</label></input></th>
                                 <th>ROOMTYPE</th>
                                 <th>ROOM STATUS</th>
                                 <th>CHECKIN</th>
