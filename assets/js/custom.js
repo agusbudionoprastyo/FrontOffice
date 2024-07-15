@@ -148,7 +148,7 @@ function printSelectedQRCode() {
                         '.qrcode img { max-width: 100%; max-height: 100%;} ' +
                         '.text { font-size: 10pt; text-align: left; } ' +
                         '</style>' +
-                        '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">' + // Tambahkan link untuk FontAwesome di sini
+                        '<script src="https://kit.fontawesome.com/3595b79eb9.js" crossorigin="anonymous"></script>' + // Tambahkan link untuk FontAwesome di sini
                         '</head><body>');
 
     // Iterasi untuk setiap baris yang dipilih
