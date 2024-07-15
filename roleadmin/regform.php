@@ -65,7 +65,7 @@ require_once '../helper/connection.php';
                                 <th>REGCARD</th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
-                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox"><label for="selectAllCheckbox"> # ROOM</label></input></th>
+                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox"> <label for="selectAllCheckbox"># ROOM</label></input></th>
                                 <th>ROOMTYPE</th>
                                 <th>ROOM STATUS</th>
                                 <th>CHECKIN</th>
@@ -138,11 +138,11 @@ require_once '../helper/connection.php';
                                     
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><?php echo $row['folio']; ?></a></td>
-                                    <td><?php echo $row['room']; ?>
-                                    <input type="checkbox" class="rowCheckbox" name="selectedRows[]" 
+                                    <td><input type="checkbox" class="rowCheckbox" name="selectedRows[]" 
                                         value="<?php echo $row['folio']; ?>"
                                             data-room="<?php echo htmlspecialchars($row['room']); ?>"
                                             data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
+                                            <?php echo $row['room']; ?>
                                     </td>
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td>
