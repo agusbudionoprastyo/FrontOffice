@@ -138,14 +138,27 @@ require_once '../helper/connection.php';
                                     
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><?php echo $row['folio']; ?></a></td>
-                                    <td>
+                                    <!-- <td>
                                           <?php if (!empty($row['room'])): ?>
                                             <input type="checkbox" class="rowCheckbox" name="selectedRows[]" id="selectedRows"
                                                 value="<?php echo $row['folio']; ?>"
                                                   data-room="<?php echo htmlspecialchars($row['room']); ?>"
                                                     data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
                                           <?php endif; ?>
-                                          <label for="selectedRows"><?php echo $row['room']; ?></label>
+                                          <?php echo $row['room']; ?>
+                                    </td> -->
+                                    <td class="room-cell" data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
+                                          <?php if (!empty($row['room'])): ?>
+                                            <input type="checkbox" class="rowCheckbox" name="selectedRows[]" id="selectedRows_<?php echo $row['folio']; ?>"
+
+                                                value="<?php echo $row['folio']; ?>"
+                                                  data-room="<?php echo htmlspecialchars($row['room']); ?>"
+
+                                                    data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
+
+                                          <?php endif; ?>
+
+                                          <?php echo $row['room']; ?>
                                     </td>
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td>
@@ -286,6 +299,21 @@ require_once '../layout/_bottom.php';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- <script type="text/javascript" src="../assets/js/qrCode/qrcode.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" integrity="sha512-ZDSPMa/JM1D+7kdg2x3BsruQ6T/JpJo3jWDWkCZsP+5yVyp1KfESqLI+7RqB5k24F7p2cV7i2YHh/890y6P6Sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.room-cell').forEach(function(cell) {
+      cell.addEventListener('click', function(event) {
+        if (event.target.tagName !== 'INPUT') {
+          const checkbox = cell.querySelector('.rowCheckbox');
+          if (checkbox) {
+            checkbox.checked = !checkbox.checked;
+          }
+        }
+      });
+    });
+  });
+</script>
 
 <!-- Page Specific JS File -->
 <?php

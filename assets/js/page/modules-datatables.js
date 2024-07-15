@@ -37,5 +37,5 @@ $("[data-checkboxes]").each(function () {
 // Initialize DataTable with initial sorting order
 $("#table-2").dataTable({
   columnDefs: [{ sortable: false, targets: [0] }],
-  order: [[2, "desc"]] // Sort by the first column (ID) in descending order initially
+  order: [[3, "desc"]] // Sort by the first column (ID) in descending order initially
 });
