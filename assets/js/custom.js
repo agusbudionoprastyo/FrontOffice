@@ -120,7 +120,6 @@ function printSelectedQRCode() {
         });
         return;
     }
-    header('Location: regform.php');
 
     // Membuat iframe element
     var iframe = document.createElement('iframe');
@@ -182,5 +181,7 @@ document.getElementById('selectAllCheckbox').addEventListener('click', function(
         checkbox.checked = document.getElementById('selectAllCheckbox').checked;
     });
 });
+
+header('Location: regform.php');
 
 "use strict";
