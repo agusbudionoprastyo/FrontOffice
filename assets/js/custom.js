@@ -175,7 +175,7 @@ function printSelectedQRCode() {
                         '.label-container { width: 50mm; height: 25mm; padding: 0; box-sizing: border-box; page-break-after: always; display: flex; flex-direction: row; align-items: center; justify-content: space-between; overflow: hidden; position: relative; } ' +
                         '.text-container { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; } ' +
                         '.qrcode-container { width: 25mm; height: 25mm; padding: 5mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
-                        '.qrcode img { width: 10mm; height: 10mm; max-width: 100%; max-height: 100%; } ' +
+                        '.qrcode img { width: 15mm; height: 15mm; max-width: 100%; max-height: 100%; } ' +
                         '.text { font-size: 8pt; text-align: left; } ' +
                         '</style></head><body>');
 
@@ -187,7 +187,7 @@ function printSelectedQRCode() {
                             '<div class="text-container">' +
                             '<div class="text"><b>Room</b> ' + row.room + '<br><b>Wifi</b> dafam<br><b>Password</b><br>krasansare<br><br></div>' +
                             '</div>' +
-                            '<div class="qrcode-container">Scan Me!<div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
+                            '<div class="qrcode-container"><div class="qrcode">Scan Me!<img src="' + qrCodeUrl + '"></div></div>' +
                             '</div>');
     });
 
