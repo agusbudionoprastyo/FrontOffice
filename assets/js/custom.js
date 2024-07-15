@@ -174,7 +174,7 @@ function printSelectedQRCode() {
                         'body { font-family: Arial, sans-serif; margin: 0; padding: 0; } ' +
                         '.label-container { width: 50mm; height: 25mm; padding: 0; box-sizing: border-box; page-break-after: always; display: flex; flex-direction: row; align-items: center; justify-content: space-between; overflow: hidden; position: relative; } ' +
                         '.text-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; } ' +
-                        '.qrcode-container { width: 25mm; height: 25mm; padding: 0; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
+                        '.qrcode-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
                         '.qrcode { font-size: 6pt; text-align: center; } ' +
                         '.qrcode img { max-width: 100%; max-height: 100%;} ' +
                         '.text { font-size: 8pt; text-align: left; } ' +
@@ -186,9 +186,9 @@ function printSelectedQRCode() {
 
         iframeDocument.write('<div class="label-container">' +
                             '<div class="text-container">' +
-                            '<div class="text"><b>Room</b> ' + row.room + '<br><br><b>Wifi</b> dafam<b><br>Password</b><br>krasansare<br><br></div>' +
+                            '<div class="text"><b>Room</b> ' + row.room + '<br><br><b>Wifi</b><br>dafamsemarang<b><br>Password</b><br>krasansare<br><br></div>' +
                             '</div>' +
-                            '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '">Scan me..!</div></div>' +
+                            '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
                             '</div>');
     });
 
