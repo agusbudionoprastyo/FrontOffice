@@ -145,6 +145,7 @@ require_once '../helper/connection.php';
                                             data-room="<?php echo htmlspecialchars($row['room']); ?>"
                                               data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
                                           <?php endif; ?>
+                                          <button type="button" class="btn btn-default rounded-pill" onclick="printRow(this)"><i class="fa-solid fa-print fa-xl"></i></button>
                                         <?php echo $row['room']; ?>  
                                     </td>
                                     <td><?php echo $row['roomtype']; ?></td>
