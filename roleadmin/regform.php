@@ -48,7 +48,7 @@ require_once '../helper/connection.php';
             <button type="button" class="btn btn-dark rounded-pill" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> PRINT LABEL</button>
         </div>  
         <div class="col-auto">
-            <button type="button" class="btn btn-info rounded-pill" onclick="syncData();"><i class="fa-solid fa-rotate fa-beat-fade"></i> SYNC DATA</button>
+            <button type="button" class="btn btn-secondary rounded-pill" onclick="syncData();"><i class="fa-solid fa-rotate fa-beat-fade"></i> SYNC DATA</button>
         </div>
         </div>
     </div>
