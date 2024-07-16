@@ -147,6 +147,7 @@ function printSelectedQRCode() {
                         '.qrcode-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
                         '.qrcode img { max-width: 100%; max-height: 100%;} ' +
                         '.text { font-size: 8pt; text-align: left; } ' +
+                        '.textRoom { font-size: 14pt; text-align: left; } ' +
                         '</style>' +
                         '<script src="https://kit.fontawesome.com/3595b79eb9.js" crossorigin="anonymous"></script>' + // Tambahkan link untuk FontAwesome di sini
                         '</head><body>');
@@ -156,8 +157,9 @@ function printSelectedQRCode() {
         var qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?data=https://ecard.dafam.cloud/?folio=' + encodeURIComponent(row.folio) + '&size=80x80';
 
         iframeDocument.write('<div class="label-container">' +
-                            '<div class="text-container">' +
-                            '<div class="text"><b>ROOM ' + row.room + '</b><br><br><b>WiFi</b><br>dafamsemarang<br><b>PASSWORD</b><br>krasansare</div>' +
+                            '<div class="text-container">' + 
+                            '<div class="textRoom"><b>ROOM ' + row.room + '</b><br><br></br></div>' +
+                            '<div class="text"><b>WiFi</b><br>dafamsemarang<br><b>PASSWORD</b><br>krasansare</div>' +
                             '</div>' +
                             '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
                             '</div>');
