@@ -157,7 +157,7 @@ function printSelectedQRCode() {
 
         iframeDocument.write('<div class="label-container">' +
                             '<div class="text-container">' +
-                            '<div class="text"><b>ROOM ' + row.room + '</b><br><br><b>WiFi</b><br>dafamsemarang<br><b>PASSWORD</><br>krasansare</div>' +
+                            '<div class="text"><b>ROOM ' + row.room + '</b><br><br><b>WiFi</b><br>dafamsemarang<br><b>PASSWORD</b><br>krasansare</div>' +
                             '</div>' +
                             '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
                             '</div>');
