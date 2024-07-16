@@ -158,7 +158,7 @@ function printSelectedQRCode() {
 
         iframeDocument.write('<div class="label-container">' +
                             '<div class="text-container">' + 
-                            '<div class="textRoom"><b>' + row.room + '</b><br></div>' +
+                            '<div class="textRoom"><b>' + row.room + '</b><br><br></div>' +
                             '<div class="text"><b>WiFi</b><br>dafamsemarang<br><b>PASSWORD</b><br>krasansare</div>' +
                             '</div>' +
                             '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
@@ -209,6 +209,7 @@ function printQRCode(folio, room) {
                         '.qrcode-container { width: 25mm; height: 25mm; padding: 2mm; box-sizing: border-box; display: flex; justify-content: center; align-items: center; } ' +
                         '.qrcode img { max-width: 100%; max-height: 100%;} ' +
                         '.text { font-size: 8pt; text-align: left; } ' +
+                        '.textRoom { font-size: 14pt; text-align: left; } ' +
                         '</style>' +
                         '<script src="https://kit.fontawesome.com/3595b79eb9.js" crossorigin="anonymous"></script>' + // Tambahkan link untuk FontAwesome di sini
                         '</head><body>');
@@ -217,7 +218,8 @@ function printQRCode(folio, room) {
 
     iframeDocument.write('<div class="label-container">' +
                         '<div class="text-container">' +
-                        '<div class="text"><b><i class="fa-solid fa-bed"></i> ' + room + '</b><br><br><b><i class="fa-solid fa-wifi"></i> dafam</b><br><b><i class="fa-solid fa-key"></i> krasansare</b><br><br></div>' +
+                        '<div class="textRoom"><b>' + row.room + '</b><br><br></div>' +
+                        '<div class="text"><b>WiFi</b><br>dafamsemarang<br><b>PASSWORD</b><br>krasansare</div>' +
                         '</div>' +
                         '<div class="qrcode-container"><div class="qrcode"><img src="' + qrCodeUrl + '"></div></div>' +
                         '</div>');
