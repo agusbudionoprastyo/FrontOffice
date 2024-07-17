@@ -121,7 +121,6 @@ require_once '../helper/connection.php';
                                         <?php if (empty($row['room'])): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_edit.php?folio=<?php echo $row['folio']; ?>"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
                                         <?php endif; ?>
-                                        <?php endif; ?>
                                         <?php if (empty($row['rc_signature_path'])): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1">unsigned <i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i></a>
                                         <?php endif; ?>
