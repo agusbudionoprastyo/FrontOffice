@@ -54,7 +54,7 @@ require_once '../helper/connection.php';
             <table class="table table-hover table-striped w-100" id="table-2">
               <thead>
               <tr>
-                <th>REGCARD</th>
+                <!-- <th>REGCARD</th> -->
                 <th>NAME</th>
                 <th>FOLIO</th>
                 <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox" style="display: none;"></input><label for="selectAllCheckbox"><i class="fa-solid fa-check-double" style="color: #63E6BE;"></i> ROOM</label></th>
@@ -159,7 +159,7 @@ require_once '../layout/_bottom.php';
     // Update the table body with new data
     $('#table-body').append(`
       <tr>
-        <td>${getRegcardButtons(data)}</td>
+        // <td>${getRegcardButtons(data)}</td>
         <td>${data.fname}</td>
         <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=${data.folio}" target="_blank">${data.folio}</a></td>
         <td>${getRoomInfo(data)}</td>
@@ -170,8 +170,8 @@ require_once '../layout/_bottom.php';
         <td>${data.birthday}</td>
         <td>${data.resv_phone}</td>
         <td>${data.resv_email}</td>
-        <td>${getGuestbillButtons(data)}</td>
-        <td>${getOtaVoucherButtons(data)}</td>
+        // <td>${getGuestbillButtons(data)}</td>
+        // <td>${getOtaVoucherButtons(data)}</td>
         <td>${getStatus(data)}</td>
         <td>${data.datecreate}</td>
       </tr>
