@@ -4,8 +4,10 @@
  * because it will make it harder for you to update.
  * 
  */
-// Modal
-$(document).ready(function(){
+$(document).ready(function() {
+    syncDataOnPageLoad(); // Panggil fungsi untuk menampilkan SweetAlert pada page load
+    
+    // Modal
     $('#deviceModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Tombol yang memicu modal
         var recipientId = button.data('id'); // Ekstrak info dari atribut data-id
@@ -22,10 +24,8 @@ $(document).ready(function(){
         modal.find('.modal-body form').attr('action', 'guestfolio_sign_update.php');
         modal.find('.modal-body form').append('<input type="hidden" name="guestfolio_id" value="' + recipientId + '">');
     });
-});
 
-// Filter
-$(document).ready(function(){
+    // Filter
     $('.custom-datepicker-input').datepicker({
         format: 'yyyy-mm-dd', // Format Tanggal (YYYY-MM-DD)
         autoclose: true,
@@ -65,6 +65,68 @@ $(document).ready(function(){
     });
 });
 
+
+// // Modal
+// $(document).ready(function(){
+//     $('#deviceModal').on('show.bs.modal', function (event) {
+//         var button = $(event.relatedTarget); // Tombol yang memicu modal
+//         var recipientId = button.data('id'); // Ekstrak info dari atribut data-id
+//         var modal = $(this);
+//         modal.find('.modal-body form').attr('action', 'regform_sign_update.php');
+//         modal.find('.modal-body form').append('<input type="hidden" name="regform_id" value="' + recipientId + '">');
+//     });
+
+//     // Event listener untuk tombol kedua
+//     $('#deviceModal2').on('show.bs.modal', function (event) {
+//         var button = $(event.relatedTarget); // Tombol yang memicu modal
+//         var recipientId = button.data('id'); // Ekstrak info dari atribut data-id
+//         var modal = $(this);
+//         modal.find('.modal-body form').attr('action', 'guestfolio_sign_update.php');
+//         modal.find('.modal-body form').append('<input type="hidden" name="guestfolio_id" value="' + recipientId + '">');
+//     });
+// });
+
+// // Filter
+// $(document).ready(function(){
+//     $('.custom-datepicker-input').datepicker({
+//         format: 'yyyy-mm-dd', // Format Tanggal (YYYY-MM-DD)
+//         autoclose: true,
+//         todayHighlight: true,
+//         clearBtn: true // Tampilkan tombol hapus
+//     });
+
+//     // Ketika nilai input berubah, serahkan formulir
+//     $('.custom-datepicker-input').on('change', function() {
+//         $('#filter').submit();
+//     });
+
+//     // Hapus inisialisasi DataTable sebelumnya
+//     if ($.fn.DataTable.isDataTable('#table-2')) {
+//         $('#table-2').DataTable().destroy();
+//     }
+
+//     // Inisialisasi DataTables
+//     var table = $('#table-2').DataTable({
+//             // Pengaturan-pengaturan DataTables lainnya
+//         });
+//             // Event listener untuk tombol "Enter" pada #search-input
+//     $('#search-input').keypress(function(event) {
+//         if (event.which === 13) {
+//             // Ambil nilai pencarian dari #search-input
+//             var searchText = $(this).val();
+
+//             // Lakukan pencarian pada tabel
+//             table.search(searchText).draw();
+//         }
+//     });
+
+//     // Handler untuk tombol reset filter
+//     $('#reset-filter').click(function() {
+//         $('.custom-datepicker-input').datepicker('setDate', null); // Mengatur tanggal datepicker ke null
+//         $('#filter').submit(); 
+//     });
+// });
+
 // JavaScript
 function showLoading() {
     document.getElementById('loading-overlay').style.display = 'block';
@@ -74,15 +136,90 @@ function hideLoading() {
     document.getElementById('loading-overlay').style.display = 'none';
 }
 
+// function syncData() {
+//     showLoading();
+
+//     $.ajax({
+//         url: 'https://103.236.201.34:3000/replicate', // Ganti dengan URL sesuai dengan endpoint server Anda
+//         method: 'GET',
+//         success: function(response) {
+//             console.log('Response from server:', response);
+//             hideLoading();
+//             location.reload(); // Reload halaman setelah iziToast ditutup (opsional)
+//         },
+//         error: function(xhr, status, error) {
+//             console.error('Error:', error);
+//             hideLoading();
+//         }
+//     });
+// };
+
+function syncDataOnPageLoad() {
+    // Ambil timestamp terakhir dari database
+    $.ajax({
+        url: '../roleadmin/get_last_sync.php', // Ganti dengan endpoint untuk mengambil dari database Anda
+        method: 'GET',
+        success: function(response) {
+            var lastSyncTime = response.lastSyncTime; // Ambil waktu terakhir sync dari respons JSON
+            
+            // Menampilkan SweetAlert dialog dengan timestamp terakhir
+            Swal.fire({
+                title: 'Sync Data',
+                html: 'Last Sync: <strong>' + (lastSyncTime ? lastSyncTime : 'Never synced') + '</strong><br><br>Do you want to sync data now?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Sync Now',
+                cancelButtonText: 'Later',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    syncData(); // Panggil fungsi syncData jika dikonfirmasi
+                }
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Error getting last sync time from database:', error);
+            
+            // Menampilkan SweetAlert dialog tanpa timestamp jika terjadi kesalahan
+            Swal.fire({
+                title: 'Sync Data',
+                text: 'Error retrieving last sync time. Do you want to sync data now?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Sync Now',
+                cancelButtonText: 'Later',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    syncData(); // Panggil fungsi syncData jika dikonfirmasi
+                }
+            });
+        }
+    });
+};
+
+
 function syncData() {
     showLoading();
 
     $.ajax({
-        url: 'https://103.236.201.34:3000/replicate', // Ganti dengan URL sesuai dengan endpoint server Anda
+        url: 'https://103.236.201.34:3000/replicate',
         method: 'GET',
         success: function(response) {
             console.log('Response from server:', response);
             hideLoading();
+            
+            // Simpan timestamp terakhir sync data ke dalam database
+            $.ajax({
+                url: '../roleadmin/save_last_sync.php', // endpoint untuk menyimpan ke database
+                method: 'POST',
+                data: { lastSyncTime: new Date().toISOString() }, // Mengirim waktu terakhir sync
+                success: function(response) {
+                    console.log('Last sync time saved to database:', response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error saving last sync time to database:', error);
+                }
+            });
+            
             location.reload(); // Reload halaman setelah iziToast ditutup (opsional)
         },
         error: function(xhr, status, error) {
