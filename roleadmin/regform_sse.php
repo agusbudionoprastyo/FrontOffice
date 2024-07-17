@@ -65,9 +65,6 @@ require_once '../helper/connection.php';
                 <th>DATEOFBIRTH</th>
                 <th>PHONE</th>
                 <th>EMAIL</th>
-                <th>GUESTBILL</th>
-                <th>CL / VOUCHER</th>
-                <th>STATUS</th>
                 <th>DATECREATE</th>
             </tr>
               </thead>
@@ -161,15 +158,14 @@ require_once '../layout/_bottom.php';
       <tr>
         <td>${data.fname}</td>
         <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=${data.folio}" target="_blank">${data.folio}</a></td>
-        <td>${getRoomInfo(data)}</td>
+        <td>${data.room}</td>
         <td>${data.roomtype}</td>
-        <td>${getFoliostatus(data)}</td>
+        <td>${data.foliostatus}</td>
         <td>${data.dateci}</td>
         <td>${data.dateco}</td>
         <td>${data.birthday}</td>
         <td>${data.resv_phone}</td>
         <td>${data.resv_email}</td>
-        <td>${getStatus(data)}</td>
         <td>${data.datecreate}</td>
       </tr>
     `);
