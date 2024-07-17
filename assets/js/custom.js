@@ -100,12 +100,24 @@ function syncDataOnPageLoad() {
         dataType: 'json', // Mengharapkan respons JSON
         success: function(response) {
             var lastSyncTime = response.lastSyncTime;
+            var lastSyncTimeObj = new Date(lastSyncTime);
+            var now = new Date();
 
             if (lastSyncTime) {
-                // Menampilkan SweetAlert dialog dengan timestamp terakhir
+                // Hitung selisih waktu dalam menit
+                var diffMinutes = Math.floor((now - lastSyncTimeObj) / (1000 * 60));
+
+                // Menampilkan SweetAlert dialog berdasarkan selisih waktu
+                var htmlContent = '';
+                if (diffMinutes < 5) {
+                    htmlContent = 'Sync Data Success (POWERPRO): <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?';
+                } else {
+                    htmlContent = 'Last Sync (POWERPRO): <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?';
+                }
+
                 Swal.fire({
                     title: 'Sync Data',
-                    html: 'Last Sync (POWERPRO): <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?',
+                    html: htmlContent,
                     icon: 'info',
                     showCancelButton: true,
                     confirmButtonText: 'Sync Now',
