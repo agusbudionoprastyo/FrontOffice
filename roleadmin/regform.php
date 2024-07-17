@@ -65,7 +65,7 @@ require_once '../helper/connection.php';
                                 <th>REGCARD</th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
-                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox" style="display: none;"></input><label for="selectAllCheckbox"># ROOM</label></th>
+                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox" style="display: none;"></input><label for="selectAllCheckbox"><i class="fa-solid fa-check-double" style="color: #63E6BE;"></i> ROOM</label></th>
                                 <th>ROOMTYPE</th>
                                 <th>ROOM STATUS</th>
                                 <th>CHECKIN</th>
@@ -138,11 +138,16 @@ require_once '../helper/connection.php';
                                     
                                     <td><?php echo $row['fname']; ?></td>
                                     <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><?php echo $row['folio']; ?></a></td>
-                                    <td><input type="checkbox" class="rowCheckbox" name="selectedRows[]" 
-                                        value="<?php echo $row['folio']; ?>"
+                                    <td>
+                                        <?php if (!empty($row['room'])): ?>
+                                          <input type="checkbox" class="btn rowCheckbox" name="selectedRows[]" id="selectedRows"
+                                          value="<?php echo $row['folio']; ?>"
                                             data-room="<?php echo htmlspecialchars($row['room']); ?>"
-                                            data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
-                                            <?php echo $row['room']; ?>
+                                              data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
+                                              <button type="button" class="btn btn-default rounded-pill" onclick="printRow(this)"><i class="fa-solid fa-print fa-xl"></i></button>
+                                          <?php endif; ?>
+                                          
+                                        <?php echo $row['room']; ?>  
                                     </td>
                                     <td><?php echo $row['roomtype']; ?></td>
                                     <td>
