@@ -162,13 +162,17 @@ function syncDataOnPageLoad() {
         success: function(response) {
             var lastSyncTime = response.lastSyncTime; // Ambil waktu terakhir sync dari respons JSON
             
-            // Konversi ke waktu WIB jika menggunakan format UNIX timestamp
-            var lastSyncTimeWIB = new Date(lastSyncTime * 1000).toLocaleString('id-ID', {timeZone: 'Asia/Jakarta'});
+            if (lastSyncTime) {
+                // Konversi ke waktu WIB jika menggunakan format UNIX timestamp
+                var lastSyncTimeWIB = new Date(lastSyncTime * 1000).toLocaleString('id-ID', {timeZone: 'Asia/Jakarta'});
+            } else {
+                lastSyncTimeWIB = 'Never synced';
+            }
             
             // Menampilkan SweetAlert dialog dengan timestamp terakhir
             Swal.fire({
                 title: 'Sync Data',
-                html: 'Last Sync (WIB): <strong>' + (lastSyncTimeWIB ? lastSyncTimeWIB : 'Never synced') + '</strong><br><br>Do you want to sync data now?',
+                html: 'Last Sync (WIB): <strong>' + lastSyncTimeWIB + '</strong><br><br>Do you want to sync data now?',
                 icon: 'info',
                 showCancelButton: true,
                 confirmButtonText: 'Sync Now',
@@ -198,9 +202,6 @@ function syncDataOnPageLoad() {
         }
     });
 }
-
-
-
 function syncData() {
     showLoading();
 
@@ -215,7 +216,7 @@ function syncData() {
             $.ajax({
                 url: '../roleadmin/save_last_sync.php', // endpoint untuk menyimpan ke database
                 method: 'POST',
-                data: { lastSyncTime: new Date(lastSyncTime * 1000).toLocaleString('id-ID', {timeZone: 'Asia/Jakarta'}) }, // Mengirim waktu terakhir sync
+                data: { lastSyncTime: Math.floor(Date.now() / 1000) }, // Mengirim timestamp saat ini dalam UNIX format
                 success: function(response) {
                     console.log('Last sync time saved to database:', response);
                 },
@@ -232,6 +233,7 @@ function syncData() {
         }
     });
 };
+
 
 // Function to get selected rows
 function getSelectedRows() {
