@@ -40,10 +40,12 @@ require_once '../helper/connection.php';
         <div class="col-auto">
             <input type="text" class="rounded-pill custom-search-input" aria-describedby="basic-addon2" id="search-input" placeholder="Search...">
         </div>
-
         <div class="col-auto">
             <button type="button" class="btn btn-danger rounded-pill" id="reset-filter"><i class="fa-solid fa-filter-circle-xmark"></i></button>
         </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-dark rounded-pill" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> PRINT LABEL</button>
+        </div>  
         </div>
     </div>
 </form>
@@ -59,7 +61,7 @@ require_once '../helper/connection.php';
                                 <th>REGCARD</th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
-                                <th>ROOM</th>
+                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox" style="display: none;"></input><label for="selectAllCheckbox"><i class="fa-solid fa-check-double" style="color: #63E6BE;"></i> ROOM</label></th>
                                 <th>ROOMTYPE</th>
                                 <th>ROOM STATUS</th>
                                 <th>CHECKIN</th>
@@ -118,6 +120,13 @@ require_once '../helper/connection.php';
                                         <?php endif; ?>
                                         <?php if (empty($row['room'])): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_edit.php?folio=<?php echo $row['folio']; ?>"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
+                                        <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if (empty($row['rc_signature_path'])): ?>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">unsigned <i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i></a>
+                                        <?php endif; ?>
+                                        <?php if ($row['rc_signature_path']): ?>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">signed <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
                                         <?php endif; ?>
                                     </td>
                                     
