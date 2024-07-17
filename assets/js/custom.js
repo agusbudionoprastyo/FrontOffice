@@ -74,24 +74,6 @@ function hideLoading() {
     document.getElementById('loading-overlay').style.display = 'none';
 }
 
-// function syncData() {
-//     showLoading();
-
-//     $.ajax({
-//         url: 'https://103.236.201.34:3000/replicate', // Ganti dengan URL sesuai dengan endpoint server Anda
-//         method: 'GET',
-//         success: function(response) {
-//             console.log('Response from server:', response);
-//             hideLoading();
-//             location.reload(); // Reload halaman setelah iziToast ditutup (opsional)
-//         },
-//         error: function(xhr, status, error) {
-//             console.error('Error:', error);
-//             hideLoading();
-//         }
-//     });
-// };
-
 function syncDataOnPageLoad() {
     // Ambil timestamp terakhir dari database
     $.ajax({
@@ -110,20 +92,20 @@ function syncDataOnPageLoad() {
                 // Menampilkan SweetAlert dialog berdasarkan selisih waktu
                 var htmlContent = '';
                 if (diffMinutes < 5) {
-                    htmlContent = 'Last Sync (POWERPRO): <strong>' + lastSyncTime + '</strong>';
+                    htmlContent = 'Last Sync <strong>' + lastSyncTime + '</strong>';
 
                     Swal.fire({
-                        title: 'Sync Data Success',
+                        title: 'Sync Data Powerpro Successfull',
                         html: htmlContent,
                         icon: 'success',
                         showCancelButton: false,
-                        showconfirmButton: false
+                        showConfirmButton: false
                     });
                 } else {
-                    htmlContent = 'Last Sync (POWERPRO): <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?';
+                    htmlContent = 'Last Sync <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?';
 
                     Swal.fire({
-                        title: 'Sync Data',
+                        title: 'Sync Data Powerpro',
                         html: htmlContent,
                         icon: 'info',
                         showCancelButton: true,
@@ -139,7 +121,7 @@ function syncDataOnPageLoad() {
                 console.error('Last sync time is undefined or null.');
                 // Menampilkan SweetAlert dialog jika lastSyncTime tidak terdefinisi
                 Swal.fire({
-                    title: 'Sync Data',
+                    title: 'Sync Data Powerpro',
                     text: 'Error: Last sync time is undefined or null. Do you want to sync data now?',
                     icon: 'info',
                     showCancelButton: true,

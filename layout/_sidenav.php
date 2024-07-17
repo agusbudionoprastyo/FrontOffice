@@ -26,7 +26,7 @@
         </ul>
         <ul class="dropdown-menu">
           <?php if ($_SESSION['login']['role'] === 'admin' || $_SESSION['login']['role'] === 'user'): ?>
-            <li><a class="nav-link" href="../roleadmin/signed_doc.php"><i class="fa-solid fa-file-pdf fa-lg"></i> Signed Document</a></li>
+            <li><a class="nav-link" href="../roleadmin/signed_doc.php"><i class="fa-regular fa-folder-open"></i> Signed Document</a></li>
           <?php endif; ?>
         </ul>
       </li>
