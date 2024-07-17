@@ -16,7 +16,34 @@ require_once '../helper/connection.php';
 
   <!-- Date Filter -->
   <form id="filter" method="GET">
-    <!-- Your existing date filter HTML -->
+  <div class="datepicker-container">
+    <div class="form-row align-items-center mb-3">
+        <div class="col-auto">
+            <input type="text" class="rounded-pill custom-datepicker-input" id="start-date" name="start_date" autocomplete="off" 
+                   value="<?php echo isset($_GET['start_date']) ? $_GET['start_date'] : ''; ?>" 
+                   placeholder="CheckIn">
+            <label for="start-date" class="btn btn-light rounded-pill custom-datepicker-button"><i class="fa-solid fa-calendar-days"></i></label>
+        </div>
+        <div class="col-auto">
+            <input type="text" class="rounded-pill custom-datepicker-input" id="end-date" name="end_date" autocomplete="off" 
+                   value="<?php echo isset($_GET['end_date']) ? $_GET['end_date'] : ''; ?>" 
+                   placeholder="CheckOut">
+            <label for="end-date" class="btn btn-light rounded-pill custom-datepicker-button"><i class="fa-solid fa-calendar-days"></i></label>        
+        </div>
+        <div class="col-auto">
+            <input type="text" class="rounded-pill custom-datepicker-input" id="datecreate" name="datecreate" autocomplete="off" 
+                   value="<?php echo isset($_GET['datecreate']) ? $_GET['datecreate'] : ''; ?>" 
+                   placeholder="Date Created">
+            <label for="datecreate" class="btn btn-light rounded-pill custom-datepicker-button"><i class="fa-solid fa-calendar-days"></i></label>        
+        </div>
+
+        <div class="col-auto">
+            <input type="text" class="rounded-pill custom-search-input" aria-describedby="basic-addon2" id="search-input" placeholder="Search...">
+        </div>
+
+        <div class="col-auto">
+            <button type="button" class="btn btn-danger rounded-pill" id="reset-filter"><i class="fa-solid fa-filter-circle-xmark"></i></button>
+        </div>
   </form>
 
   <div class="row">
@@ -26,7 +53,23 @@ require_once '../helper/connection.php';
           <div class="table-responsive">
             <table class="table table-hover table-striped w-100" id="table-2">
               <thead>
-                <!-- Your table header rows -->
+              <tr>
+                <th>REGCARD</th>
+                <th>NAME</th>
+                <th>FOLIO</th>
+                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox" style="display: none;"></input><label for="selectAllCheckbox"><i class="fa-solid fa-check-double" style="color: #63E6BE;"></i> ROOM</label></th>
+                <th>ROOMTYPE</th>
+                <th>ROOM STATUS</th>
+                <th>CHECKIN</th>
+                <th>CHECKOUT</th>
+                <th>DATEOFBIRTH</th>
+                <th>PHONE</th>
+                <th>EMAIL</th>
+                <th>GUESTBILL</th>
+                <th>CL / VOUCHER</th>
+                <th>STATUS</th>
+                <th>DATECREATE</th>
+            </tr>
               </thead>
               <tbody id="table-body">
                 <!-- Table body rows will be updated dynamically -->
@@ -44,7 +87,65 @@ require_once '../layout/_bottom.php';
 ?>
 
 <!-- Modal -->
-<!-- Your existing modals -->
+<div class="modal fade" id="deviceModal" tabindex="-1" role="dialog" aria-labelledby="deviceModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deviceModalLabel"><i class="fa-solid fa-tablet"></i> Select Device</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="get">
+          <div class="form-group">
+            <label for="device_id"><i>pilih tablet untuk sign dokumen</i></label>
+            <select name="token_id" id="device_id" class="form-control">
+              <?php
+              require_once '../helper/connection.php';
+              $query = "SELECT token_id, device_name FROM token_device";
+              $result = mysqli_query($connection, $query);
+              while ($row = mysqli_fetch_assoc($result)): ?>
+                <option value="<?= $row['token_id'] ?>"><?= $row['device_name'] ?></option>
+              <?php endwhile; ?>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">PILIH</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="deviceModal2" tabindex="-1" role="dialog" aria-labelledby="deviceModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deviceModalLabel"><i class="fa-solid fa-tablet"></i> Select Device</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="get">
+          <div class="form-group">
+            <label for="device_id"><i>pilih tablet untuk sign dokumen</i></label>
+            <select name="token_id" id="device_id" class="form-control">
+              <?php
+              require_once '../helper/connection.php';
+              $query = "SELECT token_id, device_name FROM token_device";
+              $result = mysqli_query($connection, $query);
+              while ($row = mysqli_fetch_assoc($result)): ?>
+                <option value="<?= $row['token_id'] ?>"><?= $row['device_name'] ?></option>
+              <?php endwhile; ?>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">PILIH</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Bootstrap Datepicker JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js" integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
