@@ -95,7 +95,7 @@ function syncDataOnPageLoad() {
                     htmlContent = 'Last Sync <strong>' + lastSyncTime + '</strong>';
 
                     Swal.fire({
-                        title: 'Sync Data Powerpro Successfull',
+                        title: 'PowerPro',
                         html: htmlContent,
                         icon: 'success',
                         showCancelButton: false,
@@ -105,7 +105,7 @@ function syncDataOnPageLoad() {
                     htmlContent = 'Last Sync <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?';
 
                     Swal.fire({
-                        title: 'Sync Data Powerpro',
+                        title: 'PowerPro',
                         html: htmlContent,
                         icon: 'info',
                         showCancelButton: true,
@@ -121,7 +121,7 @@ function syncDataOnPageLoad() {
                 console.error('Last sync time is undefined or null.');
                 // Menampilkan SweetAlert dialog jika lastSyncTime tidak terdefinisi
                 Swal.fire({
-                    title: 'Sync Data Powerpro',
+                    title: 'PowerPro',
                     text: 'Error: Last sync time is undefined or null. Do you want to sync data now?',
                     icon: 'info',
                     showCancelButton: true,
@@ -139,7 +139,7 @@ function syncDataOnPageLoad() {
             
             // Menampilkan SweetAlert dialog jika terjadi kesalahan
             Swal.fire({
-                title: 'Sync Data',
+                title: 'PowerPro',
                 text: 'Error retrieving last sync time. Do you want to sync data now?',
                 icon: 'info',
                 showCancelButton: true,
