@@ -51,7 +51,7 @@ require_once '../helper/connection.php';
       <div class="card">
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-hover table-striped w-100" id="table-2">
+            <table id="guestTable" class="table table-hover table-striped w-100" id="table-2">
               <thead>
               <tr>
                 <th>REGCARD</th>
@@ -71,7 +71,7 @@ require_once '../helper/connection.php';
                 <th>DATECREATE</th>
             </tr>
               </thead>
-              <tbody id="table-body">
+              <tbody id="guestTableBody">
                 <!-- Table body rows will be updated dynamically -->
               </tbody>
             </table>
