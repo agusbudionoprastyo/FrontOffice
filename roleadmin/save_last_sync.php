@@ -1,29 +1,25 @@
 <?php
 session_start();
-require_once '../helper/connection.php'; // Memuat file connection.php
+require_once '../helper/connection.php'; // Menggunakan koneksi database
 
 // Memeriksa koneksi
 if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
 
-// Memvalidasi dan menyiapkan data input
-$lastSyncTime = $_POST['lastSyncTime'];
+// Waktu saat ini
+$syncTime = date('Y-m-d H:i:s');
 
-// Prepared statement untuk menyimpan timestamp terakhir
-$sql = "INSERT INTO last_sync_time (last_sync) VALUES (?)";
+// Query INSERT untuk memasukkan timestamp baru
+$sqlInsert = "INSERT INTO last_sync_time (last_sync) VALUES ('$syncTime')";
+$resultInsert = $connection->query($sqlInsert);
 
-$stmt = $connection->prepare($sql);
-$stmt->bind_param("s", $lastSyncTime);
-
-// Eksekusi statement
-if ($stmt->execute()) {
-    echo "Last sync time saved successfully";
+if ($resultInsert) {
+    echo "Timestamp successfully inserted.";
 } else {
-    echo "Error saving last sync time: " . $stmt->error;
+    echo "Error inserting timestamp: " . $connection->error;
 }
 
-// Menutup statement dan koneksi
-$stmt->close();
+// Menutup koneksi
 $connection->close();
 ?>
