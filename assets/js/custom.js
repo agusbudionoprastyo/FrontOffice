@@ -74,47 +74,23 @@ function hideLoading() {
     document.getElementById('loading-overlay').style.display = 'none';
 }
 
-// function syncData() {
-//     showLoading();
-
-//     $.ajax({
-//         url: 'https://103.236.201.34:3000/replicate', // Ganti dengan URL sesuai dengan endpoint server Anda
-//         method: 'GET',
-//         success: function(response) {
-//             console.log('Response from server:', response);
-//             hideLoading();
-//             location.reload(); // Reload halaman setelah iziToast ditutup (opsional)
-//         },
-//         error: function(xhr, status, error) {
-//             console.error('Error:', error);
-//             hideLoading();
-//         }
-//     });
-// };
-
 function syncData() {
     showLoading();
 
     $.ajax({
-        url: 'https://103.236.201.34:3000/replicate',
+        url: 'https://103.236.201.34:3000/replicate', // Ganti dengan URL sesuai dengan endpoint server Anda
         method: 'GET',
-        headers: {
-            // 'Authorization': 'Bearer your_access_token_here',
-            // Jika Anda memerlukan header Content-Type
-            'Content-Type': 'application/json',
-        },
         success: function(response) {
             console.log('Response from server:', response);
             hideLoading();
-            location.reload(); // Opsional: Reload halaman setelah sinkronisasi berhasil
+            location.reload(); // Reload halaman setelah iziToast ditutup (opsional)
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
             hideLoading();
         }
     });
-}
-
+};
 
 // Function to get selected rows
 function getSelectedRows() {
@@ -267,6 +243,5 @@ document.getElementById('selectAllCheckbox').addEventListener('click', function(
     });
 });
 
-header('Location: regform.php');
 
 "use strict";
