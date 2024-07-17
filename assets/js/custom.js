@@ -95,29 +95,47 @@ function hideLoading() {
 function syncDataOnPageLoad() {
     // Ambil timestamp terakhir dari database
     $.ajax({
-        url: '../roleadmin/get_last_sync.php', // Ganti dengan endpoint untuk mengambil dari database Anda
+        url: '../roleadmin/get_last_sync.php',
         method: 'GET',
+        dataType: 'json', // Mengharapkan respons JSON
         success: function(response) {
-            var lastSyncTime = response.lastSyncTime; // Ambil waktu terakhir sync dari respons JSON
-            
-            // Menampilkan SweetAlert dialog dengan timestamp terakhir
-            Swal.fire({
-                title: 'Sync Data',
-                html: 'Last Sync (WIB): <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?',
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonText: 'Sync Now',
-                cancelButtonText: 'Later',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    syncData(); // Panggil fungsi syncData jika dikonfirmasi
-                }
-            });
+            var lastSyncTime = response.lastSyncTime;
+
+            if (lastSyncTime) {
+                // Menampilkan SweetAlert dialog dengan timestamp terakhir
+                Swal.fire({
+                    title: 'Sync Data',
+                    html: 'Last Sync (WIB): <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sync Now',
+                    cancelButtonText: 'Later',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        syncData(); // Panggil fungsi syncData jika dikonfirmasi
+                    }
+                });
+            } else {
+                console.error('Last sync time is undefined or null.');
+                // Menampilkan SweetAlert dialog jika lastSyncTime tidak terdefinisi
+                Swal.fire({
+                    title: 'Sync Data',
+                    text: 'Error: Last sync time is undefined or null. Do you want to sync data now?',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sync Now',
+                    cancelButtonText: 'Later',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        syncData(); // Panggil fungsi syncData jika dikonfirmasi
+                    }
+                });
+            }
         },
         error: function(xhr, status, error) {
             console.error('Error getting last sync time from database:', error);
             
-            // Menampilkan SweetAlert dialog tanpa timestamp jika terjadi kesalahan
+            // Menampilkan SweetAlert dialog jika terjadi kesalahan
             Swal.fire({
                 title: 'Sync Data',
                 text: 'Error retrieving last sync time. Do you want to sync data now?',
