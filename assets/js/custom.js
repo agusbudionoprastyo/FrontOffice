@@ -65,68 +65,6 @@ $(document).ready(function() {
     });
 });
 
-
-// // Modal
-// $(document).ready(function(){
-//     $('#deviceModal').on('show.bs.modal', function (event) {
-//         var button = $(event.relatedTarget); // Tombol yang memicu modal
-//         var recipientId = button.data('id'); // Ekstrak info dari atribut data-id
-//         var modal = $(this);
-//         modal.find('.modal-body form').attr('action', 'regform_sign_update.php');
-//         modal.find('.modal-body form').append('<input type="hidden" name="regform_id" value="' + recipientId + '">');
-//     });
-
-//     // Event listener untuk tombol kedua
-//     $('#deviceModal2').on('show.bs.modal', function (event) {
-//         var button = $(event.relatedTarget); // Tombol yang memicu modal
-//         var recipientId = button.data('id'); // Ekstrak info dari atribut data-id
-//         var modal = $(this);
-//         modal.find('.modal-body form').attr('action', 'guestfolio_sign_update.php');
-//         modal.find('.modal-body form').append('<input type="hidden" name="guestfolio_id" value="' + recipientId + '">');
-//     });
-// });
-
-// // Filter
-// $(document).ready(function(){
-//     $('.custom-datepicker-input').datepicker({
-//         format: 'yyyy-mm-dd', // Format Tanggal (YYYY-MM-DD)
-//         autoclose: true,
-//         todayHighlight: true,
-//         clearBtn: true // Tampilkan tombol hapus
-//     });
-
-//     // Ketika nilai input berubah, serahkan formulir
-//     $('.custom-datepicker-input').on('change', function() {
-//         $('#filter').submit();
-//     });
-
-//     // Hapus inisialisasi DataTable sebelumnya
-//     if ($.fn.DataTable.isDataTable('#table-2')) {
-//         $('#table-2').DataTable().destroy();
-//     }
-
-//     // Inisialisasi DataTables
-//     var table = $('#table-2').DataTable({
-//             // Pengaturan-pengaturan DataTables lainnya
-//         });
-//             // Event listener untuk tombol "Enter" pada #search-input
-//     $('#search-input').keypress(function(event) {
-//         if (event.which === 13) {
-//             // Ambil nilai pencarian dari #search-input
-//             var searchText = $(this).val();
-
-//             // Lakukan pencarian pada tabel
-//             table.search(searchText).draw();
-//         }
-//     });
-
-//     // Handler untuk tombol reset filter
-//     $('#reset-filter').click(function() {
-//         $('.custom-datepicker-input').datepicker('setDate', null); // Mengatur tanggal datepicker ke null
-//         $('#filter').submit(); 
-//     });
-// });
-
 // JavaScript
 function showLoading() {
     document.getElementById('loading-overlay').style.display = 'block';
@@ -162,13 +100,6 @@ function syncDataOnPageLoad() {
         success: function(response) {
             var lastSyncTime = response.lastSyncTime; // Ambil waktu terakhir sync dari respons JSON
             
-            if (lastSyncTime) {
-                // Konversi ke waktu WIB jika menggunakan format UNIX timestamp
-                var lastSyncTimeWIB = new Date(lastSyncTime * 1000).toLocaleString('id-ID', {timeZone: 'Asia/Jakarta'});
-            } else {
-                lastSyncTimeWIB = 'Never synced';
-            }
-            
             // Menampilkan SweetAlert dialog dengan timestamp terakhir
             Swal.fire({
                 title: 'Sync Data',
@@ -202,6 +133,7 @@ function syncDataOnPageLoad() {
         }
     });
 }
+
 function syncData() {
     showLoading();
 
