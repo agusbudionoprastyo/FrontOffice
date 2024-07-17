@@ -105,7 +105,7 @@ function syncDataOnPageLoad() {
                 // Menampilkan SweetAlert dialog dengan timestamp terakhir
                 Swal.fire({
                     title: 'Sync Data',
-                    html: 'Last Sync (WIB): <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?',
+                    html: 'Last Sync (POWERPRO): <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?',
                     icon: 'info',
                     showCancelButton: true,
                     confirmButtonText: 'Sync Now',
