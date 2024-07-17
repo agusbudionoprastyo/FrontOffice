@@ -7,15 +7,23 @@ if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 }
 
-// Menyimpan timestamp terakhir sync ke dalam database
+// Memvalidasi dan menyiapkan data input
 $lastSyncTime = $_POST['lastSyncTime'];
-$sql = "INSERT INTO last_sync_time (last_sync) VALUES ('$lastSyncTime')";
 
-if ($connection->query($sql) === TRUE) {
+// Prepared statement untuk menyimpan timestamp terakhir
+$sql = "INSERT INTO last_sync_time (last_sync) VALUES (?)";
+
+$stmt = $connection->prepare($sql);
+$stmt->bind_param("s", $lastSyncTime);
+
+// Eksekusi statement
+if ($stmt->execute()) {
     echo "Last sync time saved successfully";
 } else {
-    echo "Error saving last sync time: " . $connection->error;
+    echo "Error saving last sync time: " . $stmt->error;
 }
 
+// Menutup statement dan koneksi
+$stmt->close();
 $connection->close();
 ?>
