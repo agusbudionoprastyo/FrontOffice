@@ -159,7 +159,6 @@ require_once '../layout/_bottom.php';
     // Update the table body with new data
     $('#table-body').append(`
       <tr>
-        // <td>${getRegcardButtons(data)}</td>
         <td>${data.fname}</td>
         <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=${data.folio}" target="_blank">${data.folio}</a></td>
         <td>${getRoomInfo(data)}</td>
@@ -170,8 +169,6 @@ require_once '../layout/_bottom.php';
         <td>${data.birthday}</td>
         <td>${data.resv_phone}</td>
         <td>${data.resv_email}</td>
-        // <td>${getGuestbillButtons(data)}</td>
-        // <td>${getOtaVoucherButtons(data)}</td>
         <td>${getStatus(data)}</td>
         <td>${data.datecreate}</td>
       </tr>
