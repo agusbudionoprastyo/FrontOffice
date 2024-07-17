@@ -110,23 +110,31 @@ function syncDataOnPageLoad() {
                 // Menampilkan SweetAlert dialog berdasarkan selisih waktu
                 var htmlContent = '';
                 if (diffMinutes < 5) {
-                    htmlContent = 'Sync Data Success (POWERPRO): <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?';
+                    htmlContent = 'Last Sync (POWERPRO): <strong>' + lastSyncTime + '</strong>';
+
+                    Swal.fire({
+                        title: 'Sync Data Success',
+                        html: htmlContent,
+                        icon: 'success',
+                        showCancelButton: false,
+                        showconfirmButton: false
+                    });
                 } else {
                     htmlContent = 'Last Sync (POWERPRO): <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?';
-                }
 
-                Swal.fire({
-                    title: 'Sync Data',
-                    html: htmlContent,
-                    icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonText: 'Sync Now',
-                    cancelButtonText: 'Later',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        syncData(); // Panggil fungsi syncData jika dikonfirmasi
+                    Swal.fire({
+                        title: 'Sync Data',
+                        html: htmlContent,
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonText: 'Sync Now',
+                        cancelButtonText: 'Later',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            syncData(); // Panggil fungsi syncData jika dikonfirmasi
+                        }
+                    });
                     }
-                });
             } else {
                 console.error('Last sync time is undefined or null.');
                 // Menampilkan SweetAlert dialog jika lastSyncTime tidak terdefinisi
