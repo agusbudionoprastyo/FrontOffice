@@ -171,6 +171,8 @@ $data = mysqli_fetch_assoc($query);
                             Staff kami akan selalu siap membantu.          
                         </p>
                     </div>
+                        <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+                        <div class="elfsight-app-dc54676b-0420-49fd-936e-a55d76c86d57" data-elfsight-app-lazy></div>
                 </div>
                 </section>
 
