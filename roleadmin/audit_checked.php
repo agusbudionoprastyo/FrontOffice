@@ -34,7 +34,7 @@ if ($row['folio']) {
     $update_query = "UPDATE FOGUEST SET status = 1 WHERE folio = $folio";
     if (mysqli_query($connection, $update_query)) {
         $_SESSION['info'] = [
-            'status' => 'succes',
+            'status' => 'success',
             'message' => 'Folio Checked'
         ];
         header('Location: regform_guestfolio_audit.php');

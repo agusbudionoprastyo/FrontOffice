@@ -71,7 +71,6 @@ require_once '../helper/connection.php';
                                 <th>EMAIL</th>
                                 <th>GUESTBILL</th>
                                 <th>CL / VOUCHER</th>
-                                <th>STATUS</th>
                                 <th>DATECREATE</th>
                             </tr>
                         </thead>
@@ -121,11 +120,11 @@ require_once '../helper/connection.php';
                                         <?php if (empty($row['room'])): ?>
                                             <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_edit.php?folio=<?php echo $row['folio']; ?>"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
                                         <?php endif; ?>
-                                        <?php if (empty($row['rc_signature_path'])): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">unsigned <i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i></a>
+                                        <?php if ($row['status'] === '0'): ?>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">unchecked <i class="fa-solid fa-circle-question" style="color: #ff0000;"></i></a>
                                         <?php endif; ?>
-                                        <?php if ($row['rc_signature_path']): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">signed <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
+                                        <?php if ($row['status'] === '1'): ?>
+                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">checked <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
                                         <?php endif; ?>
                                     </td>
                                     
@@ -190,14 +189,6 @@ require_once '../helper/connection.php';
                                         <?php endif; ?>
                                         <?php if (empty($row['at_ota_voucher'])): ?>
                                         <a class="btn btn-sm btn-light rounded-pill mb-md-0 mb-1" href="ota_voucher.php?folio=<?php echo $row['folio']; ?>"><i class="fa-solid fa-cloud-arrow-up fa-xl" style="color: #f82b85;"></i> upload</a>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <?php if ($row['status'] === '0'): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">unchecked <i class="fa-solid fa-circle-question" style="color: #ff0000;"></i></a>
-                                        <?php endif; ?>
-                                        <?php if ($row['status'] === '1'): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">checked <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
                                         <?php endif; ?>
                                     </td>
                                     <td><?php echo $row['datecreate']; ?></td>
