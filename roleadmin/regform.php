@@ -80,31 +80,32 @@ require_once '../helper/connection.php';
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- <?php
-                            // Default SQL query
-                            $sql = "SELECT * FROM FOGUEST";
+                            <?php
+                            // // Default SQL query
+                            // $sql = "SELECT * FROM FOGUEST";
 
-                            // Check if start date is provided
-                            if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
-                                $start_date = $_GET['start_date'];
-                                $sql .= " WHERE dateci = '$start_date'";
-                            }
+                            // // Check if start date is provided
+                            // if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
+                            //     $start_date = $_GET['start_date'];
+                            //     $sql .= " WHERE dateci = '$start_date'";
+                            // }
 
-                            // Check if end date is provided
-                            if (isset($_GET['end_date']) && !empty($_GET['end_date'])) {
-                                $end_date = $_GET['end_date'];
-                                // Add WHERE clause or append to existing one
-                                $sql .= isset($start_date) ? " AND dateco = '$end_date'" : " WHERE dateco = '$end_date'";
-                            }
+                            // // Check if end date is provided
+                            // if (isset($_GET['end_date']) && !empty($_GET['end_date'])) {
+                            //     $end_date = $_GET['end_date'];
+                            //     // Add WHERE clause or append to existing one
+                            //     $sql .= isset($start_date) ? " AND dateco = '$end_date'" : " WHERE dateco = '$end_date'";
+                            // }
 
-                            // Check if create date is provided
-                            if (isset($_GET['datecreate']) && !empty($_GET['datecreate']) && empty($_GET['start_date']) && empty($_GET['end_date'])) {
-                                $datecreate = $_GET['datecreate'];
-                                $sql .= " WHERE datecreate = '$datecreate'";
-                            }
+                            // // Check if create date is provided
+                            // if (isset($_GET['datecreate']) && !empty($_GET['datecreate']) && empty($_GET['start_date']) && empty($_GET['end_date'])) {
+                            //     $datecreate = $_GET['datecreate'];
+                            //     $sql .= " WHERE datecreate = '$datecreate'";
+                            // }
 
-                            // Add ORDER BY clause
-                            $sql .= " ORDER BY folio DESC"; -->
+                            // // Add ORDER BY clause
+                            // $sql .= " ORDER BY folio DESC";
+                            
                             // Default SQL query
                             $sql = "SELECT * FROM FOGUEST WHERE foliostatus NOT IN ('X', 'O')";
 
