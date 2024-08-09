@@ -106,7 +106,7 @@ require_once '../helper/connection.php';
                             //     die("Query failed: " . mysqli_error($connection));
                             // }
                             // Default SQL query
-                          $sql = "SELECT * FROM FOGUEST WHERE foliostatus <> ''";
+                          $sql = "SELECT * FROM FOGUEST WHERE at_regform <> ''";
 
                           // Array for query parameters
                           $params = [];
