@@ -74,85 +74,85 @@ function hideLoading() {
     document.getElementById('loading-overlay').style.display = 'none';
 }
 
-function syncDataOnPageLoad() {
-    // Ambil timestamp terakhir dari database
-    $.ajax({
-        url: '../roleadmin/get_last_sync.php',
-        method: 'GET',
-        dataType: 'json', // Mengharapkan respons JSON
-        success: function(response) {
-            var lastSyncTime = response.lastSyncTime;
-            var lastSyncTimeObj = new Date(lastSyncTime);
-            var now = new Date();
+// function syncDataOnPageLoad() {
+//     // Ambil timestamp terakhir dari database
+//     $.ajax({
+//         url: '../roleadmin/get_last_sync.php',
+//         method: 'GET',
+//         dataType: 'json', // Mengharapkan respons JSON
+//         success: function(response) {
+//             var lastSyncTime = response.lastSyncTime;
+//             var lastSyncTimeObj = new Date(lastSyncTime);
+//             var now = new Date();
 
-            if (lastSyncTime) {
-                // Hitung selisih waktu dalam menit
-                var diffMinutes = Math.floor((now - lastSyncTimeObj) / (1000 * 60));
+//             if (lastSyncTime) {
+//                 // Hitung selisih waktu dalam menit
+//                 var diffMinutes = Math.floor((now - lastSyncTimeObj) / (1000 * 60));
 
-                // Menampilkan SweetAlert dialog berdasarkan selisih waktu
-                var htmlContent = '';
-                if (diffMinutes < 5) {
-                    htmlContent = 'Last Sync <strong>' + lastSyncTime + '</strong>';
+//                 // Menampilkan SweetAlert dialog berdasarkan selisih waktu
+//                 var htmlContent = '';
+//                 if (diffMinutes < 5) {
+//                     htmlContent = 'Last Sync <strong>' + lastSyncTime + '</strong>';
 
-                    Swal.fire({
-                        title: 'PowerPro',
-                        html: htmlContent,
-                        icon: 'success',
-                        showCancelButton: false,
-                        showConfirmButton: false
-                    });
-                } else {
-                    htmlContent = 'Last Sync <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?';
+//                     Swal.fire({
+//                         title: 'PowerPro',
+//                         html: htmlContent,
+//                         icon: 'success',
+//                         showCancelButton: false,
+//                         showConfirmButton: false
+//                     });
+//                 } else {
+//                     htmlContent = 'Last Sync <strong>' + lastSyncTime + '</strong><br><br>Do you want to sync data now?';
 
-                    Swal.fire({
-                        title: 'PowerPro',
-                        html: htmlContent,
-                        icon: 'info',
-                        showCancelButton: true,
-                        confirmButtonText: 'Sync Now',
-                        cancelButtonText: 'Later',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            syncData(); // Panggil fungsi syncData jika dikonfirmasi
-                        }
-                    });
-                    }
-            } else {
-                console.error('Last sync time is undefined or null.');
-                // Menampilkan SweetAlert dialog jika lastSyncTime tidak terdefinisi
-                Swal.fire({
-                    title: 'PowerPro',
-                    text: 'Error: Last sync time is undefined or null. Do you want to sync data now?',
-                    icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonText: 'Sync Now',
-                    cancelButtonText: 'Later',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        syncData(); // Panggil fungsi syncData jika dikonfirmasi
-                    }
-                });
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error getting last sync time from database:', error);
+//                     Swal.fire({
+//                         title: 'PowerPro',
+//                         html: htmlContent,
+//                         icon: 'info',
+//                         showCancelButton: true,
+//                         confirmButtonText: 'Sync Now',
+//                         cancelButtonText: 'Later',
+//                     }).then((result) => {
+//                         if (result.isConfirmed) {
+//                             syncData(); // Panggil fungsi syncData jika dikonfirmasi
+//                         }
+//                     });
+//                     }
+//             } else {
+//                 console.error('Last sync time is undefined or null.');
+//                 // Menampilkan SweetAlert dialog jika lastSyncTime tidak terdefinisi
+//                 Swal.fire({
+//                     title: 'PowerPro',
+//                     text: 'Error: Last sync time is undefined or null. Do you want to sync data now?',
+//                     icon: 'info',
+//                     showCancelButton: true,
+//                     confirmButtonText: 'Sync Now',
+//                     cancelButtonText: 'Later',
+//                 }).then((result) => {
+//                     if (result.isConfirmed) {
+//                         syncData(); // Panggil fungsi syncData jika dikonfirmasi
+//                     }
+//                 });
+//             }
+//         },
+//         error: function(xhr, status, error) {
+//             console.error('Error getting last sync time from database:', error);
             
-            // Menampilkan SweetAlert dialog jika terjadi kesalahan
-            Swal.fire({
-                title: 'PowerPro',
-                text: 'Error retrieving last sync time. Do you want to sync data now?',
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonText: 'Sync Now',
-                cancelButtonText: 'Later',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    syncData(); // Panggil fungsi syncData jika dikonfirmasi
-                }
-            });
-        }
-    });
-}
+//             // Menampilkan SweetAlert dialog jika terjadi kesalahan
+//             Swal.fire({
+//                 title: 'PowerPro',
+//                 text: 'Error retrieving last sync time. Do you want to sync data now?',
+//                 icon: 'info',
+//                 showCancelButton: true,
+//                 confirmButtonText: 'Sync Now',
+//                 cancelButtonText: 'Later',
+//             }).then((result) => {
+//                 if (result.isConfirmed) {
+//                     syncData(); // Panggil fungsi syncData jika dikonfirmasi
+//                 }
+//             });
+//         }
+//     });
+// }
 
 function syncData() {
     showLoading();
