@@ -82,7 +82,7 @@ require_once '../helper/connection.php';
                         <tbody>
                             <?php
                             // Default SQL query
-                            $sql = "SELECT * FROM FOGUEST WHERE foliostatus NOT IN ('X', 'O')";
+                            $sql = "SELECT * FROM FOGUEST ";
 
                             // Check if start date is provided
                             if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
@@ -104,7 +104,7 @@ require_once '../helper/connection.php';
                             }
 
                             // Add ORDER BY clause
-                            $sql .= " ORDER BY folio DESC";
+                            $sql .= " AND foliostatus NOT IN ('X', 'O') ORDER BY folio DESC";
 
                             // Perform the query
                             $result = mysqli_query($connection, $sql);
