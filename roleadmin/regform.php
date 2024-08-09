@@ -80,9 +80,9 @@ require_once '../helper/connection.php';
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
+                            <!-- <?php
                             // Default SQL query
-                            $sql = "SELECT * FROM FOGUEST ";
+                            $sql = "SELECT * FROM FOGUEST";
 
                             // Check if start date is provided
                             if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
@@ -104,7 +104,40 @@ require_once '../helper/connection.php';
                             }
 
                             // Add ORDER BY clause
-                            $sql .= " AND foliostatus NOT IN ('X', 'O') ORDER BY folio DESC";
+                            $sql .= " ORDER BY folio DESC"; -->
+                            // Default SQL query
+                            $sql = "SELECT * FROM FOGUEST WHERE foliostatus NOT IN ('X', 'O')";
+
+                            // Array untuk parameter query
+                            $params = [];
+                            $types = '';
+
+                            // Check if start date is provided
+                            if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
+                                $start_date = $_GET['start_date'];
+                                $sql .= " AND dateci = ?";
+                                $params[] = $start_date;
+                                $types .= 's';
+                            }
+
+                            // Check if end date is provided
+                            if (isset($_GET['end_date']) && !empty($_GET['end_date'])) {
+                                $end_date = $_GET['end_date'];
+                                $sql .= " AND dateco = ?";
+                                $params[] = $end_date;
+                                $types .= 's';
+                            }
+
+                            // Check if create date is provided
+                            if (isset($_GET['datecreate']) && !empty($_GET['datecreate']) && empty($_GET['start_date']) && empty($_GET['end_date'])) {
+                                $datecreate = $_GET['datecreate'];
+                                $sql .= " AND datecreate = ?";
+                                $params[] = $datecreate;
+                                $types .= 's';
+                            }
+
+                            // Add ORDER BY clause
+                            $sql .= " ORDER BY folio DESC";
 
                             // Perform the query
                             $result = mysqli_query($connection, $sql);
