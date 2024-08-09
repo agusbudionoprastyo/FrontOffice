@@ -5,7 +5,7 @@
  * 
  */
 $(document).ready(function() {
-    syncDataOnPageLoad(); // Panggil fungsi untuk menampilkan SweetAlert pada page load
+    // syncDataOnPageLoad(); // Panggil fungsi untuk menampilkan SweetAlert pada page load
     
     // Modal
     $('#deviceModal').on('show.bs.modal', function (event) {
