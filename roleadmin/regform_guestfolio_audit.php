@@ -106,7 +106,7 @@ require_once '../helper/connection.php';
                             //     die("Query failed: " . mysqli_error($connection));
                             // }
                             // Default SQL query
-                          $sql = "SELECT * FROM FOGUEST WHERE foliostatus NOT IN ('X', 'O')";
+                          $sql = "SELECT * FROM FOGUEST WHERE foliostatus <> ''";
 
                           // Array for query parameters
                           $params = [];
