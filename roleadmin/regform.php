@@ -82,7 +82,7 @@ require_once '../helper/connection.php';
                         <tbody>
                             <?php
                             // Default SQL query
-                            $sql = "SELECT * FROM FOGUEST";
+                            $sql = "SELECT * FROM FOGUEST WHERE foliostatus NOT IN ('X', 'O')";
 
                             // Check if start date is provided
                             if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
