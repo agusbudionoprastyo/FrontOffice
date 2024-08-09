@@ -80,172 +80,162 @@ require_once '../helper/connection.php';
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            // // Default SQL query
-                            // $sql = "SELECT * FROM FOGUEST";
+                        <?php
+                          // Default SQL query
+                          $sql = "SELECT * FROM FOGUEST WHERE foliostatus NOT IN ('X', 'O')";
 
-                            // // Check if start date is provided
-                            // if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
-                            //     $start_date = $_GET['start_date'];
-                            //     $sql .= " WHERE dateci = '$start_date'";
-                            // }
+                          // Array for query parameters
+                          $params = [];
+                          $types = '';
 
-                            // // Check if end date is provided
-                            // if (isset($_GET['end_date']) && !empty($_GET['end_date'])) {
-                            //     $end_date = $_GET['end_date'];
-                            //     // Add WHERE clause or append to existing one
-                            //     $sql .= isset($start_date) ? " AND dateco = '$end_date'" : " WHERE dateco = '$end_date'";
-                            // }
+                          // Check if start date is provided
+                          if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
+                              $start_date = $_GET['start_date'];
+                              $sql .= " AND dateci = ?";
+                              $params[] = $start_date;
+                              $types .= 's';
+                          }
 
-                            // // Check if create date is provided
-                            // if (isset($_GET['datecreate']) && !empty($_GET['datecreate']) && empty($_GET['start_date']) && empty($_GET['end_date'])) {
-                            //     $datecreate = $_GET['datecreate'];
-                            //     $sql .= " WHERE datecreate = '$datecreate'";
-                            // }
+                          // Check if end date is provided
+                          if (isset($_GET['end_date']) && !empty($_GET['end_date'])) {
+                              $end_date = $_GET['end_date'];
+                              $sql .= " AND dateco = ?";
+                              $params[] = $end_date;
+                              $types .= 's';
+                          }
 
-                            // // Add ORDER BY clause
-                            // $sql .= " ORDER BY folio DESC";
-                            
-                            // Default SQL query
-                            $sql = "SELECT * FROM FOGUEST WHERE foliostatus NOT IN ('X', 'O')";
+                          // Check if create date is provided
+                          if (isset($_GET['datecreate']) && !empty($_GET['datecreate']) && empty($_GET['start_date']) && empty($_GET['end_date'])) {
+                              $datecreate = $_GET['datecreate'];
+                              $sql .= " AND datecreate = ?";
+                              $params[] = $datecreate;
+                              $types .= 's';
+                          }
 
-                            // Array untuk parameter query
-                            $params = [];
-                            $types = '';
+                          // Add ORDER BY clause
+                          $sql .= " ORDER BY folio DESC";
 
-                            // Check if start date is provided
-                            if (isset($_GET['start_date']) && !empty($_GET['start_date'])) {
-                                $start_date = $_GET['start_date'];
-                                $sql .= " AND dateci = ?";
-                                $params[] = $start_date;
-                                $types .= 's';
-                            }
+                          // Prepare the statement
+                          $stmt = mysqli_prepare($connection, $sql);
 
-                            // Check if end date is provided
-                            if (isset($_GET['end_date']) && !empty($_GET['end_date'])) {
-                                $end_date = $_GET['end_date'];
-                                $sql .= " AND dateco = ?";
-                                $params[] = $end_date;
-                                $types .= 's';
-                            }
+                          if (!$stmt) {
+                              die("Prepare failed: " . mysqli_error($connection));
+                          }
 
-                            // Check if create date is provided
-                            if (isset($_GET['datecreate']) && !empty($_GET['datecreate']) && empty($_GET['start_date']) && empty($_GET['end_date'])) {
-                                $datecreate = $_GET['datecreate'];
-                                $sql .= " AND datecreate = ?";
-                                $params[] = $datecreate;
-                                $types .= 's';
-                            }
+                          // Bind parameters
+                          if (!empty($params)) {
+                              mysqli_stmt_bind_param($stmt, $types, ...$params);
+                          }
 
-                            // Add ORDER BY clause
-                            $sql .= " ORDER BY folio DESC";
+                          // Execute the query
+                          mysqli_stmt_execute($stmt);
 
-                            // Perform the query
-                            $result = mysqli_query($connection, $sql);
+                          // Get the result
+                          $result = mysqli_stmt_get_result($stmt);
 
-                            // Check if the query was successful
-                            if (!$result) {
-                                die("Query failed: " . mysqli_error($connection));
-                            }
+                          if (!$result) {
+                              die("Query failed: " . mysqli_error($connection));
+                          }
 
-                            // Loop through the results and display them in the table
-                            while ($row = mysqli_fetch_array($result)) {
-                                ?>
-                                <tr>
-                                    <td>
-                                        <?php if (empty($row['at_regform'])): ?>
-                                            <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo $row['folio']; ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
-                                        <?php endif; ?>
-                                        <?php if ($row['at_regform']): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_regform']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl" style="color: #B5120C;"></i></a>                                
-                                        <?php endif; ?>
-                                        <?php if (empty($row['room'])): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_edit.php?folio=<?php echo $row['folio']; ?>"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
-                                        <?php endif; ?>
-                                        <?php if (empty($row['rc_signature_path'])): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">unsigned <i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i></a>
-                                        <?php endif; ?>
-                                        <?php if ($row['rc_signature_path']): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">signed <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
-                                        <?php endif; ?>
-                                    </td>
-                                    
-                                    <td><?php echo $row['fname']; ?></td>
-                                    <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo $row['folio']; ?>" target="_blank"><?php echo $row['folio']; ?></a></td>
-                                    <td>
-                                        <?php if (!empty($row['room'])): ?>
+                          // Loop through the results and display them in the table
+                          while ($row = mysqli_fetch_array($result)) {
+                              ?>
+                              <tr>
+                                  <td>
+                                      <?php if (empty($row['at_regform'])): ?>
+                                          <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal" data-id="<?php echo htmlspecialchars($row['folio']); ?>"><i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i></button>
+                                      <?php endif; ?>
+                                      <?php if ($row['at_regform']): ?>
+                                          <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo htmlspecialchars($row['at_regform']); ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl" style="color: #B5120C;"></i></a>                                
+                                      <?php endif; ?>
+                                      <?php if (empty($row['room'])): ?>
+                                          <a class="btn btn-sm btn-default mb-md-0 mb-1" href="regform_edit.php?folio=<?php echo htmlspecialchars($row['folio']); ?>"><i class="fa-regular fa-pen-to-square fa-xl"></i></a>
+                                      <?php endif; ?>
+                                      <?php if (empty($row['rc_signature_path'])): ?>
+                                          <a class="btn btn-sm btn-default mb-md-0 mb-1">unsigned <i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i></a>
+                                      <?php endif; ?>
+                                      <?php if ($row['rc_signature_path']): ?>
+                                          <a class="btn btn-sm btn-default mb-md-0 mb-1">signed <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
+                                      <?php endif; ?>
+                                  </td>
+                                  
+                                  <td><?php echo htmlspecialchars($row['fname']); ?></td>
+                                  <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo htmlspecialchars($row['folio']); ?>" target="_blank"><?php echo htmlspecialchars($row['folio']); ?></a></td>
+                                  <td>
+                                      <?php if (!empty($row['room'])): ?>
                                           <input type="checkbox" class="btn rowCheckbox" name="selectedRows[]" id="selectedRows"
-                                          value="<?php echo $row['folio']; ?>"
-                                            data-room="<?php echo htmlspecialchars($row['room']); ?>"
-                                              data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
-                                              <button type="button" class="btn btn-default rounded-pill" onclick="printRow(this)"><i class="fa-solid fa-print fa-xl"></i></button>
-                                          <?php endif; ?>
-                                          
-                                        <?php echo $row['room']; ?>  
-                                    </td>
-                                    <td><?php echo $row['roomtype']; ?></td>
-                                    <td>
-                                        <?php $foliostatus = trim($row['foliostatus']); ?>
-                                        <?php if ($foliostatus == 'I'): ?>
-                                            <span style="color: #36BA98;">inHouse</span>
-                                        <?php elseif ($foliostatus == 'O'): ?>
-                                            <span style="color: #C80036">CheckOut</span>
-                                        <?php elseif ($foliostatus == 'C'): ?>
-                                            <span style="color: #1679AB;">Confirm</span>
-                                        <?php elseif ($foliostatus == 'G'): ?>
-                                            <span style="color: #102C57;">Guarantee</span>
-                                        <?php elseif ($foliostatus == 'T'): ?>
-                                            <span style="color: #43919B;">Tentative</span>
-                                        <?php else: ?>
-                                            <span class="text-muted">Cancel</span>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td><?php echo $row['dateci']; ?></td>
-                                    <td><?php echo $row['dateco']; ?></td>
-                                    <td><?php echo $row['birthday']; ?></td>
-                                    <td><?php echo $row['resv_phone']; ?></td>
-                                    <td><?php echo $row['resv_email']; ?></td>
-                                    <td>
-                                        <?php if ((empty($row['g_signature_path'])) && ($row['at_guestfolio'])): ?>
-                                            <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal2" data-id="<?php echo $row['folio']; ?>">
-                                                <i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i>
-                                            </button>
-                                        <?php endif; ?>
-                                        <?php if ($row['at_guestfolio']): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_guestfolio']; ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl" style="color: #B5120C;"></i></a>
-                                        <?php endif; ?>
-                                        <?php if (empty($row['at_guestfolio'])): ?>
-                                        <a class="btn btn-sm btn-light rounded-pill mb-md-0 mb-1" href="guestfolio.php?folio=<?php echo $row['folio']; ?>"><i class="fa-solid fa-cloud-arrow-up fa-xl" style="color: #0f97ff;"></i> upload</a>
-                                        <?php endif; ?>
-                                        <?php if ((empty($row['g_signature_path'])) && ($row['at_guestfolio'])): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">unsigned <i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i></a>
-                                        <?php endif; ?>
-                                        <?php if ($row['g_signature_path']): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">signed <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <?php if ($row['at_ota_voucher']): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo $row['at_ota_voucher']; ?>" target="_blank"><i class="fa-solid fa-file-zipper fa-xl"></i></a>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">uploaded <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
-                                        <?php endif; ?>
-                                        <?php if (empty($row['at_ota_voucher'])): ?>
-                                        <a class="btn btn-sm btn-light rounded-pill mb-md-0 mb-1" href="ota_voucher.php?folio=<?php echo $row['folio']; ?>"><i class="fa-solid fa-cloud-arrow-up fa-xl" style="color: #f82b85;"></i> upload</a>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <?php if ($row['status'] === '0'): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">unchecked <i class="fa-solid fa-circle-question" style="color: #ff0000;"></i></a>
-                                        <?php endif; ?>
-                                        <?php if ($row['status'] === '1'): ?>
-                                            <a class="btn btn-sm btn-default mb-md-0 mb-1">checked <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
-                                        <?php endif; ?>
-                                    </td>
-                                    <td><?php echo $row['datecreate']; ?></td>
-                                </tr>
-                                <?php
-                            }
-                            ?>
+                                          value="<?php echo htmlspecialchars($row['folio']); ?>"
+                                          data-room="<?php echo htmlspecialchars($row['room']); ?>"
+                                          data-folio="<?php echo htmlspecialchars($row['folio']); ?>">
+                                          <button type="button" class="btn btn-default rounded-pill" onclick="printRow(this)"><i class="fa-solid fa-print fa-xl"></i></button>
+                                      <?php endif; ?>
+                                      
+                                      <?php echo htmlspecialchars($row['room']); ?>  
+                                  </td>
+                                  <td><?php echo htmlspecialchars($row['roomtype']); ?></td>
+                                  <td>
+                                      <?php $foliostatus = trim($row['foliostatus']); ?>
+                                      <?php if ($foliostatus == 'I'): ?>
+                                          <span style="color: #36BA98;">inHouse</span>
+                                      <?php elseif ($foliostatus == 'O'): ?>
+                                          <span style="color: #C80036">CheckOut</span>
+                                      <?php elseif ($foliostatus == 'C'): ?>
+                                          <span style="color: #1679AB;">Confirm</span>
+                                      <?php elseif ($foliostatus == 'G'): ?>
+                                          <span style="color: #102C57;">Guarantee</span>
+                                      <?php elseif ($foliostatus == 'T'): ?>
+                                          <span style="color: #43919B;">Tentative</span>
+                                      <?php else: ?>
+                                          <span class="text-muted">Cancel</span>
+                                      <?php endif; ?>
+                                  </td>
+                                  <td><?php echo htmlspecialchars($row['dateci']); ?></td>
+                                  <td><?php echo htmlspecialchars($row['dateco']); ?></td>
+                                  <td><?php echo htmlspecialchars($row['birthday']); ?></td>
+                                  <td><?php echo htmlspecialchars($row['resv_phone']); ?></td>
+                                  <td><?php echo htmlspecialchars($row['resv_email']); ?></td>
+                                  <td>
+                                      <?php if ((empty($row['g_signature_path'])) && ($row['at_guestfolio'])): ?>
+                                          <button class="btn btn-sm btn-default mb-md-0 mb-1" data-toggle="modal" data-target="#deviceModal2" data-id="<?php echo htmlspecialchars($row['folio']); ?>">
+                                              <i class="fa-solid fa-paper-plane fa-xl" style="color: #f82b85;"></i>
+                                          </button>
+                                      <?php endif; ?>
+                                      <?php if ($row['at_guestfolio']): ?>
+                                          <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo htmlspecialchars($row['at_guestfolio']); ?>" target="_blank"><i class="fa-solid fa-file-pdf fa-xl" style="color: #B5120C;"></i></a>
+                                      <?php endif; ?>
+                                      <?php if (empty($row['at_guestfolio'])): ?>
+                                          <a class="btn btn-sm btn-light rounded-pill mb-md-0 mb-1" href="guestfolio.php?folio=<?php echo htmlspecialchars($row['folio']); ?>"><i class="fa-solid fa-cloud-arrow-up fa-xl" style="color: #0f97ff;"></i> upload</a>
+                                      <?php endif; ?>
+                                      <?php if ((empty($row['g_signature_path'])) && ($row['at_guestfolio'])): ?>
+                                          <a class="btn btn-sm btn-default mb-md-0 mb-1">unsigned <i class="fa-solid fa-circle-exclamation" style="color: #FFD43B;"></i></a>
+                                      <?php endif; ?>
+                                      <?php if ($row['g_signature_path']): ?>
+                                          <a class="btn btn-sm btn-default mb-md-0 mb-1">signed <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
+                                      <?php endif; ?>
+                                  </td>
+                                  <td>
+                                      <?php if ($row['at_ota_voucher']): ?>
+                                          <a class="btn btn-sm btn-default mb-md-0 mb-1" href="<?php echo htmlspecialchars($row['at_ota_voucher']); ?>" target="_blank"><i class="fa-solid fa-file-zipper fa-xl"></i></a>
+                                          <a class="btn btn-sm btn-default mb-md-0 mb-1">uploaded <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
+                                      <?php endif; ?>
+                                      <?php if (empty($row['at_ota_voucher'])): ?>
+                                          <a class="btn btn-sm btn-light rounded-pill mb-md-0 mb-1" href="ota_voucher.php?folio=<?php echo htmlspecialchars($row['folio']); ?>"><i class="fa-solid fa-cloud-arrow-up fa-xl" style="color: #f82b85;"></i> upload</a>
+                                      <?php endif; ?>
+                                  </td>
+                                  <td>
+                                      <?php if ($row['status'] === '0'): ?>
+                                          <a class="btn btn-sm btn-default mb-md-0 mb-1">unchecked <i class="fa-solid fa-circle-question" style="color: #ff0000;"></i></a>
+                                      <?php endif; ?>
+                                      <?php if ($row['status'] === '1'): ?>
+                                          <a class="btn btn-sm btn-default mb-md-0 mb-1">checked <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i></a>
+                                      <?php endif; ?>
+                                  </td>
+                                  <td><?php echo htmlspecialchars($row['datecreate']); ?></td>
+                              </tr>
+                              <?php
+                          }
+                          ?>
+
                         </tbody>
                     </table>
                 </div>
