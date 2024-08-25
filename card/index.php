@@ -171,10 +171,17 @@ $data = mysqli_fetch_assoc($query);
                             Staff kami akan selalu siap membantu.          
                         </p>
                     </div>
-                            <h2 class="section__title about__title"><b>What Our Customers Say</b></h2>
-                        <!-- <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-                            <div class="elfsight-app-dc54676b-0420-49fd-936e-a55d76c86d57" data-elfsight-app-lazy></div> -->
-                            <div class='sk-ww-tripadvisor-reviews' data-embed-id='25438732'></div><script src='https://widgets.sociablekit.com/tripadvisor-reviews/widget.js' async defer></script>
+                </div>
+                </section>
+
+                <section class="about section" id="about">
+                <div class="about__container container grid">
+                    <div class="about__data">
+                        <h2 class="section__title about__title"><b>What Our Customers Say</b></h2>
+                            <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+                            <div class="elfsight-app-dc54676b-0420-49fd-936e-a55d76c86d57" data-elfsight-app-lazy></div>
+                            <!-- <div class='sk-ww-tripadvisor-reviews' data-embed-id='25438732'></div><script src='https://widgets.sociablekit.com/tripadvisor-reviews/widget.js' async defer></script> -->
+                    </div>
                 </div>
                 </section>
 
