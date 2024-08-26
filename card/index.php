@@ -558,7 +558,7 @@ $data = mysqli_fetch_assoc($query);
             // Jika ini kunjungan pertama, tampilkan SweetAlert2
             if (isFirstVisit()) {
             Swal.fire({
-                text: 'Silakan masukkan nomor kamar Anda:',
+                text: 'Silakan masukkan nomor kamar Anda',
                 icon: 'info',
                 backdrop: 'rgba(0,0,0,0.4)',
                 input: 'text',
