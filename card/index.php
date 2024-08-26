@@ -600,8 +600,8 @@ async function handleRoomNumberInput(roomNumber) {
 
         // Show loading indicator
         Swal.fire({
-            title: 'Loading...',
-            text: 'Redirecting...',
+            // title: 'Loading...',
+            title: 'Redirecting...',
             showConfirmButton: false,
             allowOutsideClick: false,
             didOpen: () => {
@@ -668,7 +668,7 @@ if (isFirstVisit()) {
     if (isRoomNumberValid()) {
         const roomNumber = localStorage.getItem(ROOM_NUMBER_STORAGE_KEY);
         if (roomNumber) {
-            window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
+            // window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
         }
     } else {
         Swal.fire('Error', 'Nomor kamar telah kedaluwarsa. Silakan masukkan lagi', 'error');
