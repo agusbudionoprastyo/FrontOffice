@@ -542,13 +542,20 @@ $data = mysqli_fetch_assoc($query);
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
 
-            // Fungsi untuk memeriksa apakah ini kunjungan pertama
-            function isFirstVisit() {
-            return sessionStorage.getItem('firstVisit') !== 'true';
+        function isFirstVisit() {
+            const storedData = localStorage.getItem('firstVisit');
+            // Periksa apakah data ada dan belum expired
+            if (storedData) {
+                const storedTime = parseInt(storedData.split('|')[1]);
+                const currentTime = Date.now();
+                const oneHourInMilliseconds = 3600000; // 1 jam dalam milidetik
+                return currentTime - storedTime > oneHourInMilliseconds;
             }
+            return true; // Jika tidak ada data atau sudah expired, dianggap kunjungan pertama
+        }
 
-            // Jika ini kunjungan pertama, tampilkan SweetAlert2
-            if (isFirstVisit()) {
+        // Jika ini kunjungan pertama, tampilkan SweetAlert2
+        if (isFirstVisit()) {
             Swal.fire({
                 text: 'Silakan masukkan nomor kamar Anda',
                 input: 'text',
@@ -567,10 +574,11 @@ $data = mysqli_fetch_assoc($query);
             }
             }).then((result) => {
                 if (result.isConfirmed) {
-                sessionStorage.setItem('firstVisit', 'true');
+                    const currentTime = Date.now();
+                    localStorage.setItem('firstVisit', `true|${currentTime}`);
                 }
             });
-            }
+        }
 
         function showAlert() {
             Swal.fire({
