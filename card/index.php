@@ -51,6 +51,10 @@ $data = mysqli_fetch_assoc($query);
                 border-radius: 25px; /* Menambahkan sudut bulat dengan radius 10px */
                 background-color: rgba(255, 255, 255, 0.9); /* Warna latar belakang dengan transparansi */
             }
+            .roundedBtn {
+                border-radius: 25px; /* Menambahkan sudut bulat dengan radius 10px */
+                background-color: #14505c; /* Warna latar belakang dengan transparansi */
+            }
         </style>
     </head>
     <body>
@@ -659,7 +663,7 @@ $data = mysqli_fetch_assoc($query);
                 customClass: {
                     popup: 'rounded',
                     input: 'rounded',
-                    confirmButton: 'rounded',
+                    confirmButton: 'roundedBtn',
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
