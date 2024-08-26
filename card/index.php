@@ -627,7 +627,7 @@ $data = mysqli_fetch_assoc($query);
             if (isRoomNumberValid()) {
                 const roomNumber = localStorage.getItem('roomNumber');
                 // Redirect ke halaman ecard dengan nomor kamar
-                window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
+                // window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
             } else {
                 // Jika nomor kamar sudah expired, tampilkan SweetAlert2 untuk input ulang
                 Swal.fire({
