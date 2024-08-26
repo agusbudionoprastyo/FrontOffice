@@ -556,12 +556,12 @@ $data = mysqli_fetch_assoc($query);
         <script>
             
 
-        // Constants
-        const ROOM_NUMBER_STORAGE_KEY = 'roomNumber';
-        const ROOM_NUMBER_EXPIRY_STORAGE_KEY = 'roomNumberExpiry';
-        const FIRST_VISIT_KEY = 'firstVisit';
-        const ROOM_NUMBER_EXPIRY_DURATION = 3600000; // 1 hour in milliseconds
-        const VALID_URL = 'https://ecard.dafam.cloud/?room=0'; // URL yang valid untuk pengalihan
+        // // Constants
+        // const ROOM_NUMBER_STORAGE_KEY = 'roomNumber';
+        // const ROOM_NUMBER_EXPIRY_STORAGE_KEY = 'roomNumberExpiry';
+        // const FIRST_VISIT_KEY = 'firstVisit';
+        // const ROOM_NUMBER_EXPIRY_DURATION = 3600000; // 1 hour in milliseconds
+        // const VALID_URL = 'https://ecard.dafam.cloud/?room=0'; // URL yang valid untuk pengalihan
 
         // // Function to handle room number input
         // async function handleRoomNumberInput(roomNumber) {
@@ -669,7 +669,14 @@ $data = mysqli_fetch_assoc($query);
         //     }
         //     });
         // }
-        // Function to handle room number input
+// Constants
+const ROOM_NUMBER_STORAGE_KEY = 'roomNumber';
+const ROOM_NUMBER_EXPIRY_STORAGE_KEY = 'roomNumberExpiry';
+const FIRST_VISIT_KEY = 'firstVisit';
+const ROOM_NUMBER_EXPIRY_DURATION = 3600000; // 1 hour in milliseconds
+const VALID_URL = 'https://ecard.dafam.cloud/?room='; // Base URL for redirection
+
+// Function to handle room number input
 async function handleRoomNumberInput(roomNumber) {
     try {
         // Check if input is empty
@@ -706,6 +713,36 @@ async function handleRoomNumberInput(roomNumber) {
     }
 }
 
+// Function to save room number to localStorage
+function saveRoomNumberToLocalStorage(roomNumber) {
+    localStorage.setItem(ROOM_NUMBER_STORAGE_KEY, roomNumber);
+    localStorage.setItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY, Date.now() + ROOM_NUMBER_EXPIRY_DURATION);
+}
+
+// Function to check if the room number is still valid
+function isRoomNumberValid() {
+    const expiryTime = localStorage.getItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY);
+    return expiryTime && Date.now() < expiryTime;
+}
+
+// Function to check if it's the first visit
+function isFirstVisit() {
+    return !localStorage.getItem(FIRST_VISIT_KEY);
+}
+
+// Show alert for room service QR code
+function showAlert() {
+    Swal.fire({
+        text: 'Please scan QR for room service, Silakan scan QR untuk room service',
+        icon: 'info',
+        backdrop: 'rgba(0,0,0,0.4)',
+        showConfirmButton: false,
+        customClass: {
+            popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
+        }
+    });
+}
+
 // Initial logic
 if (isFirstVisit()) {
     Swal.fire({
@@ -714,11 +751,6 @@ if (isFirstVisit()) {
         showCancelButton: false,
         confirmButtonText: 'OK',
         preConfirm: handleRoomNumberInput,
-        customClass: {
-            popup: 'rounded',
-            input: 'rounded',
-            confirmButton: 'roundedBtn',
-        },
         inputValidator: (value) => {
             // Ensure the input is not empty and is numeric
             if (!value.trim()) {
@@ -728,6 +760,11 @@ if (isFirstVisit()) {
                 return 'Room number must be a number';
             }
             return null;
+        },
+        customClass: {
+            popup: 'rounded',
+            input: 'rounded',
+            confirmButton: 'roundedBtn',
         }
     }).then((result) => {
         if (result.isConfirmed) {
