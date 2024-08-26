@@ -1,8 +1,8 @@
 <?php
 require_once 'koneksi.php';
-$room = $_GET['room'];
-$query = mysqli_query($conn, "SELECT * FROM FOGUEST WHERE room='$room' AND foliostatus Not In('O','X')");
-$data = mysqli_fetch_assoc($query);
+// $room = $_GET['room'];
+// $query = mysqli_query($conn, "SELECT * FROM FOGUEST WHERE room='$room' AND foliostatus Not In('O','X')");
+// $data = mysqli_fetch_assoc($query);
 ?>
 <!DOCTYPE html>
     <html lang="en">
@@ -553,7 +553,12 @@ $data = mysqli_fetch_assoc($query);
                 title: 'Selamat Datang',
                 text: 'Silakan masukkan nomor kamar Anda',
                 input: 'text',
+                icon: 'info',
+                backdrop: 'rgba(0,0,0,0.4)',
                 showCancelButton: false,
+                customClass: {
+                popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
+            }
                 confirmButtonText: 'OK',
                 preConfirm: (roomNumber) => {
                 // Lakukan sesuatu dengan nomor ruangan yang dimasukkan
