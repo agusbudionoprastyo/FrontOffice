@@ -551,9 +551,8 @@ $data = mysqli_fetch_assoc($query);
             if (isFirstVisit()) {
             Swal.fire({
                 title: 'Selamat Datang',
-                text: 'Masukkan nomor kamar Anda',
+                text: 'Silakan masukkan nomor kamar Anda',
                 input: 'text',
-                inputLabel: 'Room',
                 showCancelButton: false,
                 confirmButtonText: 'OK',
                 preConfirm: (roomNumber) => {
