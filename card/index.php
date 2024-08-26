@@ -550,13 +550,56 @@ $data = mysqli_fetch_assoc($query);
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
 
+        // // Fungsi untuk memeriksa apakah ini kunjungan pertama
+        // function isFirstVisit() {
+        //     return sessionStorage.getItem('firstVisit') !== 'true';
+        //     }
+
+        //     // Jika ini kunjungan pertama, tampilkan SweetAlert2
+        //     if (isFirstVisit()) {
+        //     Swal.fire({
+        //         text: 'Silakan masukkan nomor kamar Anda',
+        //         icon: 'info',
+        //         backdrop: 'rgba(0,0,0,0.4)',
+        //         input: 'text',
+        //         showCancelButton: false,
+        //         confirmButtonText: 'OK',
+        //         preConfirm: (roomNumber) => {
+        //         // Lakukan sesuatu dengan nomor ruangan yang dimasukkan
+        //         console.log(`Nomor ruangan: ${roomNumber}`);
+        //         // Misalnya, arahkan ke halaman dengan parameter room:
+        //         window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
+        //         },
+        //         customClass: {
+        //         popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
+        //     }
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //         sessionStorage.setItem('firstVisit', 'true');
+        //         }
+        //     });
+        //     }
+
         // Fungsi untuk memeriksa apakah ini kunjungan pertama
         function isFirstVisit() {
             return sessionStorage.getItem('firstVisit') !== 'true';
-            }
+        }
 
-            // Jika ini kunjungan pertama, tampilkan SweetAlert2
-            if (isFirstVisit()) {
+        // Fungsi untuk menyimpan nomor kamar ke localStorage
+        function saveRoomNumberToLocalStorage(roomNumber) {
+            localStorage.setItem('roomNumber', roomNumber);
+            // Set waktu kedaluwarsa 1 jam ke depan (dalam milidetik)
+            localStorage.setItem('roomNumberExpiry', Date.now() + 3600000);
+        }
+
+        // Fungsi untuk memeriksa apakah nomor kamar masih valid (belum expired)
+        function isRoomNumberValid() {
+            const expiryTime = localStorage.getItem('roomNumberExpiry');
+            return expiryTime && Date.now() < expiryTime;
+        }
+
+        // Jika ini kunjungan pertama, tampilkan SweetAlert2 untuk input nomor kamar
+        if (isFirstVisit()) {
             Swal.fire({
                 text: 'Silakan masukkan nomor kamar Anda',
                 icon: 'info',
@@ -565,6 +608,7 @@ $data = mysqli_fetch_assoc($query);
                 showCancelButton: false,
                 confirmButtonText: 'OK',
                 preConfirm: (roomNumber) => {
+                    saveRoomNumberToLocalStorage(roomNumber);
                 // Lakukan sesuatu dengan nomor ruangan yang dimasukkan
                 console.log(`Nomor ruangan: ${roomNumber}`);
                 // Misalnya, arahkan ke halaman dengan parameter room:
@@ -578,7 +622,20 @@ $data = mysqli_fetch_assoc($query);
                 sessionStorage.setItem('firstVisit', 'true');
                 }
             });
+        } else {
+            // Jika bukan kunjungan pertama, cek apakah nomor kamar masih valid
+            if (isRoomNumberValid()) {
+                const roomNumber = localStorage.getItem('roomNumber');
+                // Redirect ke halaman ecard dengan nomor kamar
+                window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
+            } else {
+                // Jika nomor kamar sudah expired, tampilkan SweetAlert2 untuk input ulang
+                Swal.fire({
+                    text: 'Nomor kamar Anda telah kadaluarsa. Silakan masukkan kembali.',
+                    // ... (sisanya sama seperti kode SweetAlert2 sebelumnya)
+                });
             }
+        }
 
         function showAlert() {
             Swal.fire({
