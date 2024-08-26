@@ -555,136 +555,137 @@ $data = mysqli_fetch_assoc($query);
 
         <script>
             // Constants
-const ROOM_NUMBER_STORAGE_KEY = 'roomNumber';
-const ROOM_NUMBER_EXPIRY_STORAGE_KEY = 'roomNumberExpiry';
-const FIRST_VISIT_KEY = 'firstVisit';
-const ROOM_NUMBER_EXPIRY_DURATION = 3600000; // 1 hour in milliseconds
-const VALID_URL = 'https://ecard.dafam.cloud/?room='; // Base URL for redirection
+        const ROOM_NUMBER_STORAGE_KEY = 'roomNumber';
+        const ROOM_NUMBER_EXPIRY_STORAGE_KEY = 'roomNumberExpiry';
+        const FIRST_VISIT_KEY = 'firstVisit';
+        const ROOM_NUMBER_EXPIRY_DURATION = 3600000; // 1 hour in milliseconds
+        const VALID_URL = 'https://ecard.dafam.cloud/?room='; // Base URL for redirection
 
-// Function to handle room number input
-async function handleRoomNumberInput(roomNumber) {
-    try {
-        // Check if input is empty
-        if (!roomNumber.trim()) {
-            Swal.fire('Error', 'Room number cannot be empty', 'error');
-            return;
-        }
+        // Function to handle room number input
+        async function handleRoomNumberInput(roomNumber) {
+            try {
+                // Check if input is empty
+                if (!roomNumber.trim()) {
+                    Swal.fire('Error', 'Room number cannot be empty', 'error');
+                    return;
+                }
 
-        // Validate input to be numeric
-        if (!/^\d+$/.test(roomNumber)) {
-            Swal.fire('Error', 'Room number must be a number', 'error');
-            return;
-        }
+                // Validate input to be numeric
+                if (!/^\d+$/.test(roomNumber)) {
+                    Swal.fire('Error', 'Room number must be a number', 'error');
+                    return;
+                }
 
-        // Save room number to localStorage
-        saveRoomNumberToLocalStorage(roomNumber);
+                // Save room number to localStorage
+                saveRoomNumberToLocalStorage(roomNumber);
 
-        // Show loading indicator
-        Swal.fire({
-            title: 'Redirecting...',
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-        });
+                // Show loading indicator
+                Swal.fire({
+                    title: 'Redirecting...',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
 
-        // Redirect after a delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        window.location.href = `${VALID_URL}${roomNumber}`;
-    } catch (error) {
-        console.error('Error:', error);
-        Swal.fire('Error', 'An error occurred', 'error');
-    }
-}
-
-// Function to save room number to localStorage
-function saveRoomNumberToLocalStorage(roomNumber) {
-    localStorage.setItem(ROOM_NUMBER_STORAGE_KEY, roomNumber);
-    localStorage.setItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY, Date.now() + ROOM_NUMBER_EXPIRY_DURATION);
-}
-
-// Function to check if the room number is still valid
-function isRoomNumberValid() {
-    const expiryTime = localStorage.getItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY);
-    return expiryTime && Date.now() < expiryTime;
-}
-
-// Function to check if it's the first visit
-function isFirstVisit() {
-    return !localStorage.getItem(FIRST_VISIT_KEY);
-}
-
-// Show alert for room service QR code
-function showAlert() {
-    Swal.fire({
-        title: 'Please reload and input your room number first or scan QR for room service',
-        text: 'Silakan muat ulang halaman dan input nomor kamar atau scan QR untuk room service',
-        icon: 'info',
-        backdrop: 'rgba(0,0,0,0.4)',
-        showConfirmButton: false,
-        customClass: {
-            popup: 'rounded'
-        }
-    });
-}
-
-// Initial logic
-async function initialLogic() {
-    if (isFirstVisit()) {
-        const result = await Swal.fire({
-            title: 'Please input your room number',
-            text: 'Silakan masukkan nomor kamar Anda',
-            input: 'text',
-            showCancelButton: false,
-            confirmButtonText: 'OK',
-            preConfirm: handleRoomNumberInput,
-            inputValidator: (value) => {
-                if (!value.trim()) return 'Room number cannot be empty';
-                if (!/^\d+$/.test(value)) return 'Room number must be a number';
-                return null;
-            },
-            customClass: {
-                popup: 'rounded',
-                input: 'rounded',
-                confirmButton: 'roundedBtn',
-            }
-        });
-        
-        if (result.isConfirmed) {
-            localStorage.setItem(FIRST_VISIT_KEY, 'true');
-        }
-    } else {
-        if (isRoomNumberValid()) {
-            const roomNumber = localStorage.getItem(ROOM_NUMBER_STORAGE_KEY);
-            const currentUrl = window.location.href;
-
-            // Check if we are already on the correct URL
-            if (!currentUrl.startsWith(VALID_URL) && roomNumber) {
+                // Redirect after a delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 window.location.href = `${VALID_URL}${roomNumber}`;
+            } catch (error) {
+                console.error('Error:', error);
+                Swal.fire('Error', 'An error occurred', 'error');
             }
-        } else {
-            // If the room number has expired, prompt the user to re-enter
+        }
+
+        // Function to save room number to localStorage
+        function saveRoomNumberToLocalStorage(roomNumber) {
+            localStorage.setItem(ROOM_NUMBER_STORAGE_KEY, roomNumber);
+            localStorage.setItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY, Date.now() + ROOM_NUMBER_EXPIRY_DURATION);
+        }
+
+        // Function to check if the room number is still valid
+        function isRoomNumberValid() {
+            const expiryTime = localStorage.getItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY);
+            return expiryTime && Date.now() < expiryTime;
+        }
+
+        // Function to check if it's the first visit
+        function isFirstVisit() {
+            return !localStorage.getItem(FIRST_VISIT_KEY);
+        }
+
+        // Show alert for room service QR code
+        function showAlert() {
             Swal.fire({
-                title: 'Session Expired',
-                text: 'Your room number has expired. Please enter your room number again.',
-                icon: 'warning',
-                confirmButtonText: 'OK',
+                title: 'Please reload and input your room number first or scan QR for room service',
+                text: 'Silakan muat ulang halaman dan input nomor kamar atau scan QR untuk room service',
+                icon: 'info',
+                backdrop: 'rgba(0,0,0,0.4)',
+                showConfirmButton: false,
                 customClass: {
                     popup: 'rounded'
                 }
-            }).then(() => {
-                localStorage.removeItem(ROOM_NUMBER_STORAGE_KEY);
-                localStorage.removeItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY);
-                localStorage.removeItem(FIRST_VISIT_KEY);
-                window.location.reload(); // Reload to trigger room number input prompt
             });
         }
-    }
-}
 
-// Run initial logic
-initialLogic();
+        // Initial logic
+        async function initialLogic() {
+            if (isFirstVisit()) {
+                const result = await Swal.fire({
+                    title: 'Please input your room number',
+                    text: 'Silakan masukkan nomor kamar Anda',
+                    input: 'text',
+                    showCancelButton: false,
+                    confirmButtonText: 'OK',
+                    preConfirm: handleRoomNumberInput,
+                    inputValidator: (value) => {
+                        if (!value.trim()) return 'Room number cannot be empty';
+                        if (!/^\d+$/.test(value)) return 'Room number must be a number';
+                        return null;
+                    },
+                    customClass: {
+                        popup: 'rounded',
+                        input: 'rounded',
+                        confirmButton: 'roundedBtn'
+                    }
+                });
+                
+                if (result.isConfirmed) {
+                    localStorage.setItem(FIRST_VISIT_KEY, 'true');
+                }
+            } else {
+                if (isRoomNumberValid()) {
+                    const roomNumber = localStorage.getItem(ROOM_NUMBER_STORAGE_KEY);
+                    const currentUrl = window.location.href;
+
+                    // Check if we are already on the correct URL
+                    if (!currentUrl.startsWith(VALID_URL) && roomNumber) {
+                        window.location.href = `${VALID_URL}${roomNumber}`;
+                    }
+                } else {
+                    // If the room number has expired, prompt the user to re-enter
+                    Swal.fire({
+                        title: 'Session Expired',
+                        text: 'Your room number has expired. Please enter your room number again.',
+                        icon: 'warning',
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'rounded',
+                            confirmButton: 'roundedBtn'
+                        }
+                    }).then(() => {
+                        localStorage.removeItem(ROOM_NUMBER_STORAGE_KEY);
+                        localStorage.removeItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY);
+                        localStorage.removeItem(FIRST_VISIT_KEY);
+                        window.location.reload(); // Reload to trigger room number input prompt
+                    });
+                }
+            }
+        }
+
+        // Run initial logic
+        initialLogic();
 
         // // Constants
         // const ROOM_NUMBER_STORAGE_KEY = 'roomNumber';
