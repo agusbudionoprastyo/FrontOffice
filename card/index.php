@@ -670,45 +670,7 @@ $data = mysqli_fetch_assoc($query);
                     }
                 }
             } else {
-                Swal.fire({
-                title: 'Please input your room number',
-                text: 'Silakan masukkan nomor kamar Anda',
-                input: 'text',
-                showCancelButton: false,
-                confirmButtonText: 'OK',
-                preConfirm: handleRoomNumberInput,
-                inputValidator: (value) => {
-                    // Ensure the input is not empty and is numeric
-                    if (!value.trim()) {
-                        return 'Room number cannot be empty';
-                    }
-                    if (!/^\d+$/.test(value)) {
-                        return 'Room number must be a number';
-                    }
-                    return null;
-                },
-                customClass: {
-                    popup: 'rounded',
-                    input: 'rounded',
-                    confirmButton: 'roundedBtn',
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    localStorage.setItem(FIRST_VISIT_KEY, 'true');
-                }
-            });
-        } else {
-            if (isRoomNumberValid()) {
-                const roomNumber = localStorage.getItem(ROOM_NUMBER_STORAGE_KEY);
-                const currentUrl = window.location.href;
-
-                // Check if we are already on the correct URL
-                if (!currentUrl.startsWith(VALID_URL)) {
-                    if (roomNumber) {
-                        window.location.href = `${VALID_URL}${roomNumber}`;
-                    }
-                }
-            }
+                Swal.fire('Error', 'Nomor kamar telah kedaluwarsa. Silakan masukkan lagi', 'error');
             }
         }
         </script>
