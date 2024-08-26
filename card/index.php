@@ -550,10 +550,10 @@ $data = mysqli_fetch_assoc($query);
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
 
-        // // Fungsi untuk memeriksa apakah ini kunjungan pertama
-        // function isFirstVisit() {
-        //     return sessionStorage.getItem('firstVisit') !== 'true';
-        //     }
+        // Fungsi untuk memeriksa apakah ini kunjungan pertama
+        function isFirstVisit() {
+            return sessionStorage.getItem('firstVisit') !== 'true';
+            }
 
         //     // Jika ini kunjungan pertama, tampilkan SweetAlert2
         //     if (isFirstVisit()) {
