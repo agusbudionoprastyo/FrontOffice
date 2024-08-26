@@ -552,60 +552,6 @@ echo json_encode($data);
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
 
-        // Fungsi untuk mengirimkan data ke PHP dan menangani respons
-        function sendRoomNumber(roomNumber) {
-        $.ajax({
-            url: 'getData.php', // Ganti dengan URL skrip PHP Anda
-            type: 'GET',
-            data: { room: roomNumber },
-            success: function(data) {
-            // Tangani respons dari skrip PHP
-            console.log(data);
-            // Tambahkan logika lain sesuai kebutuhan, misalnya menampilkan pesan sukses
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil!',
-                text: 'Data kamar telah dikirim.'
-            });
-            },
-            error: function(error) {
-            console.error('Error:', error);
-            // Tampilkan pesan error jika terjadi kesalahan
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Terjadi kesalahan saat mengirim data.'
-            });
-            }
-        });
-        }
-
-        // Dapatkan nomor kamar dari localStorage
-        const roomNumber = localStorage.getItem('roomNumber');
-
-        // Jika nomor kamar ditemukan, kirim ke PHP
-        if (roomNumber) {
-        sendRoomNumber(roomNumber);
-        } else {
-        // Jika nomor kamar tidak ditemukan, minta pengguna untuk memasukkannya
-        Swal.fire({
-            title: 'Masukkan Nomor Kamar',
-            input: 'text',
-            inputPlaceholder: 'Masukkan nomor kamar',
-            showCancelButton: true,
-            confirmButtonText: 'Kirim',
-            cancelButtonText: 'Batal'
-        }).then((result) => {
-            if (result.isConfirmed) {
-            // Simpan nomor kamar ke localStorage
-            localStorage.setItem('roomNumber', result.value);
-
-            // Kirim nomor kamar yang baru dimasukkan
-            sendRoomNumber(result.value);
-            }
-        });
-        }
-
         function showAlert() {
             Swal.fire({
                 text: 'Silakan scan qr untuk room service, Please scan qr for room service',
