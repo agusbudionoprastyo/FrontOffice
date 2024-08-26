@@ -214,7 +214,7 @@ $data = mysqli_fetch_assoc($query);
                             <?php if (!empty($data['room'])): ?>
                                 <a href="https://cantingfood.my.id/#/menu/dafam-<?= ltrim($data['room'], '0') ?>" class="button3">To Order</a>
                             <?php else: ?>
-                                <a href="javascript:void(0);" onclick="showAlert()" class="button3">To Order</a>
+                                <a href="javascript:void(0);" onclick="isFirstVisit()" class="button3">To Order</a>
                             <?php endif; ?>
                         </div>
                         <div class="about__img-overlay">
@@ -670,19 +670,6 @@ $data = mysqli_fetch_assoc($query);
             } else {
                 Swal.fire('Error', 'Nomor kamar telah kedaluwarsa. Silakan masukkan lagi', 'error');
             }
-        }
-
-        // Show alert for room service QR code
-        function showAlert() {
-            Swal.fire({
-                text: 'Please scan QR for room service, Silakan scan QR untuk room service',
-                icon: 'info',
-                backdrop: 'rgba(0,0,0,0.4)',
-                showConfirmButton: false,
-                customClass: {
-                    popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
-                }
-            });
         }
         </script>
 
