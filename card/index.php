@@ -1,9 +1,3 @@
-<?php
-require_once 'koneksi.php';
-$room = $_GET['room'];
-$query = mysqli_query($conn, "SELECT * FROM FOGUEST WHERE room='$room' AND foliostatus Not In('O','X')");
-$data = mysqli_fetch_assoc($query);
-?>
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -542,42 +536,58 @@ $data = mysqli_fetch_assoc($query);
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
 
-        function isFirstVisit() {
-            const storedData = localStorage.getItem('firstVisit');
-            // Periksa apakah data ada dan belum expired
-            if (storedData) {
-                const storedTime = parseInt(storedData.split('|')[1]);
-                const currentTime = Date.now();
-                const oneHourInMilliseconds = 3600000; // 1 jam dalam milidetik
-                return currentTime - storedTime > oneHourInMilliseconds;
+        // Fungsi untuk mengirimkan data ke PHP dan menangani respons
+        function sendRoomNumber(roomNumber) {
+        $.ajax({
+            url: 'getData.php', // Ganti dengan URL skrip PHP Anda
+            type: 'GET',
+            data: { room: roomNumber },
+            success: function(data) {
+            // Tangani respons dari skrip PHP
+            console.log(data);
+            // Tambahkan logika lain sesuai kebutuhan, misalnya menampilkan pesan sukses
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: 'Data kamar telah dikirim.'
+            });
+            },
+            error: function(error) {
+            console.error('Error:', error);
+            // Tampilkan pesan error jika terjadi kesalahan
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Terjadi kesalahan saat mengirim data.'
+            });
             }
-            return true; // Jika tidak ada data atau sudah expired, dianggap kunjungan pertama
+        });
         }
 
-        // Jika ini kunjungan pertama, tampilkan SweetAlert2
-        if (isFirstVisit()) {
-            Swal.fire({
-                text: 'Silakan masukkan nomor kamar Anda',
-                input: 'text',
-                icon: 'info',
-                backdrop: 'rgba(0,0,0,0.4)',
-                confirmButtonText: 'OK',
-                showCancelButton: false,
-                preConfirm: (roomNumber) => {
-                // Lakukan sesuatu dengan nomor ruangan yang dimasukkan
-                console.log(`Nomor ruangan: ${roomNumber}`);
-                // Misalnya, arahkan ke halaman dengan parameter room:
-                window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
-                },
-                customClass: {
-                popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
+        // Dapatkan nomor kamar dari localStorage
+        const roomNumber = localStorage.getItem('roomNumber');
+
+        // Jika nomor kamar ditemukan, kirim ke PHP
+        if (roomNumber) {
+        sendRoomNumber(roomNumber);
+        } else {
+        // Jika nomor kamar tidak ditemukan, minta pengguna untuk memasukkannya
+        Swal.fire({
+            title: 'Masukkan Nomor Kamar',
+            input: 'text',
+            inputPlaceholder: 'Masukkan nomor kamar',
+            showCancelButton: true,
+            confirmButtonText: 'Kirim',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+            // Simpan nomor kamar ke localStorage
+            localStorage.setItem('roomNumber', result.value);
+
+            // Kirim nomor kamar yang baru dimasukkan
+            sendRoomNumber(result.value);
             }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    const currentTime = Date.now();
-                    localStorage.setItem('firstVisit', `true|${currentTime}`);
-                }
-            });
+        });
         }
 
         function showAlert() {
