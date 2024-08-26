@@ -659,7 +659,7 @@ $data = mysqli_fetch_assoc($query);
                 customClass: {
                     popup: 'rounded',
                     input: 'rounded',
-                    button: 'rounded',
+                    confirmButton: 'rounded',
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
