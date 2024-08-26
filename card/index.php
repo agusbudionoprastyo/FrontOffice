@@ -44,7 +44,7 @@ $data = mysqli_fetch_assoc($query);
         <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"> 
         <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
 
-        <title><?= $data['fname'] ?></title>
+        <title><?= !empty($data['room']) ? trim(explode(',', $data['fname'])[1]) . '. ' . trim(explode(',', $data['fname'])[0]) : '' ?></title>
 
         <style>
             .rounded {
