@@ -550,10 +550,10 @@ $data = mysqli_fetch_assoc($query);
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
 
-        // Fungsi untuk memeriksa apakah ini kunjungan pertama
-        function isFirstVisit() {
-            return sessionStorage.getItem('firstVisit') !== 'true';
-            }
+        // // Fungsi untuk memeriksa apakah ini kunjungan pertama
+        // function isFirstVisit() {
+        //     return sessionStorage.getItem('firstVisit') !== 'true';
+        //     }
 
         //     // Jika ini kunjungan pertama, tampilkan SweetAlert2
         //     if (isFirstVisit()) {
@@ -585,61 +585,94 @@ $data = mysqli_fetch_assoc($query);
         const ROOM_NUMBER_EXPIRY_STORAGE_KEY = 'roomNumberExpiry';
         const ROOM_NUMBER_EXPIRY_DURATION = 3600000; // 1 hour in milliseconds
 
-        // Functions
+        // Function to handle room number input
         async function handleRoomNumberInput(roomNumber) {
-        try {
-            // Validate input
-            if (!/^\d+$/.test(roomNumber)) {
-            Swal.fire('Error', 'Room number must be a number', 'error');
-            return;
+            try {
+                // Validate input
+                if (!/^\d+$/.test(roomNumber)) {
+                    Swal.fire('Error', 'Room number must be a number', 'error');
+                    return;
+                }
+
+                // Save room number to localStorage
+                saveRoomNumberToLocalStorage(roomNumber);
+
+                // Show loading indicator
+                Swal.fire({
+                    title: 'Loading...',
+                    text: 'Redirecting...',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                // Redirect after a delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
+            } catch (error) {
+                console.error('Error:', error);
+                Swal.fire('Error', 'An error occurred', 'error');
             }
-
-            saveRoomNumberToLocalStorage(roomNumber);
-
-            // Show loading indicator (optional)
-            Swal.fire({
-            title: 'Loading...',
-            text: 'Redirecting...',
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-            });
-
-            // Redirect after a delay (optional)
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
-            window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
-        } catch (error) {
-            console.error('Error:', error);
-            Swal.fire('Error', 'An error occurred', 'error');
-        }
         }
 
+        // Function to save room number to localStorage
         function saveRoomNumberToLocalStorage(roomNumber) {
-        localStorage.setItem(ROOM_NUMBER_STORAGE_KEY, roomNumber);
-        localStorage.setItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY, Date.now() + ROOM_NUMBER_EXPIRY_DURATION);
+            localStorage.setItem(ROOM_NUMBER_STORAGE_KEY, roomNumber);
+            localStorage.setItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY, Date.now() + ROOM_NUMBER_EXPIRY_DURATION);
         }
 
+        // Function to check if the room number is still valid
         function isRoomNumberValid() {
-        const expiryTime = localStorage.getItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY);
-        return expiryTime && Date.now() < expiryTime;
+            const expiryTime = localStorage.getItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY);
+            return expiryTime && Date.now() < expiryTime;
         }
 
-        // Initial check
-        if (isFirstVisit()) {
-        Swal.fire({
-            text: 'Please enter your room number',
-            // ... other SweetAlert2 options
-            preConfirm: handleRoomNumberInput
-        });
-        } else if (isRoomNumberValid()) {
-        const roomNumber = localStorage.getItem(ROOM_NUMBER_STORAGE_KEY);
-        handleRoomNumberInput(roomNumber);
-        } else {
-        Swal.fire('Error', 'Room number has expired. Please enter it again', 'error');
+        // Function to check if it's the first visit
+        function isFirstVisit() {
+            return !sessionStorage.getItem('firstVisit');
         }
+
+        // Show alert for room service QR code
+        function showAlert() {
+            Swal.fire({
+                text: 'Silakan scan QR untuk room service, Please scan QR for room service',
+                icon: 'info',
+                backdrop: 'rgba(0,0,0,0.4)',
+                showConfirmButton: false,
+                customClass: {
+                    popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
+                }
+            });
+        }
+
+        // Initial logic
+        if (isFirstVisit()) {
+            Swal.fire({
+                text: 'Silakan masukkan nomor kamar Anda',
+                input: 'text',
+                showCancelButton: false,
+                confirmButtonText: 'OK',
+                preConfirm: handleRoomNumberInput,
+                customClass: {
+                    popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    sessionStorage.setItem('firstVisit', 'true');
+                }
+            });
+        } else if (isRoomNumberValid()) {
+            const roomNumber = localStorage.getItem(ROOM_NUMBER_STORAGE_KEY);
+            if (roomNumber) {
+                // Skip calling handleRoomNumberInput() again if already handled
+                window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
+            }
+        } else {
+            Swal.fire('Error', 'Nomor kamar telah kedaluwarsa. Silakan masukkan lagi', 'error');
+        }
+
 
         function showAlert() {
             Swal.fire({
