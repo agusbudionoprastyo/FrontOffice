@@ -607,13 +607,11 @@ $data = mysqli_fetch_assoc($query);
                 input: 'text',
                 showCancelButton: false,
                 confirmButtonText: 'OK',
-                preConfirm: (roomNumber) => {
-                    saveRoomNumberToLocalStorage(roomNumber);
-                // Lakukan sesuatu dengan nomor ruangan yang dimasukkan
-                // console.log(`Nomor ruangan: ${roomNumber}`);
-                // Misalnya, arahkan ke halaman dengan parameter room:
-                // window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
-                },
+                    preConfirm: (roomNumber) => {
+                        saveRoomNumberToLocalStorage(roomNumber);
+                        console.log(`Nomor ruangan: ${roomNumber}`);
+                        window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
+                    },
                 customClass: {
                 popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
             }
