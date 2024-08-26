@@ -550,17 +550,17 @@ $data = mysqli_fetch_assoc($query);
             // Jika ini kunjungan pertama, tampilkan SweetAlert2
             if (isFirstVisit()) {
             Swal.fire({
-                title: 'Selamat Datang!',
-                text: 'Masukkan nomor ruangan Anda:',
+                title: 'Selamat Datang',
+                text: 'Masukkan nomor kamar Anda',
                 input: 'text',
-                inputLabel: 'Nomor Ruangan',
+                inputLabel: 'Room',
                 showCancelButton: false,
-                confirmButtonText: 'Cari',
+                confirmButtonText: 'OK',
                 preConfirm: (roomNumber) => {
                 // Lakukan sesuatu dengan nomor ruangan yang dimasukkan
                 console.log(`Nomor ruangan: ${roomNumber}`);
                 // Misalnya, arahkan ke halaman dengan parameter room:
-                window.location.href = `https://ecard.dafam.cloud/?room=${roomNumber}`;
+                window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
