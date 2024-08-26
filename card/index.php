@@ -580,59 +580,65 @@ $data = mysqli_fetch_assoc($query);
         //     });
         //     }
 
-        // Fungsi untuk memeriksa apakah ini kunjungan pertama
-        function isFirstVisit() {
-            return sessionStorage.getItem('firstVisit') !== 'true';
-        }
+        // Constants
+        const ROOM_NUMBER_STORAGE_KEY = 'roomNumber';
+        const ROOM_NUMBER_EXPIRY_STORAGE_KEY = 'roomNumberExpiry';
+        const ROOM_NUMBER_EXPIRY_DURATION = 3600000; // 1 hour in milliseconds
 
-        // Fungsi untuk menyimpan nomor kamar ke localStorage
-        function saveRoomNumberToLocalStorage(roomNumber) {
-            localStorage.setItem('roomNumber', roomNumber);
-            // Set waktu kedaluwarsa 1 jam ke depan (dalam milidetik)
-            localStorage.setItem('roomNumberExpiry', Date.now() + 3600000);
-        }
+        // Functions
+        async function handleRoomNumberInput(roomNumber) {
+        try {
+            // Validate input
+            if (!/^\d+$/.test(roomNumber)) {
+            Swal.fire('Error', 'Room number must be a number', 'error');
+            return;
+            }
 
-        // Fungsi untuk memeriksa apakah nomor kamar masih valid (belum expired)
-        function isRoomNumberValid() {
-            const expiryTime = localStorage.getItem('roomNumberExpiry');
-            return expiryTime && Date.now() < expiryTime;
-        }
+            saveRoomNumberToLocalStorage(roomNumber);
 
-        // Jika ini kunjungan pertama, tampilkan SweetAlert2 untuk input nomor kamar
-        if (isFirstVisit()) {
+            // Show loading indicator (optional)
             Swal.fire({
-                text: 'Silakan masukkan nomor kamar Anda',
-                icon: 'info',
-                backdrop: 'rgba(0,0,0,0.4)',
-                input: 'text',
-                showCancelButton: false,
-                confirmButtonText: 'OK',
-                    preConfirm: (roomNumber) => {
-                        saveRoomNumberToLocalStorage(roomNumber);
-                        console.log(`Nomor ruangan: ${roomNumber}`);
-                        window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
-                    },
-                customClass: {
-                popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
+            title: 'Loading...',
+            text: 'Redirecting...',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
             }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                sessionStorage.setItem('firstVisit', 'true');
-                }
             });
+
+            // Redirect after a delay (optional)
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
+            window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
+        } catch (error) {
+            console.error('Error:', error);
+            Swal.fire('Error', 'An error occurred', 'error');
+        }
+        }
+
+        function saveRoomNumberToLocalStorage(roomNumber) {
+        localStorage.setItem(ROOM_NUMBER_STORAGE_KEY, roomNumber);
+        localStorage.setItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY, Date.now() + ROOM_NUMBER_EXPIRY_DURATION);
+        }
+
+        function isRoomNumberValid() {
+        const expiryTime = localStorage.getItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY);
+        return expiryTime && Date.now() < expiryTime;
+        }
+
+        // Initial check
+        if (isFirstVisit()) {
+        Swal.fire({
+            text: 'Please enter your room number',
+            // ... other SweetAlert2 options
+            preConfirm: handleRoomNumberInput
+        });
+        } else if (isRoomNumberValid()) {
+        const roomNumber = localStorage.getItem(ROOM_NUMBER_STORAGE_KEY);
+        handleRoomNumberInput(roomNumber);
         } else {
-            // Jika bukan kunjungan pertama, cek apakah nomor kamar masih valid
-            if (isRoomNumberValid()) {
-                const roomNumber = localStorage.getItem('roomNumber');
-                // Redirect ke halaman ecard dengan nomor kamar
-                // window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
-            } else {
-                // Jika nomor kamar sudah expired, tampilkan SweetAlert2 untuk input ulang
-                Swal.fire({
-                    text: 'Nomor kamar Anda telah kadaluarsa. Silakan masukkan kembali.',
-                    // ... (sisanya sama seperti kode SweetAlert2 sebelumnya)
-                });
-            }
+        Swal.fire('Error', 'Room number has expired. Please enter it again', 'error');
         }
 
         function showAlert() {
