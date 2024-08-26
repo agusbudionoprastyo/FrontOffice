@@ -601,8 +601,7 @@ $data = mysqli_fetch_assoc($query);
 
                 // Show loading indicator
                 Swal.fire({
-                    title: 'Loading...',
-                    text: 'Redirecting...',
+                    title: 'Redirecting...',
                     showConfirmButton: false,
                     allowOutsideClick: false,
                     didOpen: () => {
@@ -658,7 +657,8 @@ $data = mysqli_fetch_assoc($query);
                 confirmButtonText: 'OK',
                 preConfirm: handleRoomNumberInput,
                 customClass: {
-                    popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
+                    popup: 'rounded',
+                    input: 'rounded',
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
