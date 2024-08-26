@@ -580,98 +580,101 @@ $data = mysqli_fetch_assoc($query);
         //     });
         //     }
 
-        // Constants
-        const ROOM_NUMBER_STORAGE_KEY = 'roomNumber';
-        const ROOM_NUMBER_EXPIRY_STORAGE_KEY = 'roomNumberExpiry';
-        const ROOM_NUMBER_EXPIRY_DURATION = 3600000; // 1 hour in milliseconds
+       // Constants
+const ROOM_NUMBER_STORAGE_KEY = 'roomNumber';
+const ROOM_NUMBER_EXPIRY_STORAGE_KEY = 'roomNumberExpiry';
+const FIRST_VISIT_KEY = 'firstVisit';
+const ROOM_NUMBER_EXPIRY_DURATION = 3600000; // 1 hour in milliseconds
 
-        // Function to handle room number input
-        async function handleRoomNumberInput(roomNumber) {
-            try {
-                // Validate input
-                if (!/^\d+$/.test(roomNumber)) {
-                    Swal.fire('Error', 'Room number must be a number', 'error');
-                    return;
-                }
+// Function to handle room number input
+async function handleRoomNumberInput(roomNumber) {
+    try {
+        // Validate input
+        if (!/^\d+$/.test(roomNumber)) {
+            Swal.fire('Error', 'Room number must be a number', 'error');
+            return;
+        }
 
-                // Save room number to localStorage
-                saveRoomNumberToLocalStorage(roomNumber);
+        // Save room number to localStorage
+        saveRoomNumberToLocalStorage(roomNumber);
 
-                // Show loading indicator
-                Swal.fire({
-                    title: 'Loading...',
-                    text: 'Redirecting...',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        Swal.showLoading();
-                    }
-                });
-
-                // Redirect after a delay
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
-            } catch (error) {
-                console.error('Error:', error);
-                Swal.fire('Error', 'An error occurred', 'error');
+        // Show loading indicator
+        Swal.fire({
+            title: 'Loading...',
+            text: 'Redirecting...',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
             }
-        }
+        });
 
-        // Function to save room number to localStorage
-        function saveRoomNumberToLocalStorage(roomNumber) {
-            localStorage.setItem(ROOM_NUMBER_STORAGE_KEY, roomNumber);
-            localStorage.setItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY, Date.now() + ROOM_NUMBER_EXPIRY_DURATION);
-        }
+        // Redirect after a delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
+    } catch (error) {
+        console.error('Error:', error);
+        Swal.fire('Error', 'An error occurred', 'error');
+    }
+}
 
-        // Function to check if the room number is still valid
-        function isRoomNumberValid() {
-            const expiryTime = localStorage.getItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY);
-            return expiryTime && Date.now() < expiryTime;
-        }
+// Function to save room number to localStorage
+function saveRoomNumberToLocalStorage(roomNumber) {
+    localStorage.setItem(ROOM_NUMBER_STORAGE_KEY, roomNumber);
+    localStorage.setItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY, Date.now() + ROOM_NUMBER_EXPIRY_DURATION);
+}
 
-        // Function to check if it's the first visit
-        function isFirstVisit() {
-            return !sessionStorage.getItem('firstVisit');
-        }
+// Function to check if the room number is still valid
+function isRoomNumberValid() {
+    const expiryTime = localStorage.getItem(ROOM_NUMBER_EXPIRY_STORAGE_KEY);
+    return expiryTime && Date.now() < expiryTime;
+}
 
-        // Show alert for room service QR code
-        function showAlert() {
-            Swal.fire({
-                text: 'Silakan scan QR untuk room service, Please scan QR for room service',
-                icon: 'info',
-                backdrop: 'rgba(0,0,0,0.4)',
-                showConfirmButton: false,
-                customClass: {
-                    popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
-                }
-            });
-        }
+// Function to check if it's the first visit
+function isFirstVisit() {
+    return !localStorage.getItem(FIRST_VISIT_KEY);
+}
 
-        // Initial logic
-        if (isFirstVisit()) {
-            Swal.fire({
-                text: 'Silakan masukkan nomor kamar Anda',
-                input: 'text',
-                showCancelButton: false,
-                confirmButtonText: 'OK',
-                preConfirm: handleRoomNumberInput,
-                customClass: {
-                    popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
-                }
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    sessionStorage.setItem('firstVisit', 'true');
-                }
-            });
-        } else if (isRoomNumberValid()) {
-            const roomNumber = localStorage.getItem(ROOM_NUMBER_STORAGE_KEY);
-            if (roomNumber) {
-                // Skip calling handleRoomNumberInput() again if already handled
-                window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
-            }
-        } else {
-            Swal.fire('Error', 'Nomor kamar telah kedaluwarsa. Silakan masukkan lagi', 'error');
+// Show alert for room service QR code
+function showAlert() {
+    Swal.fire({
+        text: 'Silakan scan QR untuk room service, Please scan QR for room service',
+        icon: 'info',
+        backdrop: 'rgba(0,0,0,0.4)',
+        showConfirmButton: false,
+        customClass: {
+            popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
         }
+    });
+}
+
+// Initial logic
+if (isFirstVisit()) {
+    Swal.fire({
+        text: 'Silakan masukkan nomor kamar Anda',
+        input: 'text',
+        showCancelButton: false,
+        confirmButtonText: 'OK',
+        preConfirm: handleRoomNumberInput,
+        customClass: {
+            popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            localStorage.setItem(FIRST_VISIT_KEY, 'true');
+        }
+    });
+} else {
+    if (isRoomNumberValid()) {
+        const roomNumber = localStorage.getItem(ROOM_NUMBER_STORAGE_KEY);
+        if (roomNumber) {
+            window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
+        }
+    } else {
+        Swal.fire('Error', 'Nomor kamar telah kedaluwarsa. Silakan masukkan lagi', 'error');
+    }
+}
+
 
 
         function showAlert() {
