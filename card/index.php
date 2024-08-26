@@ -558,7 +558,7 @@ $data = mysqli_fetch_assoc($query);
         const ROOM_NUMBER_STORAGE_KEY = 'roomNumber';
         const ROOM_NUMBER_EXPIRY_STORAGE_KEY = 'roomNumberExpiry';
         const FIRST_VISIT_KEY = 'firstVisit';
-        const ROOM_NUMBER_EXPIRY_DURATION = 3600000; // 1 hour in milliseconds
+        const ROOM_NUMBER_EXPIRY_DURATION = 6000; // 1 hour in milliseconds
         const VALID_URL = 'https://ecard.dafam.cloud/?room='; // Base URL for redirection
 
         // Function to handle room number input
