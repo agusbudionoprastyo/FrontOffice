@@ -557,15 +557,15 @@ $data = mysqli_fetch_assoc($query);
                 backdrop: 'rgba(0,0,0,0.4)',
                 confirmButtonText: 'OK',
                 showCancelButton: false,
-                customClass: {
-                popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
-            }
                 preConfirm: (roomNumber) => {
                 // Lakukan sesuatu dengan nomor ruangan yang dimasukkan
                 console.log(`Nomor ruangan: ${roomNumber}`);
                 // Misalnya, arahkan ke halaman dengan parameter room:
                 window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
-                }
+                },
+                customClass: {
+                popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
+            }
             }).then((result) => {
                 if (result.isConfirmed) {
                 sessionStorage.setItem('firstVisit', 'true');
