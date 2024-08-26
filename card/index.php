@@ -1,7 +1,7 @@
 <?php
 require_once 'koneksi.php';
-$folio = $_GET['folio'];
-$query = mysqli_query($conn, "SELECT * FROM FOGUEST WHERE folio='$folio' AND foliostatus Not In('O','X')");
+$room = $_GET['room'];
+$query = mysqli_query($conn, "SELECT * FROM FOGUEST WHERE room='$room' AND foliostatus Not In('O','X')");
 $data = mysqli_fetch_assoc($query);
 ?>
 <!DOCTYPE html>
@@ -167,7 +167,7 @@ $data = mysqli_fetch_assoc($query);
                             Kami berharap semoga selama kunjungan di Hotel Dafam Semarang 
                             dapat berkesan dan menyenangkan serta diberi kesehatan senantiasa. 
                             Apabila membutuhkan bantuan mohon dapat menghubungi kami, 
-                            Call operator 🅾. Atau melalui whatsapp, 
+                            Call operator 0. Atau melalui whatsapp, 
                             Staff kami akan selalu siap membantu.          
                         </p>
                     </div>
