@@ -554,106 +554,14 @@ $data = mysqli_fetch_assoc($query);
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script>
-            // Function to handle room number input
-async function handleRoomNumberInput(roomNumber) {
-    try {
-        // Check if input is empty
-        if (!roomNumber.trim()) {
-            Swal.fire('Error', 'Room number cannot be empty', 'error');
-            return;
-        }
+            
 
-        // Validate input to be numeric
-        if (!/^\d+$/.test(roomNumber)) {
-            Swal.fire('Error', 'Room number must be a number', 'error');
-            return;
-        }
-
-        // Save room number to localStorage
-        saveRoomNumberToLocalStorage(roomNumber);
-
-        // Show loading indicator
-        Swal.fire({
-            title: 'Redirecting...',
-            showConfirmButton: false,
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-        });
-
-        // Redirect after a delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        window.location.href = `${VALID_URL}${roomNumber}`;
-    } catch (error) {
-        console.error('Error:', error);
-        Swal.fire('Error', 'An error occurred', 'error');
-    }
-}
-
-// Initial logic
-if (isFirstVisit()) {
-    Swal.fire({
-        text: 'Please input your room number, Silakan masukkan nomor kamar Anda',
-        input: 'text',
-        showCancelButton: false,
-        confirmButtonText: 'OK',
-        preConfirm: handleRoomNumberInput,
-        customClass: {
-            popup: 'rounded',
-            input: 'rounded',
-            confirmButton: 'roundedBtn',
-        },
-        inputValidator: (value) => {
-            // Ensure the input is not empty and is numeric
-            if (!value.trim()) {
-                return 'Room number cannot be empty';
-            }
-            if (!/^\d+$/.test(value)) {
-                return 'Room number must be a number';
-            }
-            return null;
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            localStorage.setItem(FIRST_VISIT_KEY, 'true');
-        }
-    });
-} else {
-    if (isRoomNumberValid()) {
-        const roomNumber = localStorage.getItem(ROOM_NUMBER_STORAGE_KEY);
-        const currentUrl = window.location.href;
-
-        // Check if we are already on the correct URL
-        if (!currentUrl.startsWith(VALID_URL)) {
-            if (roomNumber) {
-                window.location.href = `${VALID_URL}${roomNumber}`;
-            }
-        }
-    } else {
-        Swal.fire('Error', 'Nomor kamar telah kedaluwarsa. Silakan masukkan lagi', 'error');
-    }
-}
-
-// Show alert for room service QR code
-function showAlert() {
-    Swal.fire({
-        text: 'Please scan QR for room service, Silakan scan QR untuk room service',
-        icon: 'info',
-        backdrop: 'rgba(0,0,0,0.4)',
-        showConfirmButton: false,
-        customClass: {
-            popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
-        }
-    });
-}
-
-        // // Constants
-        // const ROOM_NUMBER_STORAGE_KEY = 'roomNumber';
-        // const ROOM_NUMBER_EXPIRY_STORAGE_KEY = 'roomNumberExpiry';
-        // const FIRST_VISIT_KEY = 'firstVisit';
-        // const ROOM_NUMBER_EXPIRY_DURATION = 3600000; // 1 hour in milliseconds
-        // const VALID_URL = 'https://ecard.dafam.cloud/?room=0'; // URL yang valid untuk pengalihan
+        // Constants
+        const ROOM_NUMBER_STORAGE_KEY = 'roomNumber';
+        const ROOM_NUMBER_EXPIRY_STORAGE_KEY = 'roomNumberExpiry';
+        const FIRST_VISIT_KEY = 'firstVisit';
+        const ROOM_NUMBER_EXPIRY_DURATION = 3600000; // 1 hour in milliseconds
+        const VALID_URL = 'https://ecard.dafam.cloud/?room=0'; // URL yang valid untuk pengalihan
 
         // // Function to handle room number input
         // async function handleRoomNumberInput(roomNumber) {
@@ -761,6 +669,99 @@ function showAlert() {
         //     }
         //     });
         // }
+        // Function to handle room number input
+async function handleRoomNumberInput(roomNumber) {
+    try {
+        // Check if input is empty
+        if (!roomNumber.trim()) {
+            Swal.fire('Error', 'Room number cannot be empty', 'error');
+            return;
+        }
+
+        // Validate input to be numeric
+        if (!/^\d+$/.test(roomNumber)) {
+            Swal.fire('Error', 'Room number must be a number', 'error');
+            return;
+        }
+
+        // Save room number to localStorage
+        saveRoomNumberToLocalStorage(roomNumber);
+
+        // Show loading indicator
+        Swal.fire({
+            title: 'Redirecting...',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        // Redirect after a delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        window.location.href = `${VALID_URL}${roomNumber}`;
+    } catch (error) {
+        console.error('Error:', error);
+        Swal.fire('Error', 'An error occurred', 'error');
+    }
+}
+
+// Initial logic
+if (isFirstVisit()) {
+    Swal.fire({
+        text: 'Please input your room number, Silakan masukkan nomor kamar Anda',
+        input: 'text',
+        showCancelButton: false,
+        confirmButtonText: 'OK',
+        preConfirm: handleRoomNumberInput,
+        customClass: {
+            popup: 'rounded',
+            input: 'rounded',
+            confirmButton: 'roundedBtn',
+        },
+        inputValidator: (value) => {
+            // Ensure the input is not empty and is numeric
+            if (!value.trim()) {
+                return 'Room number cannot be empty';
+            }
+            if (!/^\d+$/.test(value)) {
+                return 'Room number must be a number';
+            }
+            return null;
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            localStorage.setItem(FIRST_VISIT_KEY, 'true');
+        }
+    });
+} else {
+    if (isRoomNumberValid()) {
+        const roomNumber = localStorage.getItem(ROOM_NUMBER_STORAGE_KEY);
+        const currentUrl = window.location.href;
+
+        // Check if we are already on the correct URL
+        if (!currentUrl.startsWith(VALID_URL)) {
+            if (roomNumber) {
+                window.location.href = `${VALID_URL}${roomNumber}`;
+            }
+        }
+    } else {
+        Swal.fire('Error', 'Nomor kamar telah kedaluwarsa. Silakan masukkan lagi', 'error');
+    }
+}
+
+// Show alert for room service QR code
+function showAlert() {
+    Swal.fire({
+        text: 'Please scan QR for room service, Silakan scan QR untuk room service',
+        icon: 'info',
+        backdrop: 'rgba(0,0,0,0.4)',
+        showConfirmButton: false,
+        customClass: {
+            popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
+        }
+    });
+}
         </script>
 
     </body>
