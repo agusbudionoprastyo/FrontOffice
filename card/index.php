@@ -550,6 +550,36 @@ $data = mysqli_fetch_assoc($query);
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script>
 
+                        // Fungsi untuk memeriksa apakah ini kunjungan pertama
+                        function isFirstVisit() {
+            return sessionStorage.getItem('firstVisit') !== 'true';
+            }
+
+            // Jika ini kunjungan pertama, tampilkan SweetAlert2
+            if (isFirstVisit()) {
+            Swal.fire({
+                text: 'Silakan masukkan nomor kamar Anda:',
+                icon: 'info',
+                backdrop: 'rgba(0,0,0,0.4)',
+                input: 'text',
+                showCancelButton: false,
+                confirmButtonText: 'Cari',
+                preConfirm: (roomNumber) => {
+                // Lakukan sesuatu dengan nomor ruangan yang dimasukkan
+                console.log(`Nomor ruangan: ${roomNumber}`);
+                // Misalnya, arahkan ke halaman dengan parameter room:
+                window.location.href = `https://ecard.dafam.cloud/?room=${roomNumber}`;
+                },
+                customClass: {
+                popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
+            }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                sessionStorage.setItem('firstVisit', 'true');
+                }
+            });
+            }
+
         function showAlert() {
             Swal.fire({
                 text: 'Silakan scan qr untuk room service, Please scan qr for room service',
