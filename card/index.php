@@ -555,11 +555,11 @@ $data = mysqli_fetch_assoc($query);
                 input: 'text',
                 icon: 'info',
                 backdrop: 'rgba(0,0,0,0.4)',
+                confirmButtonText: 'OK',
                 showCancelButton: false,
                 customClass: {
                 popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
             }
-                confirmButtonText: 'OK',
                 preConfirm: (roomNumber) => {
                 // Lakukan sesuatu dengan nomor ruangan yang dimasukkan
                 console.log(`Nomor ruangan: ${roomNumber}`);
