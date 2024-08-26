@@ -554,8 +554,13 @@ $data = mysqli_fetch_assoc($query);
             return true; // Jika tidak ada data atau sudah expired, dianggap kunjungan pertama
         }
 
-        // Jika ini kunjungan pertama, tampilkan SweetAlert2
-        if (isFirstVisit()) {
+        // Jika ini bukan kunjungan pertama dan data masih valid, langsung redirect
+        if (!isFirstVisit()) {
+            const storedData = localStorage.getItem('firstVisit');
+            const roomNumber = storedData.split('|')[0];
+            window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
+        } else {
+            // Jika ini kunjungan pertama atau data sudah expired, tampilkan SweetAlert2
             Swal.fire({
                 text: 'Silakan masukkan nomor kamar Anda',
                 input: 'text',
@@ -564,14 +569,14 @@ $data = mysqli_fetch_assoc($query);
                 confirmButtonText: 'OK',
                 showCancelButton: false,
                 preConfirm: (roomNumber) => {
-                // Lakukan sesuatu dengan nomor ruangan yang dimasukkan
-                console.log(`Nomor ruangan: ${roomNumber}`);
-                // Misalnya, arahkan ke halaman dengan parameter room:
-                window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
+                    // Lakukan sesuatu dengan nomor ruangan yang dimasukkan
+                    console.log(`Nomor ruangan: ${roomNumber}`);
+                    // Misalnya, arahkan ke halaman dengan parameter room:
+                    window.location.href = `https://ecard.dafam.cloud/?room=0${roomNumber}`;
                 },
                 customClass: {
-                popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
-            }
+                    popup: 'rounded' // Menambahkan kelas CSS untuk sudut bulat
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
                     const currentTime = Date.now();
