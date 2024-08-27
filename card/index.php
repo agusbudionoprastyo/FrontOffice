@@ -644,11 +644,11 @@ $data = mysqli_fetch_assoc($query);
                         const result = await Swal.fire({
                             // title: 'Please input your room number',
                             // text: 'Silakan masukkan nomor kamar Anda',
-                            html: '<p>Silakan masukkan nomor kamar Anda <strong>Please input your room number</strong></p>',
+                            html: '<p><strong>Silakan masukkan nomor kamar Anda</strong> <i>Please input your room number</i></p>',
                             icon: 'info',
                             input: 'text',
                             showCancelButton: false,
-                            confirmButtonText: 'OK',
+                            confirmButtonText: 'OKAY',
                             preConfirm: handleRoomNumberInput,
                             inputValidator: (value) => {
                                 if (!value.trim()) return 'Room number cannot be empty';
