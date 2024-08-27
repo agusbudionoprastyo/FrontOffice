@@ -642,8 +642,10 @@ $data = mysqli_fetch_assoc($query);
                 async function initialLogic() {
                     if (isFirstVisit()) {
                         const result = await Swal.fire({
-                            title: 'Please input your room number',
-                            text: 'Silakan masukkan nomor kamar Anda',
+                            // title: 'Please input your room number',
+                            // text: 'Silakan masukkan nomor kamar Anda',
+                            html: '<p>Silakan masukkan nomor kamar Anda <strong>Please input your room number</strong></p>',
+                            icon: 'info',
                             input: 'text',
                             showCancelButton: false,
                             confirmButtonText: 'OK',
