@@ -627,8 +627,9 @@ $data = mysqli_fetch_assoc($query);
                 // Show alert for room service QR code
                 function showAlert() {
                     Swal.fire({
-                        title: 'Please reload and input your room number first or scan QR for room service',
-                        text: 'Silakan muat ulang halaman dan input nomor kamar atau scan QR untuk room service',
+                        // title: 'Please reload and input your room number first or scan QR for room service',
+                        // text: 'Silakan muat ulang halaman dan input nomor kamar atau scan QR untuk room service',
+                        html : '<p><strong>Silakan muat ulang halaman dan input nomor kamar atau scan QR untuk room service</strong><br><i>Silakan muat ulang halaman dan input nomor kamar atau scan QR untuk room service</i></p>',
                         icon: 'info',
                         backdrop: 'rgba(0,0,0,0.4)',
                         showConfirmButton: false,
@@ -644,7 +645,7 @@ $data = mysqli_fetch_assoc($query);
                         const result = await Swal.fire({
                             // title: 'Please input your room number',
                             // text: 'Silakan masukkan nomor kamar Anda',
-                            html: '<p><strong>Silakan masukkan nomor kamar Anda</strong> <i>Please input your room number</i></p>',
+                            html: '<p><strong>Silakan masukkan nomor kamar Anda</strong><br><i>Please input your room number</i></p>',
                             icon: 'info',
                             input: 'text',
                             showCancelButton: false,
