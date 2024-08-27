@@ -629,9 +629,9 @@ $data = mysqli_fetch_assoc($query);
                     Swal.fire({
                         // title: 'Please reload and input your room number first or scan QR for room service',
                         // text: 'Silakan muat ulang halaman dan input nomor kamar atau scan QR untuk room service',
-                        html : '<p><strong>Silakan muat ulang halaman dan masukkan nomor kamar atau scan QR untuk room service</strong><br><i>Please reload and input your room number first or scan QR for room service</i></p>',
+                        html : '<p><strong>Muat ulang halaman dan masukkan nomor kamar atau scan QR untuk room service</strong><br><i>Reload and input your room number first or scan QR for room service</i></p>',
                         icon: 'info',
-                        backdrop: 'rgba(0,0,0,0.4)',
+                        backdrop: 'rgba(0,0,0,0.8)',
                         showConfirmButton: false,
                         customClass: {
                             popup: 'rounded'
@@ -645,7 +645,7 @@ $data = mysqli_fetch_assoc($query);
                         const result = await Swal.fire({
                             // title: 'Please input your room number',
                             // text: 'Silakan masukkan nomor kamar Anda',
-                            html: '<p><strong>Silakan masukkan nomor kamar Anda</strong><br><i>Please input your room number</i></p>',
+                            html: '<p><strong>Masukkan nomor kamar Anda</strong><br><i>Input your room number</i></p>',
                             icon: 'info',
                             input: 'text',
                             showCancelButton: false,
