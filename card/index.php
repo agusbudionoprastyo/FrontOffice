@@ -681,7 +681,7 @@ $data = mysqli_fetch_assoc($query);
                             // If the room number has expired, prompt the user to re-enter
                             Swal.fire({
                                 title: 'Session Expired',
-                                text: 'Your room number has expired. Please enter your room number again.',
+                                text: 'Please enter your room number again.',
                                 icon: 'warning',
                                 confirmButtonText: 'OK',
                                 customClass: {
