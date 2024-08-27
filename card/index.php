@@ -629,7 +629,7 @@ $data = mysqli_fetch_assoc($query);
                     Swal.fire({
                         // title: 'Please reload and input your room number first or scan QR for room service',
                         // text: 'Silakan muat ulang halaman dan input nomor kamar atau scan QR untuk room service',
-                        html : '<p><strong>Silakan muat ulang halaman dan input nomor kamar atau scan QR untuk room service</strong><br><i>Silakan muat ulang halaman dan input nomor kamar atau scan QR untuk room service</i></p>',
+                        html : '<p><strong>Silakan muat ulang halaman dan masukkan nomor kamar atau scan QR untuk room service</strong><br><i>Please reload and input your room number first or scan QR for room service</i></p>',
                         icon: 'info',
                         backdrop: 'rgba(0,0,0,0.4)',
                         showConfirmButton: false,
