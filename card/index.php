@@ -650,6 +650,7 @@ $data = mysqli_fetch_assoc($query);
                             input: 'text',
                             confirmButtonText: 'OKAY',
                             cancelButtonText: 'CANCEL',
+                            showCancelButton: true,
                             preConfirm: handleRoomNumberInput,
                             inputValidator: (value) => {
                                 if (!value.trim()) return 'Room number cannot be empty';
@@ -659,7 +660,8 @@ $data = mysqli_fetch_assoc($query);
                             customClass: {
                                 popup: 'rounded',
                                 input: 'rounded',
-                                confirmButton: 'roundedBtn'
+                                confirmButton: 'roundedBtn',
+                                cancelButton: 'roundedBtn'
                             }
                         });
 
