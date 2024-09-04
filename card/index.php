@@ -659,8 +659,7 @@ $data = mysqli_fetch_assoc($query);
                             customClass: {
                                 popup: 'rounded',
                                 input: 'rounded',
-                                confirmButton: 'roundedBtn',
-                                cancelButton: 'roundedBtn'
+                                confirmButton: 'roundedBtn'
                             }
                         });
 
