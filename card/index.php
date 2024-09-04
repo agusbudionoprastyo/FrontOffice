@@ -648,8 +648,8 @@ $data = mysqli_fetch_assoc($query);
                             html: '<p><strong>Masukkan nomor kamar Anda</strong><br><i>Input your room number</i></p>',
                             icon: 'info',
                             input: 'text',
-                            showCancelButton: True,
                             confirmButtonText: 'OKAY',
+                            cancelButtonText: 'CANCEL',
                             preConfirm: handleRoomNumberInput,
                             inputValidator: (value) => {
                                 if (!value.trim()) return 'Room number cannot be empty';
