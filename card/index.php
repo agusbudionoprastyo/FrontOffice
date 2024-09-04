@@ -55,6 +55,10 @@ $data = mysqli_fetch_assoc($query);
                 border-radius: 25px; /* Menambahkan sudut bulat dengan radius 10px */
                 background-color: #14505c; /* Warna latar belakang dengan transparansi */
             }
+            .roundedBtnCancel {
+                border-radius : 25px;
+                backgroud-color: #C7253E;
+            }
         </style>
     </head>
     <body>
@@ -661,7 +665,7 @@ $data = mysqli_fetch_assoc($query);
                                 popup: 'rounded',
                                 input: 'rounded',
                                 confirmButton: 'roundedBtn',
-                                cancelButton: 'roundedBtn'
+                                cancelButton: 'roundedBtnCancel'
                             }
                         });
 
