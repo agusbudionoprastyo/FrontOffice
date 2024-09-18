@@ -330,13 +330,13 @@ function printQRCode(folio, room) {
     };
 }
 
-// Function to handle Select All checkbox
-document.getElementById('selectAllCheckbox').addEventListener('click', function() {
-    var checkboxes = document.querySelectorAll('.rowCheckbox');
-    checkboxes.forEach(function(checkbox) {
-        checkbox.checked = document.getElementById('selectAllCheckbox').checked;
-    });
-});
+// // Function to handle Select All checkbox
+// document.getElementById('selectAllCheckbox').addEventListener('click', function() {
+//     var checkboxes = document.querySelectorAll('.rowCheckbox');
+//     checkboxes.forEach(function(checkbox) {
+//         checkbox.checked = document.getElementById('selectAllCheckbox').checked;
+//     });
+// });
 
 
 "use strict";
