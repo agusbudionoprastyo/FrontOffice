@@ -44,12 +44,12 @@ require_once '../helper/connection.php';
         <div class="col-auto">
             <button type="button" class="btn btn-danger rounded-pill" id="reset-filter"><i class="fa-solid fa-filter-circle-xmark"></i></button>
         </div>
-        <div class="col-auto">
+        <!-- <div class="col-auto">
             <button type="button" class="btn btn-dark rounded-pill" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> PRINT LABEL</button>
-        </div>  
-        <div class="col-auto">
+        </div>   -->
+        <!-- <div class="col-auto">
             <button type="button" class="btn btn-primary rounded-pill" onclick="syncData();"><i class="fa-solid fa-rotate fa-beat-fade"></i> SYNC DATA</button>
-        </div>
+        </div> -->
         </div>
     </div>
 </form>
@@ -65,7 +65,8 @@ require_once '../helper/connection.php';
                                 <th>REGCARD</th>
                                 <th>NAME</th>
                                 <th>FOLIO</th>
-                                <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox" style="display: none;"></input><label for="selectAllCheckbox"><i class="fa-solid fa-check-double" style="color: #63E6BE;"></i> ROOM</label></th>
+                                <th>ROOM</th>
+                                <!-- <th data-orderable="false"><input type="checkbox" id="selectAllCheckbox" style="display: none;"></input><label for="selectAllCheckbox"><i class="fa-solid fa-check-double" style="color: #63E6BE;"></i> ROOM</label></th> -->
                                 <th>ROOMTYPE</th>
                                 <th>ROOM STATUS</th>
                                 <th>CHECKIN</th>
@@ -160,8 +161,9 @@ require_once '../helper/connection.php';
                                   </td>
                                   
                                   <td><?php echo htmlspecialchars($row['fname']); ?></td>
-                                  <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo htmlspecialchars($row['folio']); ?>" target="_blank"><?php echo htmlspecialchars($row['folio']); ?></a></td>
-                                  <td>
+                                  <td><?php echo htmlspecialchars($row['folio']); ?></td>
+                                  <!-- <td><a class="btn btn-default" href="https://ecard.dafam.cloud/?folio=<?php echo htmlspecialchars($row['folio']); ?>" target="_blank"><?php echo htmlspecialchars($row['folio']); ?></a></td> -->
+                                  <!-- <td>
                                       <?php if (!empty($row['room'])): ?>
                                           <input type="checkbox" class="btn rowCheckbox" name="selectedRows[]" id="selectedRows"
                                           value="<?php echo htmlspecialchars($row['folio']); ?>"
@@ -171,7 +173,8 @@ require_once '../helper/connection.php';
                                       <?php endif; ?>
                                       
                                       <?php echo htmlspecialchars($row['room']); ?>  
-                                  </td>
+                                  </td> -->
+                                  <td><?php echo htmlspecialchars($row['room']); ?></td>
                                   <td><?php echo htmlspecialchars($row['roomtype']); ?></td>
                                   <td>
                                       <?php $foliostatus = trim($row['foliostatus']); ?>
