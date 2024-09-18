@@ -43,9 +43,9 @@ require_once '../helper/connection.php';
         <div class="col-auto">
             <button type="button" class="btn btn-danger rounded-pill" id="reset-filter"><i class="fa-solid fa-filter-circle-xmark"></i></button>
         </div>
-        <div class="col-auto">
+        <!-- <div class="col-auto">
             <button type="button" class="btn btn-dark rounded-pill" onclick="printSelectedQRCode();"><i class="fa-solid fa-print fa-xl"></i> PRINT LABEL</button>
-        </div>  
+        </div>   -->
         </div>
     </div>
 </form>
