@@ -8,7 +8,7 @@ $room = $_GET['room'];
 $room = mysqli_real_escape_string($conn, $room);
 
 // Use the room number in your database query
-$query = mysqli_query($conn, "SELECT * FROM FOGUEST WHERE room='$room' AND foliostatus Not In('O','X')");
+$query = mysqli_query($conn, "SELECT * FROM FOGUEST WHERE room='$room' AND foliostatus = 'I'");
 $data = mysqli_fetch_assoc($query);
 
 ?>
